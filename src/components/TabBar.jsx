@@ -68,7 +68,7 @@ const TabContainerParent = styled.div`
 `;
 
 const TabContainer = styled.div`
-  width: 480px;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;

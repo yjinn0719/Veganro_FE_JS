@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from 'styled-components';
 
 const AppContainer = styled.div`
@@ -8,7 +9,7 @@ const AppContainer = styled.div`
 `;
 
 function App() {
-  return <></>;
+  return <AppContainer></AppContainer>;
 }
 
 export default App;

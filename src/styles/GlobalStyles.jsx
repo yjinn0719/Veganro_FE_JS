@@ -33,6 +33,11 @@ const GlobalStyles = createGlobalStyle`
         background: transparent;
         cursor: pointer;
     }
+    #root{
+        display: flex;
+        justify-content: center;
+        position: relative;
+    }
 `;
 
 export default GlobalStyles;

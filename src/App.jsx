@@ -1,18 +1,14 @@
-import React from 'react';
 import styled from 'styled-components';
-import Home from './pages/Home';
 
 const AppContainer = styled.div`
-  width: 480px;
-  height: 100vh;
+  width: 100%;
+  max-width: 480px;
+  height: 100%;
+  margin: 0 auto;
 `;
 
 function App() {
-  return (
-    <AppContainer>
-      <Home />
-    </AppContainer>
-  );
+  return <></>;
 }
 
 export default App;

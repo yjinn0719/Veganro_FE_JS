@@ -1,10 +1,9 @@
 import { useState } from 'react';
-import { useDragControls } from 'framer-motion';
+import { useDragControls, motion } from 'framer-motion';
 import useMeasure from 'react-use-measure';
 import styled from 'styled-components';
-import { motion } from 'framer-motion';
 
-export default function Drawer({ height }) {
+export default function Drawer({ height, children }) {
   const [isOpened, setIsOpened] = useState(false);
   const [contentRef] = useMeasure();
   const dragControls = useDragControls();
@@ -29,7 +28,7 @@ export default function Drawer({ height }) {
         </BottomHeader>
         {isOpened && (
           <SheetContentWrapper ref={contentRef}>
-            <SheetContent></SheetContent>
+            <SheetContent>{children}</SheetContent>
           </SheetContentWrapper>
         )}
       </SheetBackground>
@@ -61,14 +60,14 @@ const SheetBackground = styled(motion.div)`
 `;
 
 const BottomHeader = styled.div`
-  height: 50px;
+  height: 40px;
   cursor: grab;
   user-select: none;
 `;
 
 const HandleBar = styled.div`
   width: 58px;
-  height: 8px;
+  height: 4px;
   background: #dfdfdf;
   margin: 0 auto;
 `;
@@ -78,7 +77,7 @@ const SheetContentWrapper = styled.div`
   height: 500px;
   color: black;
   font-size: 16px;
-  padding: 24px;
+  padding: 0 24px 24px 24px;
 `;
 
 const SheetContent = styled.div`

@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import MyRouter from './routes/index';
 
 const AppContainer = styled.div`
   width: 100%;
@@ -9,7 +10,11 @@ const AppContainer = styled.div`
 `;
 
 function App() {
-  return <AppContainer></AppContainer>;
+  return (
+    <AppContainer>
+      <MyRouter />
+    </AppContainer>
+  );
 }
 
 export default App;

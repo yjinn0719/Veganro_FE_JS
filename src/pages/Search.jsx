@@ -8,7 +8,7 @@ export default function Search() {
     const script = document.createElement('script');
     script.async = true;
     script.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${
-      import.meta.env.VITE_APP_APPKEY
+      import.meta.env.VITE_APP_KAKAO_MAP_KEY
     }&autoload=false`;
     document.head.appendChild(script);
 

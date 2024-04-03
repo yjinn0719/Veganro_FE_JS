@@ -1,6 +1,32 @@
-import React from 'react';
-import styled from 'styled-components';
+import React, { useEffect, useState } from 'react';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
+import { useGeolocation } from '../utils/useGeolocation';
+import styled from 'styled-components';
+
+const HomePage = () => {
+  const geo = useGeolocation();
+
+  return (
+    <div>
+      <Box className="home">
+        <SearchBar />
+        <Map
+          id="map"
+          center={{ lat: geo.lat, lng: geo.lon }}
+          style={{ width: '100%', height: '1080px' }}
+          level={4}
+        >
+          <MapMarker position={{ lat: geo.lat, lng: geo.lon }}>
+            <Pin>현재 위치</Pin>
+          </MapMarker>
+        </Map>
+        <ButtonCurrentLocation />
+      </Box>
+    </div>
+  );
+};
+
+export default HomePage;
 
 // TODO 임시 레이아웃 코드
 const Box = styled.main`
@@ -21,18 +47,28 @@ const SearchBar = styled.div`
   z-index: 99;
 `;
 
-const Home = () => {
-  return (
-    <div>
-      <Box className="home">
-        <SearchBar />
-        <Map
-          center={{ lat: 33.5563, lng: 126.79581 }}
-          style={{ width: '100%', height: '1080px' }}
-        ></Map>
-      </Box>
-    </div>
-  );
-};
+const ButtonCurrentLocation = styled.button`
+  width: 48px;
+  height: 48px;
+  background-color: white;
+  position: absolute;
+  left: 16px;
+  bottom: 48px;
+  z-index: 99;
+  cursor: pointer;
+`;
 
-export default Home;
+const ButtonUpdateStore = styled.button`
+  width: 48px;
+  height: 48px;
+  background-color: white;
+  position: absolute;
+  left: 16px;
+  bottom: 48px;
+  z-index: 99;
+`;
+const Pin = styled.div`
+  padding: 12px;
+  background-color: white;
+  color: 'red';
+`;

@@ -74,10 +74,10 @@ const HandleBar = styled.div`
 
 const SheetContentWrapper = styled.div`
   width: 100%;
-  height: 500px;
+  height: 100%;
   color: black;
   font-size: 16px;
-  padding: 0 24px 24px 24px;
+  padding: 12px 24px 24px 24px;
 `;
 
 const SheetContent = styled.div`

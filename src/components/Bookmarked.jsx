@@ -37,7 +37,9 @@ const BookmarkContainer = styled.button`
   border-radius: 4px;
   border: 1px solid
     ${(props) =>
-      props.clicked ? props.theme.color.green : props.theme.color.darkgray};
+      props.clicked
+        ? props.theme.color.green[500]
+        : props.theme.color.gray[800]};
   background: ${(props) => props.theme.color.white};
   cursor: pointer;
 `;
@@ -50,7 +52,9 @@ const BookmarkContent = styled.div`
 
   p {
     color: ${(props) =>
-      props.clicked ? props.theme.color.green : props.theme.color.darkgray};
+      props.clicked
+        ? props.theme.color.green[500]
+        : props.theme.color.gray[800]};
     font-size: 16px;
     font-style: normal;
     font-weight: 600;

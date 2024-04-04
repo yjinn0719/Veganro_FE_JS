@@ -37,7 +37,7 @@ const CardContent = styled.div`
   align-items: flex-start;
   gap: 12px;
   border-radius: 4px;
-  border: 1px solid ${(props) => props.theme.color.lightgray};
+  border: 1px solid ${(props) => props.theme.color.gray[800]};
   background: ${(props) => props.theme.color.white};
 `;
 
@@ -65,7 +65,7 @@ const Title = styled.p`
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 1;
   overflow: hidden;
-  color: ${(props) => props.theme.color.darkgray};
+  color: ${(props) => props.theme.color.gray[900]};
   text-overflow: ellipsis;
   font-size: 18px;
   font-style: normal;
@@ -74,7 +74,7 @@ const Title = styled.p`
 `;
 
 const Distance = styled.p`
-  color: ${(props) => props.theme.color.gray};
+  color: ${(props) => props.theme.color.gray[600]};
   font-size: 12px;
   font-style: normal;
   font-weight: 500;
@@ -82,7 +82,7 @@ const Distance = styled.p`
 `;
 
 const Address = styled.p`
-  color: ${(props) => props.theme.color.mediumgray};
+  color: ${(props) => props.theme.color.gray[700]};
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
@@ -90,7 +90,7 @@ const Address = styled.p`
 `;
 
 const Number = styled.p`
-  color: ${(props) => props.theme.color.gray};
+  color: ${(props) => props.theme.color.gray[600]};
   font-size: 12px;
   font-style: normal;
   font-weight: 500;

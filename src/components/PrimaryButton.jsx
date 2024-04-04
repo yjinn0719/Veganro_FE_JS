@@ -1,15 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 function PrimaryButton(props) {
-  const [isClicked, setIsClicked] = useState(false);
-
-  const handleClick = () => {
-    setIsClicked(!isClicked);
-  };
-
   return (
-    <PrimaryBtn onClick={handleClick} clicked={isClicked}>
+    <PrimaryBtn onClick={props.onClick} disabled={!props.isEnabled}>
       <PrimaryBtnTitle>{props.title}</PrimaryBtnTitle>
     </PrimaryBtn>
   );
@@ -28,7 +22,10 @@ const PrimaryBtn = styled.button`
   gap: 8px;
   border-radius: 4px;
   background: ${(props) =>
-    props.clicked ? props.theme.color.green[500] : props.theme.color.gray[300]};
+    props.disabled
+      ? props.theme.color.gray[300]
+      : props.theme.color.green[500]};
+  cursor: ${(props) => (props.disabled ? 'not-allowed' : 'pointer')};
 `;
 
 const PrimaryBtnTitle = styled.p`

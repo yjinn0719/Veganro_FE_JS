@@ -1,22 +1,19 @@
 import React from 'react';
-import styled, { ThemeProvider } from 'styled-components';
-import Theme from '../styles/Theme';
+import styled from 'styled-components';
 
 function Card(props) {
   return (
-    <ThemeProvider theme={Theme}>
-      <CardContainer>
-        <CardContent>
-          <Thumbnail></Thumbnail>
-          <TextBox>
-            <Title>{props.name}</Title>
-            <Distance>{props.distance}</Distance>
-            <Address>{props.address}</Address>
-            <Number>{props.number}</Number>
-          </TextBox>
-        </CardContent>
-      </CardContainer>
-    </ThemeProvider>
+    <CardContainer>
+      <CardContent>
+        <Thumbnail></Thumbnail>
+        <TextBox>
+          <Title>{props.name}</Title>
+          <Distance>{props.distance}</Distance>
+          <Address>{props.address}</Address>
+          <Number>{props.number}</Number>
+        </TextBox>
+      </CardContent>
+    </CardContainer>
   );
 }
 
@@ -32,12 +29,12 @@ const CardContainer = styled.div`
 
 const CardContent = styled.div`
   display: flex;
-  width: 448px;
+  width: 100%;
   padding: 16px 12px;
   align-items: flex-start;
   gap: 12px;
   border-radius: 4px;
-  border: 1px solid ${(props) => props.theme.color.gray[800]};
+  border: 1px solid ${(props) => props.theme.color.gray[100]};
   background: ${(props) => props.theme.color.white};
 `;
 

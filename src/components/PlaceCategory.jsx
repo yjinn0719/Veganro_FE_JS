@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import {
-  CafeOutline,
-  FishOutline,
-  WineOutline,
-  LeafOutline,
-} from 'react-ionicons';
+import LocalCafeOutlinedIcon from '@mui/icons-material/LocalCafeOutlined';
+import WineBarOutlinedIcon from '@mui/icons-material/WineBarOutlined';
+import SetMealOutlinedIcon from '@mui/icons-material/SetMealOutlined';
+import GrassOutlinedIcon from '@mui/icons-material/GrassOutlined';
 
 function PlaceCategory(props) {
   const [IsTagClicked, setIsTagClicked] = useState(false);
@@ -19,13 +17,29 @@ function PlaceCategory(props) {
 
     switch (title) {
       case '식당':
-        return <LeafOutline color={color} height="18px" width="18px" />;
+        return (
+          <GrassOutlinedIcon
+            sx={{ color: { color }, width: '24px', height: '24px' }}
+          />
+        );
       case '카페':
-        return <CafeOutline color={color} height="18px" width="18px" />;
+        return (
+          <LocalCafeOutlinedIcon
+            sx={{ color: { color }, width: '24px', height: '24px' }}
+          />
+        );
       case '술집':
-        return <WineOutline color={color} height="18px" width="18px" />;
+        return (
+          <WineBarOutlinedIcon
+            sx={{ color: { color }, width: '24px', height: '24px' }}
+          />
+        );
       case '기타':
-        return <FishOutline color={color} height="18px" width="18px" />;
+        return (
+          <SetMealOutlinedIcon
+            sx={{ color: { color }, width: '24px', height: '24px' }}
+          />
+        );
     }
   };
 

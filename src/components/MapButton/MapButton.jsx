@@ -1,11 +1,11 @@
 import React from 'react';
-import { SecondaryBtn, SecondaryBtnTitle } from './SecondaryButton.styles';
+import { MapBtn, MapBtnTitle } from './MapButton.styles';
 import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
 import MapOutlinedIcon from '@mui/icons-material/MapOutlined';
 import RefreshOutlinedIcon from '@mui/icons-material/RefreshOutlined';
 import ArticleOutlinedIcon from '@mui/icons-material/ArticleOutlined';
 
-function SecondaryButton(props) {
+function MapButton(props) {
   const renderIcon = (title) => {
     switch (title) {
       case '리스트뷰':
@@ -35,11 +35,11 @@ function SecondaryButton(props) {
     }
   };
   return (
-    <SecondaryBtn>
+    <MapBtn>
       {renderIcon(props.title)}
-      <SecondaryBtnTitle>{props.title}</SecondaryBtnTitle>
-    </SecondaryBtn>
+      <MapBtnTitle>{props.title}</MapBtnTitle>
+    </MapBtn>
   );
 }
 
-export default SecondaryButton;
+export default MapButton;

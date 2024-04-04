@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const SecondaryBtn = styled.button`
+export const MapBtn = styled.button`
   display: inline-flex;
   height: 48px;
   padding: 12px 16px;
@@ -12,7 +12,7 @@ export const SecondaryBtn = styled.button`
   background: ${(props) => props.theme.color.gray[800]};
 `;
 
-export const SecondaryBtnTitle = styled.p`
+export const MapBtnTitle = styled.p`
   color: ${(props) => props.theme.color.white};
   font-size: 14px;
   font-style: normal;

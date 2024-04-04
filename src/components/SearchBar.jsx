@@ -39,7 +39,7 @@ const Search = styled.input`
   padding-right: 40px;
   width: 448px;
   border-radius: 4px;
-  border: 1px solid ${(props) => props.theme.color.darkgray};
+  border: 1px solid ${(props) => props.theme.color.gray[800]};
   box-shadow: 4px 6px 16px 0px rgba(71, 71, 71, 0.12);
   outline: none;
 `;

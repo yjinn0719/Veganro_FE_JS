@@ -39,7 +39,7 @@ const NavContainer = styled.div`
 `;
 
 const NavTitle = styled.p`
-  color: ${(props) => props.theme.color.darkgray};
+  color: ${(props) => props.theme.color.gray[800]};
   font-size: 18px;
   font-style: normal;
   font-weight: 600;
@@ -49,7 +49,7 @@ const NavTitle = styled.p`
 `;
 
 const NavIcon = styled.div`
-  color: ${(props) => props.theme.color.darkgray};
+  color: ${(props) => props.theme.color.gray[800]};
   width: 24px;
   height: 24px;
 `;

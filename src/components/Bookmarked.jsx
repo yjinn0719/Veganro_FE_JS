@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import styled, { ThemeProvider } from 'styled-components';
-import Theme from '../styles/Theme';
+import styled from 'styled-components';
 import { BookmarkOutline, Bookmark } from 'react-ionicons';
 
 function Bookmarked() {
@@ -11,18 +10,16 @@ function Bookmarked() {
   };
 
   return (
-    <ThemeProvider theme={Theme}>
-      <BookmarkContainer onClick={handleClick} clicked={isClicked}>
-        <BookmarkContent clicked={isClicked}>
-          {isClicked ? (
-            <Bookmark color={'#4F8337'} height="24px" width="24px" />
-          ) : (
-            <BookmarkOutline color={'#000'} height="24px" width="24px" />
-          )}
-          <p>저장하기</p>
-        </BookmarkContent>
-      </BookmarkContainer>
-    </ThemeProvider>
+    <BookmarkContainer onClick={handleClick} clicked={isClicked}>
+      <BookmarkContent clicked={isClicked}>
+        {isClicked ? (
+          <Bookmark color={'#4F8337'} height="24px" width="24px" />
+        ) : (
+          <BookmarkOutline color={'#000'} height="24px" width="24px" />
+        )}
+        <p>저장하기</p>
+      </BookmarkContent>
+    </BookmarkContainer>
   );
 }
 

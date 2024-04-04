@@ -7,7 +7,6 @@ export const BackgroundOverlay = styled(motion.div)`
   left: 0;
   width: 100%;
   height: 100vh;
-  background: black;
 `;
 
 export const SheetBackground = styled(motion.div)`

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+// import { useHistory } from 'react-router-dom';
 import Drawer from '@/components/Drawer/Drawer';
 import ReviewCard from '@/components/ReviewCard/ReviewCard';
 import {
@@ -29,12 +29,12 @@ import {
   LoadMoreButtonIcon,
 } from '@/components/Review/Review.styles';
 
-export default function Review({ reviewCount, placeLocation }) {
+export default function Review({ placeLocation }) {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [reviewText, setReviewText] = useState('');
   const [submittedReviews, setSubmittedReviews] = useState([]);
   const [visibleReviews, setVisibleReviews] = useState(3); // Initial number of visible reviews
-  const history = useHistory();
+  // const history = useHistory();
 
   const toggleDrawer = () => {
     setIsDrawerOpen(!isDrawerOpen);
@@ -48,9 +48,9 @@ export default function Review({ reviewCount, placeLocation }) {
     }
   };
 
-  const handleReviewDetail = () => {
-    history.push('/reviewdetail');
-  };
+  // const handleReviewDetail = () => {
+  //   history.push('/reviewdetail');
+  // };
   return (
     <>
       <Container>

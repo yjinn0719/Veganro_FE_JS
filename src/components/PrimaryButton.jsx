@@ -13,7 +13,7 @@ export default PrimaryButton;
 
 const PrimaryBtn = styled.button`
   display: flex;
-  width: 448px;
+  width: 100%;
   height: 50px;
   padding: 12px 16px;
   flex-direction: column;

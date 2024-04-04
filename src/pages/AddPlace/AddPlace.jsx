@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 import Drawer from '@/components/Drawer';
 import { Location } from 'react-ionicons';
@@ -37,7 +36,9 @@ const Title = styled.h3`
   font-size: 24px;
   font-weight: 600;
   height: 40px;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 const Place = styled.div`
   width: 100%;

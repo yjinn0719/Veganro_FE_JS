@@ -1,30 +1,36 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 const getCurrentIp = async () => {
-  await fetch('https://geolocation-db.com/json/')
-    .then((res) => res.json())
-    .then((res) => res['IPv4']);
+  const response = await fetch('https://geolocation-db.com/json/');
+  const data = await response.json();
+  return data['IPv4'];
 };
 
-export const useGeolocation = () => {
+const useGeolocation = () => {
   const [geo, setGeo] = useState({ lat: 0, lon: 0 });
+
   const getLocation = async () => {
     const currentIp = await getCurrentIp();
+
     const geoData = await fetch(`http://ip-api.com/json/${currentIp}`).then(
-      (res) =>
-        res.json().then((res) => {
-          // 사용자 IP 가져오기
-          console.log(res);
-          return res;
-        }),
+      (res) => res.json(),
     );
-    const latitude = geoData.lat;
-    const longitude = geoData.lon;
-    setGeo({ lat: latitude, lon: longitude });
+
+    if (geoData && geoData.lat && geoData.lon) {
+      const latitude = geoData.lat;
+      const longitude = geoData.lon;
+
+      setGeo({ lat: latitude, lon: longitude });
+    } else {
+      console.error('위도와 경도를 찾을 수 없습니다.');
+    }
   };
+
   useEffect(() => {
     getLocation();
   }, []);
 
   return geo;
 };
+
+export default useGeolocation;

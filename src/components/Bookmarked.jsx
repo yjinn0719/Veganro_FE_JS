@@ -12,7 +12,7 @@ function Bookmarked() {
 
   return (
     <BookmarkContainer onClick={handleClick} clicked={isClicked}>
-      <BookmarkContent clicked={isClicked}>
+      <BookmarkContent clicked={isClicked ? 1 : 0}>
         {isClicked ? (
           <BookmarkIcon
             sx={{ color: '#4F8337', width: '24px', height: '24px' }}

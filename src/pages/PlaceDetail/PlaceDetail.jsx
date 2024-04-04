@@ -23,8 +23,8 @@ import {
   VeganIcon,
   VeganTag,
   Content,
+  ReviewContainer,
 } from '@/pages/PlaceDetail/PlaceDetail.styles';
-import { Book } from 'react-ionicons';
 
 export default function PlaceDetail({
   name = '가게 이름',
@@ -123,9 +123,9 @@ export default function PlaceDetail({
           placeURL={url}
         />
       </>
-      <>
-        <Review />
-      </>
+      <ReviewContainer>
+        <Review address={address} />
+      </ReviewContainer>
     </MainContainer>
   );
 }

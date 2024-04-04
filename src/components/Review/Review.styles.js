@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 const Container = styled.div`
   position: relative;
+  overflow: hidden;
   width: 100%;
   height: 100%;
   padding: 16px;
@@ -209,7 +210,7 @@ const LoadMoreButtonContainer = styled.div`
   gap: 6px;
 `;
 
-const LoadMoreButtonText = styled.div`
+const LoadMoreButtonText = styled.button`
   color: #6e6e6e;
   font-size: 10px;
   font-family: 'Pretendard';

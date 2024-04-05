@@ -1,25 +1,6 @@
-import React from 'react';
 import styled from 'styled-components';
 
-function Card(props) {
-  return (
-    <CardContainer>
-      <CardContent>
-        <Thumbnail></Thumbnail>
-        <TextBox>
-          <Title>{props.name}</Title>
-          <Distance>{props.distance}</Distance>
-          <Address>{props.address}</Address>
-          <Number>{props.number}</Number>
-        </TextBox>
-      </CardContent>
-    </CardContainer>
-  );
-}
-
-export default Card;
-
-const CardContainer = styled.div`
+export const CardContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -27,7 +8,7 @@ const CardContainer = styled.div`
   flex: 1 0 0;
 `;
 
-const CardContent = styled.div`
+export const CardContent = styled.div`
   display: flex;
   width: 100%;
   padding: 16px 12px;
@@ -38,7 +19,7 @@ const CardContent = styled.div`
   background: ${(props) => props.theme.color.white};
 `;
 
-const Thumbnail = styled.div`
+export const Thumbnail = styled.div`
   display: flex;
   width: 54px;
   height: 54px;
@@ -49,14 +30,14 @@ const Thumbnail = styled.div`
   border-radius: 3.6px;
 `;
 
-const TextBox = styled.div`
+export const TextBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 8px;
 `;
 
-const Title = styled.p`
+export const Title = styled.p`
   display: -webkit-box;
   max-width: 180px;
   -webkit-box-orient: vertical;
@@ -70,7 +51,7 @@ const Title = styled.p`
   line-height: normal;
 `;
 
-const Distance = styled.p`
+export const Distance = styled.p`
   color: ${(props) => props.theme.color.gray[600]};
   font-size: 12px;
   font-style: normal;
@@ -78,7 +59,7 @@ const Distance = styled.p`
   line-height: normal;
 `;
 
-const Address = styled.p`
+export const Address = styled.p`
   color: ${(props) => props.theme.color.gray[700]};
   font-size: 14px;
   font-style: normal;
@@ -86,7 +67,7 @@ const Address = styled.p`
   line-height: normal;
 `;
 
-const Number = styled.p`
+export const Number = styled.p`
   color: ${(props) => props.theme.color.gray[600]};
   font-size: 12px;
   font-style: normal;

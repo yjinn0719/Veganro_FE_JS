@@ -1,26 +1,6 @@
-import React from 'react';
 import styled from 'styled-components';
-import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 
-function SearchBar(props) {
-  const handleClick = () => {};
-  return (
-    <Wrapper>
-      <SearchContainer>
-        <Search placeholder={props.placeholder} value={props.value} />
-        <IconContainer onClick={handleClick}>
-          <SearchOutlinedIcon
-            sx={{ color: '#C4C4C4', width: '24px', height: '24px' }}
-          />
-        </IconContainer>
-      </SearchContainer>
-    </Wrapper>
-  );
-}
-
-export default SearchBar;
-
-const Wrapper = styled.div`
+export const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -35,7 +15,7 @@ const Wrapper = styled.div`
   z-index: 99;
 `;
 
-const SearchContainer = styled.div`
+export const SearchContainer = styled.div`
   width: 100%;
   position: relative;
   display: flex;
@@ -44,7 +24,7 @@ const SearchContainer = styled.div`
   width: 100%;
 `;
 
-const Search = styled.input`
+export const Search = styled.input`
   padding: 16px 40px 16px 16px;
   width: 100%;
   border-radius: 4px;
@@ -65,7 +45,7 @@ const Search = styled.input`
   }
 `;
 
-const IconContainer = styled.div`
+export const IconContainer = styled.div`
   position: absolute;
   right: 10px;
   top: 50%;

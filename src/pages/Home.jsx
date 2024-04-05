@@ -5,21 +5,31 @@ import styled from 'styled-components';
 
 const HomePage = () => {
   const geo = useGeolocation();
+  console.log(geo); //안불러와짐
+  /* lat: undefined, lon: undefined}lat: undefinedlon: undefined[[Prototype]]: Object 
+  Home.jsx:8  */
+
+  const isValidLocation = geo;
 
   return (
     <div>
       <Box className="home">
         <SearchBar />
-        <Map
-          id="map"
-          center={{ lat: geo.lat, lng: geo.lon }}
-          style={{ width: '100%', height: '1080px' }}
-          level={4}
-        >
-          <MapMarker position={{ lat: geo.lat, lng: geo.lon }}>
-            <Pin>현재 위치</Pin>
-          </MapMarker>
-        </Map>
+        {isValidLocation ? (
+          <Map
+            id="map"
+            center={{ lat: geo.lat, lng: geo.lon }}
+            style={{ width: '100%', height: '1080px' }}
+            level={4}
+          >
+            <MapMarker position={{ lat: geo.lat, lng: geo.lon }}>
+              <Pin>현재 위치</Pin>
+            </MapMarker>
+          </Map>
+        ) : (
+          <div>위치 정보를 불러오는 중...</div>
+        )}
+
         <ButtonCurrentLocation />
       </Box>
     </div>

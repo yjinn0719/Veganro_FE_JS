@@ -1,86 +1,77 @@
-import React, { useEffect, useState } from 'react';
-import { Map, MapMarker } from 'react-kakao-maps-sdk';
-import { Box, SearchBar, ButtonCurrentLocation, Pin } from '../Home/Home.style';
+import React, { useState } from 'react';
+import { useSetRecoilState } from 'recoil';
 
-const { kakao } = window;
+import { currentPositionState } from '../../store/currentPositionState';
+import KakaoMap from '../KakaoMap/KakaoMap';
+import SearchBar from '@/components/SearchBar/SearchBar';
+import { Wrapper, ButtonRelocate } from '../Home/Home.style';
 
 export default function Home() {
-  // 기본 위치 상태
-  const [state, setState] = useState({
-    center: {
-      lat: 33.450701,
-      lng: 126.570667,
-    },
-    errMsg: null,
-    isLoading: true,
-  });
+  const setCurrentLocation = useSetRecoilState(currentPositionState);
 
-  // 카카오 맵 접근, 지도 상태 조작 변수
-  const [map, setMap] = useState(null);
-
-  // 현재 사용자 위치 받아오기 (geolocation)
-  useEffect(() => {
+  // 현재 위치 받아오는 함수
+  const getCurrentPosition = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
-          setState((prev) => ({
-            ...prev,
+          setCenterMove({
+            ...centerMove,
             center: {
               lat: position.coords.latitude,
               lng: position.coords.longitude,
             },
             isLoading: false,
-          }));
+          });
         },
         (err) => {
-          setState((prev) => ({
-            ...prev,
+          setCenterMove({
+            ...centerMove,
             errMsg: err.message,
             isLoading: false,
-          }));
+          });
         },
       );
     } else {
-      setState((prev) => ({
-        ...prev,
-        errMsg: 'geolocation을 사용할 수 없습니다.',
+      setCenterMove({
+        ...centerMove,
+        errMsg: '현재 위치를 불러올 수 없습니다.',
         isLoading: false,
-      }));
+      });
     }
-  }, []);
-
-  const moveLatLng = (data) => {
-    const newLatLng = new kakao.maps.LatLng(data.y, data.x);
-    map.panTo(newLatLng);
   };
 
-  // todo 클릭한 마커 기준 중심 좌표 이동
+  // 위치 중앙 정렬
+  const [centerMove, setCenterMove] = useState({
+    center: {
+      lat: 37.5465029,
+      lng: 127.065263,
+    },
+    isLoading: false,
+    errMsg: '',
+  });
 
-  // 현재 위치 이동 버튼
-  const relocateToCurrentLocation = () => {
-    setMapCenter({ lat: geo.lat, lng: geo.lon });
+  // 버튼 클릭 시 현재 위치 업데이트
+  const handleRelocateClick = () => {
+    getCurrentPosition();
   };
 
-  // 로딩 시, 화면 표시
-  if (state.isLoading) return <div>Loading..</div>;
+  const [isMapViewCentered, setIsMapViewCentered] = useState(false);
 
   return (
     <>
-      <Box className="home">
-        <SearchBar />
-        <Map
-          id="map"
-          center={state.center}
-          style={{ width: '100%', height: '1080px' }}
-          level={4}
-          onCreate={setMap} // 지도 생성 시 setMap 함수 호출, 지도 객체 업데이트
+      <Wrapper className="home">
+        <SearchBar placeholder="서울특별시 성동구 성수2가제3동 광나루로6길 49" />
+        <KakaoMap
+          isMapViewCentered={isMapViewCentered}
+          centerMove={centerMove.center}
+        />
+        <ButtonRelocate
+          className="button-relocate"
+          onClick={handleRelocateClick}
         >
-          <MapMarker position={state.center}>
-            <Pin>{state.errMsg ? state.errMsg : '현재 위치'}</Pin>
-          </MapMarker>
-        </Map>
-        <ButtonCurrentLocation onClick={relocateToCurrentLocation} />
-      </Box>
+          현위치
+        </ButtonRelocate>
+      </Wrapper>
     </>
   );
 }

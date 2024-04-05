@@ -6,10 +6,10 @@ import SetMealOutlinedIcon from '@mui/icons-material/SetMealOutlined';
 import GrassOutlinedIcon from '@mui/icons-material/GrassOutlined';
 
 function PlaceCategory(props) {
-  const [IsTagClicked, setIsTagClicked] = useState(false);
+  const [isClicked, setIsClicked] = useState(false);
 
   const handleClicked = () => {
-    setIsTagClicked(!IsTagClicked);
+    setIsClicked(!isClicked);
   };
 
   const renderIcon = (title, clicked) => {
@@ -46,11 +46,11 @@ function PlaceCategory(props) {
   return (
     <PlaceCategoryBtn
       onClick={handleClicked}
-      clicked={IsTagClicked}
+      clicked={isClicked ? 1 : 0}
       title={props.title}
     >
-      {renderIcon(props.title, IsTagClicked)}
-      <PlaceCategoryTitle clicked={IsTagClicked}>
+      {renderIcon(props.title, isClicked)}
+      <PlaceCategoryTitle clicked={isClicked ? 1 : 0}>
         {props.title}
       </PlaceCategoryTitle>
     </PlaceCategoryBtn>

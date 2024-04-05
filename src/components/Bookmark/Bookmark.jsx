@@ -11,7 +11,7 @@ function Bookmark() {
   };
 
   return (
-    <BookmarkContainer onClick={handleClick} clicked={isClicked}>
+    <BookmarkContainer onClick={handleClick} clicked={isClicked ? 1 : 0}>
       <BookmarkContent clicked={isClicked ? 1 : 0}>
         {isClicked ? (
           <BookmarkIcon

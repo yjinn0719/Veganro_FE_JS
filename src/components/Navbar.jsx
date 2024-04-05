@@ -30,6 +30,9 @@ function Navbar(props) {
           sx={{ color: '#383838', width: '24px', height: '24px' }}
         />
       )}
+      {props.icon === 'null' && (
+        <div style={{ width: '24px', height: '24px' }}></div>
+      )}
     </NavContainer>
   );
 }

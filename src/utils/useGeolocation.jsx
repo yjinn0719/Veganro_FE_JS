@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 const getCurrentIp = async () => {
   try {
@@ -10,7 +10,7 @@ const getCurrentIp = async () => {
   }
 };
 
-export const useGeolocation = () => {
+const useGeolocation = () => {
   const [geo, setGeo] = useState({ lat: 0, lon: 0 });
 
   useEffect(() => {
@@ -47,3 +47,5 @@ export const useGeolocation = () => {
 
   return geo;
 };
+
+export default useGeolocation;

@@ -5,16 +5,16 @@ import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 function SearchBar(props) {
   const handleClick = () => {};
   return (
-    <ThemeProvider theme={Theme}>
-      <Wrapper>
-        <SearchContainer>
-          <Search placeholder={props.placeholder} value={props.value} />
-          <IconContainer onClick={handleClick}>
-            <SearchOutline color={'#C4C4C4'} height="20px" width="20px" />
-          </IconContainer>
-        </SearchContainer>
-      </Wrapper>
-    </ThemeProvider>
+    <Wrapper>
+      <SearchContainer>
+        <Search placeholder={props.placeholder} value={props.value} />
+        <IconContainer onClick={handleClick}>
+          <SearchOutlinedIcon
+            sx={{ color: '#C4C4C4', width: '24px', height: '24px' }}
+          />
+        </IconContainer>
+      </SearchContainer>
+    </Wrapper>
   );
 }
 
@@ -25,11 +25,13 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
+  max-width: 448px;
   padding: 16px;
-  box-sizing; border-box;
+  box-sizing: border-box;
   position: absolute;
   top: 0;
-  left: 0;
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 99;
 `;
 

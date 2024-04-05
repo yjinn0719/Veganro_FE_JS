@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import SearchBar from './components/SearchBar';
-// import MyRouter from './routes/index';
+import MyRouter from './routes/index';
+
 const AppContainer = styled.div`
   width: 100%;
   max-width: 480px;
@@ -11,8 +11,7 @@ const AppContainer = styled.div`
 function App() {
   return (
     <AppContainer>
-      {/* <MyRouter /> */}
-      <SearchBar />
+      <MyRouter />
     </AppContainer>
   );
 }

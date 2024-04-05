@@ -1,7 +1,6 @@
 import React from 'react';
-import styled, { ThemeProvider } from 'styled-components';
-import Theme from '../styles/Theme';
-import { SearchOutline } from 'react-ionicons';
+import styled from 'styled-components';
+import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 
 function SearchBar(props) {
   const handleClick = () => {};
@@ -40,6 +39,7 @@ const SearchContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
 `;
 
 const Search = styled.input`

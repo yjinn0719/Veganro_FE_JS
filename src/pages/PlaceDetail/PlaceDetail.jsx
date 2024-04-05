@@ -20,8 +20,6 @@ import {
   Info,
   DistanceIcon,
   Distance,
-  VeganIcon,
-  VeganTag,
   Content,
   ReviewContainer,
 } from '@/pages/PlaceDetail/PlaceDetail.styles';
@@ -42,7 +40,7 @@ export default function PlaceDetail({
       <Navbar title={name} />
       <ContentContainer>
         <ImageSection>
-          <MapComponent address={address} />
+          <MapComponent address={address} name={name} />
           <OuterContainer>
             <Content>
               <InnerContainer>
@@ -82,31 +80,6 @@ export default function PlaceDetail({
                       ></div>
                     </DistanceIcon>
                     <Distance>{distance}</Distance>
-                  </Info>
-                  <Info>
-                    <VeganIcon>
-                      <div
-                        style={{
-                          width: '9.75px',
-                          height: '9.75px',
-                          left: '1.13px',
-                          top: '1.12px',
-                          position: 'absolute',
-                          border: '0.75px #6e6e6e solid',
-                        }}
-                      ></div>
-                      <div
-                        style={{
-                          width: '1.50px',
-                          height: '1.50px',
-                          left: '8.25px',
-                          top: '2.25px',
-                          position: 'absolute',
-                          background: '#6e6e6e',
-                        }}
-                      ></div>
-                    </VeganIcon>
-                    <VeganTag>{tag}</VeganTag>
                   </Info>
                 </InfoContainer>
               </ContentContainer>

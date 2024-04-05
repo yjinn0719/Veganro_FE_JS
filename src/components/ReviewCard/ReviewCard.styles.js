@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const CommentContainer = styled.div`
+const CommentContainer = styled.div`
   width: 100%;
   height: 100%;
   padding: 12px;
@@ -13,14 +13,14 @@ export const CommentContainer = styled.div`
   display: inline-flex;
 `;
 
-export const CommentHeader = styled.div`
+const CommentHeader = styled.div`
   align-self: stretch;
   justify-content: space-between;
   align-items: flex-start;
   display: inline-flex;
 `;
 
-export const CommentInfo = styled.div`
+const CommentInfo = styled.div`
   width: 273.5px;
   flex-direction: column;
   justify-content: flex-start;
@@ -29,7 +29,7 @@ export const CommentInfo = styled.div`
   display: inline-flex;
 `;
 
-export const CommentTitle = styled.div`
+const CommentTitle = styled.div`
   color: #383838;
   font-size: 10px;
   font-family: 'Pretendard';
@@ -37,7 +37,7 @@ export const CommentTitle = styled.div`
   word-wrap: break-word;
 `;
 
-export const CommentTag = styled.div`
+const CommentTag = styled.div`
   padding-left: 6px;
   padding-right: 6px;
   padding-top: 4px;
@@ -50,7 +50,7 @@ export const CommentTag = styled.div`
   display: inline-flex;
 `;
 
-export const TagText = styled.div`
+const TagText = styled.div`
   color: #4f8337;
   font-size: 10px;
   font-family: 'Pretendard';
@@ -58,13 +58,13 @@ export const TagText = styled.div`
   word-wrap: break-word;
 `;
 
-export const IconContainer = styled.div`
+const IconContainer = styled.button`
   width: 16px;
   height: 16px;
   position: relative;
 `;
 
-export const IconDot = styled.div`
+const IconDot = styled.div`
   width: 3px;
   height: 3px;
   left: 6.5px;
@@ -72,7 +72,7 @@ export const IconDot = styled.div`
   position: absolute;
   background: #6e6e6e;
 `;
-export const CommentDate = styled.div`
+const CommentDate = styled.div`
   color: #6e6e6e;
   font-size: 12px;
   font-family: 'Pretendard';
@@ -80,10 +80,53 @@ export const CommentDate = styled.div`
   word-wrap: break-word;
 `;
 
-export const CommentText = styled.div`
+const CommentText = styled.div`
   color: #6e6e6e;
   font-size: 12px;
   font-family: 'Pretendard';
   font-weight: 500;
   word-wrap: break-word;
 `;
+
+const Container = styled.div`
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  display: inline-flex;
+`;
+
+const ItemWrapper = styled.div`
+  width: 100%;
+  padding-top: 22.15px;
+  padding-bottom: 22.15px;
+  border-bottom: 1px #f5f5f5 solid;
+  justify-content: center;
+  align-items: center;
+  display: inline-flex;
+`;
+
+const ItemText = styled.div`
+  color: ${(props) => props.color || '#000'};
+  font-size: 24px;
+  font-family: 'Pretendard';
+  font-weight: 600;
+  word-wrap: break-word;
+`;
+
+export {
+  CommentContainer,
+  CommentHeader,
+  CommentInfo,
+  CommentTitle,
+  CommentTag,
+  TagText,
+  IconContainer,
+  IconDot,
+  CommentDate,
+  CommentText,
+  Container,
+  ItemWrapper,
+  ItemText,
+};

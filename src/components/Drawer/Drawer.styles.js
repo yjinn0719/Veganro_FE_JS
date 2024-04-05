@@ -16,7 +16,7 @@ const SheetBackground = styled(motion.div)`
   width: 100%;
   height: ${({ height }) => height}vh;
   background: white;
-  box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.1);
   border-radius: 24px 24px 0 0;
   padding: 12px 0 24px 0;
   will-change: transform;

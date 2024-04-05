@@ -48,8 +48,7 @@ function App() {
 
   return (
     <AppContainer>
-      {/* <MyRouter /> */}
-      <SearchBar />
+      <MyRouter />
     </AppContainer>
   );
 }

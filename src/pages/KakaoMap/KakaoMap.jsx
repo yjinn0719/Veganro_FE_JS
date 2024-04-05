@@ -30,13 +30,29 @@ const MOCK_POSITION = [
       lng: 127.0220599,
     },
   },
+  {
+    id: 'ntower',
+    title: '남산',
+    center: {
+      lat: 37.5537586,
+      lng: 126.9809696,
+    },
+  },
+  {
+    id: 'leeum',
+    title: '리움미술관',
+    center: {
+      lat: 37.5378932,
+      lng: 126.9993937,
+    },
+  },
 ];
 
 const KakaoMap = ({ centerMove }) => {
   const setCurrentLocation = useSetRecoilState(currentPositionState);
   const currentLocation = useRecoilValue(currentPositionState);
 
-  // 장소 정보 업데이트
+  // 지도 이동 시, 좌표 정보 업데이트
   useEffect(() => {
     if (centerMove?.lat && centerMove?.lng) {
       setCurrentLocation((prev) => ({
@@ -46,7 +62,7 @@ const KakaoMap = ({ centerMove }) => {
     }
   }, [centerMove, setCurrentLocation]);
 
-  // 지도 이동 시 위치 정보 업데이트
+  // 중앙 정렬 핸들러
   const handleCenterChanged = (map) => {
     setCurrentLocation((prev) => ({
       ...prev,
@@ -63,7 +79,7 @@ const KakaoMap = ({ centerMove }) => {
       id="map"
       style={{ height: '100vh' }}
       center={currentLocation.center}
-      level={currentLocation.level || 5}
+      level={currentLocation.level || 8}
       isPanto={true}
       onCenterChanged={handleCenterChanged}
     >

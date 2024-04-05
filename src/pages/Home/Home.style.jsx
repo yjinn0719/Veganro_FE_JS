@@ -12,8 +12,11 @@ export const ButtonRelocate = styled.button`
   position: absolute;
   left: 16px;
   bottom: 16px;
-  z-index: 99;
+  z-index: 999999;
   cursor: pointer;
+  &:hover {
+    background-color: red;
+  }
 `;
 export const Pin = styled.div`
   padding: 12px;

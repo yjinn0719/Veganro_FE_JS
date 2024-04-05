@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-// import { useHistory } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Drawer from '@/components/Drawer/Drawer';
 import ReviewCard from '@/components/ReviewCard/ReviewCard';
 import {
@@ -29,12 +29,12 @@ import {
   LoadMoreButtonIcon,
 } from '@/components/Review/Review.styles';
 
-export default function Review({ placeLocation }) {
+export default function Review({ address }) {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [reviewText, setReviewText] = useState('');
   const [submittedReviews, setSubmittedReviews] = useState([]);
   const [visibleReviews, setVisibleReviews] = useState(3); // Initial number of visible reviews
-  // const history = useHistory();
+  const navigate = useNavigate();
 
   const toggleDrawer = () => {
     setIsDrawerOpen(!isDrawerOpen);
@@ -48,9 +48,6 @@ export default function Review({ placeLocation }) {
     }
   };
 
-  // const handleReviewDetail = () => {
-  //   history.push('/reviewdetail');
-  // };
   return (
     <>
       <Container>
@@ -60,7 +57,16 @@ export default function Review({ placeLocation }) {
               <ReviewTitle>리뷰</ReviewTitle>
               <ReviewNumber>{submittedReviews.length}개</ReviewNumber>
             </ReviewCount>
-            <WriteReview onClick={toggleDrawer}>리뷰 작성</WriteReview>
+            <button
+              onClick={() => {
+                window.scrollTo({
+                  top: 500,
+                  behavior: 'smooth',
+                });
+              }}
+            >
+              <WriteReview onClick={toggleDrawer}>리뷰 작성</WriteReview>
+            </button>
           </Header>
           {submittedReviews.length === 0 ? (
             <ReviewContent>
@@ -77,7 +83,11 @@ export default function Review({ placeLocation }) {
                 ))}
               {submittedReviews.length > visibleReviews && (
                 <LoadMoreButtonContainer>
-                  <LoadMoreButtonText onClick={handleReviewDetail}>
+                  <LoadMoreButtonText
+                    onClick={() => {
+                      navigate('/review');
+                    }}
+                  >
                     더보기
                   </LoadMoreButtonText>
                   <LoadMoreButtonIconContainer>
@@ -92,7 +102,7 @@ export default function Review({ placeLocation }) {
       {isDrawerOpen && (
         <Drawer
           height={46.4}
-          isopen={isDrawerOpen ? 'true' : 'false'}
+          isOpened={isDrawerOpen}
           toggleDrawer={toggleDrawer}
         >
           <TitleContainer>
@@ -122,7 +132,7 @@ export default function Review({ placeLocation }) {
                   }}
                 />
               </LocationIcon>
-              <AddressText>{placeLocation}</AddressText>
+              <AddressText>{address}</AddressText>
             </AddressInputContainer>
             <ReviewTextAreaContainer>
               <ReviewPlaceholder

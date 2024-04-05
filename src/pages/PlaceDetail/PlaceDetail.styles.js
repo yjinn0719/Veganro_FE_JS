@@ -171,6 +171,14 @@ const VeganTag = styled.div`
   word-wrap: break-word;
 `;
 
+const ReviewContainer = styled.div`
+  width: 100%;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background-color: #fff;
+`;
+
 export {
   MainContainer,
   ContentContainer,
@@ -192,4 +200,5 @@ export {
   Distance,
   placeVeganIcon,
   VeganTag,
+  ReviewContainer,
 };

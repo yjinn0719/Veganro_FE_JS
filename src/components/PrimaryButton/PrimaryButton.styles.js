@@ -1,17 +1,6 @@
-import React from 'react';
 import styled from 'styled-components';
 
-function PrimaryButton(props) {
-  return (
-    <PrimaryBtn onClick={props.onClick} disabled={!props.isEnabled}>
-      <PrimaryBtnTitle>{props.title}</PrimaryBtnTitle>
-    </PrimaryBtn>
-  );
-}
-
-export default PrimaryButton;
-
-const PrimaryBtn = styled.button`
+export const PrimaryBtn = styled.button`
   display: flex;
   width: 100%;
   height: 50px;
@@ -28,7 +17,7 @@ const PrimaryBtn = styled.button`
   cursor: ${(props) => (props.disabled ? 'not-allowed' : 'pointer')};
 `;
 
-const PrimaryBtnTitle = styled.p`
+export const PrimaryBtnTitle = styled.p`
   color: ${(props) => props.theme.color.white};
   font-size: 16px;
   font-style: normal;

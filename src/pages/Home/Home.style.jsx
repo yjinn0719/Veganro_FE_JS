@@ -1,40 +1,28 @@
 import styled from 'styled-components';
+import RoundButton from '@/components/RoundButton/RoundButton';
 
-// TODO 임시 레이아웃 코드
-export const Box = styled.main`
+export const Wrapper = styled.main`
   width: 100%;
   height: 100vh;
   position: relative;
 `;
-export const SearchBar = styled.div`
+export const Box = styled.div`
   width: 100%;
-  height: 50px;
-  padding: 16px;
+  padding: 0 16px;
   box-sizing: border-box;
   position: absolute;
-  top: 16px;
-  left: 0;
-  background-color: white;
-  z-index: 99;
+  top: 78px;
+  display: flex;
+  gap: 8px;
+  z-index: 999;
 `;
-export const ButtonCurrentLocation = styled.button`
-  width: 48px;
-  height: 48px;
-  background-color: white;
-  position: absolute;
-  left: 16px;
-  bottom: 48px;
-  z-index: 99;
-  cursor: pointer;
-`;
-export const ButtonUpdateStore = styled.button`
-  width: 48px;
-  height: 48px;
-  background-color: white;
-  position: absolute;
-  left: 16px;
-  bottom: 48px;
-  z-index: 99;
+export const RelocateButton = styled(RoundButton)`
+  &&& {
+    position: absolute;
+    left: 16px;
+    bottom: 16px;
+    z-index: 999;
+  }
 `;
 export const Pin = styled.div`
   padding: 12px;

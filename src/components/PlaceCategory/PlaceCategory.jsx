@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { PlaceCategoryBtn, PlaceCategoryTitle } from './PlaceCategory.styles';
-import LocalCafeOutlinedIcon from '@mui/icons-material/LocalCafeOutlined';
-import WineBarOutlinedIcon from '@mui/icons-material/WineBarOutlined';
-import SetMealOutlinedIcon from '@mui/icons-material/SetMealOutlined';
-import GrassOutlinedIcon from '@mui/icons-material/GrassOutlined';
+import GrassIcon from '../../assets/icons/GrassIcon.svg';
+import CafeIcon from '../../assets/icons/CafeIcon.svg';
+import WineIcon from '../../assets/icons/WineIcon.svg';
+import FishIcon from '../../assets/icons/FishIcon.svg';
 
 function PlaceCategory(props) {
   const [isClicked, setIsClicked] = useState(false);
@@ -13,31 +13,37 @@ function PlaceCategory(props) {
   };
 
   const renderIcon = (title, clicked) => {
-    const color = clicked ? '#FFFFFF' : '#383838';
-
     switch (title) {
       case '식당':
         return (
-          <GrassOutlinedIcon
-            sx={{ color: { color }, width: '24px', height: '24px' }}
+          <img
+            src={GrassIcon}
+            alt={title}
+            className={clicked ? 'clicked' : ''}
           />
         );
       case '카페':
         return (
-          <LocalCafeOutlinedIcon
-            sx={{ color: { color }, width: '24px', height: '24px' }}
+          <img
+            src={CafeIcon}
+            alt={title}
+            className={clicked ? 'clicked' : ''}
           />
         );
       case '술집':
         return (
-          <WineBarOutlinedIcon
-            sx={{ color: { color }, width: '24px', height: '24px' }}
+          <img
+            src={WineIcon}
+            alt={title}
+            className={clicked ? 'clicked' : ''}
           />
         );
       case '기타':
         return (
-          <SetMealOutlinedIcon
-            sx={{ color: { color }, width: '24px', height: '24px' }}
+          <img
+            src={FishIcon}
+            alt={title}
+            className={clicked ? 'clicked' : ''}
           />
         );
     }

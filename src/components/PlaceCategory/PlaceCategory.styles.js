@@ -27,13 +27,22 @@ export const PlaceCategoryBtn = styled.button`
   background: ${(props) =>
     getBackgroundColor(props.clicked, props.title, props.theme)};
   box-shadow: 4px 6px 16px 0px rgba(71, 71, 71, 0.12);
+  transition: all 0.3s ease-in;
+
+  img {
+    width: 20px;
+    height: 20px;
+    &.clicked {
+      filter: invert(100%);
+    }
+  }
 `;
 
 export const PlaceCategoryTitle = styled.p`
   color: ${(props) =>
-    props.clicked ? props.theme.color.white : props.theme.color.gray[800]};
-  font-size: 16px;
+    props.clicked ? props.theme.color.white : props.theme.color.gray[700]};
+  font-size: 14px;
   font-style: normal;
-  font-weight: 600;
+  font-weight: 500;
   line-height: normal;
 `;

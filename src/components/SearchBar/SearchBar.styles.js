@@ -34,7 +34,7 @@ export const Search = styled.input`
   box-sizing: border-box;
   outline: none;
   &::placeholder {
-    color: ${(props) => props.theme.color.gray[300]};
+    color: ${(props) => props.theme.color.gray[500]};
   }
   &:hover {
     border: 1px solid ${(props) => props.theme.color.green[500]};

@@ -5,7 +5,7 @@ export const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  max-width: 448px;
+  // max-width: 448px;
   padding: 16px;
   box-sizing: border-box;
   position: absolute;
@@ -34,7 +34,7 @@ export const Search = styled.input`
   box-sizing: border-box;
   outline: none;
   &::placeholder {
-    color: ${(props) => props.theme.color.gray[300]};
+    color: ${(props) => props.theme.color.gray[500]};
   }
   &:hover {
     border: 1px solid ${(props) => props.theme.color.green[500]};

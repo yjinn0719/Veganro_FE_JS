@@ -1,6 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import { PATH } from '@/constants/router';
-import Home from '@/pages/Home';
+import Home from '@/pages/Home/Home';
 // import Auth from '@/pages/Auth';
 // import SignUp from '@/pages/SignUp';
 // import AddPlace from '@/pages/AddPlace';

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-const ItemWrapper = styled.div`
+const ItemWrapper = styled.button`
   width: 100%;
   padding-top: 22.15px;
   padding-bottom: 22.15px;

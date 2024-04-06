@@ -19,6 +19,8 @@ export default function ReviewDrawer({
   toggleDrawer,
   submittedReviews,
   setSubmittedReviews,
+  titleText,
+  submitText,
 }) {
   const [reviewText, setReviewText] = useState('');
 
@@ -31,11 +33,11 @@ export default function ReviewDrawer({
   };
 
   return (
-    <Drawer height={46.4} isOpened={isOpened} toggleDrawer={toggleDrawer}>
+    <Drawer height={43.5} isOpened={isOpened} toggleDrawer={toggleDrawer}>
       {isOpened && (
         <>
           <TitleContainer>
-            <Title>리뷰 작성</Title>
+            <Title>{titleText}</Title>
           </TitleContainer>
           <FormContentContainer>
             <AddressInputContainer>
@@ -72,7 +74,7 @@ export default function ReviewDrawer({
             </ReviewTextAreaContainer>
           </FormContentContainer>
           <SubmitButtonContainer onClick={handleReview}>
-            <SubmitButtonText>등록하기</SubmitButtonText>
+            <SubmitButtonText>{submitText}</SubmitButtonText>
           </SubmitButtonContainer>
         </>
       )}

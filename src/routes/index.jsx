@@ -4,7 +4,7 @@ import Home from '@/pages/Home/Home';
 // import Auth from '@/pages/Auth';
 // import SignUp from '@/pages/SignUp';
 // import AddPlace from '@/pages/AddPlace';
-import ReviewDetail from '@/components/Review/Review';
+import ReviewDetail from '@/pages/ReviewDetail/ReviewDetail';
 // import Search from '@/pages/Search';
 // import Place from '@/pages/Place';
 import PlaceDetail from '@/pages/PlaceDetail/PlaceDetail';

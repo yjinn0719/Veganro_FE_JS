@@ -1,11 +1,10 @@
 import Navbar from '@/components/Navbar/Navbar';
 import ReviewCard from '@/components/ReviewCard/ReviewCard';
-import { ReviewContainer } from '@/pages/ReviewDetail/ReviewDetail.styles';
-import Drawer from '@/components/Drawer/Drawer';
 import {
-  ItemWrapper,
-  ItemText,
-} from '@/components/ReviewCard/ReviewCard.styles';
+  ReviewContainer,
+  Content,
+} from '@/pages/ReviewDetail/ReviewDetail.styles';
+import { useState } from 'react';
 export default function ReviewDetail() {
   const dummyData = [
     {
@@ -96,31 +95,21 @@ export default function ReviewDetail() {
   return (
     <>
       <Navbar title="리뷰" icon="null" />
+
       <ReviewContainer>
-        {dummyData.map((item, index) => (
-          <ReviewCard
-            key={index}
-            nickname={item.nickname}
-            veganLevel={item.veganLevel}
-            comment={item.comment}
-            date={item.date}
-          />
-        ))}
+        <Content>
+          {dummyData.map((item, index) => (
+            <ReviewCard
+              key={index}
+              nickname={item.nickname}
+              veganLevel={item.veganLevel}
+              comment={item.comment}
+              date={item.date}
+              click={toggleEditDrawer}
+            />
+          ))}
+        </Content>
       </ReviewContainer>
-      {isEditDrawerOpen && (
-        <Drawer
-          height={25}
-          isOpened={isEditDrawerOpen}
-          toggleDrawer={toggleReviewDrawer}
-        >
-          <ItemWrapper>
-            <ItemText color="#FF4747">삭제</ItemText>
-          </ItemWrapper>
-          <ItemWrapper style={{ height: '73.31px' }}>
-            <ItemText>수정</ItemText>
-          </ItemWrapper>
-        </Drawer>
-      )}
     </>
   );
 }

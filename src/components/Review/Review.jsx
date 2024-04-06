@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-
+import { useNavigate } from 'react-router-dom';
 import ReviewCard from '@/components/ReviewCard/ReviewCard';
 import {
   Container,
@@ -27,6 +27,9 @@ export default function Review({
   const [isEditDrawerOpen, setIsEditDrawerOpen] = useState(false);
   const [submittedReviews, setSubmittedReviews] = useState([]);
   const [visibleReviews, setVisibleReviews] = useState(3);
+  const [selectedReviewIndex, setSelectedReviewIndex] = useState(null);
+
+  const navigate = useNavigate();
 
   const toggleReviewDrawer = () => {
     setIsReviewDrawerOpen(!isReviewDrawerOpen);
@@ -83,7 +86,10 @@ export default function Review({
                   <ReviewCard
                     key={index}
                     comment={review}
-                    click={toggleEditDrawer}
+                    click={() => {
+                      setSelectedReviewIndex(index);
+                      toggleEditDrawer();
+                    }}
                   />
                 ))}
               {submittedReviews.length > visibleReviews && (
@@ -107,13 +113,26 @@ export default function Review({
       {isReviewDrawerOpen && (
         <ReviewDrawer
           address={address}
+          titleText="리뷰 작성"
+          submitText="등록하기"
           isOpened={isReviewDrawerOpen}
           toggleDrawer={toggleReviewDrawer}
           submittedReviews={submittedReviews}
           setSubmittedReviews={setSubmittedReviews}
         />
       )}
-      {isEditDrawerOpen && <EditDrawer />}
+      {isEditDrawerOpen && (
+        <EditDrawer
+          isOpened={isEditDrawerOpen}
+          toggleDrawer={toggleEditDrawer}
+          onEdit={() => toggleReviewDrawer()}
+          onDelete={(index) => {
+            setSubmittedReviews(submittedReviews.filter((_, i) => i !== index));
+            toggleEditDrawer();
+          }}
+          index={selectedReviewIndex}
+        />
+      )}
     </>
   );
 }

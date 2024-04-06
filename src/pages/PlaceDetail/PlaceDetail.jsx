@@ -1,8 +1,8 @@
 import React from 'react';
-import Navbar from '@/components/Navbar';
+import Navbar from '@/components/Navbar/Navbar';
 import MapComponent from '@/components/PlaceMap/PlaceMap';
-import BookMarked from '@/components/Bookmarked';
-import PlaceDetailInfo from '@/components/PlaceDetailInfo';
+import BookMarked from '@/components/Bookmark/Bookmark';
+import PlaceDetailInfo from '@/components/PlaceDetailInfo/PlaceDetailInfo';
 import Review from '@/components/Review/Review';
 import {
   MainContainer,
@@ -37,7 +37,7 @@ export default function PlaceDetail({
 }) {
   return (
     <MainContainer>
-      <Navbar title={name} />
+      <Navbar title={name} icon="null" />
       <ContentContainer>
         <ImageSection>
           <MapComponent address={address} name={name} />

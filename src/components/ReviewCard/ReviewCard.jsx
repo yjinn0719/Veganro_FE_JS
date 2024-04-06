@@ -11,20 +11,24 @@ import {
   IconDot,
   CommentDate,
   CommentText,
-  ItemWrapper,
-  ItemText,
 } from '@/components/ReviewCard/ReviewCard.styles';
 
 export default function ReviewCard({
+  click,
   nickname = 'Anonymous',
   veganLevel = 'Not specified',
   comment = 'No comment provided',
   date = '2021-09-01',
 }) {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+
   const toggleDrawer = () => {
-    setIsDrawerOpen(!isDrawerOpen);
+    setIsDrawerOpen((prevState) => {
+      click(!prevState);
+      return !prevState;
+    });
   };
+
   return (
     <>
       <CommentContainer>
@@ -44,15 +48,6 @@ export default function ReviewCard({
         <CommentDate>{date}</CommentDate>
         <CommentText>{comment}</CommentText>
       </CommentContainer>
-
-      <Drawer height={25} isOpened={isDrawerOpen} toggleDrawer={toggleDrawer}>
-        <ItemWrapper>
-          <ItemText color="#FF4747">삭제</ItemText>
-        </ItemWrapper>
-        <ItemWrapper style={{ height: '73.31px' }}>
-          <ItemText>수정</ItemText>
-        </ItemWrapper>
-      </Drawer>
     </>
   );
 }

@@ -1,7 +1,11 @@
-import Navbar from '@/components/Navbar';
+import Navbar from '@/components/Navbar/Navbar';
 import ReviewCard from '@/components/ReviewCard/ReviewCard';
 import { ReviewContainer } from '@/pages/ReviewDetail/ReviewDetail.styles';
-
+import Drawer from '@/components/Drawer/Drawer';
+import {
+  ItemWrapper,
+  ItemText,
+} from '@/components/ReviewCard/ReviewCard.styles';
 export default function ReviewDetail() {
   const dummyData = [
     {
@@ -83,10 +87,15 @@ export default function ReviewDetail() {
       date: '2021-09-15',
     },
   ];
+  const [isEditDrawerOpen, setIsEditDrawerOpen] = useState(false);
+
+  const toggleEditDrawer = () => {
+    setIsEditDrawerOpen(!isEditDrawerOpen);
+  };
 
   return (
     <>
-      <Navbar title="리뷰" />
+      <Navbar title="리뷰" icon="null" />
       <ReviewContainer>
         {dummyData.map((item, index) => (
           <ReviewCard
@@ -98,6 +107,20 @@ export default function ReviewDetail() {
           />
         ))}
       </ReviewContainer>
+      {isEditDrawerOpen && (
+        <Drawer
+          height={25}
+          isOpened={isEditDrawerOpen}
+          toggleDrawer={toggleReviewDrawer}
+        >
+          <ItemWrapper>
+            <ItemText color="#FF4747">삭제</ItemText>
+          </ItemWrapper>
+          <ItemWrapper style={{ height: '73.31px' }}>
+            <ItemText>수정</ItemText>
+          </ItemWrapper>
+        </Drawer>
+      )}
     </>
   );
 }

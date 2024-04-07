@@ -3,9 +3,16 @@ import KakaoMap from '../KakaoMap/KakaoMap';
 
 import SearchBar from '@/components/SearchBar/SearchBar';
 import PlaceCategory from '@/components/PlaceCategory/PlaceCategory';
-import { Wrapper, Box, RelocateButton } from '../Home/Home.style';
+import MenuButton from '@/components/MenuButton/MenuButton';
+import {
+  Wrapper,
+  Box,
+  BottomBar,
+  RelocateButton,
+  ListViewButton,
+} from '../Home/Home.style';
 
-const PLACE_TYPES = ['식당', '카페', '술집', '기타'];
+import { PLACE_TYPES } from '../../constants';
 
 export default function Home() {
   const [location, setLocation] = useState({});
@@ -45,16 +52,22 @@ export default function Home() {
     };
   };
 
-  // 버튼 클릭 시 현재 위치 업데이트
-  const handleRelocateClick = () => {
-    getCurrentPosition();
-  };
-
   // 앱 최초 진입, 현재 위치 불러오기
   // 빈 배열 넘김 -> 컴포넌트가 처음 렌더링될 때만 실행
   useEffect(() => {
     getCurrentPosition();
   }, []);
+
+  // 버튼 클릭 시 현재 위치 업데이트
+  const handleRelocateClick = () => {
+    getCurrentPosition();
+  };
+
+  // 카테고리 선택 핸들러
+  const handleCategorySelect = (title) => {
+    // Add category select logic here
+    console.log(`Category selected: ${title}`);
+  };
 
   return (
     <>
@@ -70,11 +83,15 @@ export default function Home() {
           ))}
         </Box>
         <KakaoMap centerMove={location.center} />
-        <RelocateButton
-          type="gps"
-          className="button-relocate"
-          onClick={handleRelocateClick}
-        />
+        <BottomBar>
+          <RelocateButton
+            title="gps"
+            className="relocate-button"
+            onClick={handleRelocateClick}
+          />
+          <ListViewButton className="list-view-button" title="리스트뷰" />
+          <MenuButton />
+        </BottomBar>
       </Wrapper>
     </>
   );

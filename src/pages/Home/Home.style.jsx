@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import RoundButton from '@/components/RoundButton/RoundButton';
+import MapButton from '@/components/MapButton/MapButton';
 
 export const Wrapper = styled.main`
   width: 100%;
@@ -16,12 +17,23 @@ export const Box = styled.div`
   gap: 8px;
   z-index: 999;
 `;
+export const BottomBar = styled.div`
+  width: 100%;
+  position: absolute;
+  bottom: 16px;
+  padding: 0 16px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  z-index: 999;
+`;
 export const RelocateButton = styled(RoundButton)`
-  &&& {
-    position: absolute;
-    left: 16px;
-    bottom: 16px;
-    z-index: 999;
+  &.relocate-button {
+  }
+`;
+export const ListViewButton = styled(MapButton)`
+  &.list-view-button {
   }
 `;
 export const Pin = styled.div`

@@ -1,7 +1,10 @@
-import Navbar from '@/components/Navbar';
+import Navbar from '@/components/Navbar/Navbar';
 import ReviewCard from '@/components/ReviewCard/ReviewCard';
-import { ReviewContainer } from '@/pages/ReviewDetail/ReviewDetail.styles';
-
+import {
+  ReviewContainer,
+  Content,
+} from '@/pages/ReviewDetail/ReviewDetail.styles';
+import { useState } from 'react';
 export default function ReviewDetail() {
   const dummyData = [
     {
@@ -83,20 +86,29 @@ export default function ReviewDetail() {
       date: '2021-09-15',
     },
   ];
+  const [isEditDrawerOpen, setIsEditDrawerOpen] = useState(false);
+
+  const toggleEditDrawer = () => {
+    setIsEditDrawerOpen(!isEditDrawerOpen);
+  };
 
   return (
     <>
-      <Navbar title="리뷰" />
+      <Navbar title="리뷰" icon="null" />
+
       <ReviewContainer>
-        {dummyData.map((item, index) => (
-          <ReviewCard
-            key={index}
-            nickname={item.nickname}
-            veganLevel={item.veganLevel}
-            comment={item.comment}
-            date={item.date}
-          />
-        ))}
+        <Content>
+          {dummyData.map((item, index) => (
+            <ReviewCard
+              key={index}
+              nickname={item.nickname}
+              veganLevel={item.veganLevel}
+              comment={item.comment}
+              date={item.date}
+              click={toggleEditDrawer}
+            />
+          ))}
+        </Content>
       </ReviewContainer>
     </>
   );

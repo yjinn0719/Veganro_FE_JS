@@ -1,10 +1,10 @@
 import React from 'react';
 import { SecondBtn, SecondBtnContent } from './SecondaryButton.styles';
 
-function SecondaryButton(props) {
+function SecondaryButton({ color, title }) {
   return (
-    <SecondBtn color={props.color}>
-      <SecondBtnContent>{props.title}</SecondBtnContent>
+    <SecondBtn color={color}>
+      <SecondBtnContent>{title}</SecondBtnContent>
     </SecondBtn>
   );
 }

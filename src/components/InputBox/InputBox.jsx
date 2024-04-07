@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { InputContainer } from './InputBox.styles';
 
-function InputBox(props) {
+function InputBox({ placeholder }) {
   const [value, setValue] = useState('');
 
   const handleChange = (e) => {
@@ -14,7 +14,7 @@ function InputBox(props) {
     <InputContainer
       value={value}
       onChange={handleChange}
-      placeholder={props.placeholder}
+      placeholder={placeholder}
       className={inputContent}
     />
   );

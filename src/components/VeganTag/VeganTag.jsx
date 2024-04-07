@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { VegTagButton, VegTagTitle } from './VeganTag.styles';
 
-function VeganTag(props) {
+function VeganTag({ title }) {
   const [isClicked, setIsClicked] = useState(false);
 
   const handleClick = () => {
@@ -10,7 +10,7 @@ function VeganTag(props) {
 
   return (
     <VegTagButton onClick={handleClick} clicked={isClicked ? 1 : 0}>
-      <VegTagTitle clicked={isClicked ? 1 : 0}>{props.title}</VegTagTitle>
+      <VegTagTitle clicked={isClicked ? 1 : 0}>{title}</VegTagTitle>
     </VegTagButton>
   );
 }

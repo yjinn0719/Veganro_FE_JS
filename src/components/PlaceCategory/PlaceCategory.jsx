@@ -5,7 +5,7 @@ import CafeIcon from '../../assets/icons/CafeIcon.svg';
 import WineIcon from '../../assets/icons/WineIcon.svg';
 import FishIcon from '../../assets/icons/FishIcon.svg';
 
-function PlaceCategory(props) {
+function PlaceCategory({ title }) {
   const [isClicked, setIsClicked] = useState(false);
 
   const handleClicked = () => {
@@ -53,11 +53,11 @@ function PlaceCategory(props) {
     <PlaceCategoryBtn
       onClick={handleClicked}
       clicked={isClicked ? 1 : 0}
-      title={props.title}
+      title={title}
     >
-      {renderIcon(props.title, isClicked)}
+      {renderIcon(title, isClicked)}
       <PlaceCategoryTitle clicked={isClicked ? 1 : 0}>
-        {props.title}
+        {title}
       </PlaceCategoryTitle>
     </PlaceCategoryBtn>
   );

@@ -1,4 +1,3 @@
-import { startTransition } from 'react';
 import styled from 'styled-components';
 
 export const SecondBtn = styled.button`

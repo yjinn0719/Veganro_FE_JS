@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-export default function MapComponent({ address }) {
+export default function MapComponent({ address, name }) {
   useEffect(() => {
     // 지도를 생성합니다
     const mapOption = {
@@ -27,8 +27,7 @@ export default function MapComponent({ address }) {
 
         // 인포윈도우로 장소에 대한 설명을 표시합니다
         const infowindow = new kakao.maps.InfoWindow({
-          content:
-            '<div style="width:150px;text-align:center;padding:6px 0;">우리회사</div>',
+          content: `<div style="width:150px;text-align:center;padding:6px 0;">${name}</div>`,
         });
         infowindow.open(map, marker);
 

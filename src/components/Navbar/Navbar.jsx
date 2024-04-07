@@ -5,34 +5,32 @@ import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import ClearOutlinedIcon from '@mui/icons-material/ClearOutlined';
 import ArrowBackIosNewOutlinedIcon from '@mui/icons-material/ArrowBackIosNewOutlined';
 
-function Navbar(props) {
+function Navbar({ title, icon }) {
   const navigate = useNavigate();
 
   // 한 페이지 뒤로 이동
-  const backClicked = () => {
+  const handleClick = () => {
     navigate(-1);
   };
 
   return (
     <NavContainer>
       <ArrowBackIosNewOutlinedIcon
-        onClick={backClicked}
+        onClick={handleClick}
         sx={{ color: '#383838', width: '24px', height: '24px' }}
       />
-      <NavTitle>{props.title}</NavTitle>
-      {props.icon === 'setting' && (
+      <NavTitle>{title}</NavTitle>
+      {icon === 'setting' && (
         <SettingsOutlinedIcon
           sx={{ color: '#383838', width: '24px', height: '24px' }}
         />
       )}
-      {props.icon === 'delete' && (
+      {icon === 'delete' && (
         <ClearOutlinedIcon
           sx={{ color: '#383838', width: '24px', height: '24px' }}
         />
       )}
-      {props.icon === 'null' && (
-        <div style={{ width: '24px', height: '24px' }}></div>
-      )}
+      {icon === 'null' && <div style={{ width: '24px', height: '24px' }}></div>}
     </NavContainer>
   );
 }

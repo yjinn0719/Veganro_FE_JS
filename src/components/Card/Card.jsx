@@ -10,16 +10,16 @@ import {
   Number,
 } from './Card.styles';
 
-function Card(props) {
+function Card({ name, distance, address, number }) {
   return (
     <CardContainer>
       <CardContent>
         <Thumbnail></Thumbnail>
         <TextBox>
-          <Title>{props.name}</Title>
-          <Distance>{props.distance}</Distance>
-          <Address>{props.address}</Address>
-          <Number>{props.number}</Number>
+          <Title>{name}</Title>
+          <Distance>{distance}</Distance>
+          <Address>{address}</Address>
+          <Number>{number}</Number>
         </TextBox>
       </CardContent>
     </CardContainer>

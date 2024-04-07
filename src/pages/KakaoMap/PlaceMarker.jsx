@@ -19,7 +19,7 @@ const PlaceMarker = () => {
 
   // 식당 상세 페이지 이동 핸들러
   const clickStoreHandler = (id) => {
-    navigate(`/place/${id}`);
+    navigate(`/place/${placeid}`);
   };
 
   useEffect(() => {

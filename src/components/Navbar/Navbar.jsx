@@ -22,6 +22,7 @@ function Navbar({ title, icon }) {
       <NavTitle>{title}</NavTitle>
       {icon === 'setting' && (
         <SettingsOutlinedIcon
+          onClick={() => navigate('/editmypage')}
           sx={{ color: '#383838', width: '24px', height: '24px' }}
         />
       )}

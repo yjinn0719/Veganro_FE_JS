@@ -8,13 +8,15 @@ import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import { Button } from './RoundButton.style';
 
 function RoundButton(props) {
-  const renderIcon = ({ type, color }) => {
-    switch (type) {
+  const { title, onClick } = props;
+
+  const renderIcon = (title) => {
+    switch (title) {
       case 'gps':
         return (
           <GpsFixedRoundedIcon
             sx={{
-              color: `${color ? color : '#383838'}`,
+              color: '#383838',
               width: '24px',
               height: '24px',
             }}
@@ -24,37 +26,37 @@ function RoundButton(props) {
         return (
           <GridViewRoundedIcon
             sx={{
-              color: `${color ? color : '#383838'}`,
+              color: '#383838',
               width: '24px',
               height: '24px',
             }}
           />
         );
-      case 'home':
+      case 'main':
         return (
           <HomeRoundedIcon
             sx={{
-              color: `${color ? color : '#383838'}`,
+              color: '#383838',
               width: '24px',
               height: '24px',
             }}
           />
         );
-      case 'mypage':
+      case 'my':
         return (
           <PersonOutlineRoundedIcon
             sx={{
-              color: `${color ? color : '#383838'}`,
+              color: '#383838',
               width: '24px',
               height: '24px',
             }}
           />
         );
-      case 'add-place':
+      case 'addplace':
         return (
           <EmojiFlagsRoundedIcon
             sx={{
-              color: `${color ? color : '#383838'}`,
+              color: '#383838',
               width: '24px',
               height: '24px',
             }}
@@ -64,15 +66,17 @@ function RoundButton(props) {
         return (
           <CloseRoundedIcon
             sx={{
-              color: `${color ? color : '#383838'}`,
+              color: '#383838',
               width: '24px',
               height: '24px',
             }}
           />
         );
+      default:
+        return null;
     }
   };
-  return <Button>{renderIcon(props.type)}</Button>;
+  return <Button onClick={onClick}>{renderIcon(title)}</Button>;
 }
 
 export default RoundButton;

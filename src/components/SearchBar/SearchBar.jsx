@@ -7,12 +7,12 @@ import {
 } from './SearchBar.styles';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 
-function SearchBar(props) {
+function SearchBar({ placeholder, value }) {
   const handleClick = () => {};
   return (
     <Wrapper>
       <SearchContainer>
-        <Search placeholder={props.placeholder} value={props.value} />
+        <Search placeholder={placeholder} value={value} />
         <IconContainer onClick={handleClick}>
           <SearchOutlinedIcon
             sx={{ color: '#C4C4C4', width: '24px', height: '24px' }}

@@ -1,10 +1,10 @@
 import React from 'react';
 import { PrimaryBtn, PrimaryBtnTitle } from './PrimaryButton.styles';
 
-function PrimaryButton(props) {
+function PrimaryButton({ onClick, isEnabled, title }) {
   return (
-    <PrimaryBtn onClick={props.onClick} disabled={!props.isEnabled}>
-      <PrimaryBtnTitle>{props.title}</PrimaryBtnTitle>
+    <PrimaryBtn onClick={onClick} disabled={!isEnabled}>
+      <PrimaryBtnTitle>{title}</PrimaryBtnTitle>
     </PrimaryBtn>
   );
 }

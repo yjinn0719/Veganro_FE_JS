@@ -5,7 +5,7 @@ import MapOutlinedIcon from '@mui/icons-material/MapOutlined';
 import RefreshOutlinedIcon from '@mui/icons-material/RefreshOutlined';
 import ArticleOutlinedIcon from '@mui/icons-material/ArticleOutlined';
 
-function MapButton(props) {
+function MapButton({ title }) {
   const renderIcon = (title) => {
     switch (title) {
       case '리스트뷰':
@@ -36,8 +36,8 @@ function MapButton(props) {
   };
   return (
     <MapBtn>
-      {renderIcon(props.title)}
-      <MapBtnTitle>{props.title}</MapBtnTitle>
+      {renderIcon(title)}
+      <MapBtnTitle>{title}</MapBtnTitle>
     </MapBtn>
   );
 }

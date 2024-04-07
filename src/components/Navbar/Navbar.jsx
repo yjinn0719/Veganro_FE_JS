@@ -9,14 +9,14 @@ function Navbar({ title, icon }) {
   const navigate = useNavigate();
 
   // 한 페이지 뒤로 이동
-  const backClicked = () => {
+  const handleClick = () => {
     navigate(-1);
   };
 
   return (
     <NavContainer>
       <ArrowBackIosNewOutlinedIcon
-        onClick={backClicked}
+        onClick={handleClick}
         sx={{ color: '#383838', width: '24px', height: '24px' }}
       />
       <NavTitle>{title}</NavTitle>

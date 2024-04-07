@@ -6,7 +6,7 @@ export const PATH = {
   REVIEW: '/review',
   ADDPLACE: '/add',
   PLACELISTS: '/places',
-  PLACEDETAIL: '/place/placeid',
+  PLACEDETAIL: '/place/:placeid',
   MY: `/user`, // 주석 처리 /${userid}
   MYEDIT: '/user/:userid/edit',
   NOTFOUND: '*',

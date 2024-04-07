@@ -6,7 +6,7 @@ import {
   Tab,
   TabContent,
   PlaceContent,
-} from '@/components/TabBar/TabBar.styles';
+} from './TabBar.styles';
 
 export default function TabBar() {
   const [activeTab, setActiveTab] = useState('reported');

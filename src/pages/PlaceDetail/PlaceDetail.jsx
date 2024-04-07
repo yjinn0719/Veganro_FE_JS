@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from '@/components/Navbar/Navbar';
+import axios from 'axios';
+
 import MapComponent from '@/components/PlaceMap/PlaceMap';
 import BookMarked from '@/components/Bookmark/Bookmark';
 import PlaceDetailInfo from '@/components/PlaceDetailInfo/PlaceDetailInfo';
@@ -25,22 +27,38 @@ import {
 } from '@/pages/PlaceDetail/PlaceDetail.styles';
 
 export default function PlaceDetail({
-  name = '가게 이름',
-  address = '서울 성동구 아차산로17길 48',
-  distance = '500m',
-  number = '02-1234-5678',
-  tagOption = '일부 비건',
-  tag = '비건',
-  icon = 'https://cdn.icon-icons.com/icons2/2107/PNG/512/file_type_js_official_icon_130509.png',
-  hours = '10:00 - 21:00',
-  url = 'https://www.google.com',
+  name,
+  address,
+  distance,
+  number,
+  tagOption,
+  icon,
+  hours,
+  url,
 }) {
+  const [placeData, setPlaceData] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          '/api/places/6610e451658638b12ce49ed6',
+          { withCredentials: true },
+        );
+        console.log(response.data);
+      } catch (error) {
+        console.error('Error fetching place data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <MainContainer>
       <Navbar title={name} icon="null" />
       <ContentContainer>
         <ImageSection>
-          <MapComponent address={address} name={name} />
           <OuterContainer>
             <Content>
               <InnerContainer>

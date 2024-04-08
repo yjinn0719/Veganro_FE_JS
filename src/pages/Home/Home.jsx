@@ -72,7 +72,7 @@ export default function Home() {
   return (
     <>
       <Wrapper className="home">
-        <SearchBar placeholder="서울특별시 성동구 성수2가제3동 광나루로6길 49" />
+        <SearchBar placeholder="‘가게 이름' 또는 ‘주소'를 검색해보세요." />
         <Box className="category-bar">
           {PLACE_TYPES.map((title, index) => (
             <PlaceCategory

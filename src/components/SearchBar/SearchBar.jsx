@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   Wrapper,
   SearchContainer,
@@ -8,7 +9,12 @@ import {
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 
 function SearchBar({ placeholder, value }) {
-  const handleClick = () => {};
+  // UX: 검색 입력창 click -> 검색 페이지로 navigate
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate('/search');
+  };
+
   return (
     <Wrapper>
       <SearchContainer>

@@ -12,7 +12,11 @@ export const NavContainer = styled.div`
   cursor: pointer;
   position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
   z-index: 1000;
+  box-sizing: border-box;
 `;
 
 export const NavTitle = styled.p`

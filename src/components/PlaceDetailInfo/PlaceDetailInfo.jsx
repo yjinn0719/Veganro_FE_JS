@@ -9,8 +9,13 @@ import {
   InfoText,
   HoursContainer,
   HourText,
-  HoursWrapper,
 } from './PlaceDetailInfo.styles';
+import {
+  IoLocationOutline,
+  IoCallOutline,
+  IoTimeOutline,
+  IoGlobeOutline,
+} from 'react-icons/io5';
 
 export default function PlaceDetailInfo({
   placeLocation,
@@ -26,56 +31,19 @@ export default function PlaceDetailInfo({
       <InfoWrapper>
         <InfoItem>
           <IconWrapper>
-            <Icon
-              style={{
-                width: '9px',
-                height: '13px',
-                left: '3.50px',
-                top: '1.50px',
-              }}
-            />
-            <Icon
-              style={{
-                width: '3px',
-                height: '3px',
-                left: '6.50px',
-                top: '4.50px',
-              }}
-            />
+            <IoLocationOutline size="16" />
           </IconWrapper>
           <InfoText>{placeLocation}</InfoText>
         </InfoItem>
         <InfoItem>
           <IconWrapper>
-            <Icon
-              style={{
-                width: '13px',
-                height: '13px',
-                left: '1.50px',
-                top: '1.50px',
-              }}
-            />
+            <IoCallOutline size="13" />
           </IconWrapper>
           <InfoText>{placeNumber}</InfoText>
         </InfoItem>
         <InfoItem>
           <IconWrapper>
-            <Icon
-              style={{
-                width: '12px',
-                height: '12px',
-                left: '2px',
-                top: '2px',
-              }}
-            />
-            <Icon
-              style={{
-                width: '3px',
-                height: '4.50px',
-                left: '8px',
-                top: '4px',
-              }}
-            />
+            <IoTimeOutline size="15" />
           </IconWrapper>
           <InfoText>영업시간</InfoText>
         </InfoItem>
@@ -88,38 +56,7 @@ export default function PlaceDetailInfo({
         </InfoItem>
         <InfoItem>
           <IconWrapper>
-            <Icon
-              style={{
-                width: '13px',
-                height: '13px',
-                left: '1.50px',
-                top: '1.50px',
-              }}
-            />
-            <Icon
-              style={{
-                width: '7.04px',
-                height: '13px',
-                left: '4.48px',
-                top: '1.50px',
-              }}
-            />
-            <Icon
-              style={{
-                width: '8.67px',
-                height: '8.67px',
-                left: '3.67px',
-                top: '3.67px',
-              }}
-            />
-            <Icon
-              style={{
-                width: '13px',
-                height: '13px',
-                left: '1.50px',
-                top: '1.50px',
-              }}
-            />
+            <IoGlobeOutline size="15" />
           </IconWrapper>
           <InfoText>{placeURL}</InfoText>
         </InfoItem>

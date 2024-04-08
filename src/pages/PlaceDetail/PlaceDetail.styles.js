@@ -29,6 +29,7 @@ const ContentContainer = styled.div`
 
 const ImageSection = styled.div`
   width: 100%;
+  margin-top: 20px;
   height: 380px;
   padding-bottom: 16px;
   padding-left: 16px;
@@ -50,7 +51,8 @@ const Tag = styled.div`
   justify-content: center;
   align-items: center;
   gap: 10px;
-  display: inline-flex;
+  font-weight: 700;
+  display: flex;
 `;
 
 const VeganIcon = styled.div`
@@ -144,8 +146,8 @@ const Info = styled.div`
 `;
 
 const DistanceIcon = styled.div`
-  width: 12px;
-  height: 12px;
+  width: 15px;
+  height: 15px;
   position: relative;
 `;
 

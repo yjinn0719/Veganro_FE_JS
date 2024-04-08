@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { IoNavigateCircleOutline } from 'react-icons/io5';
+import { fetchPlaceData } from '@/apis/services/place';
+
 import Navbar from '@/components/Navbar/Navbar';
-import { apiClient } from '@/apis/axiosInstance';
 import MapComponent from '@/components/PlaceMap/PlaceMap';
 import BookMarked from '@/components/Bookmark/Bookmark';
 import PlaceDetailInfo from '@/components/PlaceDetailInfo/PlaceDetailInfo';
@@ -27,7 +30,6 @@ import {
 
 export default function PlaceDetail({
   distance = '1.2km',
-
   hours = [
     '월: 11:00~20:00, 브레이크타임: 15:00~16:00',
     '화: 11:00~20:00, 브레이크타임: 15:00~16:00',
@@ -39,36 +41,32 @@ export default function PlaceDetail({
   ],
 }) {
   const [placeData, setPlaceData] = useState(null);
+  const params = useParams();
+  const placeId = params.placeid;
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await apiClient.get(
-          '/api/places/6610e628658638b12ce49ee4',
-        );
-        setPlaceData(response.data.data);
-        console.log(response.data.data);
+        const data = await fetchPlaceData(placeId);
+        setPlaceData(data);
+        console.log(data);
       } catch (error) {
-        if (error) {
-          // error handling
-          console.log(error.response.data);
-          console.log(error.response.status);
-          console.log(error.response.statusText);
-        } else {
-          console.log(`Error: ${error.message}`);
-        }
+        console.error(error.message);
       }
     };
 
     fetchData();
-  }, []);
+  }, [placeId]);
 
   return (
     <MainContainer>
       <Navbar title={placeData && placeData.name} icon="null" />
       <ContentContainer>
         <ImageSection>
-          <MapComponent address={placeData && placeData.address} />
+          <MapComponent
+            address={placeData && placeData.address}
+            name={placeData && placeData.name}
+          />
           <OuterContainer>
             <Content>
               <InnerContainer>
@@ -88,26 +86,7 @@ export default function PlaceDetail({
                 <InfoContainer>
                   <Info>
                     <DistanceIcon>
-                      <div
-                        style={{
-                          width: '4.87px',
-                          height: '4.87px',
-                          left: '3.37px',
-                          top: '3.75px',
-                          position: 'absolute',
-                          background: '#6e6e6e',
-                        }}
-                      ></div>
-                      <div
-                        style={{
-                          width: '9px',
-                          height: '9px',
-                          left: '1.50px',
-                          top: '1.50px',
-                          position: 'absolute',
-                          border: '0.75px #6e6e6e solid',
-                        }}
-                      ></div>
+                      <IoNavigateCircleOutline size="15" />
                     </DistanceIcon>
                     <Distance>{distance}</Distance>
                   </Info>

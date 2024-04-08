@@ -1,6 +1,6 @@
 import { apiClient } from '@/apis/utils/axiosInstance';
 
-export const fetchPlaceData = async (placeId) => {
+export const getPlaceData = async (placeId) => {
   try {
     const response = await apiClient.get(`/api/places/${placeId}`);
     return response.data.data;

@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useParams } from 'react-router-dom';
 import { IoNavigateCircleOutline } from 'react-icons/io5';
-import { fetchPlaceData } from '@/apis/services/place';
-
+import { useGetPlace } from '../../hooks/usePlace';
 import Navbar from '@/components/Navbar/Navbar';
 import MapComponent from '@/components/PlaceMap/PlaceMap';
 import BookMarked from '@/components/Bookmark/Bookmark';
@@ -40,23 +39,11 @@ export default function PlaceDetail({
     '일: 휴무',
   ],
 }) {
-  const [placeData, setPlaceData] = useState(null);
-  const params = useParams();
-  const placeId = params.placeid;
+  const { placeid } = useParams();
+  const { data: placeData, isLoading, isError, error } = useGetPlace(placeid);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await fetchPlaceData(placeId);
-        setPlaceData(data);
-        console.log(data);
-      } catch (error) {
-        console.error(error.message);
-      }
-    };
-
-    fetchData();
-  }, [placeId]);
+  if (isLoading) return <div>Loading...</div>;
+  if (isError) return <div>Error: {error.message}</div>;
 
   return (
     <MainContainer>

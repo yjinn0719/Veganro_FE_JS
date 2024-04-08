@@ -27,18 +27,7 @@ import {
   ReviewContainer,
 } from '@/pages/PlaceDetail/PlaceDetail.styles';
 
-export default function PlaceDetail({
-  distance = '1.2km',
-  hours = [
-    '월: 11:00~20:00, 브레이크타임: 15:00~16:00',
-    '화: 11:00~20:00, 브레이크타임: 15:00~16:00',
-    '수: 11:00~20:00, 브레이크타임: 15:00~16:00',
-    '목: 11:00~20:00, 브레이크타임: 15:00~16:00',
-    '금: 11:00~20:00, 브레이크타임: 15:00~16:00',
-    '토: 11:00~20:00, 브레이크타임: 15:00~16:00',
-    '일: 휴무',
-  ],
-}) {
+export default function PlaceDetail() {
   const { placeid } = useParams();
   const { data: placeData, isLoading, isError, error } = useGetPlace(placeid);
 
@@ -47,35 +36,30 @@ export default function PlaceDetail({
 
   return (
     <MainContainer>
-      <Navbar title={placeData && placeData.name} icon="null" />
+      <Navbar title={placeData?.name} icon="null" />
       <ContentContainer>
         <ImageSection>
-          <MapComponent
-            address={placeData && placeData.address}
-            name={placeData && placeData.name}
-          />
+          <MapComponent address={placeData?.address} name={placeData?.name} />
           <OuterContainer>
             <Content>
               <InnerContainer>
                 <IconContainer>
-                  <Icon icon={placeData && placeData.category_img} />
+                  <Icon icon={placeData?.category_img} />
                 </IconContainer>
               </InnerContainer>
               <ContentContainer>
                 <NameContainer>
-                  <Name>{placeData && placeData.name}</Name>
+                  <Name>{placeData?.name}</Name>
                 </NameContainer>
                 <TagContainer>
-                  <Tag>
-                    {placeData && placeData.vegan_option ? '일부 비건' : '비건'}
-                  </Tag>
+                  <Tag>{placeData?.vegan_option ? '일부 비건' : '비건'}</Tag>
                 </TagContainer>
                 <InfoContainer>
                   <Info>
                     <DistanceIcon>
                       <IoNavigateCircleOutline size="15" />
                     </DistanceIcon>
-                    <Distance>{distance}</Distance>
+                    <Distance>{placeData?.distance || 'N/A'}</Distance>
                   </Info>
                 </InfoContainer>
               </ContentContainer>
@@ -86,14 +70,14 @@ export default function PlaceDetail({
       </ContentContainer>
       <>
         <PlaceDetailInfo
-          placeLocation={placeData && placeData.address}
-          placeNumber={placeData && placeData.tel}
-          placeHours={hours}
-          placeURL={placeData && placeData.sns_url}
+          placeLocation={placeData?.address}
+          placeNumber={placeData?.tel}
+          placeHours={placeData?.hours || []}
+          placeURL={placeData?.sns_url || []}
         />
       </>
       <ReviewContainer>
-        <Review address={placeData && placeData.address} />
+        <Review address={placeData?.address} />
       </ReviewContainer>
     </MainContainer>
   );

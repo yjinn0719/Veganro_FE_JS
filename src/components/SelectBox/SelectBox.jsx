@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Select from 'react-select';
-import { ShortInputContainer } from './ShortInputBox.styles';
+import { SelectBoxContainer } from './SelectBox.styles';
 
 let hour = [];
 for (let i = 1; i <= 24; i++) {
@@ -43,11 +43,11 @@ const customStyles = {
   }),
 };
 
-const ShortInputBox = ({ placeholder }) => {
+const SelectBox = ({ placeholder }) => {
   const [timeValue, setTimeValue] = useState('');
 
   return (
-    <ShortInputContainer>
+    <SelectBoxContainer>
       <Select
         classNamePrefix="select"
         onChange={(option) => setTimeValue(option.value)}
@@ -55,8 +55,8 @@ const ShortInputBox = ({ placeholder }) => {
         options={hour}
         styles={customStyles}
       />
-    </ShortInputContainer>
+    </SelectBoxContainer>
   );
 };
 
-export default ShortInputBox;
+export default SelectBox;

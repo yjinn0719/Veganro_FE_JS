@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from '@/components/Navbar/Navbar';
-import axios from 'axios';
-
+import { apiClient } from '@/apis/axiosInstance';
 import MapComponent from '@/components/PlaceMap/PlaceMap';
 import BookMarked from '@/components/Bookmark/Bookmark';
 import PlaceDetailInfo from '@/components/PlaceDetailInfo/PlaceDetailInfo';
@@ -27,27 +26,37 @@ import {
 } from '@/pages/PlaceDetail/PlaceDetail.styles';
 
 export default function PlaceDetail({
-  name,
-  address,
-  distance,
-  number,
-  tagOption,
-  icon,
-  hours,
-  url,
+  distance = '1.2km',
+
+  hours = [
+    '월: 11:00~20:00, 브레이크타임: 15:00~16:00',
+    '화: 11:00~20:00, 브레이크타임: 15:00~16:00',
+    '수: 11:00~20:00, 브레이크타임: 15:00~16:00',
+    '목: 11:00~20:00, 브레이크타임: 15:00~16:00',
+    '금: 11:00~20:00, 브레이크타임: 15:00~16:00',
+    '토: 11:00~20:00, 브레이크타임: 15:00~16:00',
+    '일: 휴무',
+  ],
 }) {
   const [placeData, setPlaceData] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(
-          '/api/places/6610e451658638b12ce49ed6',
-          { withCredentials: true },
+        const response = await apiClient.get(
+          '/api/places/6610e628658638b12ce49ee4',
         );
-        console.log(response.data);
+        setPlaceData(response.data.data);
+        console.log(response.data.data);
       } catch (error) {
-        console.error('Error fetching place data:', error);
+        if (error) {
+          // error handling
+          console.log(error.response.data);
+          console.log(error.response.status);
+          console.log(error.response.statusText);
+        } else {
+          console.log(`Error: ${error.message}`);
+        }
       }
     };
 
@@ -56,22 +65,25 @@ export default function PlaceDetail({
 
   return (
     <MainContainer>
-      <Navbar title={name} icon="null" />
+      <Navbar title={placeData && placeData.name} icon="null" />
       <ContentContainer>
         <ImageSection>
+          <MapComponent address={placeData && placeData.address} />
           <OuterContainer>
             <Content>
               <InnerContainer>
                 <IconContainer>
-                  <Icon icon={icon} />
+                  <Icon icon={placeData && placeData.category_img} />
                 </IconContainer>
               </InnerContainer>
               <ContentContainer>
                 <NameContainer>
-                  <Name>{name}</Name>
+                  <Name>{placeData && placeData.name}</Name>
                 </NameContainer>
                 <TagContainer>
-                  <Tag>{tagOption}</Tag>
+                  <Tag>
+                    {placeData && placeData.vegan_option ? '일부 비건' : '비건'}
+                  </Tag>
                 </TagContainer>
                 <InfoContainer>
                   <Info>
@@ -108,14 +120,14 @@ export default function PlaceDetail({
       </ContentContainer>
       <>
         <PlaceDetailInfo
-          placeLocation={address}
-          placeNumber={number}
+          placeLocation={placeData && placeData.address}
+          placeNumber={placeData && placeData.tel}
           placeHours={hours}
-          placeURL={url}
+          placeURL={placeData && placeData.sns_url}
         />
       </>
       <ReviewContainer>
-        <Review address={address} />
+        <Review address={placeData && placeData.address} />
       </ReviewContainer>
     </MainContainer>
   );

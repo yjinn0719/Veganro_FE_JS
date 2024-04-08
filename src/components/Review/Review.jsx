@@ -64,7 +64,7 @@ export default function Review({
             <div
               onClick={() => {
                 window.scrollTo({
-                  top: 500,
+                  top: 650,
                   behavior: 'smooth',
                 });
               }}

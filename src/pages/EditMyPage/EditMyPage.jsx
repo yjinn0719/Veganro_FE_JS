@@ -4,14 +4,13 @@ import {
   TextBox,
   SubTextBox,
   Text,
-  Card,
   TagContainer,
-  Tag,
   ButtonContainer,
-  Button,
 } from './EditMyPage.styles';
 import Navbar from '@/components/Navbar/Navbar';
-import PrimaryButton from '@/components/PrimaryButton/PrimaryButton';
+import SecondaryButton from '../../components/SecondaryButton/SecondaryButton';
+import VeganTag from '../../components/VeganTag/VeganTag';
+import InputBox from '../../components/InputBox/InputBox';
 
 export default function EditMyPage() {
   return (
@@ -24,11 +23,7 @@ export default function EditMyPage() {
               닉네임
             </Text>
           </SubTextBox>
-          <Card background="#F9F9F9">
-            <Text color="#C4C4C4" fontSize={16}>
-              가게 이름
-            </Text>
-          </Card>
+          <InputBox placeholder="닉네임을 입력해주세요" />
         </TextBox>
         <TagContainer>
           <SubTextBox>
@@ -38,53 +33,23 @@ export default function EditMyPage() {
           </SubTextBox>
           <TagContainer>
             <>
-              <Tag width={100} background="#F9F9F9">
-                <Text color="#6E6E6E" fontSize={16}>
-                  비건
-                </Text>
-              </Tag>
-              <Tag width={100} background="#F9F9F9">
-                <Text color="#6E6E6E" fontSize={16}>
-                  락토
-                </Text>
-              </Tag>
-              <Tag
-                width={100}
-                background="rgba(79, 131, 55, 0.10)"
-                border="1px #4F8337 solid"
-              >
-                <Text color="#4F8337" fontSize={16}>
-                  오보
-                </Text>
-              </Tag>
-              <Tag width={115} background="#F9F9F9">
-                <Text color="#6E6E6E" fontSize={16}>
-                  락토-오보
-                </Text>
-              </Tag>
-            </>
-            <>
-              <Tag width={100} background="#F9F9F9">
-                <Text color="#6E6E6E" fontSize={16}>
-                  페스코
-                </Text>
-              </Tag>
-              <Tag width={100} background="#F9F9F9">
-                <Text color="#6E6E6E" fontSize={16}>
-                  플로
-                </Text>
-              </Tag>
-              <Tag width={100} background="#F9F9F9">
-                <Text color="#6E6E6E" fontSize={16}>
-                  플렉시테리언
-                </Text>
-              </Tag>
+              <VeganTag title="비건" />
+              <VeganTag title="락토" />
+              <VeganTag title="오보" />
+              <VeganTag title="락토-오보" />
+              <VeganTag title="페스코" />
+              <VeganTag title="플로" />
+              <VeganTag title="플렉시테리언" />
             </>
           </TagContainer>
         </TagContainer>
         <ButtonContainer>
-          <PrimaryButton title="취소" />
-          <PrimaryButton title="저장하기" />
+          <SecondaryButton
+            title="취소"
+            color="gray"
+            onClick={() => navigator('/user')}
+          />
+          <SecondaryButton title="저장하기" color="green" />
         </ButtonContainer>
       </InnerContainer>
     </Container>

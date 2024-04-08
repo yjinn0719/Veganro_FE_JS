@@ -17,11 +17,10 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target:
-          'https://veganro-backend-bcgctdc9q-veganro2024s-projects.vercel.app',
-        changeOrigin: true,
+        target: 'https://veganro-backend.vercel.app/api',
         rewrite: (path) => path.replace(/^\/api/, ''),
       },
     },
+    port: 4000,
   },
 });

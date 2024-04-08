@@ -61,6 +61,8 @@ const TagContainer = styled.div`
   justify-content: flex-start;
   align-items: flex-start;
   gap: 12px;
+  height: 520px;
+  width: 100%;
   display: flex;
 `;
 
@@ -77,11 +79,12 @@ const Tag = styled.div`
 
 const ButtonContainer = styled.div`
   display: flex;
+  height: 100px;
+  margin-top: 30px;
   align-self: stretch;
   justify-content: flex-start;
   align-items: center;
   gap: 16px;
-  display: flex;
   width: 96.55%;
 `;
 

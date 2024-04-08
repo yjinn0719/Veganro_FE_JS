@@ -7,6 +7,9 @@ import {
   IconWrapper,
   Icon,
   InfoText,
+  HoursContainer,
+  HourText,
+  HoursWrapper,
 } from './PlaceDetailInfo.styles';
 
 export default function PlaceDetailInfo({
@@ -58,7 +61,12 @@ export default function PlaceDetailInfo({
         <InfoItem>
           <IconWrapper>
             <Icon
-              style={{ width: '12px', height: '12px', left: '2px', top: '2px' }}
+              style={{
+                width: '12px',
+                height: '12px',
+                left: '2px',
+                top: '2px',
+              }}
             />
             <Icon
               style={{
@@ -69,7 +77,14 @@ export default function PlaceDetailInfo({
               }}
             />
           </IconWrapper>
-          <InfoText>{placeHours}</InfoText>
+          <InfoText>영업시간</InfoText>
+        </InfoItem>
+        <InfoItem>
+          <HoursContainer>
+            {placeHours.map((hour, index) => (
+              <HourText key={index}>{hour}</HourText>
+            ))}
+          </HoursContainer>
         </InfoItem>
         <InfoItem>
           <IconWrapper>

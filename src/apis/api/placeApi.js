@@ -3,7 +3,11 @@ import { api } from '@/apis/utils/axiosInstance';
 // 장소 리스트(전체 + 필터)
 // /places?center=x,y&radius=number&size=number&category=value&search=value
 export const fetchPlaces = async (params) => {
-  return await api.get('/api/places', { params });
+  try {
+    return await api.get('/api/places', { params });
+  } catch (e) {
+    console.log('apis/api에서 에러', e);
+  }
 };
 
 // 장소 상세 조회

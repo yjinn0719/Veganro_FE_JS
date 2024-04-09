@@ -41,6 +41,16 @@ const customStyles = {
     fontSize: '14px',
     fontWeight: 600,
   }),
+  placeholder: (defaultStyles) => {
+    return {
+      ...defaultStyles,
+      color: '#6E6E6E',
+      fontSize: '14px',
+      fontWeight: 600,
+      fontStyle: 'normal',
+      lineHeight: 'normal',
+    };
+  },
 };
 
 const SelectBox = ({ placeholder }) => {

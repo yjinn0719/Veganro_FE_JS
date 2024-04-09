@@ -1,16 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { PlaceTagBtn, PlaceTagContent } from './PlaceTag.styles';
 
-function PlaceTag({ title }) {
-  const [isClicked, setIsClicked] = useState(false);
-
-  const handleClick = () => {
-    setIsClicked(!isClicked);
-  };
-
+function PlaceTag({ title, onClick, isSelected }) {
   return (
-    <PlaceTagBtn onClick={handleClick} clicked={isClicked ? 1 : 0}>
-      <PlaceTagContent clicked={isClicked ? 1 : 0}>{title}</PlaceTagContent>
+    <PlaceTagBtn onClick={onClick} clicked={isSelected ? 1 : 0}>
+      <PlaceTagContent clicked={isSelected ? 1 : 0}>{title}</PlaceTagContent>
     </PlaceTagBtn>
   );
 }

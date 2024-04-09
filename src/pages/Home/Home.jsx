@@ -14,10 +14,12 @@ import {
   ListViewButton,
 } from '../Home/Home.style';
 
-import { PLACE_TYPES } from '../../constants';
+import { PLACE_TYPES } from '@/constants';
 
 export default function Home() {
   const [location, setLocation] = useState({});
+  // Todo '식당'으로 초기 버튼 클릭 시켜줘야함
+  const [selectedCategories, setSelectedCategories] = useState([]);
 
   // 현재 위치 받아오기
   const getCurrentPosition = () => {
@@ -67,12 +69,19 @@ export default function Home() {
   };
 
   // 카테고리 선택 핸들러
-  const handleCategorySelect = (title) => {
-    // Add category select logic here
-    console.log(`Category selected: ${title}`);
+  const handleCategorySelect = (category) => {
+    // 이미 선택된 카테고리 확인
+    if (selectedCategories.includes(category)) {
+      setSelectedCategories(selectedCategories.filter((c) => c !== category));
+    } else {
+      setSelectedCategories([...selectedCategories, category]);
+    }
   };
 
-  const handleCategoryReset = () => {};
+  // 카테고리 초기화 핸들러
+  const handleCategoryReset = () => {
+    setSelectedCategories([]);
+  };
 
   return (
     <>
@@ -94,7 +103,10 @@ export default function Home() {
           </Categories>
           <SmallRoundButton title="filter" />
         </FilterBar>
-        <KakaoMap centerMove={location.center} />
+        <KakaoMap
+          centerMove={location.center}
+          selectedCategories={selectedCategories}
+        />
         <BottomBar>
           <RelocateButton
             title="gps"

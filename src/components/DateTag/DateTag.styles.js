@@ -2,9 +2,9 @@ import styled from 'styled-components';
 
 export const DateTagBtn = styled.button`
   display: flex;
-  width: 50px;
-  height: 50px;
-  padding: 12px 16px;
+  width: 40px;
+  height: 40px;
+  padding: 12px;
   align-items: center;
   flex-shrink: 0;
   border-radius: 100px;

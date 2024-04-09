@@ -1,11 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
-import { Pin } from '../Home/Home.style';
-import PlaceMarkers from './PlaceMarker';
+import PlaceMarkers from '../KakaoMap/PlaceMarkers';
 
-const MOCK_POSITION = [];
-
-const KakaoMap = ({ centerMove }) => {
+const KakaoMap = ({ centerMove, selectedCategories }) => {
   const [currentLocation, setCurrentLocation] = useState({
     level: 4,
     center: {
@@ -40,14 +37,12 @@ const KakaoMap = ({ centerMove }) => {
       level={currentLocation.level || 4}
       isPanto={true}
     >
-      <PlaceMarkers />
-      {
-        <MapMarker
-          position={currentLocation.center}
-          title="Current Location"
-          clickable={false}
-        />
-      }
+      <PlaceMarkers selectedCategories={selectedCategories} />
+      <MapMarker
+        position={currentLocation.center}
+        title="Current Location"
+        clickable={false}
+      />
     </Map>
   );
 };

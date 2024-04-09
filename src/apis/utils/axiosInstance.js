@@ -1,11 +1,10 @@
 import axios from 'axios';
 
-const instance = axios.create({
+// Axios를 사용하여 API와 통신할 수 있는 클라이언트를 생성.
+export const api = axios.create({
   baseURL: 'https://veganro-backend.vercel.app',
   headers: {
     'Content-Type': 'application/json',
   },
   withCredentials: true,
 });
-
-export default instance;

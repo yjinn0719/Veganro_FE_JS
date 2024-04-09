@@ -19,10 +19,9 @@ import {
 } from '@/components/Review/Review.styles';
 import EditDrawer from '@/components/EditDrawer/EditDrawer';
 import ReviewDrawer from '@/components/ReviewDrawer/ReviewDrawer';
+import { IoChevronDownSharp } from 'react-icons/io5';
 
-export default function Review({
-  address = '서울특별시 강남구 역삼동 123-45',
-}) {
+export default function Review({ address }) {
   const [isReviewDrawerOpen, setIsReviewDrawerOpen] = useState(false);
   const [isEditDrawerOpen, setIsEditDrawerOpen] = useState(false);
   const [submittedReviews, setSubmittedReviews] = useState([]);
@@ -64,7 +63,7 @@ export default function Review({
             <div
               onClick={() => {
                 window.scrollTo({
-                  top: 500,
+                  top: 600,
                   behavior: 'smooth',
                 });
               }}
@@ -93,16 +92,14 @@ export default function Review({
                   />
                 ))}
               {submittedReviews.length > visibleReviews && (
-                <LoadMoreButtonContainer>
-                  <LoadMoreButtonText
-                    onClick={() => {
-                      navigate('/review');
-                    }}
-                  >
-                    더보기
-                  </LoadMoreButtonText>
+                <LoadMoreButtonContainer
+                  onClick={() => {
+                    navigate('/review');
+                  }}
+                >
+                  <LoadMoreButtonText>더보기</LoadMoreButtonText>
                   <LoadMoreButtonIconContainer>
-                    <LoadMoreButtonIcon></LoadMoreButtonIcon>
+                    <IoChevronDownSharp size="15" />
                   </LoadMoreButtonIconContainer>
                 </LoadMoreButtonContainer>
               )}

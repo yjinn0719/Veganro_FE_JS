@@ -31,7 +31,6 @@ const Title = styled.div`
 
 const InfoWrapper = styled.div`
   align-self: stretch;
-  height: 100px;
   border-radius: 4px;
   flex-direction: column;
   justify-content: flex-start;
@@ -68,6 +67,29 @@ const InfoText = styled.div`
   word-wrap: break-word;
 `;
 
+const HoursContainer = styled.div`
+  margin-left: 29px;
+  width: 100%;
+  height: 100%;
+  gap: 8px;
+  display: flex;
+  flex-direction: column;
+`;
+
+const HourText = styled.div`
+  flex: 1 1 0;
+  color: #1f1f1f;
+  font-size: 12px;
+  font-family: 'Pretendard';
+  font-weight: 500;
+  word-wrap: break-word;
+`;
+
+const HoursWrapper = `
+display: flex;
+align-items: center;
+`;
+
 export {
   Container,
   TitleWrapper,
@@ -77,4 +99,7 @@ export {
   IconWrapper,
   Icon,
   InfoText,
+  HoursContainer,
+  HourText,
+  HoursWrapper,
 };

@@ -1,4 +1,5 @@
 import Drawer from '../Drawer/Drawer';
+import PrimaryButton from '../PrimaryButton/PrimaryButton';
 import { useState } from 'react';
 import {
   TitleContainer,
@@ -9,8 +10,6 @@ import {
   AddressText,
   ReviewTextAreaContainer,
   ReviewPlaceholder,
-  SubmitButtonContainer,
-  SubmitButtonText,
 } from './ReviewDrawer.styles';
 
 export default function ReviewDrawer({
@@ -20,9 +19,9 @@ export default function ReviewDrawer({
   submittedReviews,
   setSubmittedReviews,
   titleText,
-  submitText,
 }) {
   const [reviewText, setReviewText] = useState('');
+  const [isEnabled, setIsEnabled] = useState(false); // isEnabled 상태 추가
 
   const handleReview = () => {
     if (reviewText.trim() !== '') {
@@ -32,8 +31,13 @@ export default function ReviewDrawer({
     }
   };
 
+  const handleChange = (e) => {
+    setReviewText(e.target.value);
+    setIsEnabled(e.target.value.trim() !== ''); // 리뷰 텍스트가 비어있지 않으면 isEnabled를 true로 설정
+  };
+
   return (
-    <Drawer height={43.5} isOpened={isOpened} toggleDrawer={toggleDrawer}>
+    <Drawer height={45.5} isOpened={isOpened} toggleDrawer={toggleDrawer}>
       {isOpened && (
         <>
           <TitleContainer>
@@ -69,13 +73,15 @@ export default function ReviewDrawer({
               <ReviewPlaceholder
                 placeholder="리뷰를 남겨주세요! (100자 이내)"
                 value={reviewText}
-                onChange={(e) => setReviewText(e.target.value)}
+                onChange={handleChange}
               />
             </ReviewTextAreaContainer>
           </FormContentContainer>
-          <SubmitButtonContainer onClick={handleReview}>
-            <SubmitButtonText>{submitText}</SubmitButtonText>
-          </SubmitButtonContainer>
+          <PrimaryButton
+            onClick={handleReview}
+            title="등록하기"
+            isEnabled={isEnabled}
+          />
         </>
       )}
     </Drawer>

@@ -7,9 +7,7 @@ import EmojiFlagsRoundedIcon from '@mui/icons-material/EmojiFlagsRounded';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import { Button } from './RoundButton.style';
 
-function RoundButton(props) {
-  const { title, onClick } = props;
-
+function RoundButton({ title, onClick }) {
   const renderIcon = (title) => {
     switch (title) {
       case 'gps':

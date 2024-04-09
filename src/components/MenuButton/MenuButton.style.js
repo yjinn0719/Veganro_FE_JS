@@ -7,12 +7,10 @@ export const Menu = styled.div`
 `;
 
 export const MenuList = styled.div`
-  display: ${({ isopened }) => (isopened ? 'flex' : 'none')};
+  display: ${(props) => (props.$isopened ? 'flex' : 'none')};
   flex-direction: column-reverse;
   gap: 8px;
   z-index: 999;
-
-  ${(props) => (props.isopened ? 'isopened="1"' : 'isopened="0"')};
 `;
 
 export const MenuButton = styled.button`

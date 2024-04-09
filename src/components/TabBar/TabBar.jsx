@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Card from '@/components/Card/Card';
+import PlaceCard from '@/components/Card/Card';
 import ReviewCard from '@/components/ReviewCard/ReviewCard';
 import {
   Container,
@@ -25,9 +25,7 @@ export default function TabBar({
           <Tab
             active={activeTab === 'reported'}
             onClick={() => setActiveTab('reported')}
-          >
-            제보한 가게
-          </Tab>
+          ></Tab>
           <Tab
             active={activeTab === 'review'}
             onClick={() => setActiveTab('review')}
@@ -51,6 +49,7 @@ export default function TabBar({
         {activeTab === 'review' && <div>작성 후기 데이터</div>}
         {activeTab === 'bookmark' && <div>북마크 데이터</div>}
       </TabContent>
+      <PlaceCard />
     </Container>
   );
 }

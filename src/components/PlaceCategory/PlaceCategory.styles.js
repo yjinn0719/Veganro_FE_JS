@@ -23,7 +23,7 @@ export const PlaceCategoryBtn = styled.button`
   border-radius: 4px;
   border: 1px solid
     ${(props) =>
-      props.clicked ? props.theme.color.white : props.theme.color.gray[800]};
+      props.clicked ? props.theme.color.white : props.theme.color.gray[300]};
   background: ${(props) =>
     getBackgroundColor(props.clicked, props.title, props.theme)};
   box-shadow: 4px 6px 16px 0px rgba(71, 71, 71, 0.12);

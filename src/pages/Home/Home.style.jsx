@@ -7,15 +7,21 @@ export const Wrapper = styled.main`
   height: 100vh;
   position: relative;
 `;
-export const Box = styled.div`
+export const FilterBar = styled.div`
   width: 100%;
   padding: 0 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   box-sizing: border-box;
   position: absolute;
   top: 78px;
-  display: flex;
-  gap: 8px;
   z-index: 999;
+`;
+export const Categories = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
 `;
 export const BottomBar = styled.div`
   width: 100%;

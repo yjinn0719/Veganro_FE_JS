@@ -3,13 +3,14 @@ import styled from 'styled-components';
 const MainContainer = styled.div`
   width: 100%;
   height: 100%;
+  top: 60px;
   padding-top: 16px;
   padding-bottom: 717px;
   background: #f5f5f5;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  display: inline-flex;
+  display: flex;
 `;
 const Content = styled.div`
   width: 100%;
@@ -24,7 +25,7 @@ const ContentContainer = styled.div`
   justify-content: flex-start;
   align-items: flex-start;
   gap: 10px;
-  display: inline-flex;
+  display: flex;
 `;
 
 const ImageSection = styled.div`
@@ -67,39 +68,28 @@ const OuterContainer = styled.div`
 `;
 
 const InnerContainer = styled.div`
-  margin: 0 10px 0 0;
-  width: 54px;
-  height: 54px;
-  background: #4f8337;
+  margin: 0 20px 0 0;
+  width: 60px;
+  height: 60px;
   border-radius: 3.6px;
   overflow: hidden;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  display: inline-flex;
+  display: flex;
 `;
 
-const IconContainer = styled.div`
-  width: 32px;
-  height: 32px;
-  position: relative;
-`;
-
-const Icon = styled.div`
-  width: 24px;
-  height: 24px;
+const Icon = styled.img`
+  width: 54px;
+  height: 54px;
   left: 4px;
   top: 4px;
-  position: absolute;
+  position: relative;
   background: white;
-  border: 0.5px #4f8337 solid;
 `;
 
 const NameContainer = styled.div`
   justify-content: flex-start;
   align-items: center;
   gap: 6px;
-  display: inline-flex;
+  display: flex;
 `;
 
 const Name = styled.div`
@@ -120,7 +110,7 @@ const TagContainer = styled.div`
   justify-content: center;
   align-items: center;
   gap: 10px;
-  display: inline-flex;
+  display: flex;
 `;
 
 const placeTag = styled.div`
@@ -135,7 +125,7 @@ const InfoContainer = styled.div`
   justify-content: flex-start;
   align-items: flex-start;
   gap: 6px;
-  display: inline-flex;
+  display: flex;
 `;
 
 const Info = styled.div`
@@ -198,7 +188,6 @@ export {
   VeganIcon,
   OuterContainer,
   InnerContainer,
-  IconContainer,
   Icon,
   NameContainer,
   Name,

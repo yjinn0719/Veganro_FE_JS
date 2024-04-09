@@ -14,7 +14,6 @@ import {
   ImageSection,
   OuterContainer,
   InnerContainer,
-  IconContainer,
   Icon,
   NameContainer,
   Name,
@@ -32,7 +31,7 @@ import {
 export default function PlaceDetail() {
   const { placeid } = useParams();
   const { data: placeData, isLoading, isError, error } = useGetPlace(placeid);
-
+  console.log(placeData);
   if (isLoading)
     return (
       <MainContainer>
@@ -53,9 +52,7 @@ export default function PlaceDetail() {
           <OuterContainer>
             <Content>
               <InnerContainer>
-                <IconContainer>
-                  <Icon icon={placeData?.category_img} />
-                </IconContainer>
+                <Icon src={placeData?.category_img.url.basic_url} />
               </InnerContainer>
               <ContentContainer>
                 <NameContainer>

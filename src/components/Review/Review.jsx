@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-scroll';
 import ReviewCard from '@/components/ReviewCard/ReviewCard';
 import {
   Container,
@@ -15,7 +16,6 @@ import {
   LoadMoreButtonContainer,
   LoadMoreButtonText,
   LoadMoreButtonIconContainer,
-  LoadMoreButtonIcon,
 } from '@/components/Review/Review.styles';
 import EditDrawer from '@/components/EditDrawer/EditDrawer';
 import ReviewDrawer from '@/components/ReviewDrawer/ReviewDrawer';
@@ -30,8 +30,15 @@ export default function Review({ address }) {
 
   const navigate = useNavigate();
 
-  const toggleReviewDrawer = () => {
+  const toggleDrawer = () => {
     setIsReviewDrawerOpen(!isReviewDrawerOpen);
+    if (isEditDrawerOpen) {
+      setIsEditDrawerOpen(false);
+    }
+  };
+
+  const toggleReviewDrawer = () => {
+    setIsReviewDrawerOpen(true);
     if (isEditDrawerOpen) {
       setIsEditDrawerOpen(false);
     }
@@ -52,7 +59,7 @@ export default function Review({ address }) {
 
   return (
     <>
-      <Container>
+      <Container id="write-review">
         <ReviewWrapper>
           <Header>
             <ReviewCount>
@@ -60,16 +67,9 @@ export default function Review({ address }) {
               <ReviewNumber>{submittedReviews.length}개</ReviewNumber>
             </ReviewCount>
 
-            <div
-              onClick={() => {
-                window.scrollTo({
-                  top: 600,
-                  behavior: 'smooth',
-                });
-              }}
-            >
+            <Link to="write-review" smooth={true} duration={500}>
               <WriteReview onClick={toggleReviewDrawer}>리뷰 작성</WriteReview>
-            </div>
+            </Link>
           </Header>
           {submittedReviews.length === 0 ? (
             <ReviewContent>
@@ -113,7 +113,7 @@ export default function Review({ address }) {
           titleText="리뷰 작성"
           submitText="등록하기"
           isOpened={isReviewDrawerOpen}
-          toggleDrawer={toggleReviewDrawer}
+          toggleDrawer={toggleDrawer}
           submittedReviews={submittedReviews}
           setSubmittedReviews={setSubmittedReviews}
         />

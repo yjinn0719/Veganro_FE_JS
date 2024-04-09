@@ -1,24 +1,4 @@
-import TabBar from '../components/TabBar';
 import styled from 'styled-components';
-
-export default function MyPage() {
-  return (
-    <Container>
-      <ProfileWrapper>
-        <ProfileContent>
-          <AvatarContainer>
-            <Avatar />
-            <Badge>
-              <div>페스코테리안</div>
-            </Badge>
-          </AvatarContainer>
-          <Nickname>닉네임</Nickname>
-        </ProfileContent>
-        <TabBar />
-      </ProfileWrapper>
-    </Container>
-  );
-}
 
 const Container = styled.div`
   width: 100%;
@@ -29,6 +9,8 @@ const Container = styled.div`
 `;
 
 const ProfileWrapper = styled.div`
+  position: relative;
+  top: 50px;
   width: 100%;
   flex-direction: column;
   justify-content: flex-start;
@@ -56,6 +38,7 @@ const AvatarContainer = styled.div`
 `;
 
 const Avatar = styled.div`
+  background-image: url(${(props) => props.img});
   width: 100px;
   height: 100px;
   background: #c4c4c4;
@@ -87,3 +70,13 @@ const Nickname = styled.div`
   font-weight: 700;
   word-wrap: break-word;
 `;
+
+export {
+  Container,
+  ProfileWrapper,
+  ProfileContent,
+  AvatarContainer,
+  Avatar,
+  Badge,
+  Nickname,
+};

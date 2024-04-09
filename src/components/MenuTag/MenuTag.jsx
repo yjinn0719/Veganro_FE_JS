@@ -1,16 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { MenuTagBtn, MenuTagContent } from './MenuTag.styles';
 
-function MenuTag({ title }) {
-  const [isClicked, setIsClicked] = useState(false);
-
-  const handleClick = () => {
-    setIsClicked(!isClicked);
-  };
-
+function MenuTag({ title, onClick, isSelected }) {
   return (
-    <MenuTagBtn onClick={handleClick} clicked={isClicked ? 1 : 0}>
-      <MenuTagContent clicked={isClicked ? 1 : 0}>{title}</MenuTagContent>
+    <MenuTagBtn onClick={onClick} clicked={isSelected ? 1 : 0}>
+      <MenuTagContent clicked={isSelected ? 1 : 0}>{title}</MenuTagContent>
     </MenuTagBtn>
   );
 }

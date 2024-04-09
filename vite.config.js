@@ -9,17 +9,18 @@ const __dirname = path.dirname(__filename);
 
 export default defineConfig({
   plugins: [react()],
-  server: {
-    proxy: {
-      '/api': {
-        target: process.env.VITE_APP_API_URL,
-        rewrite: (path) => path.replace(/^\/api/, ''),
-      },
-    },
-  },
   resolve: {
     alias: {
       '@': path.resolve(__dirname, 'src'),
     },
+  },
+  server: {
+    proxy: {
+      '/api': {
+        target: 'https://veganro-backend.vercel.app/api',
+        rewrite: (path) => path.replace(/^\/api/, ''),
+      },
+    },
+    port: 4000,
   },
 });

@@ -1,4 +1,8 @@
 import React from 'react';
+import { ClipLoader } from 'react-spinners';
+import { useParams } from 'react-router-dom';
+import { IoNavigateCircleOutline } from 'react-icons/io5';
+import { useGetPlace } from '../../hooks/usePlace';
 import Navbar from '@/components/Navbar/Navbar';
 import MapComponent from '@/components/PlaceMap/PlaceMap';
 import BookMarked from '@/components/Bookmark/Bookmark';
@@ -22,64 +26,50 @@ import {
   Distance,
   Content,
   ReviewContainer,
+  Loading,
 } from '@/pages/PlaceDetail/PlaceDetail.styles';
 
-export default function PlaceDetail({
-  name = '가게 이름',
-  address = '서울 성동구 아차산로17길 48',
-  distance = '500m',
-  number = '02-1234-5678',
-  tagOption = '일부 비건',
-  tag = '비건',
-  icon = 'https://cdn.icon-icons.com/icons2/2107/PNG/512/file_type_js_official_icon_130509.png',
-  hours = '10:00 - 21:00',
-  url = 'https://www.google.com',
-}) {
+export default function PlaceDetail() {
+  const { placeid } = useParams();
+  const { data: placeData, isLoading, isError, error } = useGetPlace(placeid);
+
+  if (isLoading)
+    return (
+      <MainContainer>
+        <Loading>
+          <ClipLoader color="#36d7b7" loading={isLoading} size={150} />
+          <div>Loading...</div>
+        </Loading>
+      </MainContainer>
+    );
+  if (isError) return <div>Error: {error.message}</div>;
+
   return (
     <MainContainer>
-      <Navbar title={name} icon="null" />
+      <Navbar title={placeData?.name} icon="null" />
       <ContentContainer>
         <ImageSection>
-          <MapComponent address={address} name={name} />
+          <MapComponent address={placeData?.address} name={placeData?.name} />
           <OuterContainer>
             <Content>
               <InnerContainer>
                 <IconContainer>
-                  <Icon icon={icon} />
+                  <Icon icon={placeData?.category_img} />
                 </IconContainer>
               </InnerContainer>
               <ContentContainer>
                 <NameContainer>
-                  <Name>{name}</Name>
+                  <Name>{placeData?.name}</Name>
                 </NameContainer>
                 <TagContainer>
-                  <Tag>{tagOption}</Tag>
+                  <Tag>{placeData?.vegan_option ? '일부 비건' : '비건'}</Tag>
                 </TagContainer>
                 <InfoContainer>
                   <Info>
                     <DistanceIcon>
-                      <div
-                        style={{
-                          width: '4.87px',
-                          height: '4.87px',
-                          left: '3.37px',
-                          top: '3.75px',
-                          position: 'absolute',
-                          background: '#6e6e6e',
-                        }}
-                      ></div>
-                      <div
-                        style={{
-                          width: '9px',
-                          height: '9px',
-                          left: '1.50px',
-                          top: '1.50px',
-                          position: 'absolute',
-                          border: '0.75px #6e6e6e solid',
-                        }}
-                      ></div>
+                      <IoNavigateCircleOutline size="15" />
                     </DistanceIcon>
-                    <Distance>{distance}</Distance>
+                    <Distance>{placeData?.distance || 'N/A'}</Distance>
                   </Info>
                 </InfoContainer>
               </ContentContainer>
@@ -90,14 +80,14 @@ export default function PlaceDetail({
       </ContentContainer>
       <>
         <PlaceDetailInfo
-          placeLocation={address}
-          placeNumber={number}
-          placeHours={hours}
-          placeURL={url}
+          placeLocation={placeData?.address}
+          placeNumber={placeData?.tel}
+          placeHours={placeData?.hours || []}
+          placeURL={placeData?.sns_url || []}
         />
       </>
       <ReviewContainer>
-        <Review address={address} />
+        <Review address={placeData?.address} />
       </ReviewContainer>
     </MainContainer>
   );

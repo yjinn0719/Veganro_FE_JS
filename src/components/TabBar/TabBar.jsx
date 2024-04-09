@@ -1,4 +1,6 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState } from 'react';
+import Card from '@/components/Card/Card';
+import ReviewCard from '@/components/ReviewCard/ReviewCard';
 import {
   Container,
   TabContainerParent,
@@ -6,14 +8,15 @@ import {
   Tab,
   TabContent,
   PlaceContent,
-} from '@/components/TabBar/TabBar.styles';
+} from './TabBar.styles';
 
-export default function TabBar() {
+export default function TabBar({
+  name = '산촌',
+  distance = '1.2km',
+  address = '어딘가',
+  number = '010-999-000',
+}) {
   const [activeTab, setActiveTab] = useState('reported');
-
-  const handleTabClick = useCallback((tab) => {
-    setActiveTab(tab);
-  }, []);
 
   return (
     <Container>
@@ -21,19 +24,19 @@ export default function TabBar() {
         <TabContainer>
           <Tab
             active={activeTab === 'reported'}
-            onClick={() => handleTabClick('reported')}
+            onClick={() => setActiveTab('reported')}
           >
             제보한 가게
           </Tab>
           <Tab
             active={activeTab === 'review'}
-            onClick={() => handleTabClick('review')}
+            onClick={() => setActiveTab('review')}
           >
             작성 후기
           </Tab>
           <Tab
             active={activeTab === 'bookmark'}
-            onClick={() => handleTabClick('bookmark')}
+            onClick={() => setActiveTab('bookmark')}
           >
             북마크
           </Tab>

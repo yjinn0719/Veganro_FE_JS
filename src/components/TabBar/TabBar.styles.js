@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import React from 'react';
 
 const PlaceContent = React.memo(styled.div`
   display: flex;
@@ -15,9 +16,8 @@ const Container = styled.div`
 `;
 
 const TabContainerParent = styled.div`
-  width: 100%;
   position: sticky;
-  top: 0;
+  top: 50px;
   z-index: 1;
   background-color: #fff;
 `;

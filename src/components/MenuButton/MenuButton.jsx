@@ -6,7 +6,7 @@ import RoundButton from '../RoundButton/RoundButton';
 import { MENU_LIST } from '@/constants';
 import { PATH } from '@/constants/router';
 
-function MenuButton(props) {
+function MenuButton() {
   const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(0);
 
@@ -15,7 +15,7 @@ function MenuButton(props) {
   };
 
   const handleNavigation = (page) => {
-    setIsMenuOpen(false);
+    setIsMenuOpen(0);
     const routePath = PATH[page.toUpperCase()];
     if (routePath) {
       navigate(routePath);
@@ -26,7 +26,7 @@ function MenuButton(props) {
 
   return (
     <Menu>
-      <MenuList isopened={isMenuOpen}>
+      <MenuList $isopened={isMenuOpen}>
         {isMenuOpen &&
           MENU_LIST.map((title, index) => (
             <RoundButton
@@ -36,11 +36,7 @@ function MenuButton(props) {
             />
           ))}
       </MenuList>
-      <RoundButton
-        className="menu-button"
-        title={'menu'}
-        onClick={toggleMenu}
-      />
+      <RoundButton className="menu-button" title="menu" onClick={toggleMenu} />
     </Menu>
   );
 }

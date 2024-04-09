@@ -27,8 +27,11 @@ export const SearchContainer = styled.div`
 export const Search = styled.input`
   padding: 16px 40px 16px 16px;
   width: 100%;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.2px;
   border-radius: 4px;
-  border: 1px solid ${(props) => props.theme.color.gray[800]};
+  border: 1px solid ${(props) => props.theme.color.gray[300]};
   box-shadow: 4px 6px 16px 0px rgba(71, 71, 71, 0.1);
   transition: all 0.2s ease-in;
   box-sizing: border-box;

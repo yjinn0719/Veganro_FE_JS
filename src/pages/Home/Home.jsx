@@ -4,9 +4,11 @@ import KakaoMap from '../KakaoMap/KakaoMap';
 import SearchBar from '@/components/SearchBar/SearchBar';
 import PlaceCategory from '@/components/PlaceCategory/PlaceCategory';
 import MenuButton from '@/components/MenuButton/MenuButton';
+import SmallRoundButton from '@/components/SmallRoundButton/SmallRoundButton';
 import {
   Wrapper,
-  Box,
+  FilterBar,
+  Categories,
   BottomBar,
   RelocateButton,
   ListViewButton,
@@ -59,7 +61,8 @@ export default function Home() {
   }, []);
 
   // 버튼 클릭 시 현재 위치 업데이트
-  const handleRelocateClick = () => {
+  const handleRelocateClick = (e) => {
+    e.preventDefault();
     getCurrentPosition();
   };
 
@@ -69,19 +72,28 @@ export default function Home() {
     console.log(`Category selected: ${title}`);
   };
 
+  const handleCategoryReset = () => {};
+
   return (
     <>
       <Wrapper className="home">
         <SearchBar placeholder="‘가게 이름' 또는 ‘주소'를 검색해보세요." />
-        <Box className="category-bar">
-          {PLACE_TYPES.map((title, index) => (
-            <PlaceCategory
-              key={index}
-              title={title}
-              onClick={() => handleCategorySelect(title)}
+        <FilterBar>
+          <Categories className="category-bar">
+            {PLACE_TYPES.map((title, index) => (
+              <PlaceCategory
+                key={index}
+                title={title}
+                onClick={() => handleCategorySelect(title)}
+              />
+            ))}
+            <SmallRoundButton
+              title="refresh"
+              onClick={() => handleCategoryReset()}
             />
-          ))}
-        </Box>
+          </Categories>
+          <SmallRoundButton title="filter" />
+        </FilterBar>
         <KakaoMap centerMove={location.center} />
         <BottomBar>
           <RelocateButton

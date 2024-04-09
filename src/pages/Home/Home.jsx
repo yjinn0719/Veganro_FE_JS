@@ -4,18 +4,22 @@ import KakaoMap from '../KakaoMap/KakaoMap';
 import SearchBar from '@/components/SearchBar/SearchBar';
 import PlaceCategory from '@/components/PlaceCategory/PlaceCategory';
 import MenuButton from '@/components/MenuButton/MenuButton';
+import SmallRoundButton from '@/components/SmallRoundButton/SmallRoundButton';
 import {
   Wrapper,
-  Box,
+  FilterBar,
+  Categories,
   BottomBar,
   RelocateButton,
   ListViewButton,
 } from '../Home/Home.style';
 
-import { PLACE_TYPES } from '../../constants';
+import { PLACE_TYPES } from '@/constants';
 
 export default function Home() {
   const [location, setLocation] = useState({});
+  // Todo '식당'으로 초기 버튼 클릭 시켜줘야함
+  const [selectedCategories, setSelectedCategories] = useState([]);
 
   // 현재 위치 받아오기
   const getCurrentPosition = () => {
@@ -59,30 +63,50 @@ export default function Home() {
   }, []);
 
   // 버튼 클릭 시 현재 위치 업데이트
-  const handleRelocateClick = () => {
+  const handleRelocateClick = (e) => {
+    e.preventDefault();
     getCurrentPosition();
   };
 
   // 카테고리 선택 핸들러
-  const handleCategorySelect = (title) => {
-    // Add category select logic here
-    console.log(`Category selected: ${title}`);
+  const handleCategorySelect = (category) => {
+    // 이미 선택된 카테고리 확인
+    if (selectedCategories.includes(category)) {
+      setSelectedCategories(selectedCategories.filter((c) => c !== category));
+    } else {
+      setSelectedCategories([...selectedCategories, category]);
+    }
+  };
+
+  // 카테고리 초기화 핸들러
+  const handleCategoryReset = () => {
+    setSelectedCategories([]);
   };
 
   return (
     <>
       <Wrapper className="home">
         <SearchBar placeholder="‘가게 이름' 또는 ‘주소'를 검색해보세요." />
-        <Box className="category-bar">
-          {PLACE_TYPES.map((title, index) => (
-            <PlaceCategory
-              key={index}
-              title={title}
-              onClick={() => handleCategorySelect(title)}
+        <FilterBar>
+          <Categories className="category-bar">
+            {PLACE_TYPES.map((title, index) => (
+              <PlaceCategory
+                key={index}
+                title={title}
+                onClick={() => handleCategorySelect(title)}
+              />
+            ))}
+            <SmallRoundButton
+              title="refresh"
+              onClick={() => handleCategoryReset()}
             />
-          ))}
-        </Box>
-        <KakaoMap centerMove={location.center} />
+          </Categories>
+          <SmallRoundButton title="filter" />
+        </FilterBar>
+        <KakaoMap
+          centerMove={location.center}
+          selectedCategories={selectedCategories}
+        />
         <BottomBar>
           <RelocateButton
             title="gps"

@@ -1,4 +1,13 @@
-import { api } from '@/apis/index';
+import { api } from '@/apis/utils/axiosInstance';
+
+export const getAllPlaces = async () => {
+  try {
+    const response = await api.get('/places');
+    return response.data.data;
+  } catch (error) {
+    handleError(error);
+  }
+};
 
 // 장소 리스트(전체 + 필터)
 // /places?center=x,y&radius=number&size=number&category=value&search=value
@@ -40,7 +49,7 @@ export const fetchAdminPlaces = async () => {
   return await api.get('/api/admin/places');
 };
 
-export const handleError = (error) => {
+const handleError = (error) => {
   if (error.response) {
     // 서버가 응답을 반환했지만 응답 코드가 2xx가 아닌 경우
     throw new Error(error.response.data.message);

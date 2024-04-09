@@ -22,7 +22,7 @@ export const fetchPlaces = async (params) => {
 // 장소 상세 조회
 export const getPlaceData = async (placeId) => {
   try {
-    const response = await api.get(`/api/places/${placeId}`);
+    const response = await api.get(`/places/${placeId}`);
     return response.data.data;
   } catch (error) {
     handleError(error);
@@ -31,22 +31,22 @@ export const getPlaceData = async (placeId) => {
 
 // 장소 등록
 export const createPlace = async (placeData) => {
-  return await api.post('/api/admin/places', placeData);
+  return await api.post('/admin/places', placeData);
 };
 
 // 장소 수정
 export const updatePlace = async (placeId, updateData) => {
-  return await api.put(`/api/admin/places/${placeId}`, updateData);
+  return await api.put(`/admin/places/${placeId}`, updateData);
 };
 
 // 장소 삭제(해당 장소의 리뷰, 북마크도 삭제 되어야 함)
 export const deletePlace = async (placeId) => {
-  return await api.delete(`/api/admin/places/${placeId}`);
+  return await api.delete(`/admin/places/${placeId}`);
 };
 
 // 검증된 장소 조회
 export const fetchAdminPlaces = async () => {
-  return await api.get('/api/admin/places');
+  return await api.get('/admin/places');
 };
 
 const handleError = (error) => {

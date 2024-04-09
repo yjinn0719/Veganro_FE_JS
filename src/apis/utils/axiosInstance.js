@@ -10,4 +10,18 @@ const api = axios.create({
   withCredentials: false,
 });
 
+// Axios 요청 인터셉터 설정 (토큰 필요한 경우)
+api.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem('Authorization');
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  },
+);
+
 export default api;

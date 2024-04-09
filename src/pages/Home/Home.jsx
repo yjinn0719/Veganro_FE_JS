@@ -83,6 +83,8 @@ export default function Home() {
     setSelectedCategories([]);
   };
 
+  const handleCategoryReset = () => {};
+
   return (
     <>
       <Wrapper className="home">

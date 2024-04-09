@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import MyRouter from './routes/index';
-import AddPlace from './pages/AddPlace/AddPlace';
 const AppContainer = styled.div`
   width: 100%;
   max-width: 480px;
@@ -47,8 +46,7 @@ function App() {
 
   return (
     <AppContainer>
-      {/* <MyRouter /> */}
-      <AddPlace></AddPlace>
+      <MyRouter />
     </AppContainer>
   );
 }

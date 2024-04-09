@@ -21,9 +21,7 @@ import EditDrawer from '@/components/EditDrawer/EditDrawer';
 import ReviewDrawer from '@/components/ReviewDrawer/ReviewDrawer';
 import { IoChevronDownSharp } from 'react-icons/io5';
 
-export default function Review({
-  address = '서울특별시 강남구 역삼동 123-45',
-}) {
+export default function Review({ address }) {
   const [isReviewDrawerOpen, setIsReviewDrawerOpen] = useState(false);
   const [isEditDrawerOpen, setIsEditDrawerOpen] = useState(false);
   const [submittedReviews, setSubmittedReviews] = useState([]);
@@ -65,7 +63,7 @@ export default function Review({
             <div
               onClick={() => {
                 window.scrollTo({
-                  top: 670,
+                  top: 600,
                   behavior: 'smooth',
                 });
               }}

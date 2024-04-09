@@ -2,7 +2,8 @@ import styled from 'styled-components';
 
 export const InputContainer = styled.input`
   display: flex;
-  width: 448px;
+  width: 100%;
+  max-width: 448px;
   height: 50px;
   padding: 12px;
   align-items: center;

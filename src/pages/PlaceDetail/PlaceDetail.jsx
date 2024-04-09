@@ -1,4 +1,5 @@
 import React from 'react';
+import { ClipLoader } from 'react-spinners';
 import { useParams } from 'react-router-dom';
 import { IoNavigateCircleOutline } from 'react-icons/io5';
 import { useGetPlace } from '../../hooks/usePlace';
@@ -25,13 +26,22 @@ import {
   Distance,
   Content,
   ReviewContainer,
+  Loading,
 } from '@/pages/PlaceDetail/PlaceDetail.styles';
 
 export default function PlaceDetail() {
   const { placeid } = useParams();
   const { data: placeData, isLoading, isError, error } = useGetPlace(placeid);
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading)
+    return (
+      <MainContainer>
+        <Loading>
+          <ClipLoader color="#36d7b7" loading={isLoading} size={150} />
+          <div>Loading...</div>
+        </Loading>
+      </MainContainer>
+    );
   if (isError) return <div>Error: {error.message}</div>;
 
   return (

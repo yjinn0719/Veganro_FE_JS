@@ -8,10 +8,8 @@ const Container = styled.div`
 `;
 
 const InnerContainer = styled.div`
-  position: relative;
-  margin-top: 60px;
-  margin-left: 16px;
-
+  margin: 70px auto;
+  width: 90%;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
@@ -19,6 +17,7 @@ const InnerContainer = styled.div`
 `;
 
 const TextBox = styled.div`
+  width: 100%;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
@@ -57,12 +56,12 @@ const Card = styled.div`
 `;
 
 const TagContainer = styled.div`
+  margin-top: 20px;
   flex-direction: column;
   justify-content: flex-start;
-  align-items: flex-start;
+  align-items: stretch;
   gap: 12px;
-  height: 520px;
-  width: 100%;
+  height: 600px;
   display: flex;
 `;
 
@@ -85,7 +84,7 @@ const ButtonContainer = styled.div`
   justify-content: flex-start;
   align-items: center;
   gap: 16px;
-  width: 96.55%;
+  width: 100%;
 `;
 
 const Button = styled.div`
@@ -100,6 +99,12 @@ const Button = styled.div`
   display: flex;
 `;
 
+const VeganTagContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+`;
+
 export {
   Container,
   InnerContainer,
@@ -111,4 +116,5 @@ export {
   Tag,
   ButtonContainer,
   Button,
+  VeganTagContainer,
 };

@@ -25,7 +25,9 @@ export default function TabBar({
           <Tab
             active={activeTab === 'reported'}
             onClick={() => setActiveTab('reported')}
-          ></Tab>
+          >
+            제보한 가게
+          </Tab>
           <Tab
             active={activeTab === 'review'}
             onClick={() => setActiveTab('review')}

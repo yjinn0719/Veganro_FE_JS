@@ -6,6 +6,7 @@ import {
   Text,
   TagContainer,
   ButtonContainer,
+  VeganTagContainer,
 } from './EditMyPage.styles';
 import Navbar from '@/components/Navbar/Navbar';
 import SecondaryButton from '../../components/SecondaryButton/SecondaryButton';
@@ -32,15 +33,17 @@ export default function EditMyPage() {
             </Text>
           </SubTextBox>
           <TagContainer>
-            <>
+            <VeganTagContainer>
               <VeganTag title="비건" />
               <VeganTag title="락토" />
               <VeganTag title="오보" />
               <VeganTag title="락토-오보" />
+            </VeganTagContainer>
+            <VeganTagContainer>
               <VeganTag title="페스코" />
               <VeganTag title="플로" />
               <VeganTag title="플렉시테리언" />
-            </>
+            </VeganTagContainer>
           </TagContainer>
         </TagContainer>
         <ButtonContainer>

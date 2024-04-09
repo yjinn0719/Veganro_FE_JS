@@ -6,6 +6,7 @@ export const api = axios.create({
   headers: {
     'Content-Type': 'application/json',
   },
+  //credentials: true 옵션 -> Access-Control-Allow-Origin에 특정 도메인을 명시 필수(*를 사용할 수 없음)
   withCredentials: false,
 });
 

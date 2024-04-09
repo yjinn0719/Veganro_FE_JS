@@ -31,6 +31,18 @@ export const PlaceName = styled.div`
   line-height: normal;
 `;
 
+export const Distance = styled.div`
+  color: var(--Gray-600, #6e6e6e);
+  font-feature-settings:
+    'clig' off,
+    'liga' off;
+  font-family: Pretendard;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+`;
+
 export const Address = styled.div`
   color: var(--Gray-700, #4f4f4f);
   font-feature-settings:
@@ -41,10 +53,6 @@ export const Address = styled.div`
   font-style: normal;
   font-weight: 500;
   line-height: normal;
-`;
-
-export const Distance = styled.div`
-  // 거리 표시 스타일
 `;
 
 export const CategoryIcon = styled.div`

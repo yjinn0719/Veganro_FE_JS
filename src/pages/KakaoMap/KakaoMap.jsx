@@ -2,53 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
 import { Pin } from '../Home/Home.style';
 
-const MOCK_POSITION = [
-  //   {
-  //     id: 'elice-lab',
-  //     title: '앨리스 랩',
-  //     category: '식당',
-  //     center: {
-  //       lat: 37.5465029,
-  //       lng: 127.065263,
-  //     },
-  //   },
-  //   {
-  //     id: 'starbucks',
-  //     title: '스타벅스 서울웨이브아트센터점',
-  //     category: '카페',
-  //     center: {
-  //       lat: 37.5187312,
-  //       lng: 127.0067959,
-  //     },
-  //   },
-  //   {
-  //     id: 'tamburins',
-  //     title: '탬버린즈 신사 플래그십스토어',
-  //     category: '술집',
-  //     center: {
-  //       lat: 37.5206264,
-  //       lng: 127.0220599,
-  //     },
-  //   },
-  //   {
-  //     id: 'ntower',
-  //     title: '남산',
-  //     category: '기타',
-  //     center: {
-  //       lat: 37.5537586,
-  //       lng: 126.9809696,
-  //     },
-  //   },
-  //   {
-  //     id: 'leeum',
-  //     title: '리움미술관',
-  //     category: '식당',
-  //     center: {
-  //       lat: 37.5378932,
-  //       lng: 126.9993937,
-  //     },
-  //   },
-];
+const MOCK_POSITION = [];
 
 const KakaoMap = ({ centerMove }) => {
   const [currentLocation, setCurrentLocation] = useState({

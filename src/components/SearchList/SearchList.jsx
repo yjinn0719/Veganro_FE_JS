@@ -14,7 +14,7 @@ export default function SearchList(props) {
       <CategoryIcon /> {/*식당 카테고리 아이콘*/}
       <TextBox>
         <PlaceName>{props.name}</PlaceName>
-        <Distance>{props.distance || '거리 정보 없음'}</Distance>
+        <Distance>{props.distance}</Distance>
         <Address>{props.address}</Address>
         <div>{props.tel}</div>
       </TextBox>

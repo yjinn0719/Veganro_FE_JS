@@ -51,6 +51,13 @@ const TabContent = styled.div`
   padding: 20px;
 `;
 
+const DataContent = styled.div`
+  min-height: 3000px;
+  gap: 10px;
+  display: flex;
+  flex-direction: column;
+`;
+
 export {
   PlaceContent,
   Container,
@@ -58,4 +65,5 @@ export {
   TabContainer,
   Tab,
   TabContent,
+  DataContent,
 };

@@ -8,13 +8,14 @@ import MapComponent from '@/components/PlaceMap/PlaceMap';
 import BookMarked from '@/components/Bookmark/Bookmark';
 import PlaceDetailInfo from '@/components/PlaceDetailInfo/PlaceDetailInfo';
 import Review from '@/components/Review/Review';
+import MenuButton from '@/components/MenuButton/MenuButton';
+
 import {
   MainContainer,
   ContentContainer,
   ImageSection,
   OuterContainer,
   InnerContainer,
-  IconContainer,
   Icon,
   NameContainer,
   Name,
@@ -27,6 +28,7 @@ import {
   Content,
   ReviewContainer,
   Loading,
+  MenuContainer,
 } from '@/pages/PlaceDetail/PlaceDetail.styles';
 
 export default function PlaceDetail() {
@@ -53,9 +55,7 @@ export default function PlaceDetail() {
           <OuterContainer>
             <Content>
               <InnerContainer>
-                <IconContainer>
-                  <Icon icon={placeData?.category_img} />
-                </IconContainer>
+                <Icon src={placeData?.category_img.url.basic_url} />
               </InnerContainer>
               <ContentContainer>
                 <NameContainer>
@@ -89,6 +89,9 @@ export default function PlaceDetail() {
       <ReviewContainer>
         <Review address={placeData?.address} />
       </ReviewContainer>
+      <MenuContainer>
+        <MenuButton />
+      </MenuContainer>
     </MainContainer>
   );
 }

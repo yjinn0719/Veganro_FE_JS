@@ -1,5 +1,7 @@
 import Drawer from '../Drawer/Drawer';
 import PrimaryButton from '../PrimaryButton/PrimaryButton';
+import { useParams } from 'react-router-dom';
+import { usePostReview } from '../../hooks/useReview';
 import { useState } from 'react';
 import {
   TitleContainer,
@@ -16,24 +18,34 @@ export default function ReviewDrawer({
   address,
   isOpened,
   toggleDrawer,
-  submittedReviews,
-  setSubmittedReviews,
-  titleText,
-}) {
-  const [reviewText, setReviewText] = useState('');
-  const [isEnabled, setIsEnabled] = useState(false); // isEnabled 상태 추가
 
-  const handleReview = () => {
+  titleText,
+  submitText,
+}) {
+  const { placeid } = useParams();
+  const { mutate } = usePostReview();
+  const [reviewText, setReviewText] = useState('');
+  const [isEnabled, setIsEnabled] = useState(false);
+
+  const handleReview = async (reviewData) => {
     if (reviewText.trim() !== '') {
-      setSubmittedReviews([...submittedReviews, reviewText]);
-      setReviewText('');
-      toggleDrawer();
+      try {
+        const reviewData = {
+          place_id: placeid,
+          content: reviewText,
+        };
+        await mutate(reviewData);
+        setReviewText('');
+        toggleDrawer();
+      } catch (error) {
+        console.error('Error posting review:', error);
+      }
     }
   };
 
   const handleChange = (e) => {
     setReviewText(e.target.value);
-    setIsEnabled(e.target.value.trim() !== ''); // 리뷰 텍스트가 비어있지 않으면 isEnabled를 true로 설정
+    setIsEnabled(e.target.value.trim() !== '');
   };
 
   return (
@@ -41,7 +53,7 @@ export default function ReviewDrawer({
       {isOpened && (
         <>
           <TitleContainer>
-            <Title>{titleText}</Title>
+            <Title>{titleText ? '리뷰 작성' : '리뷰 수정'}</Title>
           </TitleContainer>
           <FormContentContainer>
             <AddressInputContainer>
@@ -79,7 +91,7 @@ export default function ReviewDrawer({
           </FormContentContainer>
           <PrimaryButton
             onClick={handleReview}
-            title="등록하기"
+            title={submitText ? '등록하기' : '수정하기'}
             isEnabled={isEnabled}
           />
         </>

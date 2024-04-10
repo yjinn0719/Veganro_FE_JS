@@ -55,7 +55,7 @@ const Badge = styled.div`
   justify-content: center;
   align-items: center;
   gap: 10px;
-  display: inline-flex;
+  display: flex;
   color: #4f8337;
   font-size: 18px;
   font-family: Pretendard;
@@ -70,6 +70,10 @@ const Nickname = styled.div`
   font-weight: 700;
   word-wrap: break-word;
 `;
+const BadgeText = styled.div`
+  font-size: 14px;
+  font-weight: 600;
+`;
 
 export {
   Container,
@@ -79,4 +83,5 @@ export {
   Avatar,
   Badge,
   Nickname,
+  BadgeText,
 };

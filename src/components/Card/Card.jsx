@@ -1,29 +1,71 @@
-import React from 'react';
 import {
-  CardContainer,
-  CardContent,
-  Thumbnail,
-  TextBox,
-  Title,
-  Distance,
-  Address,
-  Number,
+  Container,
+  GreenBox,
+  TextContainer,
+  NameContainer,
+  TagContainer,
+  TagText,
+  InfoContainer,
+  InfoItem,
+  DistanceIcon,
+  InfoText,
+  LocationText,
+  NumberText,
+  Icon,
 } from './Card.styles';
+import {
+  IoNavigateCircleOutline,
+  IoLocationOutline,
+  IoCallOutline,
+} from 'react-icons/io5';
 
-function Card({ name, distance, address, number }) {
+export default function PlaceCard({
+  name,
+  location,
+  number,
+  veganOption,
+  distance = '0.5km',
+  img,
+}) {
   return (
-    <CardContainer>
-      <CardContent>
-        <Thumbnail></Thumbnail>
-        <TextBox>
-          <Title>{name}</Title>
-          <Distance>{distance}</Distance>
-          <Address>{address}</Address>
-          <Number>{number}</Number>
-        </TextBox>
-      </CardContent>
-    </CardContainer>
+    <Container>
+      <GreenBox>
+        <Icon src={img} />
+      </GreenBox>
+      <TextContainer>
+        <NameContainer>
+          <div
+            style={{
+              color: '#383838',
+              fontSize: 18,
+              fontFamily: 'Pretendard',
+              fontWeight: '600',
+              wordWrap: 'break-word',
+            }}
+          >
+            {name}
+          </div>
+          <TagContainer>
+            <TagText>{veganOption}</TagText>
+          </TagContainer>
+        </NameContainer>
+        <InfoContainer>
+          <InfoItem>
+            <DistanceIcon>
+              <IoNavigateCircleOutline size="13" />
+            </DistanceIcon>
+            <InfoText>{distance}</InfoText>
+          </InfoItem>
+        </InfoContainer>
+        <InfoItem>
+          <IoLocationOutline size="13" />
+          <LocationText>{location}</LocationText>
+        </InfoItem>
+        <InfoItem>
+          <IoCallOutline size="13" />
+          <NumberText>{number}</NumberText>
+        </InfoItem>
+      </TextContainer>
+    </Container>
   );
 }
-
-export default Card;

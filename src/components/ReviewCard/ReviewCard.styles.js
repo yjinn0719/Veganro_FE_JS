@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 const CommentContainer = styled.div`
   width: 100%;
-  height: 100%;
   padding: 12px;
   background: #f9f9f9;
   border-radius: 4px;
@@ -22,16 +21,16 @@ const CommentHeader = styled.div`
 
 const CommentInfo = styled.div`
   width: 273.5px;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: flex-start;
-  align-items: flex-start;
+  align-items: center;
   gap: 6px;
-  display: inline-flex;
+  display: flex;
 `;
 
 const CommentTitle = styled.div`
   color: #383838;
-  font-size: 10px;
+  font-size: 14px;
   font-family: 'Pretendard';
   font-weight: 500;
   word-wrap: break-word;
@@ -52,7 +51,7 @@ const CommentTag = styled.div`
 
 const TagText = styled.div`
   color: #4f8337;
-  font-size: 10px;
+  font-size: 12px;
   font-family: 'Pretendard';
   font-weight: 600;
   word-wrap: break-word;
@@ -82,7 +81,7 @@ const CommentDate = styled.div`
 
 const CommentText = styled.div`
   color: #6e6e6e;
-  font-size: 12px;
+  font-size: 14px;
   font-family: 'Pretendard';
   font-weight: 500;
   word-wrap: break-word;

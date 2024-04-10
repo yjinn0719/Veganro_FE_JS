@@ -1,76 +1,168 @@
 import styled from 'styled-components';
 
-export const CardContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-  flex: 1 0 0;
-`;
-
-export const CardContent = styled.div`
-  display: flex;
+const Container = styled.div`
+  margin: 0 auto;
   width: 100%;
-  padding: 16px 12px;
-  align-items: flex-start;
-  gap: 12px;
+  padding-left: 12px;
+  padding-right: 12px;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  background: white;
   border-radius: 4px;
-  border: 1px solid ${(props) => props.theme.color.gray[100]};
-  background: ${(props) => props.theme.color.white};
+  overflow: hidden;
+  border: 1px #efefef solid;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 10px;
+  display: flex;
 `;
 
-export const Thumbnail = styled.div`
+const GreenBox = styled.div`
+  margin: 0 10px 0 0;
+  width: 60px;
+  height: 60px;
+  border-radius: 3.6px;
+  overflow: hidden;
   display: flex;
+`;
+const Icon = styled.img`
   width: 54px;
   height: 54px;
+  left: 4px;
+  top: 4px;
+  position: relative;
+  background: white;
+`;
+const WhiteBox = styled.div`
+  width: 32px;
+  height: 32px;
+  position: relative;
+`;
+
+const InnerWhiteBox = styled.div`
+  width: 24px;
+  height: 24px;
+  left: 4px;
+  top: 4px;
+  position: absolute;
+  background: white;
+  border: 0.5px #4f8337 solid;
+`;
+
+const TextContainer = styled.div`
   flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 10px;
+  display: inline-flex;
+`;
+
+const NameContainer = styled.div`
+  justify-content: flex-start;
+  align-items: center;
+  gap: 8px;
+  display: inline-flex;
+`;
+
+const TagContainer = styled.div`
+  padding-left: 6px;
+  padding-right: 6px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  background: rgba(79, 131, 55, 0.1);
+  border-radius: 4px;
   justify-content: center;
   align-items: center;
-  flex-shrink: 0;
-  border-radius: 3.6px;
-`;
-
-export const TextBox = styled.div`
+  gap: 10px;
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 8px;
 `;
 
-export const Title = styled.p`
-  display: -webkit-box;
-  max-width: 180px;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 1;
-  overflow: hidden;
-  color: ${(props) => props.theme.color.gray[900]};
-  text-overflow: ellipsis;
-  font-size: 18px;
-  font-style: normal;
+const TagText = styled.div`
+  color: #4f8337;
+  font-size: 12px;
+  font-family: Pretendard;
   font-weight: 600;
-  line-height: normal;
+  word-wrap: break-word;
 `;
 
-export const Distance = styled.p`
-  color: ${(props) => props.theme.color.gray[600]};
+const InfoContainer = styled.div`
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 6px;
+  display: inline-flex;
+`;
+
+const InfoItem = styled.div`
+  justify-content: flex-start;
+  align-items: center;
+  gap: 2px;
+  display: flex;
+`;
+
+const DistanceIcon = styled.div`
+  width: 12px;
+  height: 12px;
+  position: relative;
+`;
+
+const DistanceOuter = styled.div`
+  width: 4.87px;
+  height: 4.87px;
+  left: 3.37px;
+  top: 3.75px;
+  position: absolute;
+  background: #6e6e6e;
+`;
+
+const DistanceInner = styled.div`
+  width: 9px;
+  height: 9px;
+  left: 1.5px;
+  top: 1.5px;
+  position: absolute;
+  border: 0.75px #6e6e6e solid;
+`;
+
+const InfoText = styled.div`
+  color: #6e6e6e;
   font-size: 12px;
-  font-style: normal;
+  font-family: Pretendard;
   font-weight: 500;
-  line-height: normal;
+  word-wrap: break-word;
 `;
 
-export const Address = styled.p`
-  color: ${(props) => props.theme.color.gray[700]};
+const LocationText = styled.div`
+  color: #4f4f4f;
   font-size: 14px;
-  font-style: normal;
+  font-family: Pretendard;
   font-weight: 500;
-  line-height: normal;
+  word-wrap: break-word;
 `;
 
-export const Number = styled.p`
-  color: ${(props) => props.theme.color.gray[600]};
+const NumberText = styled.div`
+  color: #6e6e6e;
   font-size: 12px;
-  font-style: normal;
+  font-family: Pretendard;
   font-weight: 500;
-  line-height: normal;
+  word-wrap: break-word;
 `;
+
+export {
+  Container,
+  GreenBox,
+  WhiteBox,
+  InnerWhiteBox,
+  TextContainer,
+  NameContainer,
+  TagContainer,
+  TagText,
+  InfoContainer,
+  InfoItem,
+  DistanceIcon,
+  DistanceOuter,
+  DistanceInner,
+  InfoText,
+  LocationText,
+  NumberText,
+  Icon,
+};

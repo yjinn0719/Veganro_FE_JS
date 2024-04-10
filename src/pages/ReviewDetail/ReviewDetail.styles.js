@@ -17,7 +17,7 @@ const Content = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
-
+  min-height: 1000px;
   width: 95%;
 `;
 

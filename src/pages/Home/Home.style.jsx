@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import RoundButton from '@/components/RoundButton/RoundButton';
+import SmallRoundButton from '@/components/SmallRoundButton/SmallRoundButton';
 import MapButton from '@/components/MapButton/MapButton';
 
 export const Wrapper = styled.main`
@@ -15,8 +16,11 @@ export const FilterBar = styled.div`
   align-items: center;
   box-sizing: border-box;
   position: absolute;
-  top: 78px;
+  top: 82px;
   z-index: 999;
+`;
+export const FilterButton = styled(SmallRoundButton)`
+  position: relative;
 `;
 export const Categories = styled.div`
   display: flex;

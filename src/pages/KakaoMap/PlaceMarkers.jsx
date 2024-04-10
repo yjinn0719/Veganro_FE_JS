@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { MapMarker } from 'react-kakao-maps-sdk';
-import { getAllPlaces } from '../../apis/api/placeApi';
+import { getAllPlaces } from '@/apis/api/placeApi';
+import PlaceInfoModal from '@/components/PlaceInfoModal/PlaceInfoModal';
+
+// TODO
+// 1. 식당 마커 클릭 시, 식당 인포 모달 띄워주기
+// 2. 식당 상세 페이지로 이동
 
 const PlaceMarkers = ({ categoriesStatus }) => {
-  const navigate = useNavigate();
-
   const [placeData, setPlaceData] = useState([]);
   const [filteredMarkers, setFilteredMarkers] = useState([]);
+  const [selectedMarkerId, setSelectedMarkerId] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
   const markers = placeData
@@ -57,8 +60,7 @@ const PlaceMarkers = ({ categoriesStatus }) => {
 
   // 식당 상세 페이지 이동 핸들러
   const handleMarkerClick = (id) => {
-    // TODO 여기에 정보 모달창 그려줘야함
-    // 그리고 해당 식당 상세 페이지로 이동
+    setSelectedMarkerId(id);
     console.log('클릭한 마커 ID:', id);
   };
 
@@ -79,6 +81,12 @@ const PlaceMarkers = ({ categoriesStatus }) => {
           }}
         ></MapMarker>
       ))}
+      {selectedMarkerId && (
+        <PlaceInfoModal
+          markerId={selectedMarkerId}
+          onClose={selectedMarkerId(null)}
+        />
+      )}
     </>
   );
 };

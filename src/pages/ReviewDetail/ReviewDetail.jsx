@@ -32,16 +32,18 @@ export default function ReviewDetail() {
 
       <ReviewContainer>
         <Content>
-          {ReviewsData.map((review) => (
-            <ReviewCard
-              key={review._id}
-              nickname={review.author}
-              veganLevel={review.author_tag}
-              comment={review.content}
-              date={review.updatedAt}
-              click={toggleEditDrawer}
-            />
-          ))}
+          {ReviewsData.slice()
+            .reverse()
+            .map((review) => (
+              <ReviewCard
+                key={review._id}
+                nickname={review.author}
+                veganLevel={review.author_tag}
+                comment={review.content}
+                date={review.updatedAt}
+                click={toggleEditDrawer}
+              />
+            ))}
         </Content>
       </ReviewContainer>
     </>

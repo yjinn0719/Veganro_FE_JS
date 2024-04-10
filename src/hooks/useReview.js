@@ -1,11 +1,9 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { getReviewsByPlaceId, postReview } from '../apis/api/reviewApi';
-
-const detailPageKey = {
-  post: function (placeId) {
-    return ['plae', placeId];
-  },
-};
+import {
+  getReviewsByPlaceId,
+  postReview,
+  deleteReview,
+} from '../apis/api/reviewApi';
 
 export const useGetReviewsByPlaceId = (
   placeId,
@@ -26,6 +24,17 @@ export const usePostReview = () => {
 
   return useMutation({
     mutationFn: postReview,
+    onSuccess: () => {
+      queryClient.invalidateQueries('reviews');
+    },
+  });
+};
+
+export const useDeleteReview = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: deleteReview,
     onSuccess: () => {
       queryClient.invalidateQueries('reviews');
     },

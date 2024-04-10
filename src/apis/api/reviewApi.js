@@ -26,6 +26,15 @@ export const postReview = async (reviewData) => {
   }
 };
 
+export const deleteReview = async (reviewId) => {
+  try {
+    const response = await api.delete(`/reviews/${reviewId}`);
+    return response.data.data;
+  } catch (error) {
+    throw new Error('Error deleting review: ' + error.message);
+  }
+};
+
 const handleError = (error) => {
   if (error.response) {
     // 서버가 응답을 반환했지만 응답 코드가 2xx가 아닌 경우

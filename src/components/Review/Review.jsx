@@ -114,7 +114,7 @@ export default function Review({ address }) {
                     comment={review.content}
                     date={review.updatedAt}
                     click={() => {
-                      setSelectedReviewIndex(index);
+                      setSelectedReviewIndex(review._id);
                       toggleEditDrawer();
                     }}
                   />
@@ -148,14 +148,9 @@ export default function Review({ address }) {
       )}
       {isEditDrawerOpen && (
         <EditDrawer
-          isOpened={isEditDrawerOpen}
-          toggleDrawer={toggleEditDrawer}
           onEdit={() => renderReviewDrawer()}
-          onDelete={(index) => {
-            setSubmittedReviews(submittedReviews.filter((_, i) => i !== index));
-            toggleEditDrawer();
-          }}
-          index={selectedReviewIndex}
+          reviewId={selectedReviewIndex}
+          isOpened={isEditDrawerOpen}
         />
       )}
     </>

@@ -3,10 +3,31 @@ import { useNavigate } from 'react-router-dom';
 import { MapMarker } from 'react-kakao-maps-sdk';
 import { getAllPlaces } from '../../apis/api/placeApi';
 
-const PlaceMarkers = ({ selectedCategories }) => {
+const PlaceMarkers = ({ categoriesStatus }) => {
   const navigate = useNavigate();
+
   const [placeData, setPlaceData] = useState([]);
+  const [filteredMarkers, setFilteredMarkers] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+
+  const markers = placeData
+    // 데이터 좌표값 체크
+    .filter(
+      (place) =>
+        place.location &&
+        place.location.coordinates &&
+        place.location.coordinates.length >= 2,
+    )
+    .map((place) => ({
+      id: place._id,
+      position: {
+        lat: place.location.coordinates[1], //위도
+        lng: place.location.coordinates[0], //경도
+      },
+      category: place.category,
+      categoryImg: place.category_img.url.pin_url,
+      name: place.name,
+    }));
 
   useEffect(() => {
     const fetchPlacesData = async () => {
@@ -22,34 +43,26 @@ const PlaceMarkers = ({ selectedCategories }) => {
     fetchPlacesData(); // 컴포넌트 마운트 되었을때, 데이터 부르기
   }, []);
 
-  const markers = placeData.map((place) => ({
-    id: place._id,
-    position: {
-      lat: place.location.coordinates[1], //경도
-      lng: place.location.coordinates[0], //위도
-    },
-    category: place.category,
-    categoryImg: place.category_img.url.pin_url,
-    name: place.name,
-  }));
-
-  const [isVisible, setIsVisible] = useState({
-    id: -1,
-    isVisible: false,
-  });
+  useEffect(() => {
+    if (!isLoading) {
+      const newFilteredMarkers = markers.filter((marker) => {
+        const selectedCategory = categoriesStatus.find(
+          (c) => c.name === marker.category,
+        );
+        return !selectedCategory || selectedCategory.clicked;
+      });
+      setFilteredMarkers(newFilteredMarkers);
+    }
+  }, [placeData, categoriesStatus, isLoading]);
 
   // 식당 상세 페이지 이동 핸들러
   const handleMarkerClick = (id) => {
-    // todo 여기에 정보 모달창 그려줘야함
+    // TODO 여기에 정보 모달창 그려줘야함
     // 그리고 해당 식당 상세 페이지로 이동
+    console.log('클릭한 마커 ID:', id);
   };
 
   if (isLoading) return <div>Loading...</div>;
-
-  const filteredMarkers =
-    selectedCategories.length > 0
-      ? markers.filter((marker) => selectedCategories.includes(marker.category))
-      : markers;
 
   return (
     <>
@@ -59,6 +72,7 @@ const PlaceMarkers = ({ selectedCategories }) => {
           position={marker.position}
           category={marker.category}
           clickable={true}
+          onClick={() => handleMarkerClick(marker.id)}
           image={{
             src: marker.categoryImg,
             size: { width: 30, height: 30 },

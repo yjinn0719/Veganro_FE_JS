@@ -21,8 +21,11 @@ import { PLACE_TYPES } from '@/constants';
 export default function Home() {
   const { location, error, isLoading, reloadLocation } = useCurrentLocation();
 
-  // '식당'으로 초기 데이터 보여주기
-  const [selectedCategories, setSelectedCategories] = useState(['식당']);
+  // 카테고리 상태 객체 배열로 초기화
+  const [categoriesStatus, setCategoriesStatus] = useState(
+    PLACE_TYPES.map((type) => ({ name: type, clicked: 0 })),
+  );
+  const [resetCategories, setResetCategories] = useState(false);
 
   // 앱 최초 진입, 현재 위치 불러오기
   // 빈 배열 넘김 -> 컴포넌트가 처음 렌더링될 때만 실행
@@ -37,18 +40,22 @@ export default function Home() {
   };
 
   // 카테고리 선택 핸들러
-  const handleCategorySelect = (category) => {
-    // 이미 선택된 카테고리 확인
-    if (selectedCategories.includes(category)) {
-      setSelectedCategories(selectedCategories.filter((c) => c !== category));
-    } else {
-      setSelectedCategories([...selectedCategories, category]);
-    }
+  const handleCategorySelect = (categoryName) => {
+    setCategoriesStatus((prevState) =>
+      prevState.map((category) =>
+        category.name === categoryName
+          ? { ...category, clicked: !category.clicked }
+          : category,
+      ),
+    );
   };
 
   // 카테고리 초기화 핸들러
   const handleCategoryReset = () => {
-    setSelectedCategories([]);
+    setCategoriesStatus(
+      categoriesStatus.map((category) => ({ ...category, clicked: 0 })),
+    );
+    setResetCategories((prevState) => !prevState);
   };
 
   return (
@@ -61,8 +68,13 @@ export default function Home() {
               <PlaceCategory
                 key={index}
                 title={title}
-                className={selectedCategories.includes(title) ? 'selected' : ''}
+                className={
+                  categoriesStatus.find((c) => c.name === title).clicked
+                    ? 'selected'
+                    : ''
+                }
                 onClick={() => handleCategorySelect(title)}
+                reset={resetCategories}
               />
             ))}
             <SmallRoundButton
@@ -72,13 +84,19 @@ export default function Home() {
           </Categories>
           <SmallRoundButton title="filter" />
         </FilterBar>
-        {error && <div>위치 정보를 가져올 수 없습니다: {error}</div>}
+        {error && (
+          <div>
+            위치 정보를 가져올 수 없습니다
+            <br />
+            {error}
+          </div>
+        )}
         {isLoading ? (
           <div>위치 정보를 가져오는 중..</div>
         ) : (
           <KakaoMap
             centerMove={location.center}
-            selectedCategories={selectedCategories}
+            categoriesStatus={categoriesStatus}
           />
         )}
         <BottomBar>

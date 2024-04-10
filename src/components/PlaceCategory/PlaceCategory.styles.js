@@ -9,7 +9,7 @@ export const getBackgroundColor = (clicked, title, theme) => {
       return theme.color.beige[500];
     case '술집':
       return theme.color.burgundy[500];
-    case '기타':
+    case '마켓':
       return theme.color.skyblue[500];
   }
 };

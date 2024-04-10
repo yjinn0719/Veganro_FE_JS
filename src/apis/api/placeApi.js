@@ -1,4 +1,4 @@
-import { api } from '@/apis/utils/axiosInstance';
+import { api } from '@/apis/index';
 
 export const getAllPlaces = async () => {
   try {
@@ -58,7 +58,7 @@ export const fetchAdminPlaces = async () => {
   return await api.get('/admin/places');
 };
 
-const handleError = (error) => {
+export const handleError = (error) => {
   if (error.response) {
     // 서버가 응답을 반환했지만 응답 코드가 2xx가 아닌 경우
     throw new Error(error.response.data.message);

@@ -7,6 +7,7 @@ import SearchBar from '@/components/SearchBar/SearchBar';
 import PlaceCategory from '@/components/PlaceCategory/PlaceCategory';
 import MenuButton from '@/components/MenuButton/MenuButton';
 import SmallRoundButton from '@/components/SmallRoundButton/SmallRoundButton';
+import MapFilterModal from '@/components/MapFilterModal/MapFilterModal';
 import {
   Wrapper,
   FilterBar,
@@ -14,9 +15,15 @@ import {
   BottomBar,
   RelocateButton,
   ListViewButton,
+  FilterButton,
 } from '../Home/Home.style';
 
 import { PLACE_TYPES } from '@/constants';
+
+// TODO
+// 1. '식당'으로 초기값 부여
+// 2. 로딩/에러 화면 컴포넌트로 교체
+// 3. 필터 모달 보이기
 
 export default function Home() {
   const { location, error, isLoading, reloadLocation } = useCurrentLocation();
@@ -26,6 +33,7 @@ export default function Home() {
     PLACE_TYPES.map((type) => ({ name: type, clicked: 0 })),
   );
   const [resetCategories, setResetCategories] = useState(false);
+  const [showFilterModal, setShowFilterModal] = useState(false);
 
   // 앱 최초 진입, 현재 위치 불러오기
   // 빈 배열 넘김 -> 컴포넌트가 처음 렌더링될 때만 실행
@@ -58,6 +66,11 @@ export default function Home() {
     setResetCategories((prevState) => !prevState);
   };
 
+  const handleFilterModal = () => {
+    setShowFilterModal(!showFilterModal);
+    console.log('필터 모달');
+  };
+
   return (
     <>
       <Wrapper className="home">
@@ -68,11 +81,6 @@ export default function Home() {
               <PlaceCategory
                 key={index}
                 title={title}
-                className={
-                  categoriesStatus.find((c) => c.name === title).clicked
-                    ? 'selected'
-                    : ''
-                }
                 onClick={() => handleCategorySelect(title)}
                 reset={resetCategories}
               />
@@ -82,7 +90,8 @@ export default function Home() {
               onClick={() => handleCategoryReset()}
             />
           </Categories>
-          <SmallRoundButton title="filter" />
+          <FilterButton title="filter" onClick={handleFilterModal} />
+          {showFilterModal && <MapFilterModal />}
         </FilterBar>
         {error && (
           <div>

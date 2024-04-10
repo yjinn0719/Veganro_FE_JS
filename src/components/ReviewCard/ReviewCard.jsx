@@ -15,10 +15,10 @@ import {
 
 export default function ReviewCard({
   click,
-  nickname = 'Anonymous',
-  veganLevel = 'Not specified',
-  comment = 'No comment provided',
-  date = '2021-09-01',
+  nickname,
+  veganLevel,
+  comment,
+  date,
 }) {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 

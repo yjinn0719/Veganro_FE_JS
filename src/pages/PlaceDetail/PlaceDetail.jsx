@@ -8,6 +8,8 @@ import MapComponent from '@/components/PlaceMap/PlaceMap';
 import BookMarked from '@/components/Bookmark/Bookmark';
 import PlaceDetailInfo from '@/components/PlaceDetailInfo/PlaceDetailInfo';
 import Review from '@/components/Review/Review';
+import MenuButton from '@/components/MenuButton/MenuButton';
+
 import {
   MainContainer,
   ContentContainer,
@@ -26,12 +28,13 @@ import {
   Content,
   ReviewContainer,
   Loading,
+  MenuContainer,
 } from '@/pages/PlaceDetail/PlaceDetail.styles';
 
 export default function PlaceDetail() {
   const { placeid } = useParams();
   const { data: placeData, isLoading, isError, error } = useGetPlace(placeid);
-  console.log(placeData);
+
   if (isLoading)
     return (
       <MainContainer>
@@ -86,6 +89,9 @@ export default function PlaceDetail() {
       <ReviewContainer>
         <Review address={placeData?.address} />
       </ReviewContainer>
+      <MenuContainer>
+        <MenuButton />
+      </MenuContainer>
     </MainContainer>
   );
 }

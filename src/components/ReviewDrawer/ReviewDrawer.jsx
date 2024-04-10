@@ -19,6 +19,7 @@ export default function ReviewDrawer({
   submittedReviews,
   setSubmittedReviews,
   titleText,
+  submitText,
 }) {
   const [reviewText, setReviewText] = useState('');
   const [isEnabled, setIsEnabled] = useState(false); // isEnabled 상태 추가
@@ -33,7 +34,7 @@ export default function ReviewDrawer({
 
   const handleChange = (e) => {
     setReviewText(e.target.value);
-    setIsEnabled(e.target.value.trim() !== ''); // 리뷰 텍스트가 비어있지 않으면 isEnabled를 true로 설정
+    setIsEnabled(e.target.value.trim() !== '');
   };
 
   return (
@@ -41,7 +42,7 @@ export default function ReviewDrawer({
       {isOpened && (
         <>
           <TitleContainer>
-            <Title>{titleText}</Title>
+            <Title>{titleText ? '리뷰 작성' : '리뷰 수정'}</Title>
           </TitleContainer>
           <FormContentContainer>
             <AddressInputContainer>
@@ -79,7 +80,7 @@ export default function ReviewDrawer({
           </FormContentContainer>
           <PrimaryButton
             onClick={handleReview}
-            title="등록하기"
+            title={submitText ? '등록하기' : '수정하기'}
             isEnabled={isEnabled}
           />
         </>

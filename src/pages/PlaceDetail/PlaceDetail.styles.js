@@ -178,6 +178,13 @@ const Loading = styled.div`
   align-items: center;
   display: flex;
 `;
+const MenuContainer = styled.div`
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+  background: transparent;
+  z-index: 999;
+`;
 
 export {
   MainContainer,
@@ -201,4 +208,5 @@ export {
   VeganTag,
   ReviewContainer,
   Loading,
+  MenuContainer,
 };

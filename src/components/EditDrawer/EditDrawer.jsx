@@ -7,12 +7,6 @@ export default function EditDrawer({
   onEdit,
   index,
 }) {
-  const handleDelete = () => {
-    console.log('Delete');
-  };
-  const handleEdit = () => {
-    console.log('Edit');
-  };
   return (
     <Drawer height={24.5} isOpened={isOpened} toggleDrawer={toggleDrawer}>
       {isOpened && (

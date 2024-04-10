@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useGetReviewsByPlaceId } from '../../hooks/useReview';
 import { Link } from 'react-scroll';
 import ReviewCard from '@/components/ReviewCard/ReviewCard';
 import {
@@ -22,13 +23,30 @@ import ReviewDrawer from '@/components/ReviewDrawer/ReviewDrawer';
 import { IoChevronDownSharp } from 'react-icons/io5';
 
 export default function Review({ address }) {
+  const { placeid } = useParams();
+  const {
+    data: ReviewsData,
+    isLoading,
+    isError,
+    error,
+  } = useGetReviewsByPlaceId(placeid);
   const [isReviewDrawerOpen, setIsReviewDrawerOpen] = useState(false);
   const [isEditDrawerOpen, setIsEditDrawerOpen] = useState(false);
   const [submittedReviews, setSubmittedReviews] = useState([]);
   const [visibleReviews, setVisibleReviews] = useState(3);
   const [selectedReviewIndex, setSelectedReviewIndex] = useState(null);
-
   const navigate = useNavigate();
+
+  const handleWriteReviewClick = () => {
+    toggleReviewDrawer();
+    document.body.style.overflow = 'hidden';
+  };
+
+  useEffect(() => {
+    if (!isReviewDrawerOpen) {
+      document.body.style.overflow = 'auto';
+    }
+  }, [isReviewDrawerOpen]);
 
   const toggleDrawer = () => {
     setIsReviewDrawerOpen(!isReviewDrawerOpen);
@@ -38,7 +56,7 @@ export default function Review({ address }) {
   };
 
   const toggleReviewDrawer = () => {
-    setIsReviewDrawerOpen(true);
+    setIsReviewDrawerOpen(!isReviewDrawerOpen);
     if (isEditDrawerOpen) {
       setIsEditDrawerOpen(false);
     }
@@ -50,13 +68,18 @@ export default function Review({ address }) {
       setIsReviewDrawerOpen(false);
     }
   };
+  const renderReviewDrawer = () => {
+    return <ReviewDrawer titleText={false} submitText={false} />;
+  };
 
   useEffect(() => {
     if (isEditDrawerOpen) {
       setIsEditDrawerOpen(true);
     }
   }, [isEditDrawerOpen]);
-
+  if (isLoading) return <div>Loading...</div>;
+  if (isError) return <div>Error: {error.message}</div>;
+  console.log(ReviewsData);
   return (
     <>
       <Container id="write-review">
@@ -64,14 +87,15 @@ export default function Review({ address }) {
           <Header>
             <ReviewCount>
               <ReviewTitle>리뷰</ReviewTitle>
-              <ReviewNumber>{submittedReviews.length}개</ReviewNumber>
+              <ReviewNumber>{ReviewsData.length}개</ReviewNumber>
             </ReviewCount>
-
             <Link to="write-review" smooth={true} duration={500}>
-              <WriteReview onClick={toggleReviewDrawer}>리뷰 작성</WriteReview>
+              <WriteReview onClick={handleWriteReviewClick}>
+                리뷰 작성
+              </WriteReview>
             </Link>
           </Header>
-          {submittedReviews.length === 0 ? (
+          {ReviewsData.length === 0 ? (
             <ReviewContent>
               <NoReview>
                 <NoReviewText>리뷰를 작성해주세요.</NoReviewText>
@@ -79,19 +103,20 @@ export default function Review({ address }) {
             </ReviewContent>
           ) : (
             <>
-              {submittedReviews
-                .slice(0, visibleReviews)
-                .map((review, index) => (
-                  <ReviewCard
-                    key={index}
-                    comment={review}
-                    click={() => {
-                      setSelectedReviewIndex(index);
-                      toggleEditDrawer();
-                    }}
-                  />
-                ))}
-              {submittedReviews.length > visibleReviews && (
+              {ReviewsData.slice(0, visibleReviews).map((review) => (
+                <ReviewCard
+                  key={review._id}
+                  nickname={review.author}
+                  veganLevel={review.author_tag}
+                  comment={review.content}
+                  date={review.updatedAt}
+                  click={() => {
+                    setSelectedReviewIndex(index);
+                    toggleEditDrawer();
+                  }}
+                />
+              ))}
+              {ReviewsData.length > visibleReviews && (
                 <LoadMoreButtonContainer
                   onClick={() => {
                     navigate('/review');
@@ -110,8 +135,8 @@ export default function Review({ address }) {
       {isReviewDrawerOpen && (
         <ReviewDrawer
           address={address}
-          titleText="리뷰 작성"
-          submitText="등록하기"
+          titleText={true}
+          submitText={true}
           isOpened={isReviewDrawerOpen}
           toggleDrawer={toggleDrawer}
           submittedReviews={submittedReviews}
@@ -122,7 +147,7 @@ export default function Review({ address }) {
         <EditDrawer
           isOpened={isEditDrawerOpen}
           toggleDrawer={toggleEditDrawer}
-          onEdit={() => toggleReviewDrawer()}
+          onEdit={() => renderReviewDrawer()}
           onDelete={(index) => {
             setSubmittedReviews(submittedReviews.filter((_, i) => i !== index));
             toggleEditDrawer();

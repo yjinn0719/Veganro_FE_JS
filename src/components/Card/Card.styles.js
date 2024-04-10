@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const Container = styled.div`
   margin: 0 auto;
-  width: 95%;
+  width: 100%;
   padding-left: 12px;
   padding-right: 12px;
   padding-top: 16px;
@@ -13,22 +13,26 @@ const Container = styled.div`
   border: 1px #efefef solid;
   justify-content: flex-start;
   align-items: flex-start;
-  gap: 20px;
+  gap: 10px;
   display: flex;
 `;
 
 const GreenBox = styled.div`
-  width: 54px;
-  height: 54px;
-  background: #4f8337;
+  margin: 0 10px 0 0;
+  width: 60px;
+  height: 60px;
   border-radius: 3.6px;
   overflow: hidden;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  display: inline-flex;
+  display: flex;
 `;
-
+const Icon = styled.img`
+  width: 54px;
+  height: 54px;
+  left: 4px;
+  top: 4px;
+  position: relative;
+  background: white;
+`;
 const WhiteBox = styled.div`
   width: 32px;
   height: 32px;
@@ -160,4 +164,5 @@ export {
   InfoText,
   LocationText,
   NumberText,
+  Icon,
 };

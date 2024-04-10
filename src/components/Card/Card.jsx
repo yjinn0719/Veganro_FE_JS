@@ -1,8 +1,6 @@
 import {
   Container,
   GreenBox,
-  WhiteBox,
-  InnerWhiteBox,
   TextContainer,
   NameContainer,
   TagContainer,
@@ -13,27 +11,26 @@ import {
   InfoText,
   LocationText,
   NumberText,
+  Icon,
 } from './Card.styles';
 import {
   IoNavigateCircleOutline,
-  IoPricetagOutline,
   IoLocationOutline,
   IoCallOutline,
 } from 'react-icons/io5';
 
 export default function PlaceCard({
-  name = '일뷰',
-  location = '어딘가',
-  number = '010-999-000',
-  veganOption = '비건',
-  distance = '1.2km',
+  name,
+  location,
+  number,
+  veganOption,
+  distance = '0.5km',
+  img,
 }) {
   return (
     <Container>
       <GreenBox>
-        <WhiteBox>
-          <InnerWhiteBox />
-        </WhiteBox>
+        <Icon src={img} />
       </GreenBox>
       <TextContainer>
         <NameContainer>
@@ -49,7 +46,7 @@ export default function PlaceCard({
             {name}
           </div>
           <TagContainer>
-            <TagText>일뷰 메뉴 비건</TagText>
+            <TagText>{veganOption}</TagText>
           </TagContainer>
         </NameContainer>
         <InfoContainer>
@@ -58,10 +55,6 @@ export default function PlaceCard({
               <IoNavigateCircleOutline size="13" />
             </DistanceIcon>
             <InfoText>{distance}</InfoText>
-          </InfoItem>
-          <InfoItem>
-            <IoPricetagOutline size="13" />
-            <InfoText>{veganOption}</InfoText>
           </InfoItem>
         </InfoContainer>
         <InfoItem>

@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { fetchPlaces } from '@/apis/api/placeApi';
-import { getPlacesWithDistance } from '@/apis/service/distance';
+import { fetchPlaces } from '@/apis/index';
 import useCurrentLocation from '@/hooks/useCurrentLocation';
+import { getPlacesWithDistance } from '@/apis/index';
 
 import SearchBar from '@/components/SearchBar/SearchBar';
 import PlaceCategory from '@/components/PlaceCategory/PlaceCategory';
 import SearchList from '@/components/SearchList/SearchList';
-import { Box } from './Search.style';
+import { Box, Wrapper } from './Search.style';
 
 import { PLACE_TYPES } from '../../constants';
 
@@ -28,7 +28,9 @@ export default function Search() {
   useEffect(() => {
     if (!isLoading && location.center) {
       getPlacesWithDistance(location.center, fetchPlaces)
-        .then(setPlaces)
+        .then((placesWithDistance) => {
+          setPlaces(placesWithDistance);
+        })
         .catch(console.error);
     }
   }, [location, isLoading]);
@@ -42,26 +44,28 @@ export default function Search() {
   }
 
   return (
-    <div>
-      <SearchBar placeholder="‘가게 이름' 또는 ‘주소'를 검색해보세요." />
-      <Box className="category-bar">
-        {PLACE_TYPES.map((title, index) => (
-          <PlaceCategory
-            key={index}
-            title={title}
-            onClick={() => handleCategorySelect(title)}
+    <>
+      <Wrapper className="search">
+        <SearchBar placeholder="‘가게 이름' 또는 ‘주소'를 검색해보세요." />
+        <Box className="category-bar">
+          {PLACE_TYPES.map((title, index) => (
+            <PlaceCategory
+              key={index}
+              title={title}
+              onClick={() => handleCategorySelect(title)}
+            />
+          ))}
+        </Box>
+        {places.map((place) => (
+          <SearchList
+            key={place._id}
+            name={place.name}
+            distance={`${place.distance}km`}
+            address={`${place.address} ${place.address_detail}`}
+            tel={place.tel}
           />
         ))}
-      </Box>
-      {places.map((place) => (
-        <SearchList
-          key={place._id}
-          name={place.name}
-          distance={''} //초기 임시값
-          address={`${place.address} ${place.address_detail}`}
-          tel={place.tel}
-        />
-      ))}
-    </div>
+      </Wrapper>
+    </>
   );
 }

@@ -21,13 +21,13 @@ export const useGetReviewsByPlaceId = (
   });
 };
 
-export const usePostReview = (placeid) => {
+export const usePostReview = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (reviewData) => postReview({ review: reviewData, placeid }),
-    onSuccess() {
-      queryClient.invalidateQueries({ queryKey: detailPageKey.post(placeid) });
+    mutationFn: postReview,
+    onSuccess: () => {
+      queryClient.invalidateQueries('reviews');
     },
   });
 };

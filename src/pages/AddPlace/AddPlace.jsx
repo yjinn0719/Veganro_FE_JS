@@ -43,7 +43,7 @@ function AddPlace() {
 
       <AddPlaceText>가게 형태</AddPlaceText>
       <TagContainer>
-        {['식당', '술집', '카페', '기타'].map((type) => (
+        {['식당', '술집', '카페', '마켓'].map((type) => (
           <PlaceTag
             key={type}
             title={type}

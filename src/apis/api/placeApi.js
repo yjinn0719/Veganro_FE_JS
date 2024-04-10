@@ -9,15 +9,6 @@ export const getAllPlaces = async () => {
   }
 };
 
-export const getAllPlaces = async () => {
-  try {
-    const response = await api.get('/places');
-    return response.data.data;
-  } catch (error) {
-    handleError(error);
-  }
-};
-
 // 장소 리스트(전체 + 필터)
 // /places?center=x,y&radius=number&size=number&category=value&search=value
 export const fetchPlaces = async (params) => {

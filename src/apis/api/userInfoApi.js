@@ -1,4 +1,4 @@
-import { api } from '@/apis/utils/axiosInstance';
+import { api } from '@/apis/index';
 
 export const getUserData = async () => {
   try {

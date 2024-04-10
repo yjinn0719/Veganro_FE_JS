@@ -1,4 +1,4 @@
-import { api } from '@/apis/utils/axiosInstance';
+import { api } from '@/apis/index';
 
 //https://veganro-backend.vercel.app/api/reviews?placeId=6610e830658638b12ce49ef2&pageNumber=1r&pageSize=10
 

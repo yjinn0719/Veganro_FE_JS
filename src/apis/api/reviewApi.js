@@ -16,6 +16,16 @@ export const getReviewsByPlaceId = async (
     handleError(error);
   }
 };
+
+export const postReview = async (reviewData) => {
+  try {
+    const response = await api.post('/reviews', reviewData);
+    return response.data.data;
+  } catch (error) {
+    throw new Error('Error posting review: ' + error.message);
+  }
+};
+
 const handleError = (error) => {
   if (error.response) {
     // 서버가 응답을 반환했지만 응답 코드가 2xx가 아닌 경우

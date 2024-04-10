@@ -1,5 +1,7 @@
 import Drawer from '../Drawer/Drawer';
 import PrimaryButton from '../PrimaryButton/PrimaryButton';
+import { useParams } from 'react-router-dom';
+import { postReview } from '../../apis/api/reviewApi';
 import { useState } from 'react';
 import {
   TitleContainer,
@@ -16,19 +18,28 @@ export default function ReviewDrawer({
   address,
   isOpened,
   toggleDrawer,
-  submittedReviews,
-  setSubmittedReviews,
+
   titleText,
   submitText,
 }) {
-  const [reviewText, setReviewText] = useState('');
-  const [isEnabled, setIsEnabled] = useState(false); // isEnabled 상태 추가
+  const { placeid } = useParams();
 
-  const handleReview = () => {
+  const [reviewText, setReviewText] = useState('');
+  const [isEnabled, setIsEnabled] = useState(false);
+
+  const handleReview = async () => {
     if (reviewText.trim() !== '') {
-      setSubmittedReviews([...submittedReviews, reviewText]);
-      setReviewText('');
-      toggleDrawer();
+      try {
+        const reviewData = {
+          place_id: placeid,
+          content: reviewText,
+        };
+        await postReview(reviewData);
+        setReviewText('');
+        toggleDrawer();
+      } catch (error) {
+        console.error('Error posting review:', error);
+      }
     }
   };
 

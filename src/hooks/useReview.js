@@ -1,5 +1,11 @@
-import { useQuery } from '@tanstack/react-query';
-import { getReviewsByPlaceId } from '../apis/api/reviewApi';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { getReviewsByPlaceId, postReview } from '../apis/api/reviewApi';
+
+const detailPageKey = {
+  post: function (placeId) {
+    return ['plae', placeId];
+  },
+};
 
 export const useGetReviewsByPlaceId = (
   placeId,
@@ -11,6 +17,17 @@ export const useGetReviewsByPlaceId = (
     queryFn: () => getReviewsByPlaceId(placeId, pageNumber, pageSize),
     config: {
       retry: false,
+    },
+  });
+};
+
+export const usePostReview = (placeid) => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (reviewData) => postReview({ review: reviewData, placeid }),
+    onSuccess() {
+      queryClient.invalidateQueries({ queryKey: detailPageKey.post(placeid) });
     },
   });
 };

@@ -8,6 +8,7 @@ export const MainContainer = styled.div`
   flex-direction: column;
   align-items: flex-start;
   gap: 24px;
+  margin-top: 50px;
   background: ${(props) => props.theme.color.white};
 `;
 
@@ -31,4 +32,21 @@ export const AddPlaceText = styled.p`
   font-style: normal;
   font-weight: 600;
   line-height: normal;
+`;
+
+export const AddPlaceSearch = styled.p`
+  white-space: nowrap;
+  display: flex;
+  color: ${(props) => props.theme.color.green[500]};
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+`;
+
+export const AddressInputContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%; // 컨테이너의 너비를 부모에 맞춥니다.
 `;

@@ -1,32 +1,52 @@
 import React, { useState } from 'react';
-import InputBox from '../../components/InputBox/InputBox';
-import Navbar from '../../components/Navbar/Navbar';
-import PlaceMap from '../../components/PlaceMap/PlaceMap';
-import PlaceTag from '../../components/PlaceTag/PlaceTag';
-import MenuTag from '../../components/MenuTag/MenuTag';
-import DateTag from '../../components/DateTag/DateTag';
-import PrimaryButton from '../../components/PrimaryButton/PrimaryButton';
-import SelectBox from '../../components/SelectBox/SelectBox';
-
+import InputBox from '@/components/InputBox/InputBox';
+import Navbar from '@/components/Navbar/Navbar';
+import PlaceMap from '@/components/PlaceMap/PlaceMap';
+import PlaceTag from '@/components/PlaceTag/PlaceTag';
+import MenuTag from '@/components/MenuTag/MenuTag';
+import DateTag from '@/components/DateTag/DateTag';
+import PrimaryButton from '@/components/PrimaryButton/PrimaryButton';
+import SelectBox from '@/components/SelectBox/SelectBox';
+import KakaoAddress from '../../components/KakaoAddress/KakaoAddress';
 import {
   MainContainer,
   TagContainer,
   DateTagContainer,
   AddPlaceText,
+  AddressInputContainer,
+  AddPlaceSearch,
 } from './AddPlace.styles';
 
 function AddPlace() {
-  // 선택된 가게 형태를 관리하기 위한 상태
-  const [selectedPlaceType, setSelectedPlaceType] = useState('');
-  const [selectedMenuType, setSelectedMenuType] = useState('');
+  const [selectPlace, setSelectPlace] = useState('');
+  const [selectMenu, setSelectMenu] = useState('');
+  const [placeAddress, setPlaceAddress] = useState('');
+  const [placeName, setPlaceName] = useState('');
+  const [placeSns, setPlaceSns] = useState('');
+  const [placeNumber, setPlaceNumber] = useState('');
+  const [placeAddressApi, setPlaceAddressApi] = useState('');
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // 가게 형태 태그를 클릭했을 때 호출될 함수
+  const isButtonEnabled =
+    placeAddressApi.length > 0 &&
+    placeName.length > 0 &&
+    selectPlace !== '' &&
+    selectMenu !== '';
+
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
+
+  const handleAddressSelect = (address) => {
+    setPlaceAddressApi(address); // 사용자가 선택한 주소를 상태에 저장
+    closeModal(); // 주소 선택 후 모달 닫기
+  };
+
   const handlePlaceTagClick = (type) => {
-    setSelectedPlaceType(type);
+    setSelectPlace(type);
   };
 
   const handleMenuTagClick = (type) => {
-    setSelectedMenuType(type);
+    setSelectMenu(type);
   };
 
   const daysOfWeek = ['월', '화', '수', '목', '금', '토', '일'];
@@ -36,10 +56,34 @@ function AddPlace() {
       <Navbar title="가게제보" icon="delete"></Navbar>
       {/* <PlaceMap></PlaceMap> */}
       <AddPlaceText>가게 위치</AddPlaceText>
-      <InputBox></InputBox>
+      <AddressInputContainer>
+        <InputBox
+          placeholder="가게 위치"
+          value={placeAddressApi} // 주소 검색 결과를 표시
+          onChange={(e) => setPlaceAddressApi(e.target.value)}
+        ></InputBox>
+        <AddPlaceSearch onClick={openModal}>검색</AddPlaceSearch>
+      </AddressInputContainer>
+
+      {isModalOpen && (
+        <KakaoAddress
+          onClose={closeModal}
+          onAddressSelect={handleAddressSelect}
+        />
+      )}
+
+      <InputBox
+        placeholder="상세 위치"
+        value={placeAddress}
+        onChange={(e) => setPlaceAddress(e.target.value)}
+      ></InputBox>
 
       <AddPlaceText>가게 이름</AddPlaceText>
-      <InputBox></InputBox>
+      <InputBox
+        placeholder="가게 이름"
+        value={placeName}
+        onChange={(e) => setPlaceName(e.target.value)}
+      />
 
       <AddPlaceText>가게 형태</AddPlaceText>
       <TagContainer>
@@ -48,7 +92,7 @@ function AddPlace() {
             key={type}
             title={type}
             onClick={() => handlePlaceTagClick(type)}
-            isSelected={selectedPlaceType === type}
+            isSelected={selectPlace === type}
           />
         ))}
       </TagContainer>
@@ -60,13 +104,17 @@ function AddPlace() {
             key={type}
             title={type}
             onClick={() => handleMenuTagClick(type)}
-            isSelected={selectedMenuType === type}
+            isSelected={selectMenu === type}
           />
         ))}
       </TagContainer>
 
       <AddPlaceText>SNS (옵션)</AddPlaceText>
-      <InputBox></InputBox>
+      <InputBox
+        placeholder="https://www.instagram.com/vegan-ro/"
+        value={placeSns}
+        onChange={(e) => setPlaceSns(e.target.value)}
+      ></InputBox>
 
       <AddPlaceText>영업시간 (옵션)</AddPlaceText>
       <DateTagContainer>
@@ -86,9 +134,16 @@ function AddPlace() {
       </TagContainer>
 
       <AddPlaceText>연락처 (옵션)</AddPlaceText>
-      <InputBox></InputBox>
+      <InputBox
+        placeholder="010-1234-5678"
+        value={placeNumber}
+        onChange={(e) => setPlaceNumber(e.target.value)}
+      ></InputBox>
 
-      <PrimaryButton title="이 위치로 등록하기"></PrimaryButton>
+      <PrimaryButton
+        title="이 위치로 등록하기"
+        isEnabled={isButtonEnabled}
+      ></PrimaryButton>
     </MainContainer>
   );
 }

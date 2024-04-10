@@ -12,19 +12,13 @@ export const MenuTagBtn = styled.button`
   border-radius: 4px;
   background: ${(props) =>
     props.clicked ? '#4F83371A' : props.theme.color.gray[10]};
+  color: ${(props) =>
+    props.clicked ? props.theme.color.green[500] : props.theme.color.gray[600]};
   border: 1px solid
     ${(props) =>
       props.clicked
         ? props.theme.color.green[500]
         : props.theme.color.gray[10]};
-`;
-
-export const MenuTagContent = styled.p`
-  color: ${(props) =>
-    props.clicked ? props.theme.color.green[500] : props.theme.color.gray[600]};
-  text-align: center;
   font-size: 16px;
-  font-style: normal;
   font-weight: 600;
-  line-height: normal;
 `;

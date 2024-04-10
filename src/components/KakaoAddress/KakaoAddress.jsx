@@ -1,26 +1,6 @@
-// KakaoAddressModal.jsx
 import React from 'react';
 import DaumPostcode from 'react-daum-postcode';
-import styled from 'styled-components';
-
-const ModalOverlay = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const ModalContent = styled.div`
-  background-color: white;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-`;
+import { ModalOverlay, ModalContent } from './KakaoAddress.styles';
 
 const KakaoAddress = ({ onClose, onAddressSelect }) => {
   const handleComplete = (data) => {
@@ -37,9 +17,9 @@ const KakaoAddress = ({ onClose, onAddressSelect }) => {
       }
       fullAddress += extraAddress !== '' ? ` (${extraAddress})` : '';
     }
-
-    onAddressSelect(fullAddress); // 선택한 주소 정보를 부모 컴포넌트로 전달
-    onClose(); // 모달 닫기
+    // 선택한 주소 정보를 부모 컴포넌트로 전달
+    onAddressSelect(fullAddress);
+    onClose();
   };
 
   return (

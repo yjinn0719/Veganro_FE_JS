@@ -1,3 +1,5 @@
-import axiosInstance from './axios';
+import api from './utils/axiosInstance';
+import { fetchPlaces } from './api/placeApi';
+import getPlacesWithDistance from './service/distance';
 
-export { axiosInstance };
+export { api, fetchPlaces, getPlacesWithDistance };

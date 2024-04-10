@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import {
   useGetReviewsByUserId,
   useGetReportedByUserId,
@@ -12,7 +12,6 @@ import {
   TabContainer,
   Tab,
   TabContent,
-  PlaceContent,
   DataContent,
 } from './TabBar.styles';
 import {
@@ -20,30 +19,23 @@ import {
   NoReview,
   NoReviewText,
 } from '@/components/Review/Review.styles';
+import getDistance from '../../hooks/useDistance';
+import useCurrentLocation from '../../hooks/useCurrentLocation';
 
 export default function TabBar({}) {
   const { data: ReviewsData, isError, error } = useGetReviewsByUserId();
   const { data: ReportData } = useGetReportedByUserId();
   const { data: BookmarkData } = useGetBookmarkedByUserId();
-  console.log(BookmarkData);
+  const {
+    location: userLocation,
+    error: userLocationError,
+    isLoading: userLocationLoading,
+    reloadLocation: getCurrentPosition,
+  } = useCurrentLocation();
+  console.log(ReviewsData, ReportData, BookmarkData);
   const [activeTab, setActiveTab] = useState('reported');
   const tabContentRef = useRef(null);
 
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (
-        tabContentRef.current &&
-        !tabContentRef.current.contains(event.target)
-      ) {
-        setActiveTab(null); // Close TabContent when clicking outside
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, []);
   if (
     BookmarkData === undefined ||
     ReportData === undefined ||
@@ -85,7 +77,7 @@ export default function TabBar({}) {
       >
         {activeTab === 'reported' && (
           <>
-            {ReportData && ReportData.length === 0 ? (
+            {ReportData === undefined || ReportData.length === 0 ? (
               <ReviewContent>
                 <NoReview>
                   <NoReviewText>제보한 가게가 없습니다.</NoReviewText>
@@ -98,7 +90,14 @@ export default function TabBar({}) {
                     key={report._id}
                     name={report.name}
                     veganOption={report.vegan_option ? '일부 비건' : '비건'}
-                    distance={report.distance}
+                    distance={
+                      getDistance({
+                        lat1: userLocation.center.lat,
+                        lon1: userLocation.center.lon,
+                        lat2: report.location[1],
+                        lon2: report.location[0],
+                      }) / 1000
+                    }
                     location={report.address}
                     number={report.tel}
                     img={report.category_img.url.basic_url}
@@ -110,7 +109,7 @@ export default function TabBar({}) {
         )}
         {activeTab === 'review' && (
           <>
-            {ReviewsData && ReviewsData.length === 0 ? (
+            {ReviewsData === undefined || ReviewsData.length === 0 ? (
               <ReviewContent>
                 <NoReview>
                   <NoReviewText>작성한 리뷰가 없습니다.</NoReviewText>
@@ -137,7 +136,7 @@ export default function TabBar({}) {
         )}
         {activeTab === 'bookmark' && (
           <>
-            {BookmarkData && BookmarkData.length === 0 ? (
+            {BookmarkData === undefined || BookmarkData.length === 0 ? (
               <ReviewContent>
                 <NoReview>
                   <NoReviewText>북마크한 가게가 없습니다.</NoReviewText>
@@ -152,7 +151,14 @@ export default function TabBar({}) {
                     veganOption={
                       bookmark.place_id.vegan_option ? '일부 비건' : '비건'
                     }
-                    distance={bookmark.place_id.distance}
+                    distance={
+                      getDistance({
+                        lat1: userLocation.center.lat,
+                        lon1: userLocation.center.lon,
+                        lat2: bookmark.place_id.location.coordinates[1],
+                        lon2: bookmark.place_id.location.coordinates[0],
+                      }) / 1000
+                    }
                     location={bookmark.place_id.address}
                     number={bookmark.place_id.tel}
                     img={bookmark.place_id.category_img.url.basic_url}

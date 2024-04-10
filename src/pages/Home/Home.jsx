@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import KakaoMap from '../KakaoMap/KakaoMap';
 
+import useCurrentLocation from '@/hooks/useCurrentLocation';
+
 import SearchBar from '@/components/SearchBar/SearchBar';
 import PlaceCategory from '@/components/PlaceCategory/PlaceCategory';
 import MenuButton from '@/components/MenuButton/MenuButton';
@@ -17,55 +19,21 @@ import {
 import { PLACE_TYPES } from '@/constants';
 
 export default function Home() {
-  const [location, setLocation] = useState({});
-  // Todo '식당'으로 초기 버튼 클릭 시켜줘야함
-  const [selectedCategories, setSelectedCategories] = useState([]);
+  const { location, error, isLoading, reloadLocation } = useCurrentLocation();
 
-  // 현재 위치 받아오기
-  const getCurrentPosition = () => {
-    const { geolocation } = navigator;
-
-    if (geolocation) {
-      geolocation.getCurrentPosition(
-        (position) => {
-          const { latitude, longitude } = position.coords;
-          setLocation({
-            center: {
-              lat: latitude,
-              lng: longitude,
-            },
-            isLoading: false,
-          });
-        },
-        (err) => {
-          setLocation({
-            errMsg: err.message,
-            isLoading: false,
-          });
-        },
-      );
-    } else {
-      setLocation({
-        ...location,
-        errMsg: '현재 위치를 불러올 수 없습니다.',
-        isLoading: false,
-      });
-    }
-    return {
-      currentLocation: location,
-    };
-  };
+  // '식당'으로 초기 데이터 보여주기
+  const [selectedCategories, setSelectedCategories] = useState(['식당']);
 
   // 앱 최초 진입, 현재 위치 불러오기
   // 빈 배열 넘김 -> 컴포넌트가 처음 렌더링될 때만 실행
   useEffect(() => {
-    getCurrentPosition();
+    reloadLocation(); // 위치 재요청
   }, []);
 
   // 버튼 클릭 시 현재 위치 업데이트
   const handleRelocateClick = (e) => {
     e.preventDefault();
-    getCurrentPosition();
+    reloadLocation(); // 위치 재요청
   };
 
   // 카테고리 선택 핸들러
@@ -93,6 +61,7 @@ export default function Home() {
               <PlaceCategory
                 key={index}
                 title={title}
+                className={selectedCategories.includes(title) ? 'selected' : ''}
                 onClick={() => handleCategorySelect(title)}
               />
             ))}
@@ -103,10 +72,15 @@ export default function Home() {
           </Categories>
           <SmallRoundButton title="filter" />
         </FilterBar>
-        <KakaoMap
-          centerMove={location.center}
-          selectedCategories={selectedCategories}
-        />
+        {error && <div>위치 정보를 가져올 수 없습니다: {error}</div>}
+        {isLoading ? (
+          <div>위치 정보를 가져오는 중..</div>
+        ) : (
+          <KakaoMap
+            centerMove={location.center}
+            selectedCategories={selectedCategories}
+          />
+        )}
         <BottomBar>
           <RelocateButton
             title="gps"

@@ -10,7 +10,7 @@ const useCurrentLocation = () => {
       (position) => {
         const { latitude, longitude } = position.coords;
         setLocation({
-          center: { lat: latitude, lon: longitude },
+          center: { lat: latitude, lng: longitude },
         });
         setIsLoading(false);
       },

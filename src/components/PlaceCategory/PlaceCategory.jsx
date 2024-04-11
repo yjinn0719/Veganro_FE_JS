@@ -1,15 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { PlaceCategoryBtn, PlaceCategoryTitle } from './PlaceCategory.styles';
 import GrassIcon from '../../assets/icons/GrassIcon.svg';
 import CafeIcon from '../../assets/icons/CafeIcon.svg';
 import WineIcon from '../../assets/icons/WineIcon.svg';
 import FishIcon from '../../assets/icons/FishIcon.svg';
 
-function PlaceCategory({ title }) {
-  const [isClicked, setIsClicked] = useState(false);
+function PlaceCategory({ title, onClick, selected, reset }) {
+  const [isClicked, setIsClicked] = useState(selected);
+
+  useEffect(() => {
+    setIsClicked(false);
+  }, [reset]);
 
   const handleClicked = () => {
     setIsClicked(!isClicked);
+    onClick(title);
   };
 
   const renderIcon = (title, clicked) => {
@@ -38,7 +43,7 @@ function PlaceCategory({ title }) {
             className={clicked ? 'clicked' : ''}
           />
         );
-      case '기타':
+      case '마켓':
         return (
           <img
             src={FishIcon}

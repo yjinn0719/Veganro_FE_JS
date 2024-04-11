@@ -1,9 +1,9 @@
 import React from 'react';
 import { SecondBtn, SecondBtnContent } from './SecondaryButton.styles';
 
-function SecondaryButton({ color, title }) {
+function SecondaryButton({ color, title, onClick }) {
   return (
-    <SecondBtn color={color}>
+    <SecondBtn color={color} onClick={onClick}>
       <SecondBtnContent>{title}</SecondBtnContent>
     </SecondBtn>
   );

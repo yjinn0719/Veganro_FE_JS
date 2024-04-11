@@ -1,4 +1,4 @@
-import api from '../utils/axiosInstance';
+import api from '@/apis/utils/axiosInstance';
 
 export const getAllPlaces = async () => {
   try {

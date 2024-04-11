@@ -1,16 +1,16 @@
 import { Route, Routes } from 'react-router-dom';
 import { PATH } from '@/constants/router';
 import Home from '@/pages/Home/Home';
-// import Auth from '@/pages/Auth';
-// import SignUp from '@/pages/SignUp';
-// import AddPlace from '@/pages/AddPlace';
-// import Review from '@/pages/Review';
-// import Search from '@/pages/Search';
-// import Place from '@/pages/Place';
-// import PlaceDetail from '@/pages/PlaceDetail';
-// import MyPage from '@/pages/MyPage';
-// import EditMyPage from '@/pages/EditMyPage';
-// import NotFound from '@/pages/NotFound';
+// import Auth from '@/pages/Auth/Auth';
+// import SignUp from '@/pages/SignUp/SignUp';
+// import AddPlace from '@/pages/AddPlace/AddPlace';
+// import Review from '@/pages/ReviewDetail/ReviewDetail';
+// import Search from '@/pages/Search/Search';
+// import Place from '@/pages/Place/Place';
+// import PlaceDetail from '@/pages/PlaceDetail/PlaceDetail';
+// import MyPage from '@/pages/MyPage/MyPage';
+// import EditMyPage from '@/pages/EditMyPage/EditMyPage';
+// import NotFound from '@/pages/NotFound/NotFound';
 
 const MyRouter = () => {
   return (

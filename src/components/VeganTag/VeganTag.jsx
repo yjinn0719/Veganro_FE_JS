@@ -1,16 +1,22 @@
 import React, { useState } from 'react';
 import { VegTagButton, VegTagTitle } from './VeganTag.styles';
 
-function VeganTag({ title }) {
-  const [isClicked, setIsClicked] = useState(false);
+function VeganTag({ title, onClick, isActive }) {
+  const [isClickable, setIsClickable] = useState(true);
 
   const handleClick = () => {
-    setIsClicked(!isClicked);
+    if (isClickable) {
+      setIsClickable(false);
+      onClick();
+      setTimeout(() => {
+        setIsClickable(true);
+      }, 1000);
+    }
   };
 
   return (
-    <VegTagButton onClick={handleClick} clicked={isClicked ? 1 : 0}>
-      <VegTagTitle clicked={isClicked ? 1 : 0}>{title}</VegTagTitle>
+    <VegTagButton onClick={handleClick} isActive={isActive}>
+      <VegTagTitle>{title}</VegTagTitle>
     </VegTagButton>
   );
 }

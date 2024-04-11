@@ -10,6 +10,7 @@ import {
 import { useState } from 'react';
 export default function ReviewDetail() {
   const { placeid } = useParams();
+  console.log(placeid);
   const {
     data: ReviewsData,
     isLoading,
@@ -17,7 +18,7 @@ export default function ReviewDetail() {
     error,
   } = useGetReviewsByPlaceId(placeid);
   const [isEditDrawerOpen, setIsEditDrawerOpen] = useState(false);
-
+  console.log(ReviewsData);
   const toggleEditDrawer = () => {
     setIsEditDrawerOpen(!isEditDrawerOpen);
   };
@@ -37,8 +38,8 @@ export default function ReviewDetail() {
             .map((review) => (
               <ReviewCard
                 key={review._id}
-                nickname={review.author}
-                veganLevel={review.author_tag}
+                nickname={review.user_id.nickname}
+                veganLevel={review.user_id.tag}
                 comment={review.content}
                 date={review.updatedAt}
                 click={toggleEditDrawer}

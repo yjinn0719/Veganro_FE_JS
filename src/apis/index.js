@@ -7,6 +7,8 @@ import {
   getReviewsByUserId,
   getReportedByUserId,
   getBookmarkedByUserId,
+  postBookmark,
+  deleteBookmark,
 } from './api/userInfoApi';
 import getPlacesWithDistance from './service/distance';
 
@@ -24,4 +26,6 @@ export {
   getReviewsByUserId,
   getReportedByUserId,
   getBookmarkedByUserId,
+  postBookmark,
+  deleteBookmark,
 };

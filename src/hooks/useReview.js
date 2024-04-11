@@ -21,7 +21,6 @@ export const useGetReviewsByPlaceId = (
 
 export const usePostReview = () => {
   const queryClient = useQueryClient();
-
   return useMutation({
     mutationFn: postReview,
     onSuccess: () => {

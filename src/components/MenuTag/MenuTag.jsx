@@ -1,10 +1,10 @@
 import React from 'react';
-import { MenuTagBtn } from './MenuTag.styles';
+import { MenuTagBtn, MenuTagContent } from './MenuTag.styles';
 
 function MenuTag({ title, onClick, isSelected }) {
   return (
     <MenuTagBtn onClick={onClick} clicked={isSelected ? 1 : 0}>
-      {title}
+      <MenuTagContent clicked={isSelected ? 1 : 0}>{title}</MenuTagContent>
     </MenuTagBtn>
   );
 }

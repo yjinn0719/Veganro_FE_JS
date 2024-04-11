@@ -1,13 +1,18 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Container } from './PlaceInfoModal.style';
+import { Container, RedirectButton } from './PlaceInfoModal.style';
 
-function PlaceInfoModal(id) {
+function PlaceInfoModal({ markId }) {
   const navigate = useNavigate();
+
+  const handleRedirect = () => {};
 
   return (
     <>
-      <Container>`${id}`</Container>
+      <Container>
+        {markId}
+        <RedirectButton onClick={handleRedirect} />
+      </Container>
     </>
   );
 }

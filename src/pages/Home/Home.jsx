@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import KakaoMap from '../KakaoMap/KakaoMap';
-
 import useCurrentLocation from '@/hooks/useCurrentLocation';
-
 import SearchBar from '@/components/SearchBar/SearchBar';
 import PlaceCategory from '@/components/PlaceCategory/PlaceCategory';
 import MenuButton from '@/components/MenuButton/MenuButton';
@@ -23,16 +21,20 @@ import { PLACE_TYPES } from '@/constants';
 // TODO
 // 1. '식당'으로 초기값 부여
 // 2. 로딩/에러 화면 컴포넌트로 교체
-// 3. 필터 모달 보이기
+// 3. 필터 모달 보이기 / 필터 적용 마커 렌더링
 
 export default function Home() {
   const { location, error, isLoading, reloadLocation } = useCurrentLocation();
 
   // 카테고리 상태 객체 배열로 초기화
-  const [categoriesStatus, setCategoriesStatus] = useState(
-    PLACE_TYPES.map((type) => ({ name: type, clicked: 0 })),
-  );
-  const [resetCategories, setResetCategories] = useState(false);
+  const [categoriesStatus, setCategoriesStatus] = useState(() => {
+    const initialCategoriesStatus = PLACE_TYPES.map((type) => ({
+      name: type,
+      clicked: type === '식당',
+    }));
+    return initialCategoriesStatus;
+  });
+
   const [showFilterModal, setShowFilterModal] = useState(false);
 
   // 앱 최초 진입, 현재 위치 불러오기
@@ -49,23 +51,26 @@ export default function Home() {
 
   // 카테고리 선택 핸들러
   const handleCategorySelect = (categoryName) => {
-    setCategoriesStatus((prevState) =>
-      prevState.map((category) =>
-        category.name === categoryName
-          ? { ...category, clicked: !category.clicked }
-          : category,
-      ),
+    setCategoriesStatus((prevCategories) =>
+      prevCategories.map((category) => ({
+        ...category,
+        clicked:
+          category.name === categoryName ? !category.clicked : category.clicked,
+      })),
     );
   };
 
   // 카테고리 초기화 핸들러
   const handleCategoryReset = () => {
-    setCategoriesStatus(
-      categoriesStatus.map((category) => ({ ...category, clicked: 0 })),
+    setCategoriesStatus((prevCategories) =>
+      prevCategories.map((category) => ({
+        ...category,
+        clicked: 0,
+      })),
     );
-    setResetCategories((prevState) => !prevState);
   };
 
+  // 필터 모달 핸들러
   const handleFilterModal = () => {
     setShowFilterModal(!showFilterModal);
     console.log('필터 모달');
@@ -77,18 +82,19 @@ export default function Home() {
         <SearchBar placeholder="‘가게 이름' 또는 ‘주소'를 검색해보세요." />
         <FilterBar>
           <Categories className="category-bar">
-            {PLACE_TYPES.map((title, index) => (
+            {PLACE_TYPES.map((title) => (
               <PlaceCategory
-                key={index}
+                className="category-button"
+                key={title}
                 title={title}
                 onClick={() => handleCategorySelect(title)}
-                reset={resetCategories}
+                initialClicked={
+                  categoriesStatus.find((category) => category.name === title)
+                    ?.clicked
+                }
               />
             ))}
-            <SmallRoundButton
-              title="refresh"
-              onClick={() => handleCategoryReset()}
-            />
+            <SmallRoundButton title="refresh" onClick={handleCategoryReset} />
           </Categories>
           <FilterButton title="filter" onClick={handleFilterModal} />
           {showFilterModal && <MapFilterModal />}

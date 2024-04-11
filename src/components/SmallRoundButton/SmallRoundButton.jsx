@@ -4,6 +4,10 @@ import FilterListRoundedIcon from '@mui/icons-material/FilterListRounded';
 import { Button } from './SmallRoundButton.style';
 
 function SmallRoundButton({ title, onClick }) {
+  const handleClick = () => {
+    onClick();
+  };
+
   const renderIcon = (title) => {
     switch (title) {
       case 'refresh':
@@ -30,7 +34,7 @@ function SmallRoundButton({ title, onClick }) {
         return null;
     }
   };
-  return <Button onClick={onClick}>{renderIcon(title)}</Button>;
+  return <Button onClick={handleClick}>{renderIcon(title)}</Button>;
 }
 
 export default SmallRoundButton;

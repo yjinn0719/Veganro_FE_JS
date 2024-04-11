@@ -5,12 +5,12 @@ import CafeIcon from '../../assets/icons/CafeIcon.svg';
 import WineIcon from '../../assets/icons/WineIcon.svg';
 import FishIcon from '../../assets/icons/FishIcon.svg';
 
-function PlaceCategory({ title, onClick, selected, reset }) {
-  const [isClicked, setIsClicked] = useState(selected);
+function PlaceCategory({ title, onClick, initialClicked }) {
+  const [isClicked, setIsClicked] = useState();
 
   useEffect(() => {
-    setIsClicked(false);
-  }, [reset]);
+    setIsClicked(initialClicked);
+  }, [initialClicked]);
 
   const handleClicked = () => {
     setIsClicked(!isClicked);

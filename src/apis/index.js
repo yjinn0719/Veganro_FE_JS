@@ -1,5 +1,5 @@
 import api from './utils/axiosInstance';
-import { fetchPlaces, getPlaceData } from './api/placeApi';
+import { getAllPlaces, fetchPlaces, getPlaceData } from './api/placeApi';
 import { getReviewsByPlaceId, postReview, deleteReview } from './api/reviewApi';
 import {
   getUserData,
@@ -12,6 +12,7 @@ import getPlacesWithDistance from './service/distance';
 
 export {
   api,
+  getAllPlaces,
   fetchPlaces,
   getPlacesWithDistance,
   getPlaceData,

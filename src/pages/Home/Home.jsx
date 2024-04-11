@@ -22,8 +22,6 @@ import { PLACE_TYPES } from '@/constants';
 import { useRecoilState } from 'recoil';
 import { selectedCategoryState } from '@/states/filterState';
 
-import { useNavigate } from 'react-router-dom';
-
 // TODO
 // 1. 로딩/에러 화면 컴포넌트로 교체
 // 2. 필터 모달 보이기 / 필터 적용 마커 렌더링
@@ -41,8 +39,6 @@ export default function Home() {
   });
 
   const [showFilterModal, setShowFilterModal] = useState(false);
-  const [showPlaceModal, setShowPlaceModal] = useState(false);
-  const [mapCenter, setMapCenter] = useState(null);
 
   // to 세영님) recoil 상태관리 읽기 전용으로 추가했습니다
   const [selectedCategories, setSelectedCategories] = useRecoilState(
@@ -63,6 +59,14 @@ export default function Home() {
 
   // 카테고리 선택 핸들러
   const handleCategorySelect = (categoryName) => {
+    // to 세영님) categorySelect에 recoil 도입 수정 했습니다
+    setSelectedCategories((prevSelected) => {
+      const isSelected = prevSelected.includes(categoryName);
+      return isSelected
+        ? prevSelected.filter((name) => name !== categoryName) // clicked X -> 배열 제거
+        : [...prevSelected, categoryName]; // clicked O -> 배열 추가
+    });
+
     // to 세영님) categorySelect에 recoil 도입 수정 했습니다
     setSelectedCategories((prevSelected) => {
       const isSelected = prevSelected.includes(categoryName);

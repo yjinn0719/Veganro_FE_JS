@@ -103,26 +103,23 @@ export default function Review({ address }) {
             </ReviewContent>
           ) : (
             <>
-              {ReviewsData.slice()
-                .reverse()
-                .slice(0, visibleReviews)
-                .map((review) => (
-                  <ReviewCard
-                    key={review._id}
-                    nickname={review.author}
-                    veganLevel={review.author_tag}
-                    comment={review.content}
-                    date={review.updatedAt}
-                    click={() => {
-                      setSelectedReviewIndex(review._id);
-                      toggleEditDrawer();
-                    }}
-                  />
-                ))}
+              {ReviewsData.slice(0, visibleReviews).map((review) => (
+                <ReviewCard
+                  key={review._id}
+                  nickname={review.user_id.nickname}
+                  veganLevel={review.user_id.tag}
+                  comment={review.content}
+                  date={review.updatedAt}
+                  click={() => {
+                    setSelectedReviewIndex(review._id);
+                    toggleEditDrawer();
+                  }}
+                />
+              ))}
               {ReviewsData.length > visibleReviews && (
                 <LoadMoreButtonContainer
                   onClick={() => {
-                    navigate('/review');
+                    navigate(`/place/${placeid}/review`);
                   }}
                 >
                   <LoadMoreButtonText>더보기</LoadMoreButtonText>

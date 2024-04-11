@@ -80,7 +80,7 @@ const TabBar = () => {
             const distance =
               getDistance({
                 lat1: userLocation.center.lat,
-                lon1: userLocation.center.lon,
+                lon1: userLocation.center.lng,
                 lat2: report.location[1],
                 lon2: report.location[0],
               }) / 1000;
@@ -92,7 +92,7 @@ const TabBar = () => {
                 veganOption={report.vegan_option ? '일부 비건' : '비건'}
                 distance={distance}
                 location={report.address}
-                number={report.tel}
+                number={report.tel === '' ? '없음' : report.tel}
                 img={report.category_img.url.basic_url}
               />
             );
@@ -117,8 +117,8 @@ const TabBar = () => {
           {ReviewsData.map((review) => (
             <ReviewCard
               key={review._id}
-              nickname={review.author}
-              veganLevel={review.author_tag}
+              nickname={review.user_id.nickname}
+              veganLevel={review.user_id.tag}
               comment={review.content}
               date={review.updatedAt}
             />
@@ -144,7 +144,7 @@ const TabBar = () => {
             const distance =
               getDistance({
                 lat1: userLocation.center.lat,
-                lon1: userLocation.center.lon,
+                lon1: userLocation.center.lng,
                 lat2: bookmark.place_id.location.coordinates[1],
                 lon2: bookmark.place_id.location.coordinates[0],
               }) / 1000;

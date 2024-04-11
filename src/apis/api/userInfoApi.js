@@ -28,7 +28,7 @@ export const updateUserData = async ({ nickname, tag }) => {
 export const getReviewsByUserId = async (pageNumber = 1, pageSize = 10) => {
   try {
     const response = await api.get(
-      `/reviews?me?pageNumber=${pageNumber}&pageSize=${pageSize}`,
+      `/reviews/me?pageNumber=${pageNumber}&pageSize=${pageSize}`,
     );
     return response.data.data;
   } catch (error) {
@@ -47,13 +47,33 @@ export const getReportedByUserId = async (pageNumber = 1, pageSize = 10) => {
   }
 };
 
-// /bookmarks/users
-export const getBookmarkedByUserId = async () => {
+// /bookmarks/users?pageNumber=value&pageSize=value
+export const getBookmarkedByUserId = async (pageNumber = 1, pageSize = 10) => {
   try {
-    const response = await api.get(`/bookmarks/users`);
+    const response = await api.get(
+      `/bookmarks/me?pageNumber=${pageNumber}&pageSize=${pageSize}`,
+    );
     return response.data.data;
   } catch (error) {
     handleError(error);
+  }
+};
+
+export const postBookmark = async (place_id) => {
+  try {
+    const response = await api.post('/bookmarks', place_id);
+    return response.data.data;
+  } catch (error) {
+    throw new Error('Error posting bookmark: ' + error.message);
+  }
+};
+
+export const deleteBookmark = async (bookmarkId) => {
+  try {
+    const response = await api.delete(`/bookmarks/${bookmarkId}`);
+    return response.data.data;
+  } catch (error) {
+    throw new Error('Error deleting bookmark: ' + error.message);
   }
 };
 

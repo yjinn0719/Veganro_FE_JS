@@ -73,7 +73,7 @@ export default function PlaceDetail() {
   if (placeData && userLocation) {
     const calculateDistance = getDistance({
       lat1: userLocation.center.lat,
-      lon1: userLocation.center.lon,
+      lon1: userLocation.center.lng,
       lat2: placeData.location.coordinates[1],
       lon2: placeData.location.coordinates[0],
     });
@@ -116,7 +116,7 @@ export default function PlaceDetail() {
           <PlaceDetailInfo
             placeLocation={placeData.address}
             placeNumber={placeData.tel}
-            placeHours={placeData.hours || []}
+            placeHours={placeData.open_times || []}
             placeURL={placeData.sns_url || []}
           />
         </>

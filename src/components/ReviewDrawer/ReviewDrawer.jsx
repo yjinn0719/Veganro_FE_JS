@@ -18,7 +18,6 @@ export default function ReviewDrawer({
   address,
   isOpened,
   toggleDrawer,
-
   titleText,
   submitText,
 }) {
@@ -27,13 +26,14 @@ export default function ReviewDrawer({
   const [reviewText, setReviewText] = useState('');
   const [isEnabled, setIsEnabled] = useState(false);
 
-  const handleReview = async (reviewData) => {
+  const handleReview = async () => {
     if (reviewText.trim() !== '') {
       try {
         const reviewData = {
           place_id: placeid,
           content: reviewText,
         };
+        console.log('reviewData', reviewData);
         await mutate(reviewData);
         setReviewText('');
         toggleDrawer();

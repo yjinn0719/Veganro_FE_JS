@@ -9,6 +9,21 @@ export const getUserData = async () => {
   }
 };
 
+export const updateUserData = async ({ nickname, tag }) => {
+  try {
+    const formData = new FormData();
+
+    formData.append('nickname', nickname);
+    formData.append('tag', tag);
+
+    const response = await api.put('/users/me', formData);
+
+    return response.data.data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 //reviews/me?pageNumber=number&pageSize=number
 export const getReviewsByUserId = async (pageNumber = 1, pageSize = 10) => {
   try {

@@ -8,10 +8,10 @@ export const VegTagButton = styled.button`
   align-items: center;
   border-radius: 100px;
   background: ${(props) =>
-    props.clicked ? '#4F83371A' : props.theme.color.gray[10]};
+    props.isActive ? '#4F83371A' : props.theme.color.gray[10]};
   border: 1px solid
     ${(props) =>
-      props.clicked
+      props.isActive
         ? props.theme.color.green[500]
         : props.theme.color.gray[10]};
 `;
@@ -19,7 +19,9 @@ export const VegTagButton = styled.button`
 export const VegTagTitle = styled.p`
   flex: 1 0 0;
   color: ${(props) =>
-    props.clicked ? props.theme.color.green[500] : props.theme.color.gray[600]};
+    props.isActive
+      ? props.theme.color.green[500]
+      : props.theme.color.gray[600]};
   text-align: center;
   font-size: 16px;
   font-style: normal;

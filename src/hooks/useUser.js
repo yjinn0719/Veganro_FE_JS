@@ -4,6 +4,7 @@ import {
   getReviewsByUserId,
   getReportedByUserId,
   getBookmarkedByUserId,
+  updateUserData,
 } from '../apis/api/userInfoApi';
 
 export const useGetUser = (userId) => {
@@ -14,6 +15,10 @@ export const useGetUser = (userId) => {
       retry: false,
     },
   });
+};
+
+export const useUpdateUser = () => {
+  return useMutation({ mutationFn: updateUserData });
 };
 
 export const useGetReviewsByUserId = (pageNumber = 1, pageSize = 10) => {

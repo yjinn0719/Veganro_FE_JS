@@ -1,4 +1,4 @@
-import { api } from '@/apis/index';
+import api from '@/apis/utils/axiosInstance';
 
 export const getUserData = async () => {
   try {
@@ -6,6 +6,21 @@ export const getUserData = async () => {
     return response.data.data;
   } catch (error) {
     handleError(error);
+  }
+};
+
+export const updateUserData = async ({ nickname, tag }) => {
+  try {
+    const formData = new FormData();
+
+    formData.append('nickname', nickname);
+    formData.append('tag', tag);
+
+    const response = await api.put('/users/me', formData);
+
+    return response.data.data;
+  } catch (error) {
+    console.error(error);
   }
 };
 

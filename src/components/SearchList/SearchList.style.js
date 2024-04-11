@@ -42,8 +42,8 @@ export const DistBox = styled.div`
 export const DistanceNavicon = styled.div`
   width: 12px;
   height: 12px;
-  background-image: '@/assests/icons/DistanceNaviIcon.svg';
-  background-size: cover;
+  background-image: url(${DistanceNaviIcon});
+  background-size: contain;
   background-repeat: no-repeat;
 `;
 

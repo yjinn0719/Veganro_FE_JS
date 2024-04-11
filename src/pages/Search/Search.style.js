@@ -3,10 +3,15 @@ import styled from 'styled-components';
 import SmallRoundButton from '@/components/SmallRoundButton/SmallRoundButton';
 
 export const Wrapper = styled.main`
-  padding: 0 16px 16px 16px;
+  padding: 16px;
+  padding-top: 16px;
   width: 100%;
   height: 100vh;
   position: relative;
+  box-sizing: border-box;
+`;
+export const Box = styled.div`
+  width: 100%;
   box-sizing: border-box;
 `;
 export const Categories = styled.div`
@@ -54,8 +59,6 @@ export const SearchNav = styled.div`
   background-color: white;
   position: sticky;
   z-index: 1000;
-
-  position: fixed;
   top: 0;
   left: 0;
   right: 0;

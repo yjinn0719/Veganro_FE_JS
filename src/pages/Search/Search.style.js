@@ -15,3 +15,20 @@ export const Box = styled.div`
   gap: 8px;
   z-index: 999;
 `;
+export const SearchNav = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 110px;
+  padding-bottom: 12px;
+
+  background-color: white;
+  position: sticky;
+  z-index: 1000;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  box-sizing: border-box;
+`;

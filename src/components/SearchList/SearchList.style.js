@@ -31,6 +31,20 @@ export const PlaceName = styled.div`
   line-height: normal;
 `;
 
+export const DistBox = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 2px;
+`;
+
+export const DistanceNavicon = styled.div`
+  width: 12px;
+  height: 12px;
+  background-image: '@/assests/icons/DistanceNaviIcon.svg';
+  background-size: cover;
+  background-repeat: no-repeat;
+`;
+
 export const Distance = styled.div`
   color: var(--Gray-600, #6e6e6e);
   font-feature-settings:

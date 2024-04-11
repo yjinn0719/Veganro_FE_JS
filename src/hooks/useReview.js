@@ -3,6 +3,7 @@ import {
   getReviewsByPlaceId,
   postReview,
   deleteReview,
+  updateReview,
 } from '../apis/api/reviewApi';
 
 export const useGetReviewsByPlaceId = (
@@ -27,6 +28,9 @@ export const usePostReview = () => {
       queryClient.invalidateQueries('reviews');
     },
   });
+};
+export const useUpdateReview = () => {
+  return useMutation({ mutationFn: updateReview });
 };
 
 export const useDeleteReview = () => {

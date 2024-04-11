@@ -8,6 +8,7 @@ import DateTag from '@/components/DateTag/DateTag';
 import PrimaryButton from '@/components/PrimaryButton/PrimaryButton';
 import SelectBox from '@/components/SelectBox/SelectBox';
 import KakaoAddress from '../../components/KakaoAddress/KakaoAddress';
+import { createReportPlace } from '@/apis/api/reportApi';
 import {
   MainContainer,
   TagContainer,
@@ -26,6 +27,33 @@ function AddPlace() {
   const [placeNumber, setPlaceNumber] = useState('');
   const [placeAddressApi, setPlaceAddressApi] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [openTimes, setOpenTimes] = useState([]);
+  const [snsUrls, setSnsUrls] = useState([]);
+
+  const collectData = () => {
+    return {
+      name: placeName,
+      category: selectPlace,
+      vegan_option: selectMenu === '일부 채식 메뉴 제공',
+      tel: placeNumber || '',
+      address: placeAddressApi,
+      address_lot_number: '서울 00-00',
+      address_detail: placeAddress || '',
+      location: [126.9710461, 37.5560575],
+      open_times: openTimes.length > 0 ? openTimes : [],
+      sns_url: snsUrls.length > 0 ? snsUrls : [],
+    };
+  };
+
+  const handleSubmit = async () => {
+    const data = collectData();
+    try {
+      const result = await createReportPlace(data);
+      console.log(result);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   const isButtonEnabled =
     placeAddressApi.length > 0 &&
@@ -143,6 +171,7 @@ function AddPlace() {
       <PrimaryButton
         title="이 위치로 등록하기"
         isEnabled={isButtonEnabled}
+        onClick={handleSubmit}
       ></PrimaryButton>
     </MainContainer>
   );

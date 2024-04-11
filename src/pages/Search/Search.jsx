@@ -6,7 +6,7 @@ import { getPlacesWithDistance } from '@/apis/index';
 import SearchBar from '@/components/SearchBar/SearchBar';
 import PlaceCategory from '@/components/PlaceCategory/PlaceCategory';
 import SearchList from '@/components/SearchList/SearchList';
-import { Box, Wrapper } from './Search.style';
+import { Box, Wrapper, SearchNav } from './Search.style';
 
 import { PLACE_TYPES } from '../../constants';
 
@@ -46,25 +46,30 @@ export default function Search() {
   return (
     <>
       <Wrapper className="search">
-        <SearchBar placeholder="‘가게 이름' 또는 ‘주소'를 검색해보세요." />
-        <Box className="category-bar">
-          {PLACE_TYPES.map((title, index) => (
-            <PlaceCategory
-              key={index}
-              title={title}
-              onClick={() => handleCategorySelect(title)}
-            />
-          ))}
-        </Box>
-        {places.map((place) => (
-          <SearchList
-            key={place._id}
-            name={place.name}
-            distance={`${place.distance}km`}
-            address={`${place.address} ${place.address_detail}`}
-            tel={place.tel}
-          />
-        ))}
+        <SearchNav>
+          <SearchBar placeholder="‘가게 이름' 또는 ‘주소'를 검색해보세요." />
+          <Box className="category-bar">
+            {PLACE_TYPES.map((title, index) => (
+              <PlaceCategory
+                key={index}
+                title={title}
+                onClick={() => handleCategorySelect(title)}
+              />
+            ))}
+          </Box>
+        </SearchNav>
+        <div>
+          {places &&
+            places.map((place) => (
+              <SearchList
+                key={place._id}
+                name={place.name}
+                distance={`${place.distance}km`}
+                address={`${place.address} ${place.address_detail}`}
+                tel={place.tel}
+              />
+            ))}
+        </div>
       </Wrapper>
     </>
   );

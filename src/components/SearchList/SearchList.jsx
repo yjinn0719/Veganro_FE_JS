@@ -3,6 +3,8 @@ import {
   CardWrapper,
   TextBox,
   PlaceName,
+  DistBox,
+  DistanceNavicon,
   Address,
   Distance,
   CategoryIcon,
@@ -14,7 +16,10 @@ export default function SearchList(props) {
       <CategoryIcon /> {/*식당 카테고리 아이콘*/}
       <TextBox>
         <PlaceName>{props.name}</PlaceName>
-        <Distance>{props.distance}</Distance>
+        <DistBox>
+          <DistanceNavicon />
+          <Distance>{props.distance}</Distance>
+        </DistBox>
         <Address>{props.address}</Address>
         <div>{props.tel}</div>
       </TextBox>

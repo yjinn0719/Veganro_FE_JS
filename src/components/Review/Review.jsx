@@ -32,6 +32,7 @@ export default function Review({ address }) {
   } = useGetReviewsByPlaceId(placeid);
   const [isReviewDrawerOpen, setIsReviewDrawerOpen] = useState(false);
   const [isEditDrawerOpen, setIsEditDrawerOpen] = useState(false);
+  const [editReview, setEditReview] = useState(false);
   const [submittedReviews, setSubmittedReviews] = useState([]);
   const [visibleReviews, setVisibleReviews] = useState(3);
   const [selectedReviewIndex, setSelectedReviewIndex] = useState(null);
@@ -50,36 +51,38 @@ export default function Review({ address }) {
 
   const toggleDrawer = () => {
     setIsReviewDrawerOpen(!isReviewDrawerOpen);
-    if (isEditDrawerOpen) {
+    if (isEditDrawerOpen || editReview) {
       setIsEditDrawerOpen(false);
     }
   };
 
   const toggleReviewDrawer = () => {
     setIsReviewDrawerOpen(!isReviewDrawerOpen);
-    if (isEditDrawerOpen) {
+    if (isEditDrawerOpen || editReview) {
       setIsEditDrawerOpen(false);
+      setEditReview(false);
     }
   };
 
-  const toggleEditDrawer = () => {
+  const toggleEditDrawer = (reviewId) => {
+    setSelectedReviewIndex(reviewId);
     setIsEditDrawerOpen(!isEditDrawerOpen);
-    if (isReviewDrawerOpen) {
+    if (isReviewDrawerOpen || editReview) {
+      setIsReviewDrawerOpen(false);
+      setEditReview(false);
+    }
+  };
+  const toggleEditReview = () => {
+    setEditReview(!editReview);
+    if (isEditDrawerOpen || isReviewDrawerOpen) {
+      setIsEditDrawerOpen(false);
       setIsReviewDrawerOpen(false);
     }
   };
-  const renderReviewDrawer = () => {
-    return <ReviewDrawer titleText={false} submitText={false} />;
-  };
 
-  useEffect(() => {
-    if (isEditDrawerOpen) {
-      setIsEditDrawerOpen(true);
-    }
-  }, [isEditDrawerOpen]);
   if (isLoading) return <div>Loading...</div>;
   if (isError) return <div>Error: {error.message}</div>;
-  console.log(ReviewsData);
+
   return (
     <>
       <Container id="write-review">
@@ -112,7 +115,7 @@ export default function Review({ address }) {
                   date={review.updatedAt}
                   click={() => {
                     setSelectedReviewIndex(review._id);
-                    toggleEditDrawer();
+                    toggleEditDrawer(review._id);
                   }}
                 />
               ))}
@@ -145,9 +148,21 @@ export default function Review({ address }) {
       )}
       {isEditDrawerOpen && (
         <EditDrawer
-          onEdit={() => renderReviewDrawer()}
+          onEdit={toggleEditReview}
           reviewId={selectedReviewIndex}
           isOpened={isEditDrawerOpen}
+        />
+      )}
+      {editReview && (
+        <ReviewDrawer
+          address={address}
+          titleText={false}
+          submitText={false}
+          isOpened={toggleEditReview}
+          toggleDrawer={toggleDrawer}
+          submittedReviews={submittedReviews}
+          setSubmittedReviews={setSubmittedReviews}
+          reviewIndex={selectedReviewIndex}
         />
       )}
     </>

@@ -26,6 +26,20 @@ export const postReview = async (reviewData) => {
   }
 };
 
+export const updateReview = async ({ reviewId, content }) => {
+  try {
+    const formData = new FormData();
+
+    formData.append('content', content);
+
+    const response = await api.patch(`/reviews/${reviewId}`, formData);
+
+    return response.data.data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 export const deleteReview = async (reviewId) => {
   try {
     const response = await api.delete(`/reviews/${reviewId}`);

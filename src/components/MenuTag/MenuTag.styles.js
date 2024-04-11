@@ -11,20 +11,19 @@ export const MenuTagBtn = styled.button`
   flex: 1 0 0;
   border-radius: 4px;
   background: ${(props) =>
-    props.clicked ? '#4F83371A' : props.theme.color.gray[10]};
+    props.$clicked ? '#4F83371A' : props.theme.color.gray[10]};
   border: 1px solid
     ${(props) =>
-      props.clicked
+      props.$clicked
         ? props.theme.color.green[500]
         : props.theme.color.gray[10]};
 `;
 
 export const MenuTagContent = styled.p`
   color: ${(props) =>
-    props.clicked ? props.theme.color.green[500] : props.theme.color.gray[600]};
-  text-align: center;
+    props.$clicked
+      ? props.theme.color.green[500]
+      : props.theme.color.gray[600]};
   font-size: 16px;
-  font-style: normal;
   font-weight: 600;
-  line-height: normal;
 `;

@@ -33,6 +33,9 @@ const GlobalStyles = createGlobalStyle`
         background: transparent;
         cursor: pointer;
     }
+    button[disabled] {
+        cursor: default;
+    }
     #root{
         display: flex;
         justify-content: center;

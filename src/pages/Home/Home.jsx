@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import KakaoMap from '../KakaoMap/KakaoMap';
 
+import useCurrentLocation from '@/hooks/useCurrentLocation';
+
 import SearchBar from '@/components/SearchBar/SearchBar';
 import PlaceCategory from '@/components/PlaceCategory/PlaceCategory';
 import MenuButton from '@/components/MenuButton/MenuButton';
 import SmallRoundButton from '@/components/SmallRoundButton/SmallRoundButton';
+import MapFilterModal from '@/components/MapFilterModal/MapFilterModal';
 import {
   Wrapper,
   FilterBar,
@@ -12,75 +15,60 @@ import {
   BottomBar,
   RelocateButton,
   ListViewButton,
+  FilterButton,
 } from '../Home/Home.style';
 
 import { PLACE_TYPES } from '@/constants';
 
+// TODO
+// 1. '식당'으로 초기값 부여
+// 2. 로딩/에러 화면 컴포넌트로 교체
+// 3. 필터 모달 보이기
+
 export default function Home() {
-  const [location, setLocation] = useState({});
-  // Todo '식당'으로 초기 버튼 클릭 시켜줘야함
-  const [selectedCategories, setSelectedCategories] = useState([]);
+  const { location, error, isLoading, reloadLocation } = useCurrentLocation();
 
-  // 현재 위치 받아오기
-  const getCurrentPosition = () => {
-    const { geolocation } = navigator;
-
-    if (geolocation) {
-      geolocation.getCurrentPosition(
-        (position) => {
-          const { latitude, longitude } = position.coords;
-          setLocation({
-            center: {
-              lat: latitude,
-              lng: longitude,
-            },
-            isLoading: false,
-          });
-        },
-        (err) => {
-          setLocation({
-            errMsg: err.message,
-            isLoading: false,
-          });
-        },
-      );
-    } else {
-      setLocation({
-        ...location,
-        errMsg: '현재 위치를 불러올 수 없습니다.',
-        isLoading: false,
-      });
-    }
-    return {
-      currentLocation: location,
-    };
-  };
+  // 카테고리 상태 객체 배열로 초기화
+  const [categoriesStatus, setCategoriesStatus] = useState(
+    PLACE_TYPES.map((type) => ({ name: type, clicked: 0 })),
+  );
+  const [resetCategories, setResetCategories] = useState(false);
+  const [showFilterModal, setShowFilterModal] = useState(false);
 
   // 앱 최초 진입, 현재 위치 불러오기
   // 빈 배열 넘김 -> 컴포넌트가 처음 렌더링될 때만 실행
   useEffect(() => {
-    getCurrentPosition();
+    reloadLocation(); // 위치 재요청
   }, []);
 
   // 버튼 클릭 시 현재 위치 업데이트
   const handleRelocateClick = (e) => {
     e.preventDefault();
-    getCurrentPosition();
+    reloadLocation(); // 위치 재요청
   };
 
   // 카테고리 선택 핸들러
-  const handleCategorySelect = (category) => {
-    // 이미 선택된 카테고리 확인
-    if (selectedCategories.includes(category)) {
-      setSelectedCategories(selectedCategories.filter((c) => c !== category));
-    } else {
-      setSelectedCategories([...selectedCategories, category]);
-    }
+  const handleCategorySelect = (categoryName) => {
+    setCategoriesStatus((prevState) =>
+      prevState.map((category) =>
+        category.name === categoryName
+          ? { ...category, clicked: !category.clicked }
+          : category,
+      ),
+    );
   };
 
   // 카테고리 초기화 핸들러
   const handleCategoryReset = () => {
-    setSelectedCategories([]);
+    setCategoriesStatus(
+      categoriesStatus.map((category) => ({ ...category, clicked: 0 })),
+    );
+    setResetCategories((prevState) => !prevState);
+  };
+
+  const handleFilterModal = () => {
+    setShowFilterModal(!showFilterModal);
+    console.log('필터 모달');
   };
 
   return (
@@ -94,6 +82,7 @@ export default function Home() {
                 key={index}
                 title={title}
                 onClick={() => handleCategorySelect(title)}
+                reset={resetCategories}
               />
             ))}
             <SmallRoundButton
@@ -101,12 +90,24 @@ export default function Home() {
               onClick={() => handleCategoryReset()}
             />
           </Categories>
-          <SmallRoundButton title="filter" />
+          <FilterButton title="filter" onClick={handleFilterModal} />
+          {showFilterModal && <MapFilterModal />}
         </FilterBar>
-        <KakaoMap
-          centerMove={location.center}
-          selectedCategories={selectedCategories}
-        />
+        {error && (
+          <div>
+            위치 정보를 가져올 수 없습니다
+            <br />
+            {error}
+          </div>
+        )}
+        {isLoading ? (
+          <div>위치 정보를 가져오는 중..</div>
+        ) : (
+          <KakaoMap
+            centerMove={location.center}
+            categoriesStatus={categoriesStatus}
+          />
+        )}
         <BottomBar>
           <RelocateButton
             title="gps"

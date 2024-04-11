@@ -4,7 +4,7 @@ export const SecondBtn = styled.button`
   display: flex;
   height: 50px;
   width: 100%;
-  max-width: 261px;
+  max-width: 260px;
   padding: 12px 16px;
   justify-content: center;
   align-items: center;

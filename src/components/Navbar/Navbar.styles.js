@@ -15,7 +15,6 @@ export const NavContainer = styled.div`
   left: 0;
   right: 0;
   margin: auto;
-  z-index: 1000;
   box-sizing: border-box;
 `;
 

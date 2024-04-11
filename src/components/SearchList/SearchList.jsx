@@ -13,7 +13,7 @@ import {
 export default function SearchList(props) {
   return (
     <CardWrapper>
-      <CategoryIcon /> {/*식당 카테고리 아이콘*/}
+      <CategoryIcon src={props.category_img} alt="Category Icon" />
       <TextBox>
         <PlaceName>{props.name}</PlaceName>
         <DistBox>

@@ -2,9 +2,11 @@ import styled from 'styled-components';
 
 export const Wrapper = styled.main`
   padding: 16px;
+  padding-top: 16px;
   width: 100%;
   height: 100vh;
   position: relative;
+  box-sizing: border-box;
 `;
 export const Box = styled.div`
   width: 100%;
@@ -25,8 +27,6 @@ export const SearchNav = styled.div`
   background-color: white;
   position: sticky;
   z-index: 1000;
-
-  position: fixed;
   top: 0;
   left: 0;
   right: 0;

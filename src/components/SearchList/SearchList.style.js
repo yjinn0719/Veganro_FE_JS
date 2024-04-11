@@ -1,8 +1,10 @@
 import styled from 'styled-components';
+import DistanceNaviIcon from '../../assets/icons/DistanceNaviIcon.svg';
 
 export const CardWrapper = styled.div`
   display: flex;
   margin: auto;
+  margin-bottom: 12px;
   padding: 16px 12px;
   align-items: flex-start;
   gap: 12px;
@@ -40,8 +42,8 @@ export const DistBox = styled.div`
 export const DistanceNavicon = styled.div`
   width: 12px;
   height: 12px;
-  background-image: '@/assests/icons/DistanceNaviIcon.svg';
-  background-size: cover;
+  background-image: url(${DistanceNaviIcon});
+  background-size: contain;
   background-repeat: no-repeat;
 `;
 
@@ -70,6 +72,12 @@ export const Address = styled.div`
 `;
 
 export const CategoryIcon = styled.div`
-  position: absolute;
+  width: 54px;
+  height: 54px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  border-radius: 3.6px;
   border: 1px #8f8f8f solid;
 `;

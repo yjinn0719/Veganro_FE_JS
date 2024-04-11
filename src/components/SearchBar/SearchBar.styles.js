@@ -6,7 +6,7 @@ export const Wrapper = styled.div`
   align-items: center;
   width: 100%;
   // max-width: 448px;
-  // padding: 16px 0; 얘가 있으면 배경색 들어가요ㅜㅜ
+  padding: 16px 0;
   box-sizing: border-box;
   position: relative;
   top: 0;

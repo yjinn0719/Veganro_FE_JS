@@ -44,3 +44,20 @@ export const FilterBar = styled.div`
 export const FilterButton = styled(SmallRoundButton)`
   position: relative;
 `;
+export const SearchNav = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 110px;
+  padding-bottom: 12px;
+
+  background-color: white;
+  position: sticky;
+  z-index: 1000;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  box-sizing: border-box;
+`;

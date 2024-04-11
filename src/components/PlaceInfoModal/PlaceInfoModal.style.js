@@ -9,3 +9,8 @@ export const Container = styled.div`
   align-items: center;
   z-index: 999;
 `;
+export const RedirectButton = styled.button`
+  width: 48px;
+  height: 48px;
+  background-color: red;
+`;

@@ -18,6 +18,10 @@ import {
 
 import { PLACE_TYPES } from '@/constants';
 
+// to 세영님) recoil 상태관리 import 입니다
+import { useRecoilState } from 'recoil';
+import { selectedCategoryState } from '@/states/filterState';
+
 // TODO
 // 1. '식당'으로 초기값 부여
 // 2. 로딩/에러 화면 컴포넌트로 교체
@@ -37,6 +41,11 @@ export default function Home() {
 
   const [showFilterModal, setShowFilterModal] = useState(false);
 
+  // to 세영님) recoil 상태관리 읽기 전용으로 추가했습니다
+  const [selectedCategories, setSelectedCategories] = useRecoilState(
+    selectedCategoryState,
+  );
+
   // 앱 최초 진입, 현재 위치 불러오기
   // 빈 배열 넘김 -> 컴포넌트가 처음 렌더링될 때만 실행
   useEffect(() => {
@@ -51,6 +60,14 @@ export default function Home() {
 
   // 카테고리 선택 핸들러
   const handleCategorySelect = (categoryName) => {
+    // to 세영님) categorySelect에 recoil 도입 수정 했습니다
+    setSelectedCategories((prevSelected) => {
+      const isSelected = prevSelected.includes(categoryName);
+      return isSelected
+        ? prevSelected.filter((name) => name !== categoryName) // clicked X -> 배열 제거
+        : [...prevSelected, categoryName]; // clicked O -> 배열 추가
+    });
+
     setCategoriesStatus((prevCategories) =>
       prevCategories.map((category) => ({
         ...category,

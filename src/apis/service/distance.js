@@ -8,7 +8,7 @@ const getPlacesWithDistance = async (userLocation, fetchPlacesFunc) => {
       const distance = () => {
         // 사용자 위치 from kakao
         const userLat = user.lat;
-        const userLon = user.lon;
+        const userLon = user.lng;
 
         // place 위치 from DB
         const placeLat = place.location.coordinates[1];

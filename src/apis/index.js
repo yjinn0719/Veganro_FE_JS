@@ -12,8 +12,8 @@ import getPlacesWithDistance from './service/distance';
 
 export {
   api,
-  getAllPlaces,
   fetchPlaces,
+  getAllPlaces,
   getPlacesWithDistance,
   getPlaceData,
   getReviewsByPlaceId,

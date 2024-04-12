@@ -8,18 +8,12 @@ import {
 } from './SearchBar.styles';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 
-function SearchBar({ placeholder, value }) {
-  // UX: 검색 입력창 click -> 검색 페이지로 navigate
-  const navigate = useNavigate();
-  const handleClick = () => {
-    navigate('/search');
-  };
-
+function SearchBar({ placeholder, value, onActive }) {
   return (
     <Wrapper>
       <SearchContainer>
-        <Search placeholder={placeholder} value={value} />
-        <IconContainer onClick={handleClick}>
+        <Search placeholder={placeholder} value={value} onFocus={onActive} />
+        <IconContainer onClick={onActive}>
           <SearchOutlinedIcon
             sx={{ color: '#C4C4C4', width: '24px', height: '24px' }}
           />

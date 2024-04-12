@@ -19,6 +19,7 @@ import {
   LoadMoreButtonIconContainer,
 } from '@/components/Review/Review.styles';
 import EditDrawer from '@/components/EditDrawer/EditDrawer';
+import ComplaintDrawer from '@/components/ComplaintDrawer/ComplaintDrawer';
 import ReviewDrawer from '@/components/ReviewDrawer/ReviewDrawer';
 import { IoChevronDownSharp } from 'react-icons/io5';
 
@@ -32,6 +33,7 @@ export default function Review({ address }) {
   } = useGetReviewsByPlaceId(placeid);
   const [isReviewDrawerOpen, setIsReviewDrawerOpen] = useState(false);
   const [isEditDrawerOpen, setIsEditDrawerOpen] = useState(false);
+  const [isComplaintDrawerOpen, setIsComplaintDrawerOpen] = useState(false);
   const [editReview, setEditReview] = useState(false);
   const [submittedReviews, setSubmittedReviews] = useState([]);
   const [visibleReviews, setVisibleReviews] = useState(3);
@@ -51,14 +53,14 @@ export default function Review({ address }) {
 
   const toggleDrawer = () => {
     setIsReviewDrawerOpen(!isReviewDrawerOpen);
-    if (isEditDrawerOpen || editReview) {
+    if (isEditDrawerOpen || editReview || isComplaintDrawerOpen) {
       setIsEditDrawerOpen(false);
     }
   };
 
   const toggleReviewDrawer = () => {
     setIsReviewDrawerOpen(!isReviewDrawerOpen);
-    if (isEditDrawerOpen || editReview) {
+    if (isEditDrawerOpen || editReview || isComplaintDrawerOpen) {
       setIsEditDrawerOpen(false);
       setEditReview(false);
     }
@@ -67,16 +69,26 @@ export default function Review({ address }) {
   const toggleEditDrawer = (reviewId) => {
     setSelectedReviewIndex(reviewId);
     setIsEditDrawerOpen(!isEditDrawerOpen);
-    if (isReviewDrawerOpen || editReview) {
+    if (isReviewDrawerOpen || editReview || isComplaintDrawerOpen) {
       setIsReviewDrawerOpen(false);
       setEditReview(false);
     }
   };
   const toggleEditReview = () => {
     setEditReview(!editReview);
-    if (isEditDrawerOpen || isReviewDrawerOpen) {
+    if (isEditDrawerOpen || isReviewDrawerOpen || isComplaintDrawerOpen) {
       setIsEditDrawerOpen(false);
       setIsReviewDrawerOpen(false);
+    }
+  };
+
+  const handleReviewCardClick = (reviewId, userToken) => {
+    setSelectedReviewIndex(reviewId);
+
+    if (userToken === localStorage.getItem('Authorization')) {
+      toggleEditDrawer(reviewId);
+    } else {
+      setIsComplaintDrawerOpen(true);
     }
   };
 
@@ -113,6 +125,7 @@ export default function Review({ address }) {
                   veganLevel={review.user_id.tag}
                   comment={review.content}
                   date={review.updatedAt}
+                  userToken={review.user_id.token}
                   click={() => {
                     setSelectedReviewIndex(review._id);
                     toggleEditDrawer(review._id);
@@ -151,6 +164,13 @@ export default function Review({ address }) {
           onEdit={toggleEditReview}
           reviewId={selectedReviewIndex}
           isOpened={isEditDrawerOpen}
+        />
+      )}
+      {isComplaintDrawerOpen && (
+        <ComplaintDrawer
+          reviewId={selectedReviewIndex}
+          isOpened={isComplaintDrawerOpen}
+          toggleDrawer={toggleEditReview}
         />
       )}
       {editReview && (

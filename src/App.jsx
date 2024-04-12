@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
+import { RecoilRoot } from 'recoil';
 import MyRouter from './routes/index';
+
 const AppContainer = styled.div`
   width: 100%;
   max-width: 480px;
@@ -45,9 +47,11 @@ function App() {
   // }, []);
 
   return (
-    <AppContainer>
-      <MyRouter />
-    </AppContainer>
+    <RecoilRoot>
+      <AppContainer>
+        <MyRouter />
+      </AppContainer>
+    </RecoilRoot>
   );
 }
 

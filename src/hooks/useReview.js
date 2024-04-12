@@ -1,4 +1,5 @@
 import {
+  useQuery,
   useMutation,
   useQueryClient,
   useInfiniteQuery,
@@ -9,6 +10,20 @@ import {
   deleteReview,
   updateReview,
 } from '../apis/api/reviewApi';
+
+export const useGetReviews = (
+  placeId,
+  pageNumber = 1, // default page number is 1
+  pageSize = 10, // default page size is 10
+) => {
+  return useQuery({
+    queryKey: ['getReviewsByPlaceId', placeId, pageNumber, pageSize],
+    queryFn: () => getReviewsByPlaceId(placeId, pageNumber, pageSize),
+    config: {
+      retry: false,
+    },
+  });
+};
 
 export const useGetReviewsByPlaceId = (placeId, pageSize = 10) => {
   return useInfiniteQuery({

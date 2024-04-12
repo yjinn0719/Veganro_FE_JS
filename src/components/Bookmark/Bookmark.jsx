@@ -4,14 +4,14 @@ import { BookmarkContainer, BookmarkContent } from './Bookmark.styles';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import BookmarkBorderOutlinedIcon from '@mui/icons-material/BookmarkBorderOutlined';
 import {
-  useGetBookmarkedByUserId,
+  useGetBookmarked,
   usePostBookmark,
   useDeleteBookmark,
 } from '../../hooks/useUser';
 
 function Bookmark() {
   const { placeid } = useParams();
-  const { data: bookmarkData } = useGetBookmarkedByUserId();
+  const { data: bookmarkData } = useGetBookmarked();
   const [isClicked, setIsClicked] = useState(false);
   const [bookmarkId, setBookmarkId] = useState(null);
 

@@ -1,5 +1,5 @@
 import EditMyPage from '@/pages/EditMyPage/EditMyPage';
 
 export default function SignUp() {
-  return <EditMyPage title="정보 등록" />;
+  return <EditMyPage title="회원 정보 등록" />;
 }

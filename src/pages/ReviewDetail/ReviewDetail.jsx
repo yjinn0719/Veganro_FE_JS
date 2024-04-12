@@ -35,8 +35,6 @@ export default function Review({ address }) {
     isFetchingNextPage,
   } = useGetReviewsByPlaceId(placeid);
 
-  console.log(ReviewsData?.pages[0]);
-  console.log(inView);
   const [isReviewDrawerOpen, setIsReviewDrawerOpen] = useState(false);
   const [isEditDrawerOpen, setIsEditDrawerOpen] = useState(false);
   const [isComplaintDrawerOpen, setIsComplaintDrawerOpen] = useState(false);

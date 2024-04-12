@@ -25,7 +25,7 @@ export const updateUserData = async ({ nickname, tag }) => {
 };
 
 //reviews/me?pageNumber=number&pageSize=number
-export const getReviewsByUserId = async (pageNumber = 1, pageSize = 10) => {
+export const getReviewsByUserId = async (pageNumber, pageSize) => {
   try {
     const response = await api.get(
       `/reviews/me?pageNumber=${pageNumber}&pageSize=${pageSize}`,
@@ -36,7 +36,7 @@ export const getReviewsByUserId = async (pageNumber = 1, pageSize = 10) => {
   }
 };
 
-export const getReportedByUserId = async (pageNumber = 1, pageSize = 10) => {
+export const getReportedByUserId = async (pageNumber, pageSize) => {
   try {
     const response = await api.get(
       `/reports/me?pageNumber=${pageNumber}&pageSize=${pageSize}`,
@@ -48,7 +48,7 @@ export const getReportedByUserId = async (pageNumber = 1, pageSize = 10) => {
 };
 
 // /bookmarks/users?pageNumber=value&pageSize=value
-export const getBookmarkedByUserId = async (pageNumber = 1, pageSize = 10) => {
+export const getBookmarkedByUserId = async (pageNumber, pageSize) => {
   try {
     const response = await api.get(
       `/bookmarks/me?pageNumber=${pageNumber}&pageSize=${pageSize}`,

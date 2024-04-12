@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useGetReviewsByPlaceId } from '../../hooks/useReview';
+import { useGetReviews } from '../../hooks/useReview';
 import { Link } from 'react-scroll';
 import ReviewCard from '@/components/ReviewCard/ReviewCard';
 import {
@@ -30,7 +30,7 @@ export default function Review({ address }) {
     isLoading,
     isError,
     error,
-  } = useGetReviewsByPlaceId(placeid);
+  } = useGetReviews(placeid);
   const [isReviewDrawerOpen, setIsReviewDrawerOpen] = useState(false);
   const [isEditDrawerOpen, setIsEditDrawerOpen] = useState(false);
   const [isComplaintDrawerOpen, setIsComplaintDrawerOpen] = useState(false);
@@ -39,7 +39,7 @@ export default function Review({ address }) {
   const [visibleReviews, setVisibleReviews] = useState(3);
   const [selectedReviewIndex, setSelectedReviewIndex] = useState(null);
   const navigate = useNavigate();
-
+  console.log(ReviewsData);
   const handleWriteReviewClick = () => {
     toggleReviewDrawer();
     document.body.style.overflow = 'hidden';

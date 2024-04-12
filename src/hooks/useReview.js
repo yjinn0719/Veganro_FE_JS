@@ -1,4 +1,8 @@
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import {
+  useMutation,
+  useQueryClient,
+  useInfiniteQuery,
+} from '@tanstack/react-query';
 import {
   getReviewsByPlaceId,
   postReview,
@@ -6,16 +10,15 @@ import {
   updateReview,
 } from '../apis/api/reviewApi';
 
-export const useGetReviewsByPlaceId = (
-  placeId,
-  pageNumber = 1,
-  pageSize = 10,
-) => {
-  return useQuery({
-    queryKey: ['getReviewsByPlaceId', placeId, pageNumber, pageSize],
-    queryFn: () => getReviewsByPlaceId(placeId, pageNumber, pageSize),
-    config: {
-      retry: false,
+export const useGetReviewsByPlaceId = (placeId, pageSize = 10) => {
+  return useInfiniteQuery({
+    queryKey: ['reviews', placeId],
+    queryFn: ({ pageParam }) =>
+      getReviewsByPlaceId(placeId, pageParam, pageSize),
+    initialPageParam: 1,
+    getNextPageParam: (lastPage, allPages) => {
+      const nextPage = lastPage.length ? allPages.length + 1 : undefined;
+      return nextPage;
     },
   });
 };

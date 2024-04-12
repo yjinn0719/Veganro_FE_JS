@@ -1,5 +1,3 @@
-import { useState } from 'react';
-import Drawer from '@/components/Drawer/Drawer';
 import {
   CommentContainer,
   CommentHeader,
@@ -20,15 +18,6 @@ export default function ReviewCard({
   comment,
   date,
 }) {
-  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-
-  const toggleDrawer = () => {
-    setIsDrawerOpen((prevState) => {
-      click(!prevState);
-      return !prevState;
-    });
-  };
-
   return (
     <>
       <CommentContainer>
@@ -39,7 +28,7 @@ export default function ReviewCard({
               <TagText>{veganLevel}</TagText>
             </CommentTag>
           </CommentInfo>
-          <IconContainer onClick={toggleDrawer}>
+          <IconContainer onClick={click}>
             <IconDot top={6.5} />
             <IconDot top={11.5} />
             <IconDot top={1.5} />

@@ -1,7 +1,7 @@
 import Drawer from '../Drawer/Drawer';
 import PrimaryButton from '../PrimaryButton/PrimaryButton';
 import { useParams } from 'react-router-dom';
-import { usePostReview } from '../../hooks/useReview';
+import { usePostReview, useUpdateReview } from '../../hooks/useReview';
 import { useState } from 'react';
 import {
   TitleContainer,
@@ -18,27 +18,35 @@ export default function ReviewDrawer({
   address,
   isOpened,
   toggleDrawer,
-
   titleText,
   submitText,
+  reviewIndex,
 }) {
   const { placeid } = useParams();
-  const { mutate } = usePostReview();
+  const { mutate: postReview } = usePostReview();
+  const { mutate: updateReview } = useUpdateReview();
   const [reviewText, setReviewText] = useState('');
   const [isEnabled, setIsEnabled] = useState(false);
 
-  const handleReview = async (reviewData) => {
+  const handleReview = async () => {
     if (reviewText.trim() !== '') {
       try {
         const reviewData = {
           place_id: placeid,
           content: reviewText,
         };
-        await mutate(reviewData);
+        if (submitText) {
+          await postReview(reviewData);
+        } else {
+          await updateReview({ reviewId: reviewIndex, content: reviewText });
+        }
         setReviewText('');
-        toggleDrawer();
+
+        setTimeout(() => {
+          window.location.reload();
+        }, 500);
       } catch (error) {
-        console.error('Error posting review:', error);
+        console.error('Error posting or updating review:', error);
       }
     }
   };

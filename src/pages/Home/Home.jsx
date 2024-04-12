@@ -22,6 +22,8 @@ import { PLACE_TYPES } from '@/constants';
 import { useRecoilState } from 'recoil';
 import { selectedCategoryState } from '@/states/filterState';
 
+import { useNavigate } from 'react-router-dom';
+
 // TODO
 // 1. 로딩/에러 화면 컴포넌트로 교체
 // 2. 필터 모달 보이기 / 필터 적용 마커 렌더링

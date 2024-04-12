@@ -2,20 +2,18 @@ import styled from 'styled-components';
 
 import SmallRoundButton from '@/components/SmallRoundButton/SmallRoundButton';
 
+import SmallRoundButton from '@/components/SmallRoundButton/SmallRoundButton';
+
 export const Wrapper = styled.main`
-  padding: 16px;
-  padding-top: 16px;
+  padding: 0 16px 16px 16px;
   width: 100%;
   height: 100vh;
   position: relative;
   box-sizing: border-box;
 `;
-export const Box = styled.div`
-  width: 100%;
-  box-sizing: border-box;
-`;
 export const Categories = styled.div`
   display: flex;
+  align-items: center;
   align-items: center;
   gap: 8px;
 `;
@@ -48,19 +46,4 @@ export const FilterBar = styled.div`
 
 export const FilterButton = styled(SmallRoundButton)`
   position: relative;
-`;
-export const SearchNav = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  margin-bottom: 110px;
-  padding-bottom: 12px;
-
-  background-color: white;
-  position: sticky;
-  z-index: 1000;
-  top: 0;
-  left: 0;
-  right: 0;
-  box-sizing: border-box;
 `;

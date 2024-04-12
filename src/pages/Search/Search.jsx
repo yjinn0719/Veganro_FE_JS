@@ -6,7 +6,14 @@ import { getPlacesWithDistance } from '@/apis/index';
 import SearchBar from '@/components/SearchBar/SearchBar';
 import PlaceCategory from '@/components/PlaceCategory/PlaceCategory';
 import SearchList from '@/components/SearchList/SearchList';
-import { Box, Wrapper, SearchNav } from './Search.style';
+import SmallRoundButton from '@/components/SmallRoundButton/SmallRoundButton';
+import {
+  Categories,
+  Wrapper,
+  SearchNav,
+  FilterBar,
+  FilterButton,
+} from './Search.style';
 
 import { PLACE_TYPES } from '../../constants';
 
@@ -65,15 +72,16 @@ export default function Search() {
       <Wrapper className="search">
         <SearchNav>
           <SearchBar placeholder="‘가게 이름' 또는 ‘주소'를 검색해보세요." />
-          <Box className="category-bar">
-            {PLACE_TYPES.map((title, index) => (
-              <PlaceCategory
-                key={index}
-                title={title}
-                onClick={() => handleCategorySelect(title)}
-              />
-            ))}
-          </Box>
+          <FilterBar>
+            <Categories className="category-bar">
+              {PLACE_TYPES.map((title, index) => (
+                <PlaceCategory key={index} title={title} onClick={() => {}} />
+              ))}
+              <SmallRoundButton title="refresh" onClick={handleCategoryReset} />
+            </Categories>
+            <FilterButton title="filter" onClick={handleFilterModal} />
+            {showFilterModal && <MapFilterModal />}
+          </FilterBar>
         </SearchNav>
         <div>
           {places &&

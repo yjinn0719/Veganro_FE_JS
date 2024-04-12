@@ -37,10 +37,13 @@ export const FilterBar = styled.div`
   z-index: 999;
   width: 100%;
   margin-top: 12px;
-}
-  
 `;
 
 export const FilterButton = styled(SmallRoundButton)`
   position: relative;
+`;
+
+export const ScrollableList = styled.div`
+  overflow: auto;
+  max-height: 100%;
 `;

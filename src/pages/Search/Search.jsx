@@ -3,6 +3,9 @@ import { fetchPlaces } from '@/apis/index';
 import useCurrentLocation from '@/hooks/useCurrentLocation';
 import { getPlacesWithDistance } from '@/apis/index';
 
+import { useRecoilState } from 'recoil';
+import { selectedCategoryState } from '@/states/filterState';
+
 import SearchBar from '@/components/SearchBar/SearchBar';
 import PlaceCategory from '@/components/PlaceCategory/PlaceCategory';
 import SearchList from '@/components/SearchList/SearchList';
@@ -13,6 +16,7 @@ import {
   SearchNav,
   FilterBar,
   FilterButton,
+  ScrollableList,
 } from './Search.style';
 
 import { PLACE_TYPES } from '../../constants';
@@ -20,7 +24,14 @@ import { PLACE_TYPES } from '../../constants';
 export default function Search() {
   const [places, setPlaces] = useState([]);
   const { location, isLoading, error } = useCurrentLocation(); // 사용자~place 동적 거리계산 상태관리용
-  const [showFilterModal, setShowFilterModal] = useState(false); //recoil로 옮겨야하는 상태관리값
+  const [searchTerm, setSearchTerm] = useState('');
+
+  //recoil로 옮겨야하는 상태관리값
+  const [showFilterModal, setShowFilterModal] = useState(false);
+  const [categoriesStatus, setCategoriesStatus] = useState([]);
+  const [selectedCategories, setSelectedCategories] = useRecoilState(
+    selectedCategoryState,
+  );
 
   useEffect(() => {
     // 추후 리팩터링 때 try-catch 검증 추가
@@ -42,6 +53,34 @@ export default function Search() {
         .catch(console.error);
     }
   }, [location, isLoading]);
+
+  // 검색어 필터링
+  const filteredPlaces = searchTerm
+    ? places.filter(
+        (place) =>
+          place.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          place.address.toLowerCase().includes(searchTerm.toLowerCase()),
+      )
+    : places;
+
+  // 카테고리 선택 핸들러
+  const handleCategorySelect = (categoryName) => {
+    // to 세영님) categorySelect에 recoil 도입 수정 했습니다
+    setSelectedCategories((prevSelected) => {
+      const isSelected = prevSelected.includes(categoryName);
+      return isSelected
+        ? prevSelected.filter((name) => name !== categoryName) // clicked X -> 배열 제거
+        : [...prevSelected, categoryName]; // clicked O -> 배열 추가
+    });
+
+    setCategoriesStatus((prevCategories) =>
+      prevCategories.map((category) => ({
+        ...category,
+        clicked:
+          category.name === categoryName ? !category.clicked : category.clicked,
+      })),
+    );
+  };
 
   // 카테고리 초기화 핸들러
   const handleCategoryReset = () => {
@@ -71,11 +110,23 @@ export default function Search() {
     <>
       <Wrapper className="search">
         <SearchNav>
-          <SearchBar placeholder="‘가게 이름' 또는 ‘주소'를 검색해보세요." />
+          <SearchBar
+            placeholder="‘가게 이름' 또는 ‘주소'를 검색해보세요."
+            value={searchTerm}
+            onSearchChange={setSearchTerm}
+          />
           <FilterBar>
             <Categories className="category-bar">
               {PLACE_TYPES.map((title, index) => (
-                <PlaceCategory key={index} title={title} onClick={() => {}} />
+                <PlaceCategory
+                  key={index}
+                  title={title}
+                  onClick={() => handleCategorySelect(title)}
+                  initialClicked={
+                    categoriesStatus.find((category) => category.name === title)
+                      ?.clicked
+                  }
+                />
               ))}
               <SmallRoundButton title="refresh" onClick={handleCategoryReset} />
             </Categories>
@@ -83,9 +134,9 @@ export default function Search() {
             {showFilterModal && <MapFilterModal />}
           </FilterBar>
         </SearchNav>
-        <div>
+        <ScrollableList>
           {places &&
-            places.map((place) => (
+            filteredPlaces.map((place) => (
               <SearchList
                 key={place._id}
                 name={place.name}
@@ -94,7 +145,7 @@ export default function Search() {
                 tel={place.tel}
               />
             ))}
-        </div>
+        </ScrollableList>
       </Wrapper>
     </>
   );

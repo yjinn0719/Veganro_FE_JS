@@ -22,6 +22,8 @@ import { PLACE_TYPES } from '@/constants';
 import { useRecoilState } from 'recoil';
 import { selectedCategoryState } from '@/states/filterState';
 
+import { useNavigate } from 'react-router-dom';
+
 // TODO
 // 1. '식당'으로 초기값 부여
 // 2. 로딩/에러 화면 컴포넌트로 교체
@@ -93,10 +95,19 @@ export default function Home() {
     console.log('필터 모달');
   };
 
+  // to 세영님) SearchBar 활성화시 Search페이지 리디렉션하는 코드입니다.
+  const navigate = useNavigate();
+  const handleSearchActive = () => {
+    navigate('/search');
+  };
+
   return (
     <>
       <Wrapper className="home">
-        <SearchBar placeholder="‘가게 이름' 또는 ‘주소'를 검색해보세요." />
+        <SearchBar
+          placeholder="‘가게 이름' 또는 ‘주소'를 검색해보세요."
+          onActive={handleSearchActive}
+        />
         <FilterBar>
           <Categories className="category-bar">
             {PLACE_TYPES.map((title) => (

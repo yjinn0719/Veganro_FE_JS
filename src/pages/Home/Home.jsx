@@ -22,6 +22,8 @@ import { PLACE_TYPES } from '@/constants';
 import { useRecoilState } from 'recoil';
 import { selectedCategoryState } from '@/states/filterState';
 
+import { useNavigate } from 'react-router-dom';
+
 // TODO
 // 1. 로딩/에러 화면 컴포넌트로 교체
 // 2. 필터 모달 보이기 / 필터 적용 마커 렌더링
@@ -94,19 +96,19 @@ export default function Home() {
     console.log('필터 모달');
   };
 
-  const handleShowPlaceModal = () => {
-    setShowPlaceModal(!showPlaceModal);
-  };
-
-  const handlePlaceModalClose = () => {
-    setShowPlaceModal(false);
-    console.log('식당 상세 모달 닫힘');
+  // to 세영님) SearchBar 활성화시 Search페이지 리디렉션하는 코드입니다.
+  const navigate = useNavigate();
+  const handleSearchActive = () => {
+    navigate('/search');
   };
 
   return (
     <>
       <Wrapper className="home">
-        <SearchBar placeholder="가게 이름' 또는 ‘주소'를 검색해보세요." />
+        <SearchBar
+          placeholder="‘가게 이름' 또는 ‘주소'를 검색해보세요."
+          onActive={handleSearchActive}
+        />
         <FilterBar>
           <Categories className="category-bar">
             {PLACE_TYPES.map((title) => (

@@ -8,6 +8,7 @@ import SmallRoundButton from '@/components/SmallRoundButton/SmallRoundButton';
 import MapFilterModal from '@/components/MapFilterModal/MapFilterModal';
 import {
   Wrapper,
+  TopBar,
   FilterBar,
   Categories,
   BottomBar,
@@ -29,6 +30,7 @@ import { useNavigate } from 'react-router-dom';
 // 2. 필터 모달 보이기 / 필터 적용 마커 렌더링
 
 export default function Home() {
+  const navigate = useNavigate();
   const { location, error, isLoading, reloadLocation } = useCurrentLocation();
 
   // 카테고리 상태 객체 배열로 초기화
@@ -102,8 +104,15 @@ export default function Home() {
     console.log('필터 모달');
   };
 
-  // to 세영님) SearchBar 활성화시 Search페이지 리디렉션하는 코드입니다.
-  const navigate = useNavigate();
+  const handleShowPlaceModal = () => {
+    setShowPlaceModal(!showPlaceModal);
+  };
+
+  const handlePlaceModalClose = () => {
+    setShowPlaceModal(false);
+    console.log('식당 상세 모달 닫힘');
+  };
+
   const handleSearchActive = () => {
     navigate('/search');
   };
@@ -111,29 +120,31 @@ export default function Home() {
   return (
     <>
       <Wrapper className="home">
-        <SearchBar
-          placeholder="‘가게 이름' 또는 ‘주소'를 검색해보세요."
-          onActive={handleSearchActive}
-        />
-        <FilterBar>
-          <Categories className="category-bar">
-            {PLACE_TYPES.map((title) => (
-              <PlaceCategory
-                className="category-button"
-                key={title}
-                title={title}
-                onClick={() => handleCategorySelect(title)}
-                initialClicked={
-                  categoriesStatus.find((category) => category.name === title)
-                    ?.clicked
-                }
-              />
-            ))}
-            <SmallRoundButton title="refresh" onClick={handleCategoryReset} />
-          </Categories>
-          <FilterButton title="filter" onClick={handleFilterModal} />
-          {showFilterModal && <MapFilterModal />}
-        </FilterBar>
+        <TopBar>
+          <SearchBar
+            placeholder="‘가게 이름' 또는 ‘주소'를 검색해보세요."
+            onActive={handleSearchActive}
+          />
+          <FilterBar>
+            <Categories className="category-bar">
+              {PLACE_TYPES.map((title) => (
+                <PlaceCategory
+                  className="category-button"
+                  key={title}
+                  title={title}
+                  onClick={() => handleCategorySelect(title)}
+                  initialClicked={
+                    categoriesStatus.find((category) => category.name === title)
+                      ?.clicked
+                  }
+                />
+              ))}
+              <SmallRoundButton title="refresh" onClick={handleCategoryReset} />
+            </Categories>
+            <FilterButton title="filter" onClick={handleFilterModal} />
+            {showFilterModal && <MapFilterModal />}
+          </FilterBar>
+        </TopBar>
         {error && (
           <div>
             위치 정보를 가져올 수 없습니다.

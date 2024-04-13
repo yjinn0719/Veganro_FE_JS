@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { fetchPlaces } from '@/apis/index';
 import useCurrentLocation from '@/hooks/useCurrentLocation';
 import { getPlacesWithDistance } from '@/apis/index';
@@ -10,6 +11,7 @@ import SearchBar from '@/components/SearchBar/SearchBar';
 import PlaceCategory from '@/components/PlaceCategory/PlaceCategory';
 import SearchList from '@/components/SearchList/SearchList';
 import SmallRoundButton from '@/components/SmallRoundButton/SmallRoundButton';
+import MenuButton from '@/components/MenuButton/MenuButton';
 import {
   Categories,
   Wrapper,
@@ -17,6 +19,8 @@ import {
   FilterBar,
   FilterButton,
   ScrollableList,
+  BottomBar,
+  MapViewButton,
 } from './Search.style';
 
 import { PLACE_TYPES } from '../../constants';
@@ -98,6 +102,8 @@ export default function Search() {
     console.log('필터 모달');
   };
 
+  const navigate = useNavigate();
+
   if (error) {
     return <div>위치 정보를 가져올 수 없습니다 {error}</div>;
   }
@@ -146,6 +152,14 @@ export default function Search() {
               />
             ))}
         </ScrollableList>
+        <BottomBar>
+          <MapViewButton
+            className="map-view-button"
+            title="지도에서 다시 찾기"
+            onClick={() => console.log('Clicked')}
+          />
+          {/* <MenuButton /> */}
+        </BottomBar>
       </Wrapper>
     </>
   );

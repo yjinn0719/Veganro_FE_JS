@@ -9,10 +9,13 @@ import {
   ButtonContainer,
   VeganTagContainer,
   Icon,
+  ButtonContent,
 } from './EditMyPage.styles';
+import { useParams } from 'react-router-dom';
 import Navbar from '@/components/Navbar/Navbar';
 import { IoInformationCircle } from 'react-icons/io5';
-import SecondaryButton from '../../components/SecondaryButton/SecondaryButton';
+import SecondaryButton from '@/components/SecondaryButton/SecondaryButton';
+import PrimaryButton from '../../components/PrimaryButton/PrimaryButton';
 import VeganTag from '../../components/VeganTag/VeganTag';
 import InputBox from '../../components/InputBox/InputBox';
 import { updateUserData } from '../../apis/api/userInfoApi';
@@ -21,6 +24,7 @@ import { useNavigate } from 'react-router-dom';
 export default function EditMyPage({ title = '프로필 설정', nickname }) {
   const [newNickname, setNewNickname] = useState(nickname);
   const [activeTag, setActiveTag] = useState('');
+  const { userid } = useParams();
   const navigate = useNavigate();
 
   const handleNicknameChange = (e) => {
@@ -44,6 +48,7 @@ export default function EditMyPage({ title = '프로필 설정', nickname }) {
       }
     }
   };
+  const isButtonEnabled = newNickname && newNickname.length > 0; // 조건문으로 확인
 
   return (
     <Container>
@@ -58,7 +63,7 @@ export default function EditMyPage({ title = '프로필 설정', nickname }) {
           <InputBox
             placeholder="닉네임을 입력해주세요"
             value={newNickname}
-            onChange={(e) => setNewNickname(e.target.value)}
+            onChange={handleNicknameChange}
           />
         </TextBox>
         <TagContainer>
@@ -110,18 +115,22 @@ export default function EditMyPage({ title = '프로필 설정', nickname }) {
             </VeganTagContainer>
           </TagContainer>
         </TagContainer>
-        <ButtonContainer>
-          <SecondaryButton
-            title="취소"
-            color="gray"
-            onClick={() => navigator('/user')}
-          />
-          <SecondaryButton
-            title="저장하기"
-            color="green"
-            onClick={handleSave}
-          />
-        </ButtonContainer>
+        <ButtonContent>
+          <ButtonContainer>
+            <SecondaryButton
+              title="취소"
+              color="gray"
+              onClick={() => navigate(`/user/${userid}`)}
+            />
+          </ButtonContainer>
+          <ButtonContainer>
+            <PrimaryButton
+              title="저장하기"
+              isEnabled={isButtonEnabled}
+              onClick={handleSave}
+            />
+          </ButtonContainer>
+        </ButtonContent>
       </InnerContainer>
     </Container>
   );

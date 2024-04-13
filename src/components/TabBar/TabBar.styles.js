@@ -34,12 +34,12 @@ const Tab = styled.div`
   height: 43px;
   padding: 12px;
   border-bottom: ${(props) =>
-    props.active ? '2px #4F8337 solid' : '1px #EFEFEF solid'};
+    props.$active ? '2px #4F8337 solid' : '1px #EFEFEF solid'};
   justify-content: center;
   align-items: center;
   display: flex;
   text-align: center;
-  color: ${(props) => (props.active ? '#4F8337' : '#ADADAD')};
+  color: ${(props) => (props.$active ? '#4F8337' : '#ADADAD')};
   font-size: 16px;
   font-family: Pretendard;
   font-weight: 600;

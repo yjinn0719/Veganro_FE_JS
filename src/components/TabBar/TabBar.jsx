@@ -239,19 +239,19 @@ const TabBar = () => {
       <TabContainerParent>
         <TabContainer>
           <Tab
-            active={activeTab === 'reported'}
+            $active={activeTab === 'reported'}
             onClick={() => setActiveTab('reported')}
           >
             제보한 가게
           </Tab>
           <Tab
-            active={activeTab === 'review'}
+            $active={activeTab === 'review'}
             onClick={() => setActiveTab('review')}
           >
             작성 후기
           </Tab>
           <Tab
-            active={activeTab === 'bookmark'}
+            $active={activeTab === 'bookmark'}
             onClick={() => setActiveTab('bookmark')}
           >
             북마크

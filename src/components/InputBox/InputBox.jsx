@@ -1,8 +1,8 @@
 import React from 'react';
 import { InputContainer } from './InputBox.styles';
 
-function InputBox({ placeholder, value, onChange }) {
-  const inputContent = value.length > 0 ? 'existContent' : '';
+function InputBox({ placeholder, value = '', onChange }) {
+  const inputContent = value && value.length > 0 ? 'existContent' : '';
 
   return (
     <InputContainer

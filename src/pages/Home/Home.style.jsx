@@ -8,16 +8,22 @@ export const Wrapper = styled.main`
   height: 100vh;
   position: relative;
 `;
-export const FilterBar = styled.div`
+export const TopBar = styled.div`
   width: 100%;
   padding: 0 16px;
+  position: absolute;
+  top: 16px;
+  z-index: 999;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+`;
+export const FilterBar = styled.div`
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-sizing: border-box;
-  position: absolute;
-  top: 82px;
-  z-index: 999;
 `;
 export const FilterButton = styled(SmallRoundButton)`
   position: relative;

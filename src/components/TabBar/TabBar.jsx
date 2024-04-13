@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import { useInView } from 'react-intersection-observer';
 import {
   useGetReviewsByUserId,
   useGetReportedByUserId,
@@ -12,7 +13,6 @@ import {
   TabContainer,
   Tab,
   TabContent,
-  PlaceContent,
   DataContent,
 } from './TabBar.styles';
 import {
@@ -20,40 +20,219 @@ import {
   NoReview,
   NoReviewText,
 } from '@/components/Review/Review.styles';
+import getDistance from '../../hooks/useDistance';
+import useCurrentLocation from '../../hooks/useCurrentLocation';
 
-export default function TabBar({}) {
-  const { data: ReviewsData, isError, error } = useGetReviewsByUserId();
-  const { data: ReportData } = useGetReportedByUserId();
-  const { data: BookmarkData } = useGetBookmarkedByUserId();
-  console.log(BookmarkData);
+const TabBar = () => {
+  const { ref, inView } = useInView();
+
+  const {
+    data: ReviewsData,
+    isError: isReviewsError,
+    error: reviewsError,
+    isLoading: reviewsLoading,
+    isFetchingNextPage: reviewsFetchingNextPage,
+    hasNextPage: reviewsHasNextPage,
+    fetchNextPage: reviewsFetchNextPage,
+  } = useGetReviewsByUserId();
+  const {
+    data: ReportData,
+    isError: isReportError,
+    error: reportError,
+    isLoading: reportLoading,
+    isFetchingNextPage: reportFetchingNextPage,
+    hasNextPage: reportHasNextPage,
+    fetchNextPage: reportFetchNextPage,
+  } = useGetReportedByUserId();
+  const {
+    data: BookmarkData,
+    isError: isBookmarkError,
+    error: bookmarkError,
+    isLoading: bookmarkLoading,
+    isFetchingNextPage: bookmarkFetchingNextPage,
+    hasNextPage: bookmarkHasNextPage,
+    fetchNextPage: bookmarkFetchNextPage,
+  } = useGetBookmarkedByUserId();
+  const {
+    location: userLocation,
+    error: userLocationError,
+    isLoading: userLocationLoading,
+    reloadLocation: getCurrentPosition,
+  } = useCurrentLocation();
   const [activeTab, setActiveTab] = useState('reported');
   const tabContentRef = useRef(null);
-
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (
-        tabContentRef.current &&
-        !tabContentRef.current.contains(event.target)
-      ) {
-        setActiveTab(null); // Close TabContent when clicking outside
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
+    getCurrentPosition();
   }, []);
+  useEffect(() => {
+    if (inView && reviewsHasNextPage) {
+      reviewsFetchNextPage();
+    }
+    if (inView && reportHasNextPage) {
+      reportFetchNextPage();
+    }
+    if (inView && bookmarkHasNextPage) {
+      bookmarkFetchNextPage();
+    }
+  }, [
+    inView,
+    reviewsHasNextPage,
+    reviewsFetchNextPage,
+    reportHasNextPage,
+    reportFetchNextPage,
+    bookmarkHasNextPage,
+    bookmarkFetchNextPage,
+  ]);
+
   if (
-    BookmarkData === undefined ||
+    userLocationLoading ||
     ReportData === undefined ||
-    ReviewsData === undefined
+    ReviewsData === undefined ||
+    BookmarkData === undefined
   ) {
     return <div>Loading...</div>;
   }
-  if (isError) {
-    return <div>Error: {error.message}</div>;
+
+  if (userLocationError || isReviewsError || isReportError || isBookmarkError) {
+    return <div>Error occurred while loading data.</div>;
   }
+
+  const renderReportedPlaces = () => {
+    if (ReportData.length === 0) {
+      return (
+        <ReviewContent>
+          <NoReview>
+            <NoReviewText>제보한 가게가 없습니다.</NoReviewText>
+          </NoReview>
+        </ReviewContent>
+      );
+    } else {
+      return (
+        <DataContent>
+          {ReportData?.pages.map((page) =>
+            page.map((report) => {
+              const distance =
+                getDistance({
+                  lat1: userLocation.center.lat,
+                  lon1: userLocation.center.lng,
+                  lat2: report.location[1],
+                  lon2: report.location[0],
+                }) / 1000;
+
+              return (
+                <PlaceCard
+                  key={report._id}
+                  name={report.name}
+                  veganOption={report.vegan_option ? '일부 비건' : '비건'}
+                  distance={distance}
+                  location={report.address}
+                  number={report.tel === '' ? '없음' : report.tel}
+                  img={report.category_img.url.basic_url}
+                />
+              );
+            }),
+          )}
+          <div ref={ref}>
+            {reportFetchingNextPage ? (
+              <div>Loading more...</div>
+            ) : reportHasNextPage ? (
+              <div>Load More</div>
+            ) : (
+              'No more reviews'
+            )}
+          </div>
+        </DataContent>
+      );
+    }
+  };
+
+  const renderReviews = () => {
+    if (ReviewsData.length === 0) {
+      return (
+        <ReviewContent>
+          <NoReview>
+            <NoReviewText>작성한 리뷰가 없습니다.</NoReviewText>
+          </NoReview>
+        </ReviewContent>
+      );
+    } else {
+      return (
+        <DataContent>
+          {ReviewsData?.pages.map((page) =>
+            page.map((review) => (
+              <ReviewCard
+                key={review._id}
+                nickname={review.user_id.nickname}
+                veganLevel={review.user_id.tag}
+                comment={review.content}
+                date={review.updatedAt}
+              />
+            )),
+          )}
+          <div ref={ref}>
+            {reviewsFetchingNextPage ? (
+              <div>Loading more...</div>
+            ) : reviewsHasNextPage ? (
+              <div>Load More</div>
+            ) : (
+              'No more reviews'
+            )}
+          </div>
+        </DataContent>
+      );
+    }
+  };
+
+  const renderBookmarkedPlaces = () => {
+    if (BookmarkData.length === 0) {
+      return (
+        <ReviewContent>
+          <NoReview>
+            <NoReviewText>북마크한 가게가 없습니다.</NoReviewText>
+          </NoReview>
+        </ReviewContent>
+      );
+    } else {
+      return (
+        <DataContent>
+          {BookmarkData?.pages.map((page) =>
+            page.map((bookmark) => {
+              const distance =
+                getDistance({
+                  lat1: userLocation.center.lat,
+                  lon1: userLocation.center.lng,
+                  lat2: bookmark.place_id.location.coordinates[1],
+                  lon2: bookmark.place_id.location.coordinates[0],
+                }) / 1000;
+
+              return (
+                <PlaceCard
+                  key={bookmark._id}
+                  name={bookmark.place_id.name}
+                  veganOption={
+                    bookmark.place_id.vegan_option ? '일부 비건' : '비건'
+                  }
+                  distance={distance}
+                  location={bookmark.place_id.address}
+                  number={bookmark.place_id.tel}
+                  img={bookmark.place_id.category_img.url.basic_url}
+                />
+              );
+            }),
+          )}
+          <div ref={ref}>
+            {bookmarkFetchingNextPage ? (
+              <div>Loading more...</div>
+            ) : bookmarkHasNextPage ? (
+              <div>Load More</div>
+            ) : (
+              'No more reviews'
+            )}
+          </div>
+        </DataContent>
+      );
+    }
+  };
 
   return (
     <Container>
@@ -83,86 +262,12 @@ export default function TabBar({}) {
         ref={tabContentRef}
         style={{ display: activeTab ? 'block' : 'none' }}
       >
-        {activeTab === 'reported' && (
-          <>
-            {ReportData && ReportData.length === 0 ? (
-              <ReviewContent>
-                <NoReview>
-                  <NoReviewText>제보한 가게가 없습니다.</NoReviewText>
-                </NoReview>
-              </ReviewContent>
-            ) : (
-              <DataContent>
-                {ReportData.map((report) => (
-                  <PlaceCard
-                    key={report._id}
-                    name={report.name}
-                    veganOption={report.vegan_option ? '일부 비건' : '비건'}
-                    distance={report.distance}
-                    location={report.address}
-                    number={report.tel}
-                    img={report.category_img.url.basic_url}
-                  />
-                ))}
-              </DataContent>
-            )}
-          </>
-        )}
-        {activeTab === 'review' && (
-          <>
-            {ReviewsData && ReviewsData.length === 0 ? (
-              <ReviewContent>
-                <NoReview>
-                  <NoReviewText>작성한 리뷰가 없습니다.</NoReviewText>
-                </NoReview>
-              </ReviewContent>
-            ) : (
-              <DataContent>
-                {ReviewsData.map((review) => (
-                  <ReviewCard
-                    key={review._id}
-                    nickname={review.author}
-                    veganLevel={review.author_tag}
-                    comment={review.content}
-                    date={review.updatedAt}
-                    click={() => {
-                      setSelectedReviewIndex(index);
-                      toggleEditDrawer();
-                    }}
-                  />
-                ))}
-              </DataContent>
-            )}
-          </>
-        )}
-        {activeTab === 'bookmark' && (
-          <>
-            {BookmarkData && BookmarkData.length === 0 ? (
-              <ReviewContent>
-                <NoReview>
-                  <NoReviewText>북마크한 가게가 없습니다.</NoReviewText>
-                </NoReview>
-              </ReviewContent>
-            ) : (
-              <DataContent>
-                {BookmarkData.map((bookmark) => (
-                  <PlaceCard
-                    key={bookmark._id}
-                    name={bookmark.place_id.name}
-                    veganOption={
-                      bookmark.place_id.vegan_option ? '일부 비건' : '비건'
-                    }
-                    distance={bookmark.place_id.distance}
-                    location={bookmark.place_id.address}
-                    number={bookmark.place_id.tel}
-                    img={bookmark.place_id.category_img.url.basic_url}
-                  />
-                ))}
-              </DataContent>
-            )}
-          </>
-        )}
+        {activeTab === 'reported' && renderReportedPlaces()}
+        {activeTab === 'review' && renderReviews()}
+        {activeTab === 'bookmark' && renderBookmarkedPlaces()}
       </TabContent>
     </Container>
   );
-}
+};
+
+export default TabBar;

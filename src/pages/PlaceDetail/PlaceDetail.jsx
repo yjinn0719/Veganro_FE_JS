@@ -9,6 +9,8 @@ import BookMarked from '@/components/Bookmark/Bookmark';
 import PlaceDetailInfo from '@/components/PlaceDetailInfo/PlaceDetailInfo';
 import Review from '@/components/Review/Review';
 import MenuButton from '@/components/MenuButton/MenuButton';
+import useCurrentLocation from '@/hooks/useCurrentLocation';
+import getDistance from '../../hooks/useDistance';
 
 import {
   MainContainer,
@@ -33,65 +35,98 @@ import {
 
 export default function PlaceDetail() {
   const { placeid } = useParams();
-  const { data: placeData, isLoading, isError, error } = useGetPlace(placeid);
+  const {
+    data: placeData,
+    isLoading: placeDataLoading,
+    isError: placeDataError,
+    error: placeDataErrorMessage,
+  } = useGetPlace(placeid);
+  const {
+    location: userLocation,
+    error: userLocationError,
+    isLoading: userLocationLoading,
+    reloadLocation: getCurrentPosition,
+  } = useCurrentLocation();
+  console.log('userLocation', userLocation);
 
-  if (isLoading)
+  if (placeDataLoading || userLocationLoading)
     return (
       <MainContainer>
         <Loading>
-          <ClipLoader color="#36d7b7" loading={isLoading} size={150} />
+          <ClipLoader
+            color="#36d7b7"
+            loading={placeDataLoading || userLocationLoading}
+            size={150}
+          />
           <div>Loading...</div>
         </Loading>
       </MainContainer>
     );
-  if (isError) return <div>Error: {error.message}</div>;
 
-  return (
-    <MainContainer>
-      <Navbar title={placeData?.name} icon="null" />
-      <ContentContainer>
-        <ImageSection>
-          <MapComponent address={placeData?.address} name={placeData?.name} />
-          <OuterContainer>
-            <Content>
-              <InnerContainer>
-                <Icon src={placeData?.category_img.url.basic_url} />
-              </InnerContainer>
-              <ContentContainer>
-                <NameContainer>
-                  <Name>{placeData?.name}</Name>
-                </NameContainer>
-                <TagContainer>
-                  <Tag>{placeData?.vegan_option ? '일부 비건' : '비건'}</Tag>
-                </TagContainer>
-                <InfoContainer>
-                  <Info>
-                    <DistanceIcon>
-                      <IoNavigateCircleOutline size="15" />
-                    </DistanceIcon>
-                    <Distance>{placeData?.distance || 'N/A'}</Distance>
-                  </Info>
-                </InfoContainer>
-              </ContentContainer>
-            </Content>
-            <BookMarked />
-          </OuterContainer>
-        </ImageSection>
-      </ContentContainer>
-      <>
-        <PlaceDetailInfo
-          placeLocation={placeData?.address}
-          placeNumber={placeData?.tel}
-          placeHours={placeData?.hours || []}
-          placeURL={placeData?.sns_url || []}
-        />
-      </>
-      <ReviewContainer>
-        <Review address={placeData?.address} />
-      </ReviewContainer>
-      <MenuContainer>
-        <MenuButton />
-      </MenuContainer>
-    </MainContainer>
-  );
+  if (placeDataError || userLocationError)
+    return (
+      <MainContainer>
+        <div>Error: {placeDataErrorMessage || userLocationError}</div>
+      </MainContainer>
+    );
+
+  if (placeData && userLocation) {
+    const calculateDistance = getDistance({
+      lat1: userLocation.center.lat,
+      lon1: userLocation.center.lng,
+      lat2: placeData.location.coordinates[1],
+      lon2: placeData.location.coordinates[0],
+    });
+
+    const distance = calculateDistance / 1000;
+
+    return (
+      <MainContainer>
+        <Navbar title={placeData.name} icon="null" />
+        <ContentContainer>
+          <ImageSection>
+            <MapComponent address={placeData.address} name={placeData.name} />
+            <OuterContainer>
+              <Content>
+                <InnerContainer>
+                  <Icon src={placeData.category_img.url.basic_url} />
+                </InnerContainer>
+                <ContentContainer>
+                  <NameContainer>
+                    <Name>{placeData.name}</Name>
+                  </NameContainer>
+                  <TagContainer>
+                    <Tag>{placeData.vegan_option ? '일부 비건' : '비건'}</Tag>
+                  </TagContainer>
+                  <InfoContainer>
+                    <Info>
+                      <DistanceIcon>
+                        <IoNavigateCircleOutline size="15" />
+                      </DistanceIcon>
+                      <Distance>{distance}km</Distance>
+                    </Info>
+                  </InfoContainer>
+                </ContentContainer>
+              </Content>
+              <BookMarked />
+            </OuterContainer>
+          </ImageSection>
+        </ContentContainer>
+        <>
+          <PlaceDetailInfo
+            placeLocation={placeData.address}
+            placeNumber={placeData.tel}
+            placeHours={placeData.open_times || []}
+            placeURL={placeData.sns_url || []}
+          />
+        </>
+        <ReviewContainer>
+          <Review address={placeData.address} />
+        </ReviewContainer>
+        <MenuContainer>
+          <MenuButton />
+        </MenuContainer>
+      </MainContainer>
+    );
+  }
 }

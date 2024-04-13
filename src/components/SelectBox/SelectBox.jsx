@@ -1,20 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Select from 'react-select';
 import { SelectBoxContainer } from './SelectBox.styles';
-
-let hour = [];
-for (let i = 1; i <= 24; i++) {
-  hour.push({
-    value: ('0' + i).slice(-2),
-    label: ('0' + i).slice(-2) + '시',
-  });
-}
 
 const customStyles = {
   control: (base, state) => ({
     ...base,
     height: 50,
     minHeight: 50,
+    minWidth: 160,
     borderColor: state.isFocused ? '#4F8337' : base.borderColor,
     boxShadow: state.isFocused ? '0 0 0 1px #4F83371A' : 'none',
     '&:hover': {
@@ -53,16 +46,15 @@ const customStyles = {
   },
 };
 
-const SelectBox = ({ placeholder }) => {
-  const [timeValue, setTimeValue] = useState('');
-
+const SelectBox = ({ placeholder, value, onChange, options }) => {
   return (
     <SelectBoxContainer>
       <Select
         classNamePrefix="select"
-        onChange={(option) => setTimeValue(option.value)}
+        value={options.find((option) => option.value === value)}
+        onChange={(option) => onChange(option.value)}
         placeholder={placeholder}
-        options={hour}
+        options={options}
         styles={customStyles}
       />
     </SelectBoxContainer>

@@ -1,4 +1,14 @@
-import { api } from '@/apis/index';
+import api from '@/apis/utils/axiosInstance';
+
+// 장소 리스트(전체 + 필터)
+// /places?center=x,y&radius=number&size=number&category=value&search=value
+export const fetchPlaces = async (params) => {
+  try {
+    return await api.get('/places', { params });
+  } catch (e) {
+    console.log('apis/api에서 에러', e);
+  }
+};
 
 export const getAllPlaces = async () => {
   try {
@@ -6,16 +16,6 @@ export const getAllPlaces = async () => {
     return response.data.data;
   } catch (error) {
     handleError(error);
-  }
-};
-
-// 장소 리스트(전체 + 필터)
-// /places?center=x,y&radius=number&size=number&category=value&search=value
-export const fetchPlaces = async (params) => {
-  try {
-    return await api.get('/api/places', { params });
-  } catch (e) {
-    console.log('apis/api에서 에러', e);
   }
 };
 

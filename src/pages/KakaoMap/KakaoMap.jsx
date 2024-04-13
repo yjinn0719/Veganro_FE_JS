@@ -2,7 +2,14 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
 import PlaceMarkers from '../KakaoMap/PlaceMarkers';
 
-const KakaoMap = ({ centerMove, categoriesStatus }) => {
+const KakaoMap = ({
+  centerMove,
+  categoriesStatus,
+  handleShowPlaceModal,
+  handlePlaceModalClose,
+  mapCenter,
+  setMapCenter,
+}) => {
   const [currentLocation, setCurrentLocation] = useState({
     level: 4,
     center: {
@@ -29,6 +36,12 @@ const KakaoMap = ({ centerMove, categoriesStatus }) => {
     }
   }, [currentLocation]);
 
+  useEffect(() => {
+    if (mapCenter) {
+      setMapCenter(mapCenter);
+    }
+  }, [mapCenter]);
+
   return (
     <Map
       id="map"
@@ -37,7 +50,13 @@ const KakaoMap = ({ centerMove, categoriesStatus }) => {
       level={currentLocation.level || 4}
       isPanto={true}
     >
-      <PlaceMarkers categoriesStatus={categoriesStatus} />
+      <PlaceMarkers
+        categoriesStatus={categoriesStatus}
+        mapCenter={mapCenter}
+        handleShowPlaceModal={handleShowPlaceModal}
+        handlePlaceModalClose={handlePlaceModalClose}
+        setMapCenter={setMapCenter}
+      />
       <MapMarker
         position={currentLocation.center}
         title="Current Location"

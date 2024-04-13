@@ -7,7 +7,7 @@ export default function EditDrawer({ isOpened, onEdit, reviewId }) {
 
   const [isDeleteDrawerOpen, setIsDeleteDrawerOpen] = useState(false);
   const [isEditDrawerOpen, setIsEditDrawerOpen] = useState(false);
-
+  console.log('reviewId', reviewId);
   const toggleDrawer = () => {
     setIsDeleteDrawerOpen(!isDeleteDrawerOpen);
     if (isEditDrawerOpen) {
@@ -18,7 +18,9 @@ export default function EditDrawer({ isOpened, onEdit, reviewId }) {
   const handleDelete = async () => {
     try {
       await mutate(reviewId);
-      toggleDrawer();
+      setTimeout(() => {
+        window.location.reload();
+      }, 500);
     } catch (error) {
       console.error('Error deleting review:', error);
     }

@@ -54,7 +54,7 @@ export default function PlaceCard({
             <DistanceIcon>
               <IoNavigateCircleOutline size="13" />
             </DistanceIcon>
-            <InfoText>{distance}</InfoText>
+            <InfoText>{distance}km</InfoText>
           </InfoItem>
         </InfoContainer>
         <InfoItem>

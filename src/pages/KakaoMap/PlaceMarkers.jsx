@@ -1,36 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import { MapMarker } from 'react-kakao-maps-sdk';
-import { getAllPlaces } from '@/apis/api/placeApi';
+import { getAllPlaces } from '@/apis';
 import PlaceInfoModal from '@/components/PlaceInfoModal/PlaceInfoModal';
 
 // TODO
 // 1. 식당 마커 클릭 시, 식당 인포 모달 띄워주기
 // 2. 식당 상세 페이지로 이동
+// 3. 로딩 컴포넌트 연결
 
-const PlaceMarkers = ({ categoriesStatus }) => {
+const PlaceMarkers = ({
+  categoriesStatus,
+  handleShowPlaceModal,
+  handlePlaceModalClose,
+  mapCenter,
+  setMapCenter,
+}) => {
   const [placeData, setPlaceData] = useState([]);
   const [filteredMarkers, setFilteredMarkers] = useState([]);
   const [selectedMarkerId, setSelectedMarkerId] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-
-  const markers = placeData
-    // 데이터 좌표값 체크
-    .filter(
-      (place) =>
-        place.location &&
-        place.location.coordinates &&
-        place.location.coordinates.length >= 2,
-    )
-    .map((place) => ({
-      id: place._id,
-      position: {
-        lat: place.location.coordinates[1], //위도
-        lng: place.location.coordinates[0], //경도
-      },
-      category: place.category,
-      categoryImg: place.category_img.url.pin_url,
-      name: place.name,
-    }));
 
   useEffect(() => {
     const fetchPlacesData = async () => {
@@ -48,19 +36,30 @@ const PlaceMarkers = ({ categoriesStatus }) => {
 
   useEffect(() => {
     if (!isLoading) {
-      const newFilteredMarkers = markers.filter((marker) => {
-        const selectedCategory = categoriesStatus.find(
-          (c) => c.name === marker.category,
-        );
-        return !selectedCategory || selectedCategory.clicked;
-      });
-      setFilteredMarkers(newFilteredMarkers);
+      const newFilteredMarkers = placeData.filter((place) =>
+        categoriesStatus.some(
+          (category) => category.name === place.category && category.clicked,
+        ),
+      );
+      setFilteredMarkers(
+        newFilteredMarkers.map((place) => ({
+          id: place._id,
+          position: {
+            lat: place.location.coordinates[1], // 위도
+            lng: place.location.coordinates[0], // 경도
+          },
+          category: place.category,
+          categoryImg: place.category_img.url.pin_url,
+          name: place.name,
+        })),
+      );
     }
   }, [placeData, categoriesStatus, isLoading]);
 
   // 식당 상세 페이지 이동 핸들러
-  const handleMarkerClick = (id) => {
+  const handleMarkerClick = (id, position) => {
     setSelectedMarkerId(id);
+    setMapCenter(position);
     console.log('클릭한 마커 ID:', id);
   };
 
@@ -81,10 +80,11 @@ const PlaceMarkers = ({ categoriesStatus }) => {
           }}
         ></MapMarker>
       ))}
-      {selectedMarkerId && (
+      {selectedMarkerId !== null && (
         <PlaceInfoModal
           markerId={selectedMarkerId}
-          onClose={selectedMarkerId(null)}
+          handleShowPlaceModal={handleShowPlaceModal}
+          onClose={handlePlaceModalClose}
         />
       )}
     </>

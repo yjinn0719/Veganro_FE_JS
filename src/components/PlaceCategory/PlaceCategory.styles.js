@@ -1,16 +1,17 @@
 import styled from 'styled-components';
 
 export const getBackgroundColor = (clicked, title, theme) => {
-  if (!clicked) return theme.color.white;
   switch (title) {
     case '식당':
-      return theme.color.green[500];
+      return clicked ? theme.color.green[500] : theme.color.white;
     case '카페':
-      return theme.color.beige[500];
+      return clicked ? theme.color.beige[500] : theme.color.white;
     case '술집':
-      return theme.color.burgundy[500];
+      return clicked ? theme.color.burgundy[500] : theme.color.white;
     case '마켓':
-      return theme.color.skyblue[500];
+      return clicked ? theme.color.skyblue[500] : theme.color.white;
+    default:
+      return theme.color.white;
   }
 };
 

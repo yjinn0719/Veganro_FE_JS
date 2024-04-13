@@ -1,12 +1,8 @@
-import { api } from '@/apis/index';
+import api from '@/apis/utils/axiosInstance';
 
 //https://veganro-backend.vercel.app/api/reviews?placeId=6610e830658638b12ce49ef2&pageNumber=1r&pageSize=10
 
-export const getReviewsByPlaceId = async (
-  placeId,
-  pageNumber = 1,
-  pageSize = 10,
-) => {
+export const getReviewsByPlaceId = async (placeId, pageNumber, pageSize) => {
   try {
     const response = await api.get(
       `/reviews?placeId=${placeId}&pageNumber=${pageNumber}&pageSize=${pageSize}`,
@@ -23,6 +19,20 @@ export const postReview = async (reviewData) => {
     return response.data.data;
   } catch (error) {
     throw new Error('Error posting review: ' + error.message);
+  }
+};
+
+export const updateReview = async ({ reviewId, content }) => {
+  try {
+    const formData = new FormData();
+
+    formData.append('content', content);
+
+    const response = await api.patch(`/reviews/${reviewId}`, formData);
+
+    return response.data.data;
+  } catch (error) {
+    console.error(error);
   }
 };
 

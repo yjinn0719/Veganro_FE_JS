@@ -1,5 +1,4 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import { NavContainer, NavTitle } from './Navbar.styles';
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import ClearOutlinedIcon from '@mui/icons-material/ClearOutlined';

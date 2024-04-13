@@ -18,7 +18,6 @@ export default function MyPage() {
   const { data: userData, isLoading, isError, error } = useGetUser(userid);
   if (isLoading) return <div>Loading...</div>;
   if (isError) return <div>Error: {error.message}</div>;
-  console.log(userData);
   return (
     <Container>
       <Navbar icon="setting" title="마이페이지" />

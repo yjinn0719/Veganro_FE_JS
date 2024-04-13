@@ -21,12 +21,10 @@ import { useNavigate } from 'react-router-dom';
 export default function EditMyPage({ title = '프로필 설정', nickname }) {
   const [newNickname, setNewNickname] = useState(nickname);
   const [activeTag, setActiveTag] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
 
   const handleNicknameChange = (e) => {
     setNewNickname(e.target.value);
-    setErrorMessage('');
   };
 
   const handleTagClick = (tag) => {
@@ -57,11 +55,10 @@ export default function EditMyPage({ title = '프로필 설정', nickname }) {
               닉네임
             </Text>
           </SubTextBox>
-
           <InputBox
             placeholder="닉네임을 입력해주세요"
             value={newNickname}
-            onChange={handleNicknameChange}
+            onChange={(e) => setNewNickname(e.target.value)}
           />
         </TextBox>
         <TagContainer>

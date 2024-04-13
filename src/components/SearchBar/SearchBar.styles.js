@@ -1,21 +1,22 @@
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
-  display: flex;
+  // display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
   // max-width: 448px;
-  padding: 16px;
+  // padding: 16px 0; 얘가 있으면 배경색 들어가요ㅜㅜ
   box-sizing: border-box;
-  position: absolute;
+  position: relative;
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 99;
+  // z-index: 99;
 `;
 
 export const SearchContainer = styled.div`
+  position: absolute;
   width: 100%;
   position: relative;
   display: flex;

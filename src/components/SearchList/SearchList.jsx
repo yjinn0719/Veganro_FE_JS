@@ -3,6 +3,8 @@ import {
   CardWrapper,
   TextBox,
   PlaceName,
+  DistBox,
+  DistanceNavicon,
   Address,
   Distance,
   CategoryIcon,
@@ -11,10 +13,13 @@ import {
 export default function SearchList(props) {
   return (
     <CardWrapper>
-      <CategoryIcon /> {/*식당 카테고리 아이콘*/}
+      <CategoryIcon src={props.category_img} alt="Category Icon" />
       <TextBox>
         <PlaceName>{props.name}</PlaceName>
-        <Distance>{props.distance}</Distance>
+        <DistBox>
+          <DistanceNavicon />
+          <Distance>{props.distance}</Distance>
+        </DistBox>
         <Address>{props.address}</Address>
         <div>{props.tel}</div>
       </TextBox>

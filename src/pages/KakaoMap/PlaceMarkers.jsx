@@ -8,7 +8,13 @@ import PlaceInfoModal from '@/components/PlaceInfoModal/PlaceInfoModal';
 // 2. 식당 상세 페이지로 이동
 // 3. 로딩 컴포넌트 연결
 
-const PlaceMarkers = ({ categoriesStatus }) => {
+const PlaceMarkers = ({
+  categoriesStatus,
+  handleShowPlaceModal,
+  handlePlaceModalClose,
+  mapCenter,
+  setMapCenter,
+}) => {
   const [placeData, setPlaceData] = useState([]);
   const [filteredMarkers, setFilteredMarkers] = useState([]);
   const [selectedMarkerId, setSelectedMarkerId] = useState(null);
@@ -51,12 +57,11 @@ const PlaceMarkers = ({ categoriesStatus }) => {
   }, [placeData, categoriesStatus, isLoading]);
 
   // 식당 상세 페이지 이동 핸들러
-  const handleMarkerClick = (id) => {
+  const handleMarkerClick = (id, position) => {
     setSelectedMarkerId(id);
+    setMapCenter(position);
     console.log('클릭한 마커 ID:', id);
   };
-
-  const handleCloseModal = () => setSelectedMarkerId(null);
 
   if (isLoading) return <div>Loading...</div>;
 
@@ -75,10 +80,11 @@ const PlaceMarkers = ({ categoriesStatus }) => {
           }}
         ></MapMarker>
       ))}
-      {selectedMarkerId && (
+      {selectedMarkerId !== null && (
         <PlaceInfoModal
           markerId={selectedMarkerId}
-          onClose={handleCloseModal}
+          handleShowPlaceModal={handleShowPlaceModal}
+          onClose={handlePlaceModalClose}
         />
       )}
     </>

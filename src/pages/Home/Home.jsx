@@ -8,6 +8,7 @@ import SmallRoundButton from '@/components/SmallRoundButton/SmallRoundButton';
 import MapFilterModal from '@/components/MapFilterModal/MapFilterModal';
 import {
   Wrapper,
+  TopBar,
   FilterBar,
   Categories,
   BottomBar,
@@ -29,6 +30,7 @@ import { useNavigate } from 'react-router-dom';
 // 2. 필터 모달 보이기 / 필터 적용 마커 렌더링
 
 export default function Home() {
+  const navigate = useNavigate();
   const { location, error, isLoading, reloadLocation } = useCurrentLocation();
 
   // 카테고리 상태 객체 배열로 초기화
@@ -103,15 +105,16 @@ export default function Home() {
   const handlePlaceModalClose = () => {
     setShowPlaceModal(false);
     console.log('식당 상세 모달 닫힘');
-    // to 세영님) SearchBar 활성화시 Search페이지 리디렉션하는 코드입니다.
-    const navigate = useNavigate();
-    const handleSearchActive = () => {
-      navigate('/search');
-    };
+  };
 
-    return (
-      <>
-        <Wrapper className="home">
+  const handleSearchActive = () => {
+    navigate('/search');
+  };
+
+  return (
+    <>
+      <Wrapper className="home">
+        <TopBar>
           <SearchBar
             placeholder="‘가게 이름' 또는 ‘주소'를 검색해보세요."
             onActive={handleSearchActive}
@@ -135,36 +138,36 @@ export default function Home() {
             <FilterButton title="filter" onClick={handleFilterModal} />
             {showFilterModal && <MapFilterModal />}
           </FilterBar>
-          {error && (
-            <div>
-              위치 정보를 가져올 수 없습니다.
-              <br />
-              {error}
-            </div>
-          )}
-          {isLoading ? (
-            <div>위치 정보를 가져오는 중..</div>
-          ) : (
-            <KakaoMap
-              centerMove={location.center}
-              categoriesStatus={categoriesStatus}
-              handleShowPlaceModal={handleShowPlaceModal}
-              handlePlaceModalClose={handlePlaceModalClose}
-              mapCenter={mapCenter}
-              setMapCenter={setMapCenter}
-            />
-          )}
-          <BottomBar>
-            <RelocateButton
-              title="gps"
-              className="relocate-button"
-              onClick={handleRelocateClick}
-            />
-            <ListViewButton className="list-view-button" title="리스트뷰" />
-            <MenuButton />
-          </BottomBar>
-        </Wrapper>
-      </>
-    );
-  };
+        </TopBar>
+        {error && (
+          <div>
+            위치 정보를 가져올 수 없습니다.
+            <br />
+            {error}
+          </div>
+        )}
+        {isLoading ? (
+          <div>위치 정보를 가져오는 중..</div>
+        ) : (
+          <KakaoMap
+            centerMove={location.center}
+            categoriesStatus={categoriesStatus}
+            handleShowPlaceModal={handleShowPlaceModal}
+            handlePlaceModalClose={handlePlaceModalClose}
+            mapCenter={mapCenter}
+            setMapCenter={setMapCenter}
+          />
+        )}
+        <BottomBar>
+          <RelocateButton
+            title="gps"
+            className="relocate-button"
+            onClick={handleRelocateClick}
+          />
+          <ListViewButton className="list-view-button" title="리스트뷰" />
+          <MenuButton />
+        </BottomBar>
+      </Wrapper>
+    </>
+  );
 }

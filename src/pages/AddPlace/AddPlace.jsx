@@ -4,15 +4,13 @@ import Navbar from '@/components/Navbar/Navbar';
 import PlaceMap from '@/components/PlaceMap/PlaceMap';
 import PlaceTag from '@/components/PlaceTag/PlaceTag';
 import MenuTag from '@/components/MenuTag/MenuTag';
-import DateTag from '@/components/DateTag/DateTag';
 import PrimaryButton from '@/components/PrimaryButton/PrimaryButton';
-import SelectBox from '@/components/SelectBox/SelectBox';
 import KakaoAddress from '../../components/KakaoAddress/KakaoAddress';
+import OpenTimeTab from '../../components/OpenTimeTab/OpenTimeTab';
 import { createReportPlace } from '@/apis/api/reportApi';
 import {
   MainContainer,
   TagContainer,
-  DateTagContainer,
   AddPlaceText,
   AddressInputContainer,
   AddPlaceSearch,
@@ -27,8 +25,17 @@ function AddPlace() {
   const [placeNumber, setPlaceNumber] = useState('');
   const [placeAddressApi, setPlaceAddressApi] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [openTimes, setOpenTimes] = useState([]);
   const [snsUrls, setSnsUrls] = useState([]);
+  const [selectedTag, setSelectedTag] = useState('월');
+  const [timeValues, setTimeValues] = useState({
+    월: { 0: '', 1: '', 2: '', 3: '' },
+    화: { 0: '', 1: '', 2: '', 3: '' },
+    수: { 0: '', 1: '', 2: '', 3: '' },
+    목: { 0: '', 1: '', 2: '', 3: '' },
+    금: { 0: '', 1: '', 2: '', 3: '' },
+    토: { 0: '', 1: '', 2: '', 3: '' },
+    일: { 0: '', 1: '', 2: '', 3: '' },
+  });
 
   const collectData = () => {
     return {
@@ -40,7 +47,7 @@ function AddPlace() {
       address_lot_number: '서울 00-00',
       address_detail: placeAddress || '',
       location: [126.9710461, 37.5560575],
-      open_times: openTimes.length > 0 ? openTimes : [],
+      open_times: timeValues.length > 0 ? timeValues : [],
       sns_url: snsUrls.length > 0 ? snsUrls : [],
     };
   };
@@ -77,8 +84,12 @@ function AddPlace() {
     setSelectMenu(type);
   };
 
-  const daysOfWeek = ['월', '화', '수', '목', '금', '토', '일'];
-
+  const handleTimeChange = (day, index, value) => {
+    setTimeValues((prevValues) => ({
+      ...prevValues,
+      [day]: { ...prevValues[day], [index]: value },
+    }));
+  };
   return (
     <>
       <MainContainer>
@@ -93,20 +104,17 @@ function AddPlace() {
           ></InputBox>
           <AddPlaceSearch onClick={openModal}>검색</AddPlaceSearch>
         </AddressInputContainer>
-
         <InputBox
           placeholder="상세 위치"
           value={placeAddress}
           onChange={(e) => setPlaceAddress(e.target.value)}
         ></InputBox>
-
         <AddPlaceText>가게 이름</AddPlaceText>
         <InputBox
           placeholder="가게 이름"
           value={placeName}
           onChange={(e) => setPlaceName(e.target.value)}
         />
-
         <AddPlaceText>가게 형태</AddPlaceText>
         <TagContainer>
           {['식당', '술집', '카페', '마켓'].map((type) => (
@@ -118,7 +126,6 @@ function AddPlace() {
             />
           ))}
         </TagContainer>
-
         <AddPlaceText>채식 메뉴</AddPlaceText>
         <TagContainer>
           {['전체 채식 메뉴 제공', '일부 채식 메뉴 제공'].map((type) => (
@@ -130,38 +137,25 @@ function AddPlace() {
             />
           ))}
         </TagContainer>
-
         <AddPlaceText>SNS (옵션)</AddPlaceText>
         <InputBox
           placeholder="https://www.instagram.com/vegan-ro/"
           value={placeSns}
           onChange={(e) => setPlaceSns(e.target.value)}
         ></InputBox>
-
         <AddPlaceText>영업시간 (옵션)</AddPlaceText>
-        <DateTagContainer>
-          <DateTagContainer>
-            {daysOfWeek.map((day) => (
-              <DateTag key={day} title={day} />
-            ))}
-          </DateTagContainer>
-        </DateTagContainer>
-        <TagContainer>
-          <SelectBox placeholder="영업 시작시간"></SelectBox>
-          <SelectBox placeholder="영업 종료시간"></SelectBox>
-        </TagContainer>
-        <TagContainer>
-          <SelectBox placeholder="브레이크 시작시간"></SelectBox>
-          <SelectBox placeholder="브레이크 종료시간"></SelectBox>
-        </TagContainer>
-
+        <OpenTimeTab
+          selectedTag={selectedTag}
+          setSelectedTag={setSelectedTag}
+          timeValues={timeValues}
+          handleTimeChange={handleTimeChange}
+        />
         <AddPlaceText>연락처 (옵션)</AddPlaceText>
         <InputBox
           placeholder="010-1234-5678"
           value={placeNumber}
           onChange={(e) => setPlaceNumber(e.target.value)}
         ></InputBox>
-
         <PrimaryButton
           title="이 위치로 등록하기"
           isEnabled={isButtonEnabled}

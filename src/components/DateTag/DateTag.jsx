@@ -1,15 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { DateTagBtn, DateTagContent } from './DateTag.styles';
 
-function DateTag({ title }) {
-  const [isClicked, setIsClicked] = useState(false);
-
-  const handleClick = () => {
-    setIsClicked(!isClicked);
-  };
-
+function DateTag({ title, isClicked, onClick }) {
   return (
-    <DateTagBtn onClick={handleClick} clicked={isClicked ? 1 : 0}>
+    <DateTagBtn onClick={onClick} clicked={isClicked ? 1 : 0}>
       <DateTagContent clicked={isClicked ? 1 : 0}>{title}</DateTagContent>
     </DateTagBtn>
   );

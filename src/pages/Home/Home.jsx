@@ -19,9 +19,8 @@ import {
 import { PLACE_TYPES } from '@/constants';
 
 // TODO
-// 1. '식당'으로 초기값 부여
-// 2. 로딩/에러 화면 컴포넌트로 교체
-// 3. 필터 모달 보이기 / 필터 적용 마커 렌더링
+// 1. 로딩/에러 화면 컴포넌트로 교체
+// 2. 필터 모달 보이기 / 필터 적용 마커 렌더링
 
 export default function Home() {
   const { location, error, isLoading, reloadLocation } = useCurrentLocation();
@@ -36,6 +35,8 @@ export default function Home() {
   });
 
   const [showFilterModal, setShowFilterModal] = useState(false);
+  const [showPlaceModal, setShowPlaceModal] = useState(false);
+  const [mapCenter, setMapCenter] = useState(null);
 
   // 앱 최초 진입, 현재 위치 불러오기
   // 빈 배열 넘김 -> 컴포넌트가 처음 렌더링될 때만 실행
@@ -76,10 +77,19 @@ export default function Home() {
     console.log('필터 모달');
   };
 
+  const handleShowPlaceModal = () => {
+    setShowPlaceModal(!showPlaceModal);
+  };
+
+  const handlePlaceModalClose = () => {
+    setShowPlaceModal(false);
+    console.log('식당 상세 모달 닫힘');
+  };
+
   return (
     <>
       <Wrapper className="home">
-        <SearchBar placeholder="‘가게 이름' 또는 ‘주소'를 검색해보세요." />
+        <SearchBar placeholder="가게 이름' 또는 ‘주소'를 검색해보세요." />
         <FilterBar>
           <Categories className="category-bar">
             {PLACE_TYPES.map((title) => (
@@ -101,7 +111,7 @@ export default function Home() {
         </FilterBar>
         {error && (
           <div>
-            위치 정보를 가져올 수 없습니다
+            위치 정보를 가져올 수 없습니다.
             <br />
             {error}
           </div>
@@ -112,6 +122,10 @@ export default function Home() {
           <KakaoMap
             centerMove={location.center}
             categoriesStatus={categoriesStatus}
+            handleShowPlaceModal={handleShowPlaceModal}
+            handlePlaceModalClose={handlePlaceModalClose}
+            mapCenter={mapCenter}
+            setMapCenter={setMapCenter}
           />
         )}
         <BottomBar>

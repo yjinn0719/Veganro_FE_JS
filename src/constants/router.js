@@ -10,6 +10,5 @@ export const PATH = {
   MY: `/user/:userid`,
   MYEDIT: '/user/:userid/edit',
   REDIRECTION: '/auth/kakao/callback',
-  LOGIN: '/login',
   NOTFOUND: '*',
 };

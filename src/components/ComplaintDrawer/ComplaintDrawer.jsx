@@ -4,12 +4,18 @@ import {
   ItemWrapper,
   ItemText,
 } from '@/components/EditDrawer/EditDrawer.styles';
+import { useUpdateComplaint } from '@/hooks/useUser';
 
-export default function ComplaintDrawer({ isOpened, onEdit, reviewId }) {
+export default function ComplaintDrawer({ isOpened, reviewId: reviewId }) {
   const [isComplaintDrawerOpen, setIsComplaintDrawerOpen] = useState(false);
-
-  const handleReportClick = () => {
-    setIsComplaintDrawerOpen(true);
+  const { mutate } = useUpdateComplaint();
+  const handleReportClick = async () => {
+    try {
+      await mutate(reviewId, reviewId);
+      toggleDrawer();
+    } catch (error) {
+      console.error('Error reporting review:', error);
+    }
   };
 
   const toggleDrawer = () => {

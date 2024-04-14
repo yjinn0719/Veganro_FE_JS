@@ -76,6 +76,14 @@ export const deleteBookmark = async (bookmarkId) => {
     throw new Error('Error deleting bookmark: ' + error.message);
   }
 };
+export const updateComplaint = async (reviewId) => {
+  try {
+    const response = await api.patch(`/users/complaint/${reviewId}`);
+    return response.data.data;
+  } catch (error) {
+    throw new Error('Error updating complaint: ' + error.message);
+  }
+};
 
 const handleError = (error) => {
   if (error.response) {

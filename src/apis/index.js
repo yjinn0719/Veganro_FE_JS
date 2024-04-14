@@ -20,6 +20,7 @@ import {
   getBookmarkedByUserId,
   postBookmark,
   deleteBookmark,
+  updateComplaint,
 } from './api/userInfoApi';
 import getPlacesWithDistance from './service/distance';
 
@@ -42,4 +43,5 @@ export {
   postBookmark,
   deleteBookmark,
   getBookmarkByPlaceId,
+  updateComplaint,
 };

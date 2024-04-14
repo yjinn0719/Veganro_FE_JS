@@ -1,5 +1,6 @@
 import Drawer from '../Drawer/Drawer';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+
 import { ItemWrapper, ItemText } from './EditDrawer.styles';
 import { useDeleteReview } from '../../hooks/useReview';
 import ReviewDrawer from '../ReviewDrawer/ReviewDrawer';
@@ -10,6 +11,11 @@ export default function EditDrawer({ isOpened, address, reviewId }) {
   const [isEditDrawerOpen, setIsEditDrawerOpen] = useState(false);
   const [submittedReviews, setSubmittedReviews] = useState([]);
 
+  useEffect(() => {
+    if (!isEditDrawerOpen) {
+      document.body.style.overflow = 'auto';
+    }
+  }, [isReviewDrawerOpen]);
   const toggleDrawer = () => {
     setIsDeleteDrawerOpen(!isDeleteDrawerOpen);
     if (isEditDrawerOpen) {
@@ -18,6 +24,7 @@ export default function EditDrawer({ isOpened, address, reviewId }) {
   };
 
   const toggleEditReview = () => {
+    document.body.style.overflow = 'hidden';
     setIsEditDrawerOpen(!isEditDrawerOpen);
     if (isDeleteDrawerOpen) {
       setIsDeleteDrawerOpen(false);

@@ -12,6 +12,7 @@ import {
   updateUserData,
   postBookmark,
   deleteBookmark,
+  updateComplaint,
 } from '../apis/api/userInfoApi';
 
 export const useGetUser = (userId) => {
@@ -27,7 +28,9 @@ export const useGetUser = (userId) => {
 export const useUpdateUser = () => {
   return useMutation({ mutationFn: updateUserData });
 };
-
+export const useUpdateComplaint = () => {
+  return useMutation({ mutationFn: updateComplaint });
+};
 export const useGetReviewsByUserId = (pageSize = 10) => {
   return useInfiniteQuery({
     queryKey: ['getReviewsByUserId'],

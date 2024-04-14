@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const LoginContainer = styled.div`
+export const AuthContainer = styled.div`
   display: inline-flex;
   width: 100%;
   height: 100vh;

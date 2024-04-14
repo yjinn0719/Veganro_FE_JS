@@ -69,6 +69,11 @@ export default function Search() {
       )
     : places;
 
+  // 유저의 현재 위치 기준, 가까운 순 정렬
+  const sortedPlaces = [...filteredPlaces].sort(
+    (a, b) => a.distance - b.distance,
+  );
+
   // 카테고리 선택 핸들러
   const handleCategorySelect = (categoryName) => {
     // to 세영님) categorySelect에 recoil 도입 수정 했습니다
@@ -144,7 +149,7 @@ export default function Search() {
         </SearchNav>
         <ScrollableList>
           {places &&
-            filteredPlaces.map((place) => (
+            sortedPlaces.map((place) => (
               <SearchList
                 key={place._id}
                 name={place.name}

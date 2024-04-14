@@ -21,7 +21,7 @@ const MyRouter = () => {
       <Route path={PATH.ADDPLACE} element={<AddPlace />} />
       <Route path={PATH.REVIEW} element={<Review />} />
       <Route path={PATH.SEARCH} element={<Search />} />
-      {/*<Route path={PATH.PLACELISTS} element={<Place />} />
+      <Route path={PATH.PLACELISTS} element={<Place />} />
       <Route path={PATH.PLACEDETAIL} element={<PlaceDetail />} />
       <Route path={PATH.MY} element={<MyPage />} />
       <Route path={PATH.MYEDIT} element={<EditMyPage />} />

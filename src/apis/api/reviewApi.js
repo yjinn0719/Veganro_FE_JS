@@ -5,7 +5,7 @@ import api from '@/apis/utils/axiosInstance';
 export const getReviewsByPlaceId = async (
   placeId,
   pageNumber = 1,
-  pageSize = 3,
+  pageSize,
 ) => {
   try {
     const response = await api.get(
@@ -16,7 +16,16 @@ export const getReviewsByPlaceId = async (
     handleError(error);
   }
 };
-
+export const getMyReviews = async (placeId, pageNumber = 1, pageSize = 4) => {
+  try {
+    const response = await api.get(
+      `/reviews/my-reviews?placeId=${placeId}&pageNumber=${pageNumber}&pageSize=${pageSize}`,
+    );
+    return response.data.data;
+  } catch (error) {
+    handleError(error);
+  }
+};
 export const postReview = async (reviewData) => {
   try {
     const response = await api.post('/reviews', reviewData);

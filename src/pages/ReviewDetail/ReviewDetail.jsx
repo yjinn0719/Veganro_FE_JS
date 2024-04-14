@@ -34,7 +34,7 @@ export default function Review({ address }) {
     fetchNextPage,
     isFetchingNextPage,
   } = useGetReviewsByPlaceId(placeid);
-
+  console.log(ReviewsData);
   const [isReviewDrawerOpen, setIsReviewDrawerOpen] = useState(false);
   const [isEditDrawerOpen, setIsEditDrawerOpen] = useState(false);
   const [isComplaintDrawerOpen, setIsComplaintDrawerOpen] = useState(false);
@@ -62,6 +62,8 @@ export default function Review({ address }) {
     setIsReviewDrawerOpen(!isReviewDrawerOpen);
     if (isEditDrawerOpen || editReview || isComplaintDrawerOpen) {
       setIsEditDrawerOpen(false);
+      setEditReview(false);
+      setIsComplaintDrawerOpen(false);
     }
   };
 
@@ -70,6 +72,7 @@ export default function Review({ address }) {
     if (isEditDrawerOpen || editReview || isComplaintDrawerOpen) {
       setIsEditDrawerOpen(false);
       setEditReview(false);
+      setIsComplaintDrawerOpen(false);
     }
   };
 
@@ -79,6 +82,7 @@ export default function Review({ address }) {
     if (isReviewDrawerOpen || editReview || isComplaintDrawerOpen) {
       setIsReviewDrawerOpen(false);
       setEditReview(false);
+      setIsComplaintDrawerOpen(false);
     }
   };
   const toggleEditReview = () => {
@@ -86,17 +90,28 @@ export default function Review({ address }) {
     if (isEditDrawerOpen || isReviewDrawerOpen || isComplaintDrawerOpen) {
       setIsEditDrawerOpen(false);
       setIsReviewDrawerOpen(false);
-    }
-  };
-  const handleReviewCardClick = (reviewId, userToken) => {
-    setSelectedReviewIndex(reviewId);
-    if (userToken === localStorage.getItem('Authorization')) {
-      toggleEditDrawer(reviewId);
-    } else {
-      setIsComplaintDrawerOpen(true);
+      setEditReview(false);
     }
   };
 
+  const toggleComplaintReview = () => {
+    setIsComplaintDrawerOpen(!isComplaintDrawerOpen);
+    if (isEditDrawerOpen || isReviewDrawerOpen || editReview) {
+      setIsEditDrawerOpen(false);
+      setIsReviewDrawerOpen(false);
+      setEditReview(false);
+    }
+  };
+
+  const handleReviewCardClick = (review) => {
+    if (review.isWrittenByCurrentUser === true) {
+      setSelectedReviewIndex(review._id);
+      toggleEditDrawer(review._id);
+    } else {
+      setSelectedReviewIndex(review._id);
+      setIsComplaintDrawerOpen(true);
+    }
+  };
   if (isLoading) return <div>Loading...</div>;
   if (isError) return <div>Error: {error.message}</div>;
 
@@ -110,7 +125,7 @@ export default function Review({ address }) {
           <Header>
             <ReviewCount>
               <ReviewTitle>리뷰</ReviewTitle>
-              <ReviewNumber>{ReviewsData.length}개</ReviewNumber>
+              <ReviewNumber>{ReviewsData.pages[0].totalCount}개</ReviewNumber>
             </ReviewCount>
             <Link to="write-review" smooth={true} duration={500}>
               <WriteReview onClick={handleWriteReviewClick}>
@@ -118,7 +133,7 @@ export default function Review({ address }) {
               </WriteReview>
             </Link>
           </Header>
-          {ReviewsData.length === 0 ? (
+          {ReviewsData.pages[0].totalCount === 0 ? (
             <ReviewContent>
               <NoReview>
                 <NoReviewText>리뷰를 작성해주세요.</NoReviewText>
@@ -127,18 +142,14 @@ export default function Review({ address }) {
           ) : (
             <>
               {ReviewsData?.pages.map((page) =>
-                page.map((review) => (
+                page.reviews.map((review) => (
                   <ReviewCard
                     key={review._id}
                     nickname={review.user_id.nickname}
                     veganLevel={review.user_id.tag}
                     comment={review.content}
                     date={review.updatedAt}
-                    userToken={review.user_id.token}
-                    click={() => {
-                      setSelectedReviewIndex(review._id);
-                      toggleEditDrawer(review._id);
-                    }}
+                    click={() => handleReviewCardClick(review)}
                   />
                 )),
               )}
@@ -177,7 +188,7 @@ export default function Review({ address }) {
         <ComplaintDrawer
           reviewId={selectedReviewIndex}
           isOpened={isComplaintDrawerOpen}
-          toggleDrawer={toggleEditReview}
+          toggleDrawer={toggleComplaintReview}
         />
       )}
       {editReview && (

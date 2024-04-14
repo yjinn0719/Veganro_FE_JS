@@ -10,6 +10,7 @@ import {
   postReview,
   deleteReview,
   updateReview,
+  getMyReviews,
 } from './api/reviewApi';
 import {
   getUserData,
@@ -31,6 +32,7 @@ export {
   getReviewsByPlaceId,
   postReview,
   deleteReview,
+  getMyReviews,
   updateReview,
   getUserData,
   updateUserData,

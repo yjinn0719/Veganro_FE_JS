@@ -3,42 +3,31 @@ import { useParams } from 'react-router-dom';
 import { BookmarkContainer, BookmarkContent } from './Bookmark.styles';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import BookmarkBorderOutlinedIcon from '@mui/icons-material/BookmarkBorderOutlined';
-import {
-  useGetBookmarked,
-  usePostBookmark,
-  useDeleteBookmark,
-} from '../../hooks/useUser';
-// import { useGetBookmarkByPlaceId } from '../../hooks/usePlace';
+import { usePostBookmark, useDeleteBookmark } from '../../hooks/useUser';
+import { useGetBookmarkByPlaceId } from '../../hooks/usePlace';
 
 function Bookmark() {
   const { placeid } = useParams();
-  // const { data: bookmarkDataByPlaceId } = useGetBookmarkByPlaceId(placeid);
-  const { data: bookmarkData } = useGetBookmarked();
+  const { data: bookmarkDataByPlaceId } = useGetBookmarkByPlaceId(placeid);
+
   const [isClicked, setIsClicked] = useState(false);
   const [bookmarkId, setBookmarkId] = useState(null);
-  // console.log(bookmarkDataByPlaceId);
   const { mutate: postBookmark } = usePostBookmark();
   const { mutate: deleteBookmark } = useDeleteBookmark();
-
   useEffect(() => {
-    if (bookmarkData) {
-      const bookmarkIdByUser = bookmarkData.map((data) => data.place_id._id);
-      if (bookmarkIdByUser.includes(placeid)) {
-        setIsClicked(true);
-        const bookmark = bookmarkData.find(
-          (data) => data.place_id._id === placeid,
-        );
-        setBookmarkId(bookmark._id);
-      } else {
-        setIsClicked(false);
-        setBookmarkId(null);
-      }
+    if (bookmarkDataByPlaceId) {
+      const bookmarkStatus = bookmarkDataByPlaceId.isBookmarked;
+      const bookmarkId = bookmarkDataByPlaceId._id;
+      setBookmarkId(bookmarkId);
+      setIsClicked(bookmarkStatus);
+    } else {
+      setIsClicked(false);
+      setBookmarkId(null);
     }
-  }, [bookmarkData, placeid]);
+  }, [bookmarkDataByPlaceId, placeid]);
 
   const handleClick = async () => {
     if (!placeid) {
-      // placeid가 없으면 처리하지 않음
       return;
     }
 

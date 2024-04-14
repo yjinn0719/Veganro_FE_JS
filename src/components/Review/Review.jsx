@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useGetReviewsByPlaceId } from '../../hooks/useReview';
+import { useGetReviews, useGetMyReviews } from '../../hooks/useReview';
 import { Link } from 'react-scroll';
 import ReviewCard from '@/components/ReviewCard/ReviewCard';
 import {
@@ -30,7 +30,7 @@ export default function Review({ address }) {
     isLoading,
     isError,
     error,
-  } = useGetReviewsByPlaceId(placeid);
+  } = useGetMyReviews(placeid);
   const [isReviewDrawerOpen, setIsReviewDrawerOpen] = useState(false);
   const [isEditDrawerOpen, setIsEditDrawerOpen] = useState(false);
   const [isComplaintDrawerOpen, setIsComplaintDrawerOpen] = useState(false);
@@ -39,7 +39,7 @@ export default function Review({ address }) {
   const [visibleReviews, setVisibleReviews] = useState(3);
   const [selectedReviewIndex, setSelectedReviewIndex] = useState(null);
   const navigate = useNavigate();
-  console.log('ReviewsData:', ReviewsData);
+
   const handleWriteReviewClick = () => {
     toggleReviewDrawer();
     document.body.style.overflow = 'hidden';
@@ -82,11 +82,12 @@ export default function Review({ address }) {
     }
   };
 
-  const handleReviewCardClick = () => {
-    if (selectedReviewIndex === userId) {
-      console.log('selectedReviewIndex:', selectedReviewIndex);
-      toggleEditDrawer();
+  const handleReviewCardClick = (review) => {
+    if (review.isWrittenByCurrentUser === true) {
+      setSelectedReviewIndex(review._id);
+      toggleEditDrawer(review._id);
     } else {
+      setSelectedReviewIndex(review._id);
       setIsComplaintDrawerOpen(true);
     }
   };
@@ -117,22 +118,18 @@ export default function Review({ address }) {
             </ReviewContent>
           ) : (
             <>
-              {ReviewsData?.reviews.map((reviews) =>
-                reviews.map((review) => (
-                  <ReviewCard
-                    key={review._id}
-                    nickname={review.user_id.nickname}
-                    veganLevel={review.user_id.tag}
-                    comment={review.content}
-                    date={review.updatedAt}
-                    click={() => {
-                      setSelectedReviewIndex(review._id);
-                      handleReviewCardClick(review._id);
-                    }}
-                  />
-                )),
-              )}
-              {ReviewsData.length > visibleReviews && (
+              {ReviewsData?.reviews.map((review) => (
+                <ReviewCard
+                  key={review._id}
+                  nickname={review.user_id.nickname}
+                  veganLevel={review.user_id.tag}
+                  comment={review.content}
+                  date={review.updatedAt}
+                  click={() => handleReviewCardClick(review)}
+                />
+              ))}
+
+              {ReviewsData.reviews.length > visibleReviews && (
                 <LoadMoreButtonContainer
                   onClick={() => {
                     navigate(`/place/${placeid}/review`);
@@ -164,13 +161,14 @@ export default function Review({ address }) {
           onEdit={toggleEditReview}
           reviewId={selectedReviewIndex}
           isOpened={isEditDrawerOpen}
+          toggleDrawer={toggleEditDrawer}
         />
       )}
       {isComplaintDrawerOpen && (
         <ComplaintDrawer
           reviewId={selectedReviewIndex}
           isOpened={isComplaintDrawerOpen}
-          toggleDrawer={toggleEditReview}
+          toggleDrawer={toggleComplaintReview}
         />
       )}
       {editReview && (

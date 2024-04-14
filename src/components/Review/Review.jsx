@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useGetReviews } from '../../hooks/useReview';
+import { useGetReviewsByPlaceId } from '../../hooks/useReview';
 import { Link } from 'react-scroll';
 import ReviewCard from '@/components/ReviewCard/ReviewCard';
 import {
@@ -30,7 +30,7 @@ export default function Review({ address }) {
     isLoading,
     isError,
     error,
-  } = useGetReviews(placeid);
+  } = useGetReviewsByPlaceId(placeid);
   const [isReviewDrawerOpen, setIsReviewDrawerOpen] = useState(false);
   const [isEditDrawerOpen, setIsEditDrawerOpen] = useState(false);
   const [isComplaintDrawerOpen, setIsComplaintDrawerOpen] = useState(false);
@@ -39,7 +39,7 @@ export default function Review({ address }) {
   const [visibleReviews, setVisibleReviews] = useState(3);
   const [selectedReviewIndex, setSelectedReviewIndex] = useState(null);
   const navigate = useNavigate();
-  console.log(ReviewsData);
+  console.log('ReviewsData:', ReviewsData);
   const handleWriteReviewClick = () => {
     toggleReviewDrawer();
     document.body.style.overflow = 'hidden';
@@ -82,11 +82,10 @@ export default function Review({ address }) {
     }
   };
 
-  const handleReviewCardClick = (reviewId, userToken) => {
-    setSelectedReviewIndex(reviewId);
-
-    if (userToken === localStorage.getItem('Authorization')) {
-      toggleEditDrawer(reviewId);
+  const handleReviewCardClick = () => {
+    if (selectedReviewIndex === userId) {
+      console.log('selectedReviewIndex:', selectedReviewIndex);
+      toggleEditDrawer();
     } else {
       setIsComplaintDrawerOpen(true);
     }
@@ -102,7 +101,7 @@ export default function Review({ address }) {
           <Header>
             <ReviewCount>
               <ReviewTitle>리뷰</ReviewTitle>
-              <ReviewNumber>{ReviewsData.length}개</ReviewNumber>
+              <ReviewNumber>{ReviewsData.totalCount}개</ReviewNumber>
             </ReviewCount>
             <Link to="write-review" smooth={true} duration={500}>
               <WriteReview onClick={handleWriteReviewClick}>
@@ -110,7 +109,7 @@ export default function Review({ address }) {
               </WriteReview>
             </Link>
           </Header>
-          {ReviewsData.length === 0 ? (
+          {ReviewsData?.totalCount === 0 ? (
             <ReviewContent>
               <NoReview>
                 <NoReviewText>리뷰를 작성해주세요.</NoReviewText>
@@ -118,20 +117,21 @@ export default function Review({ address }) {
             </ReviewContent>
           ) : (
             <>
-              {ReviewsData.slice(0, visibleReviews).map((review) => (
-                <ReviewCard
-                  key={review._id}
-                  nickname={review.user_id.nickname}
-                  veganLevel={review.user_id.tag}
-                  comment={review.content}
-                  date={review.updatedAt}
-                  userToken={review.user_id.token}
-                  click={() => {
-                    setSelectedReviewIndex(review._id);
-                    toggleEditDrawer(review._id);
-                  }}
-                />
-              ))}
+              {ReviewsData?.reviews.map((reviews) =>
+                reviews.map((review) => (
+                  <ReviewCard
+                    key={review._id}
+                    nickname={review.user_id.nickname}
+                    veganLevel={review.user_id.tag}
+                    comment={review.content}
+                    date={review.updatedAt}
+                    click={() => {
+                      setSelectedReviewIndex(review._id);
+                      handleReviewCardClick(review._id);
+                    }}
+                  />
+                )),
+              )}
               {ReviewsData.length > visibleReviews && (
                 <LoadMoreButtonContainer
                   onClick={() => {

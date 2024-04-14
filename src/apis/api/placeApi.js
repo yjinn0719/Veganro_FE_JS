@@ -29,6 +29,15 @@ export const getPlaceData = async (placeId) => {
   }
 };
 
+export const getBookmarkByPlaceId = async (placeId) => {
+  try {
+    const response = await api.get(`/places/${placeId}/bookmarked`);
+    return response.data.data;
+  } catch (error) {
+    handleError(error);
+  }
+};
+
 // 장소 등록
 export const createPlace = async (placeData) => {
   return await api.post('/admin/places', placeData);

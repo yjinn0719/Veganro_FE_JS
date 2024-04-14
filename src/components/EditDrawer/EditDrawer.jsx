@@ -7,7 +7,6 @@ export default function EditDrawer({ isOpened, onEdit, reviewId }) {
 
   const [isDeleteDrawerOpen, setIsDeleteDrawerOpen] = useState(false);
   const [isEditDrawerOpen, setIsEditDrawerOpen] = useState(false);
-  console.log('reviewId', reviewId);
   const toggleDrawer = () => {
     setIsDeleteDrawerOpen(!isDeleteDrawerOpen);
     if (isEditDrawerOpen) {

@@ -64,7 +64,7 @@ export const useGetBookmarkedByUserId = (pageSize = 10) => {
   });
 };
 
-export const useGetBookmarked = (pageNumber = 1, pageSize = 1000) => {
+export const useGetBookmarked = (pageNumber = 1, pageSize = 10) => {
   return useQuery({
     queryKey: ['getBookmarked', pageNumber, pageSize],
     queryFn: () => getBookmarkedByUserId(pageNumber, pageSize),

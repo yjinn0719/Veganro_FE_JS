@@ -1,5 +1,10 @@
 import api from './utils/axiosInstance';
-import { getAllPlaces, fetchPlaces, getPlaceData } from './api/placeApi';
+import {
+  getAllPlaces,
+  fetchPlaces,
+  getPlaceData,
+  getBookmarkByPlaceId,
+} from './api/placeApi';
 import {
   getReviewsByPlaceId,
   postReview,
@@ -34,4 +39,5 @@ export {
   getBookmarkedByUserId,
   postBookmark,
   deleteBookmark,
+  getBookmarkByPlaceId,
 };

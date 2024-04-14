@@ -9,5 +9,6 @@ export const PATH = {
   PLACEDETAIL: '/place/:placeid',
   MY: `/user/:userid`,
   MYEDIT: '/user/:userid/edit',
+  REDIRECTION: '/auth/kakao/callback',
   NOTFOUND: '*',
 };

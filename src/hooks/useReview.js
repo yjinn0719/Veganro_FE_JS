@@ -25,15 +25,12 @@ export const useGetReviews = (
   });
 };
 
-export const useGetReviewsByPlaceId = (placeId, pageSize = 10) => {
-  return useInfiniteQuery({
-    queryKey: ['reviews', placeId],
-    queryFn: ({ pageParam }) =>
-      getReviewsByPlaceId(placeId, pageParam, pageSize),
-    initialPageParam: 1,
-    getNextPageParam: (lastPage, allPages) => {
-      const nextPage = lastPage.length ? allPages.length + 1 : undefined;
-      return nextPage;
+export const useGetReviewsByPlaceId = (placeId) => {
+  return useQuery({
+    queryKey: ['getReviewsByPlaceId', placeId],
+    queryFn: () => getReviewsByPlaceId(placeId),
+    config: {
+      retry: false,
     },
   });
 };

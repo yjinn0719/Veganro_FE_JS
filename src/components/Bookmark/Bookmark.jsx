@@ -8,13 +8,15 @@ import {
   usePostBookmark,
   useDeleteBookmark,
 } from '../../hooks/useUser';
+// import { useGetBookmarkByPlaceId } from '../../hooks/usePlace';
 
 function Bookmark() {
   const { placeid } = useParams();
+  // const { data: bookmarkDataByPlaceId } = useGetBookmarkByPlaceId(placeid);
   const { data: bookmarkData } = useGetBookmarked();
   const [isClicked, setIsClicked] = useState(false);
   const [bookmarkId, setBookmarkId] = useState(null);
-
+  // console.log(bookmarkDataByPlaceId);
   const { mutate: postBookmark } = usePostBookmark();
   const { mutate: deleteBookmark } = useDeleteBookmark();
 

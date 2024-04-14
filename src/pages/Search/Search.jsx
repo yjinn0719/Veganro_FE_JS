@@ -69,7 +69,7 @@ export default function Search() {
       )
     : places;
 
-  // 유저의 현재 위치 기준, 가까운 순 정렬
+  // 유저의 현재 위치 기준, places 가까운 순 정렬
   const sortedPlaces = [...filteredPlaces].sort(
     (a, b) => a.distance - b.distance,
   );
@@ -153,6 +153,7 @@ export default function Search() {
               <SearchList
                 key={place._id}
                 name={place.name}
+                vegan_option={place.vegan_option}
                 distance={`${place.distance}km`}
                 address={`${place.address} ${place.address_detail}`}
                 tel={place.tel}

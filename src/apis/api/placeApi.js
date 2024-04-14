@@ -31,7 +31,7 @@ export const getPlaceData = async (placeId) => {
 
 export const getBookmarkByPlaceId = async (placeId) => {
   try {
-    const response = await api.get(`/places/${placeId}/bookmarked`);
+    const response = await api.get(`/bookmarks/check?placeId=${placeId}`);
     return response.data.data;
   } catch (error) {
     handleError(error);

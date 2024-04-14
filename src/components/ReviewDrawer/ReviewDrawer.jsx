@@ -27,7 +27,7 @@ export default function ReviewDrawer({
   const { mutate: updateReview } = useUpdateReview();
   const [reviewText, setReviewText] = useState('');
   const [isEnabled, setIsEnabled] = useState(false);
-
+  console.log(reviewIndex);
   const handleReview = async () => {
     if (reviewText.trim() !== '') {
       try {

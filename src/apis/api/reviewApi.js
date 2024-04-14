@@ -19,7 +19,7 @@ export const getReviewsByPlaceId = async (
 export const getMyReviews = async (placeId, pageNumber = 1, pageSize = 4) => {
   try {
     const response = await api.get(
-      `/reviews/my-reviews?placeId=${placeId}&pageNumber=${pageNumber}&pageSize=${pageSize}`,
+      `/reviews/check?placeId=${placeId}&pageNumber=${pageNumber}&pageSize=${pageSize}`,
     );
     return response.data.data;
   } catch (error) {

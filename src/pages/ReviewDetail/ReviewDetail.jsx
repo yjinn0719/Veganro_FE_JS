@@ -145,6 +145,8 @@ export default function Review({ address }) {
                 page.reviews.map((review) => (
                   <ReviewCard
                     key={review._id}
+                    reviewId={review._id}
+                    isCurrentUser={review.isWrittenByCurrentUser}
                     nickname={review.user_id.nickname}
                     veganLevel={review.user_id.tag}
                     comment={review.content}

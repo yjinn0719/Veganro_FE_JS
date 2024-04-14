@@ -10,8 +10,10 @@ import { selectedCategoryState } from '@/states/filterState';
 import SearchBar from '@/components/SearchBar/SearchBar';
 import PlaceCategory from '@/components/PlaceCategory/PlaceCategory';
 import SearchList from '@/components/SearchList/SearchList';
-import SmallRoundButton from '@/components/SmallRoundButton/SmallRoundButton';
 import MenuButton from '@/components/MenuButton/MenuButton';
+import SmallRoundButton from '@/components/SmallRoundButton/SmallRoundButton';
+import MapFilterModal from '@/components/MapFilterModal/MapFilterModal';
+
 import {
   Categories,
   Wrapper,
@@ -156,7 +158,7 @@ export default function Search() {
           <MapViewButton
             className="map-view-button"
             title="지도에서 다시 찾기"
-            onClick={() => console.log('Clicked')}
+            onClick={() => navigate('/')}
           />
           {/* <MenuButton /> */}
         </BottomBar>

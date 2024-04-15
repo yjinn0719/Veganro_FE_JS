@@ -1,6 +1,7 @@
 import React from 'react';
 import RefreshRoundedIcon from '@mui/icons-material/RefreshRounded';
 import FilterListRoundedIcon from '@mui/icons-material/FilterListRounded';
+import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import { Button } from './SmallRoundButton.style';
 
 function SmallRoundButton({ title, onClick }) {
@@ -23,6 +24,16 @@ function SmallRoundButton({ title, onClick }) {
       case 'filter':
         return (
           <FilterListRoundedIcon
+            sx={{
+              color: '#4f4f4f',
+              width: '24px',
+              height: '24px',
+            }}
+          />
+        );
+      case 'close':
+        return (
+          <CloseRoundedIcon
             sx={{
               color: '#4f4f4f',
               width: '24px',

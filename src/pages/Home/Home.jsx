@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 
-import { selectedMenuTypeState } from '@/states/filterState';
-
 import KakaoMap from '../KakaoMap/KakaoMap';
 import useCurrentLocation from '@/hooks/useCurrentLocation';
 import SearchBar from '@/components/SearchBar/SearchBar';
@@ -23,19 +21,24 @@ import {
 } from '../Home/Home.style';
 import { PLACE_TYPES } from '@/constants';
 
-import { selectedCategoryState } from '@/states/filterState';
+import {
+  selectedMenuTypeState,
+  selectedCategoryState,
+} from '@/states/filterState';
 
 export default function Home() {
   const navigate = useNavigate();
   const { location, error, isLoading, reloadLocation } = useCurrentLocation();
   const [showFilterModal, setShowFilterModal] = useState(false);
+  const [isButtonActive, setIsButtonActive] = useState(false);
 
-  // 세영님, menutypes값 recoil로 넘겼습니다
   const [selectedMenuTypes, setSelectedMenuTypes] = useRecoilState(
     selectedMenuTypeState,
   );
+  const [selectedCategories, setSelectedCategories] = useRecoilState(
+    selectedCategoryState,
+  );
 
-  // 카테고리 상태 객체 배열로 초기화
   const [categoriesStatus, setCategoriesStatus] = useState(() => {
     const initialCategoriesStatus = PLACE_TYPES.map((type) => ({
       name: type,
@@ -43,19 +46,16 @@ export default function Home() {
     }));
     return initialCategoriesStatus;
   });
-  const [selectedCategories, setSelectedCategories] = useRecoilState(
-    selectedCategoryState,
-  );
 
   // 앱 최초 진입, 현재 위치 불러오기
   useEffect(() => {
-    reloadLocation(); // 위치 재요청
+    reloadLocation();
   }, []);
 
   // 버튼 클릭 시 현재 위치 업데이트
   const handleRelocateClick = (e) => {
     e.preventDefault();
-    reloadLocation(); // 위치 재요청
+    reloadLocation();
   };
 
   // 카테고리 선택 핸들러
@@ -76,23 +76,24 @@ export default function Home() {
     );
   };
 
-  // 카테고리 초기화 핸들러
-  const handleCategoryReset = () => {
+  // 필터 초기화 핸들러
+  const handleFilterReset = () => {
     setCategoriesStatus((prevCategories) =>
       prevCategories.map((category) => ({
         ...category,
-        clicked: 0,
+        clicked: 0, // category.name === '식당' ? true : false
       })),
     );
-    // Recoil 상태 초기화
     setSelectedCategories([]);
-    // 선택한 메뉴 유형 초기화
     setSelectedMenuTypes(null);
+    setShowFilterModal(false);
+    setIsButtonActive(false);
+    localStorage.removeItem('selectedMenuTypes');
   };
 
-  // 필터 모달 핸들러
   const handleFilterModal = () => {
     setShowFilterModal(!showFilterModal);
+    setIsButtonActive(!isButtonActive);
   };
 
   const handleSearchActive = () => {
@@ -125,7 +126,10 @@ export default function Home() {
                   }
                 />
               ))}
-              <FilterButton title="filter" onClick={handleFilterModal} />
+              <FilterButton
+                title={isButtonActive ? 'close' : 'filter'}
+                onClick={handleFilterModal}
+              />
               {showFilterModal && (
                 <MapFilterModal
                   updateMarkers={updateMarkers}
@@ -133,7 +137,7 @@ export default function Home() {
                 />
               )}
             </Categories>
-            <SmallRoundButton title="refresh" onClick={handleCategoryReset} />
+            <SmallRoundButton title="refresh" onClick={handleFilterReset} />
           </FilterBar>
         </TopBar>
         {error && (

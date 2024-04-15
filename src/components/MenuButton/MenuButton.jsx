@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Menu, MenuList } from './MenuButton.style';
-import RoundButton from '../RoundButton/RoundButton';
+import RoundButton from '@/components/RoundButton/RoundButton';
 
 import { MENU_LIST } from '@/constants';
 import { PATH } from '@/constants/router';
@@ -9,9 +9,11 @@ import { PATH } from '@/constants/router';
 function MenuButton() {
   const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(0);
+  const [isButtonActive, setIsButtonActive] = useState(false);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
+    setIsButtonActive(!isButtonActive);
   };
 
   const handleNavigation = (page) => {
@@ -36,7 +38,11 @@ function MenuButton() {
             />
           ))}
       </MenuList>
-      <RoundButton className="menu-button" title="menu" onClick={toggleMenu} />
+      <RoundButton
+        className="menu-button"
+        title={isButtonActive ? 'close' : 'menu'}
+        onClick={toggleMenu}
+      />
     </Menu>
   );
 }

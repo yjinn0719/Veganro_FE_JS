@@ -12,9 +12,3 @@ export const MenuList = styled.div`
   gap: 8px;
   z-index: 999;
 `;
-
-export const MenuButton = styled.button`
-  &:hover {
-    background: ${(props) => props.theme.color.green[500]};
-  }
-`;

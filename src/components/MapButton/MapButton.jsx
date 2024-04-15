@@ -5,7 +5,7 @@ import MapOutlinedIcon from '@mui/icons-material/MapOutlined';
 import RefreshOutlinedIcon from '@mui/icons-material/RefreshOutlined';
 import ArticleOutlinedIcon from '@mui/icons-material/ArticleOutlined';
 
-function MapButton({ title }) {
+function MapButton({ title, onClick }) {
   const renderIcon = (title) => {
     switch (title) {
       case '리스트뷰':
@@ -14,7 +14,7 @@ function MapButton({ title }) {
             sx={{ color: '#FFFFFF', width: '24px', height: '24px' }}
           />
         );
-      case '지도뷰':
+      case '지도에서 다시 찾기':
         return (
           <MapOutlinedIcon
             sx={{ color: '#FFFFFF', width: '24px', height: '24px' }}
@@ -35,7 +35,7 @@ function MapButton({ title }) {
     }
   };
   return (
-    <MapBtn>
+    <MapBtn onClick={onClick}>
       {renderIcon(title)}
       <MapBtnTitle>{title}</MapBtnTitle>
     </MapBtn>

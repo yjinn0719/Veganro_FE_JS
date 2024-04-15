@@ -4,7 +4,7 @@ import PlaceMarkers from '../KakaoMap/PlaceMarkers';
 
 const KakaoMap = ({ centerMove, categoriesStatus, selectedMenuTypes }) => {
   const [currentLocation, setCurrentLocation] = useState({
-    level: 4,
+    level: 6,
     center: {
       lat: 37.5465029,
       lng: 127.065263,
@@ -41,7 +41,7 @@ const KakaoMap = ({ centerMove, categoriesStatus, selectedMenuTypes }) => {
       id="map"
       style={{ height: '100vh' }}
       center={currentLocation.center}
-      level={currentLocation.level || 4}
+      level={8}
       isPanto={true}
     >
       <PlaceMarkers

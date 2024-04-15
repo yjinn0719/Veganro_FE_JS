@@ -2,14 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
 import PlaceMarkers from '../KakaoMap/PlaceMarkers';
 
-const KakaoMap = ({
-  centerMove,
-  categoriesStatus,
-  handleShowPlaceModal,
-  handlePlaceModalClose,
-  mapCenter,
-  setMapCenter,
-}) => {
+const KakaoMap = ({ centerMove, categoriesStatus, selectedMenuTypes }) => {
   const [currentLocation, setCurrentLocation] = useState({
     level: 4,
     center: {
@@ -36,11 +29,12 @@ const KakaoMap = ({
     }
   }, [currentLocation]);
 
-  useEffect(() => {
-    if (mapCenter) {
-      setMapCenter(mapCenter);
-    }
-  }, [mapCenter]);
+  const handleMarkerClick = (position) => {
+    setCurrentLocation({
+      ...currentLocation,
+      center: position,
+    });
+  };
 
   return (
     <Map
@@ -52,15 +46,20 @@ const KakaoMap = ({
     >
       <PlaceMarkers
         categoriesStatus={categoriesStatus}
-        mapCenter={mapCenter}
-        handleShowPlaceModal={handleShowPlaceModal}
-        handlePlaceModalClose={handlePlaceModalClose}
-        setMapCenter={setMapCenter}
+        selectedMenuTypes={selectedMenuTypes}
+        handleMarkerClick={handleMarkerClick}
       />
       <MapMarker
         position={currentLocation.center}
         title="Current Location"
         clickable={false}
+        image={{
+          src: 'https://storage.cloud.google.com/vegan-ro/current_position_pin.png',
+          size: {
+            width: 32,
+            height: 36,
+          },
+        }}
       />
     </Map>
   );

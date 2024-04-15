@@ -42,7 +42,7 @@ export const BottomBar = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  z-index: 999;
+  z-index: 998;
 `;
 export const RelocateButton = styled(RoundButton)`
   &.relocate-button {

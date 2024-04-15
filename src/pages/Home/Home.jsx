@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useRecoilState } from 'recoil';
 import KakaoMap from '../KakaoMap/KakaoMap';
 import useCurrentLocation from '@/hooks/useCurrentLocation';
 import SearchBar from '@/components/SearchBar/SearchBar';
@@ -16,22 +18,15 @@ import {
   ListViewButton,
   FilterButton,
 } from '../Home/Home.style';
-
 import { PLACE_TYPES } from '@/constants';
 
-// to 세영님) recoil 상태관리 import 입니다
-import { useRecoilState } from 'recoil';
 import { selectedCategoryState } from '@/states/filterState';
-
-import { useNavigate } from 'react-router-dom';
-
-// TODO
-// 1. 로딩/에러 화면 컴포넌트로 교체
-// 2. 필터 모달 보이기 / 필터 적용 마커 렌더링
 
 export default function Home() {
   const navigate = useNavigate();
   const { location, error, isLoading, reloadLocation } = useCurrentLocation();
+  const [showFilterModal, setShowFilterModal] = useState(false);
+  const [selectedMenuTypes, setSelectedMenuTypes] = useState([]);
 
   // 카테고리 상태 객체 배열로 초기화
   const [categoriesStatus, setCategoriesStatus] = useState(() => {
@@ -41,18 +36,11 @@ export default function Home() {
     }));
     return initialCategoriesStatus;
   });
-
-  const [showFilterModal, setShowFilterModal] = useState(false);
-  const [showPlaceModal, setShowPlaceModal] = useState(false);
-  const [mapCenter, setMapCenter] = useState(null);
-
-  // to 세영님) recoil 상태관리 읽기 전용으로 추가했습니다
   const [selectedCategories, setSelectedCategories] = useRecoilState(
     selectedCategoryState,
   );
 
   // 앱 최초 진입, 현재 위치 불러오기
-  // 빈 배열 넘김 -> 컴포넌트가 처음 렌더링될 때만 실행
   useEffect(() => {
     reloadLocation(); // 위치 재요청
   }, []);
@@ -95,20 +83,14 @@ export default function Home() {
   // 필터 모달 핸들러
   const handleFilterModal = () => {
     setShowFilterModal(!showFilterModal);
-    console.log('필터 모달');
-  };
-
-  const handleShowPlaceModal = () => {
-    setShowPlaceModal(!showPlaceModal);
-  };
-
-  const handlePlaceModalClose = () => {
-    setShowPlaceModal(false);
-    console.log('식당 상세 모달 닫힘');
   };
 
   const handleSearchActive = () => {
     navigate('/search');
+  };
+
+  const updateMarkers = (menuTypes) => {
+    setSelectedMenuTypes(menuTypes);
   };
 
   return (
@@ -136,7 +118,9 @@ export default function Home() {
               <SmallRoundButton title="refresh" onClick={handleCategoryReset} />
             </Categories>
             <FilterButton title="filter" onClick={handleFilterModal} />
-            {showFilterModal && <MapFilterModal />}
+            {showFilterModal && (
+              <MapFilterModal updateMarkers={updateMarkers} />
+            )}
           </FilterBar>
         </TopBar>
         {error && (
@@ -152,10 +136,7 @@ export default function Home() {
           <KakaoMap
             centerMove={location.center}
             categoriesStatus={categoriesStatus}
-            handleShowPlaceModal={handleShowPlaceModal}
-            handlePlaceModalClose={handlePlaceModalClose}
-            mapCenter={mapCenter}
-            setMapCenter={setMapCenter}
+            selectedMenuTypes={selectedMenuTypes}
           />
         )}
         <BottomBar>
@@ -164,7 +145,7 @@ export default function Home() {
             className="relocate-button"
             onClick={handleRelocateClick}
           />
-          <ListViewButton className="list-view-button" title="리스트뷰" />
+          {/* <ListViewButton className="list-view-button" title="리스트뷰" /> */}
           <MenuButton />
         </BottomBar>
       </Wrapper>

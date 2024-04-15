@@ -1,5 +1,10 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { FaArrowUp } from 'react-icons/fa';
+import { Button } from '@/components/RoundButton/RoundButton.style';
+
+export const ModalWrapper = styled.div`
+  width: 100%;
+`;
 
 export const Wrapper = styled.div`
   width: 100%;
@@ -60,14 +65,21 @@ export const Distance = styled.div`
   align-items: center;
 `;
 export const DistanceIcon = styled.div`
-  width: 14px;
-  height: 14px;
-  position: relative;
+  width: 16px;
+  height: 16px;
+  color: ${(props) => props.theme.color.gray[600]};
 `;
 export const DistanceText = styled.div`
-  color: ${(props) => props.theme.color.green[600]}
-  font-size: 12px;
+  color: ${(props) => props.theme.color.gray[600]};
+  font-size: 14px;
   font-weight: 500;
+`;
+export const ButtonWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
 `;
 export const RedirectButton = styled.button`
   width: 48px;
@@ -78,34 +90,25 @@ export const RedirectButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  // TODO 마우스 오버 시, 회전
+  transition: all 0.2s ease-in;
   &:hover {
-    svg {
-      tranform: rotate(90deg);
-    }
+    transform: rotate(90deg);
   }
+`;
+export const RedirectButtonText = styled.small`
+  font-size: 14px;
+  font-weight: 500;
+  color: ${(props) => props.theme.color.green[500]};
 `;
 export const ArrowIcon = styled(FaArrowUp)`
   fill: white;
   width: 20px;
   height: 20px;
 `;
-export const MainContainer = styled.div`
-  width: 100%;
-  height: 100%;
-  top: 60px;
-  padding-top: 16px;
-  padding-bottom: 717px;
-  background: #f5f5f5;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  display: flex;
-`;
-export const Loading = styled.div`
-  width: 100%;
-  height: 100%;
-  justify-content: center;
-  align-items: center;
-  display: flex;
+export const CloseButton = styled(Button)`
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  z-index: 999;
+  transform: translateX(-50%);
 `;

@@ -80,8 +80,11 @@ const PlaceMarkers = ({
           clickable={true}
           onClick={() => handleMarkerMove(marker.id, marker.position)}
           image={{
-            src: selectedMarkerId === marker.id ? null : marker.categoryImg,
+            src: selectedMarkerId === marker.id ? '' : marker.categoryImg,
             size: { width: 30, height: 30 },
+            style: {
+              display: selectedMarkerId === marker.id ? 'none' : 'block',
+            },
           }}
         ></MapMarker>
       ))}

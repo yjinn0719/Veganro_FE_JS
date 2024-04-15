@@ -95,6 +95,9 @@ export default function Search() {
 
   // 카테고리 초기화 핸들러
   const handleCategoryReset = () => {
+    // Recoil 상태 초기화: 실제 데이터 필터링에 사용
+    setCategoriesStatus([]);
+
     setCategoriesStatus((prevCategories) =>
       prevCategories.map((category) => ({
         ...category,

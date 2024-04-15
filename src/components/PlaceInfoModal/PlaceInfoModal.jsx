@@ -4,9 +4,11 @@ import { useGetPlace } from '@/hooks/usePlace';
 import useCurrentLocation from '@/hooks/useCurrentLocation';
 import getDistance from '@/hooks/useDistance';
 
+import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import { IoNavigateCircleOutline } from 'react-icons/io5';
 import { VEGAN_MENU_TYPES } from '@/constants';
 import {
+  ModalWrapper,
   Wrapper,
   Inner,
   InfoBox,
@@ -18,11 +20,14 @@ import {
   Distance,
   DistanceIcon,
   DistanceText,
+  ButtonWrapper,
   RedirectButton,
+  RedirectButtonText,
   ArrowIcon,
+  CloseButton,
 } from './PlaceInfoModal.style';
 
-function PlaceInfoModal({ markerId }) {
+function PlaceInfoModal({ markerId, closeModal }) {
   const navigate = useNavigate();
 
   const {
@@ -49,7 +54,7 @@ function PlaceInfoModal({ markerId }) {
       const calculatedDistance =
         getDistance({
           lat1: userLocation.center.lat,
-          lon1: userLocation.center.lon,
+          lon1: userLocation.center.lng,
           lat2: placeData.location.coordinates[1],
           lon2: placeData.location.coordinates[0],
         }) / 1000;
@@ -79,32 +84,48 @@ function PlaceInfoModal({ markerId }) {
   return (
     placeData &&
     userLocation && (
-      <Wrapper>
-        <Inner>
-          <InfoBox>
-            <Thumbsnail>
-              <PlaceTypeIcon src={placeData.category_img.url.basic_url} />
-            </Thumbsnail>
-            <TextBox>
-              <Title>{placeData.name}</Title>
-              <MenuTag>
-                {placeData.vegan_option
-                  ? VEGAN_MENU_TYPES[0]
-                  : VEGAN_MENU_TYPES[1]}
-              </MenuTag>
-              <Distance>
-                <DistanceIcon>
-                  <IoNavigateCircleOutline size="15" />
-                </DistanceIcon>
-                <DistanceText>{distance}km</DistanceText>
-              </Distance>
-            </TextBox>
-          </InfoBox>
-          <RedirectButton onClick={handleRedirect}>
-            <ArrowIcon />
-          </RedirectButton>
-        </Inner>
-      </Wrapper>
+      <>
+        <ModalWrapper>
+          <Wrapper>
+            <Inner>
+              <InfoBox>
+                <Thumbsnail>
+                  <PlaceTypeIcon src={placeData.category_img.url.basic_url} />
+                </Thumbsnail>
+                <TextBox>
+                  <Title>{placeData.name}</Title>
+                  <MenuTag>
+                    {placeData.vegan_option
+                      ? VEGAN_MENU_TYPES[0]
+                      : VEGAN_MENU_TYPES[1]}
+                  </MenuTag>
+                  <Distance>
+                    <DistanceIcon>
+                      <IoNavigateCircleOutline size="15" />
+                    </DistanceIcon>
+                    <DistanceText>{distance} km</DistanceText>
+                  </Distance>
+                </TextBox>
+              </InfoBox>
+              <ButtonWrapper>
+                <RedirectButton onClick={handleRedirect}>
+                  <ArrowIcon />
+                </RedirectButton>
+                <RedirectButtonText>더 보기</RedirectButtonText>
+              </ButtonWrapper>
+            </Inner>
+          </Wrapper>
+          <CloseButton onClick={closeModal}>
+            <CloseRoundedIcon
+              sx={{
+                color: '#383838',
+                width: '24px',
+                height: '24px',
+              }}
+            />
+          </CloseButton>
+        </ModalWrapper>
+      </>
     )
   );
 }

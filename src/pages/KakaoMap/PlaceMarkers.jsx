@@ -3,21 +3,15 @@ import { MapMarker } from 'react-kakao-maps-sdk';
 import { getAllPlaces } from '@/apis';
 import PlaceInfoModal from '@/components/PlaceInfoModal/PlaceInfoModal';
 
-// TODO
-// 1. 식당 마커 클릭 시, 식당 인포 모달 띄워주기
-// 2. 식당 상세 페이지로 이동
-// 3. 로딩 컴포넌트 연결
-
 const PlaceMarkers = ({
   categoriesStatus,
-  handleShowPlaceModal,
-  handlePlaceModalClose,
-  mapCenter,
-  setMapCenter,
+  selectedMenuTypes,
+  handleMarkerClick,
 }) => {
   const [placeData, setPlaceData] = useState([]);
   const [filteredMarkers, setFilteredMarkers] = useState([]);
   const [selectedMarkerId, setSelectedMarkerId] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -36,13 +30,21 @@ const PlaceMarkers = ({
 
   useEffect(() => {
     if (!isLoading) {
-      const newFilteredMarkers = placeData.filter((place) =>
+      const categoryFilteredMarkers = placeData.filter((place) =>
         categoriesStatus.some(
           (category) => category.name === place.category && category.clicked,
         ),
       );
+
+      // 세영님, selectedMenuTypes를 String[] -> bool값으로 변경해서 placeMarkers도 그에 맞게 변경했습니다
+      const menuTypeFilteredMarkers = categoryFilteredMarkers.filter(
+        (place) =>
+          selectedMenuTypes === null ||
+          place.vegan_option === selectedMenuTypes,
+      );
+
       setFilteredMarkers(
-        newFilteredMarkers.map((place) => ({
+        menuTypeFilteredMarkers.map((place) => ({
           id: place._id,
           position: {
             lat: place.location.coordinates[1], // 위도
@@ -54,13 +56,17 @@ const PlaceMarkers = ({
         })),
       );
     }
-  }, [placeData, categoriesStatus, isLoading]);
+  }, [placeData, categoriesStatus, selectedMenuTypes, isLoading]);
 
   // 식당 상세 페이지 이동 핸들러
-  const handleMarkerClick = (id, position) => {
+  const handleMarkerMove = (id, position) => {
     setSelectedMarkerId(id);
-    setMapCenter(position);
-    console.log('클릭한 마커 ID:', id);
+    handleMarkerClick(position);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
   };
 
   if (isLoading) return <div>Loading...</div>;
@@ -73,19 +79,15 @@ const PlaceMarkers = ({
           position={marker.position}
           category={marker.category}
           clickable={true}
-          onClick={() => handleMarkerClick(marker.id)}
+          onClick={() => handleMarkerMove(marker.id, marker.position)}
           image={{
             src: marker.categoryImg,
             size: { width: 30, height: 30 },
           }}
         ></MapMarker>
       ))}
-      {selectedMarkerId !== null && (
-        <PlaceInfoModal
-          markerId={selectedMarkerId}
-          handleShowPlaceModal={handleShowPlaceModal}
-          onClose={handlePlaceModalClose}
-        />
+      {isModalOpen && selectedMarkerId !== null && (
+        <PlaceInfoModal markerId={selectedMarkerId} closeModal={closeModal} />
       )}
     </>
   );

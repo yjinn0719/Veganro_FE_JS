@@ -12,7 +12,9 @@ export default function ComplaintDrawer({ isOpened, reviewId: reviewId }) {
   const handleReportClick = async () => {
     try {
       await mutate(reviewId, reviewId);
-      toggleDrawer();
+      setTimeout(() => {
+        window.location.reload();
+      }, 500);
     } catch (error) {
       console.error('Error reporting review:', error);
     }

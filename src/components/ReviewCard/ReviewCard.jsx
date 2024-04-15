@@ -18,6 +18,7 @@ import EditDrawer from '@/components/EditDrawer/EditDrawer';
 import ComplaintDrawer from '@/components/ComplaintDrawer/ComplaintDrawer';
 
 export default function ReviewCard({
+  address,
   reviewId,
   nickname,
   veganLevel,
@@ -25,15 +26,18 @@ export default function ReviewCard({
   date,
   selectedReviewId,
   onSelectReviewId,
+  placeId,
+  isOpened,
 }) {
   const [isReviewCurrentUser, setIsReviewCurrentUser] = useState(false);
   const [isEditDrawerOpen, setIsEditDrawerOpen] = useState(false);
   const [isComplaintDrawerOpen, setIsComplaintDrawerOpen] = useState(false);
   const [clickedReviewId, setClickedReviewId] = useState(null);
+  console.log(isOpened);
 
   const { placeid } = useParams();
-  const { data: myReviews } = useGetMyReviews(placeid);
-  console.log(myReviews);
+  const effectivePlaceId = placeId || placeid;
+  const { data: myReviews } = useGetMyReviews(effectivePlaceId);
   useEffect(() => {
     if (myReviews) {
       const reviewCurrentUser = myReviews.reviews.find(
@@ -48,14 +52,14 @@ export default function ReviewCard({
   const toggleEditDrawer = () => {
     setIsEditDrawerOpen(!isEditDrawerOpen);
     if (isComplaintDrawerOpen) {
-      setIsComplaintDrawerOpen(false);
+      setIsEditDrawerOpen(false);
     }
   };
 
   const toggleComplaintReview = () => {
     setIsComplaintDrawerOpen(!isComplaintDrawerOpen);
     if (isEditDrawerOpen) {
-      setIsEditDrawerOpen(false);
+      setIsComplaintDrawerOpen(false);
     }
   };
 
@@ -97,22 +101,23 @@ export default function ReviewCard({
         <CommentDate>{date}</CommentDate>
         <CommentText>{comment}</CommentText>
       </CommentContainer>
-        <DrawerContainer>
-          {isEditDrawerOpen && (
-            <EditDrawer
-              reviewId={clickedReviewId}
-              isOpened={isEditDrawerOpen}
-              toggleDrawer={toggleEditDrawer}
-            />
-          )}
-          {isComplaintDrawerOpen && (
-            <ComplaintDrawer
-              reviewId={clickedReviewId}
-              isOpened={isComplaintDrawerOpen}
-              toggleDrawer={toggleComplaintReview}
-            />
-          )}
-        </DrawerContainer>
+      <DrawerContainer>
+        {isEditDrawerOpen && (
+          <EditDrawer
+            address={address}
+            reviewId={clickedReviewId}
+            isOpened={isEditDrawerOpen}
+            toggleDrawer={toggleEditDrawer}
+          />
+        )}
+        {isComplaintDrawerOpen && (
+          <ComplaintDrawer
+            reviewId={clickedReviewId}
+            isOpened={isComplaintDrawerOpen}
+            toggleDrawer={toggleComplaintReview}
+          />
+        )}
+      </DrawerContainer>
     </>
   );
 }

@@ -12,6 +12,7 @@ const BackgroundOverlay = styled(motion.div)`
 `;
 
 const SheetBackground = styled(motion.div)`
+  z-index: 9999;
   position: fixed;
   bottom: ${({ isOpened }) => (isOpened ? '0' : '-100%')};
   max-width: 480px;

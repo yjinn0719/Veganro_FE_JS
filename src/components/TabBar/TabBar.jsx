@@ -59,19 +59,20 @@ const TabBar = () => {
     isLoading: userLocationLoading,
     reloadLocation: getCurrentPosition,
   } = useCurrentLocation();
+  console.log(ReviewsData);
   const [activeTab, setActiveTab] = useState('reported');
   const tabContentRef = useRef(null);
   useEffect(() => {
     getCurrentPosition();
   }, []);
   useEffect(() => {
-    if (inView && reviewsHasNextPage) {
+    if (inView && reviewsHasNextPage && !reviewsFetchingNextPage) {
       reviewsFetchNextPage();
     }
-    if (inView && reportHasNextPage) {
+    if (inView && reportHasNextPage && !reportFetchingNextPage) {
       reportFetchNextPage();
     }
-    if (inView && bookmarkHasNextPage) {
+    if (inView && bookmarkHasNextPage && !bookmarkFetchingNextPage) {
       bookmarkFetchNextPage();
     }
   }, [
@@ -96,7 +97,6 @@ const TabBar = () => {
   if (userLocationError || isReviewsError || isReportError || isBookmarkError) {
     return <div>Error occurred while loading data.</div>;
   }
-
   const renderReportedPlaces = () => {
     if (ReportData.length === 0) {
       return (
@@ -159,13 +159,15 @@ const TabBar = () => {
       return (
         <DataContent>
           {ReviewsData?.pages.map((page) =>
-            page.map((review) => (
+            page.reviews.map((review) => (
               <ReviewCard
                 key={review._id}
+                reviewId={review._id}
                 nickname={review.user_id.nickname}
                 veganLevel={review.user_id.tag}
                 comment={review.content}
                 date={review.updatedAt}
+                placeId={review.place_id}
               />
             )),
           )}

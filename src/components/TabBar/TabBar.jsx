@@ -22,6 +22,7 @@ import {
 } from '@/components/Review/Review.styles';
 import getDistance from '../../hooks/useDistance';
 import useCurrentLocation from '../../hooks/useCurrentLocation';
+import { Reviews } from '@mui/icons-material';
 
 const TabBar = () => {
   const { ref, inView } = useInView();
@@ -59,7 +60,6 @@ const TabBar = () => {
     isLoading: userLocationLoading,
     reloadLocation: getCurrentPosition,
   } = useCurrentLocation();
-  console.log(ReviewsData);
   const [activeTab, setActiveTab] = useState('reported');
   const tabContentRef = useRef(null);
   useEffect(() => {
@@ -84,7 +84,8 @@ const TabBar = () => {
     bookmarkHasNextPage,
     bookmarkFetchNextPage,
   ]);
-
+  console.log(inView);
+  console.log(bookmarkFetchingNextPage, bookmarkHasNextPage, BookmarkData);
   if (
     userLocationLoading ||
     ReportData === undefined ||
@@ -93,7 +94,6 @@ const TabBar = () => {
   ) {
     return <div>Loading...</div>;
   }
-
   if (userLocationError || isReviewsError || isReportError || isBookmarkError) {
     return <div>Error occurred while loading data.</div>;
   }
@@ -260,6 +260,7 @@ const TabBar = () => {
           </Tab>
         </TabContainer>
       </TabContainerParent>
+
       <TabContent
         ref={tabContentRef}
         style={{ display: activeTab ? 'block' : 'none' }}

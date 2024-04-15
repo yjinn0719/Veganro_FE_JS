@@ -120,7 +120,7 @@ export default function EditMyPage({ title = '프로필 설정', nickname }) {
             <SecondaryButton
               title="취소"
               color="gray"
-              onClick={() => navigate(`/user/${userid}`)}
+              onClick={() => navigate(`/`)}
             />
           </ButtonContainer>
           <ButtonContainer>

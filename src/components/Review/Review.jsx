@@ -22,12 +22,7 @@ import {
 import ReviewDrawer from '@/components/ReviewDrawer/ReviewDrawer';
 import { IoChevronDownSharp } from 'react-icons/io5';
 
-export default function Review({
-  address,
-  isEditDrawerOpen,
-  isComplaintDrawerOpen,
-  isOpened,
-}) {
+export default function Review({ address, isOpened }) {
   const { placeid } = useParams();
   const {
     data: ReviewsData,

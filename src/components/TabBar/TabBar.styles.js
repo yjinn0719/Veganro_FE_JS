@@ -17,8 +17,8 @@ const Container = styled.div`
 
 const TabContainerParent = styled.div`
   position: sticky;
-  top: 50px;
-  z-index: 1;
+  top: 48px;
+  z-index: 999;
   background-color: #fff;
 `;
 
@@ -52,7 +52,6 @@ const TabContent = styled.div`
 `;
 
 const DataContent = styled.div`
-  min-height: 3000px;
   gap: 10px;
   display: flex;
   flex-direction: column;

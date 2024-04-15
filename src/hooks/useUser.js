@@ -63,7 +63,6 @@ export const useGetBookmarkedByUserId = (pageSize = 10) => {
     queryFn: ({ pageParam }) => getBookmarkedByUserId(pageParam, pageSize),
     initialPageParam: 1,
     getNextPageParam: (lastPage, allPages) => {
-      console.log(lastPage);
       const nextPage = lastPage.length ? allPages.length + 1 : undefined;
       return nextPage;
     },

@@ -11,7 +11,7 @@ import { MenuTagBtn, MenuTagContent } from '../MenuTag/MenuTag.styles';
 
 import { VEGAN_MENU_TYPES } from '@/constants';
 
-function MapFilterModal() {
+function MapFilterModal({ updateMarkers }) {
   const [isClicked, setIsClicked] = useState(false);
   const [selectedMenuTypes, setSelectedMenuTypes] = useState([]);
   const [isSavedActive, setIsSavedActive] = useState(false);
@@ -28,6 +28,12 @@ function MapFilterModal() {
         return [...prevState, type];
       }
     });
+  };
+
+  const handleSaveClick = () => {
+    updateMarkers(selectedMenuTypes);
+    setIsClicked(false);
+    console.log('필터 값 저장', selectedMenuTypes);
   };
 
   useEffect(() => {
@@ -60,6 +66,7 @@ function MapFilterModal() {
         <SaveButton
           color={isSavedActive ? 'green' : 'gray'}
           disabled={!isSavedActive}
+          onClick={handleSaveClick}
         >
           <SaveButtonTxt>저장하기</SaveButtonTxt>
         </SaveButton>

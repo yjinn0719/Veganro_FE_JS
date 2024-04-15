@@ -24,6 +24,7 @@ export default function ReviewCard({
   veganLevel,
   comment,
   date,
+  placeId,
 }) {
   const [isReviewCurrentUser, setIsReviewCurrentUser] = useState(false);
   const [isEditDrawerOpen, setIsEditDrawerOpen] = useState(false);
@@ -31,8 +32,8 @@ export default function ReviewCard({
   const [clickedReviewId, setClickedReviewId] = useState(null);
 
   const { placeid } = useParams();
-  const { data: myReviews } = useGetMyReviews(placeid);
-  console.log(myReviews);
+  const effectivePlaceId = placeId || placeid;
+  const { data: myReviews } = useGetMyReviews(effectivePlaceId);
   useEffect(() => {
     if (myReviews) {
       const reviewCurrentUser = myReviews.reviews.find(

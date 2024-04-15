@@ -37,22 +37,21 @@ export default function Review() {
   const { data: placeData } = useGetPlace(placeid);
   const [isReviewDrawerOpen, setIsReviewDrawerOpen] = useState(false);
   const [submittedReviews, setSubmittedReviews] = useState([]);
-  console.log('ReviewsData:', ReviewsData);
   const handleWriteReviewClick = () => {
     toggleDrawer();
     document.body.style.overflow = 'hidden';
   };
-  console.log(placeData);
   useEffect(() => {
     if (!isReviewDrawerOpen) {
       document.body.style.overflow = 'auto';
     }
   }, [isReviewDrawerOpen]);
   useEffect(() => {
-    if (inView && hasNextPage) {
+    if (inView && hasNextPage && !isFetchingNextPage) {
+      console.log(inView, hasNextPage, isFetchingNextPage);
       fetchNextPage();
     }
-  }, [inView, hasNextPage, fetchNextPage]);
+  }, [inView, hasNextPage, isFetchingNextPage, fetchNextPage]);
 
   const toggleDrawer = () => {
     setIsReviewDrawerOpen(!isReviewDrawerOpen);

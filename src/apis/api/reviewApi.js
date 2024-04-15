@@ -16,11 +16,9 @@ export const getReviewsByPlaceId = async (
     handleError(error);
   }
 };
-export const getMyReviews = async (placeId, pageNumber = 1, pageSize = 4) => {
+export const getMyReviews = async (placeId) => {
   try {
-    const response = await api.get(
-      `/reviews/check?placeId=${placeId}&pageNumber=${pageNumber}&pageSize=${pageSize}`,
-    );
+    const response = await api.get(`/reviews/check?placeId=${placeId}`);
     return response.data.data;
   } catch (error) {
     handleError(error);

@@ -47,7 +47,6 @@ export default function PlaceDetail() {
     isLoading: userLocationLoading,
     reloadLocation: getCurrentPosition,
   } = useCurrentLocation();
-  console.log('userLocation', userLocation);
 
   if (placeDataLoading || userLocationLoading)
     return (

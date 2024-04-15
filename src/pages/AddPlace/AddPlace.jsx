@@ -39,10 +39,6 @@ function AddPlace() {
     일: ['', '', '', ''],
   });
 
-  useEffect(() => {
-    console.log('Updated timeValues:', timeValues);
-  }, [timeValues]);
-
   const collectData = () => {
     const weekDays = ['월', '화', '수', '목', '금', '토', '일'];
     const formattedOpenTimes = weekDays.map((day) => {
@@ -144,6 +140,7 @@ function AddPlace() {
       };
     });
   };
+
   return (
     <>
       <MainContainer>

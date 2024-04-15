@@ -41,6 +41,9 @@ const GlobalStyles = createGlobalStyle`
         justify-content: center;
         position: relative;
     }
+    img[src='']{
+        display: none !important;
+    }
 `;
 
 export default GlobalStyles;

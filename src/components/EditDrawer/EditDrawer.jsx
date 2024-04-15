@@ -17,7 +17,6 @@ export default function EditDrawer({ isOpened, address, reviewId }) {
       setIsEditDrawerOpen(false);
     }
   };
-
   const toggleEditReview = () => {
     document.body.style.overflow = 'hidden';
     setIsEditDrawerOpen(!isEditDrawerOpen);

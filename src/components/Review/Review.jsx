@@ -22,7 +22,12 @@ import {
 import ReviewDrawer from '@/components/ReviewDrawer/ReviewDrawer';
 import { IoChevronDownSharp } from 'react-icons/io5';
 
-export default function Review({ address }) {
+export default function Review({
+  address,
+  isEditDrawerOpen,
+  isComplaintDrawerOpen,
+  isOpened,
+}) {
   const { placeid } = useParams();
   const {
     data: ReviewsData,
@@ -39,7 +44,7 @@ export default function Review({ address }) {
     toggleDrawer();
     document.body.style.overflow = 'hidden';
   };
-
+  console.log(isOpened);
   useEffect(() => {
     if (!isReviewDrawerOpen) {
       document.body.style.overflow = 'auto';
@@ -86,6 +91,7 @@ export default function Review({ address }) {
                   veganLevel={review.user_id.tag}
                   comment={review.content}
                   date={review.updatedAt}
+                  isOpened={isOpened}
                 />
               ))}
 
@@ -105,7 +111,7 @@ export default function Review({ address }) {
           )}
         </ReviewWrapper>
       </Container>
-      {isReviewDrawerOpen && (
+      {isReviewDrawerOpen && !isEditDrawerOpen && !isComplaintDrawerOpen && (
         <ReviewDrawer
           address={address}
           titleText={true}

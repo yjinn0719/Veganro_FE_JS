@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-export default function MapComponent({ address, name }) {
+export default function MapComponent({ address }) {
   useEffect(() => {
     // 지도를 생성합니다
     const mapOption = {
@@ -25,11 +25,11 @@ export default function MapComponent({ address, name }) {
           position: coords,
         });
 
-        // 인포윈도우로 장소에 대한 설명을 표시합니다
-        const infowindow = new kakao.maps.InfoWindow({
-          content: `<div style="width:150px;text-align:center;padding:6px 0;">${name}</div>`,
-        });
-        infowindow.open(map, marker);
+        // // 인포윈도우로 장소에 대한 설명을 표시합니다
+        // const infowindow = new kakao.maps.InfoWindow({
+        //   content: `<div style="width:150px;text-align:center;padding:6px 0;">${name}</div>`,
+        // });
+        // infowindow.open(map, marker);
 
         // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
         map.setCenter(coords);

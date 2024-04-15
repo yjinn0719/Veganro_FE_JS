@@ -22,6 +22,7 @@ import {
 } from '@/components/Review/Review.styles';
 import getDistance from '../../hooks/useDistance';
 import useCurrentLocation from '../../hooks/useCurrentLocation';
+import { Reviews } from '@mui/icons-material';
 
 const TabBar = () => {
   const { ref, inView } = useInView();
@@ -65,13 +66,13 @@ const TabBar = () => {
     getCurrentPosition();
   }, []);
   useEffect(() => {
-    if (inView && reviewsHasNextPage) {
+    if (inView && reviewsHasNextPage && !reviewsFetchingNextPage) {
       reviewsFetchNextPage();
     }
-    if (inView && reportHasNextPage) {
+    if (inView && reportHasNextPage && !reportFetchingNextPage) {
       reportFetchNextPage();
     }
-    if (inView && bookmarkHasNextPage) {
+    if (inView && bookmarkHasNextPage && !bookmarkFetchingNextPage) {
       bookmarkFetchNextPage();
     }
   }, [
@@ -83,7 +84,8 @@ const TabBar = () => {
     bookmarkHasNextPage,
     bookmarkFetchNextPage,
   ]);
-
+  console.log(inView);
+  console.log(bookmarkFetchingNextPage, bookmarkHasNextPage, BookmarkData);
   if (
     userLocationLoading ||
     ReportData === undefined ||
@@ -92,11 +94,9 @@ const TabBar = () => {
   ) {
     return <div>Loading...</div>;
   }
-
   if (userLocationError || isReviewsError || isReportError || isBookmarkError) {
     return <div>Error occurred while loading data.</div>;
   }
-
   const renderReportedPlaces = () => {
     if (ReportData.length === 0) {
       return (
@@ -159,13 +159,15 @@ const TabBar = () => {
       return (
         <DataContent>
           {ReviewsData?.pages.map((page) =>
-            page.map((review) => (
+            page.reviews.map((review) => (
               <ReviewCard
                 key={review._id}
+                reviewId={review._id}
                 nickname={review.user_id.nickname}
                 veganLevel={review.user_id.tag}
                 comment={review.content}
                 date={review.updatedAt}
+                placeId={review.place_id}
               />
             )),
           )}
@@ -239,25 +241,26 @@ const TabBar = () => {
       <TabContainerParent>
         <TabContainer>
           <Tab
-            active={activeTab === 'reported'}
+            $active={activeTab === 'reported'}
             onClick={() => setActiveTab('reported')}
           >
             제보한 가게
           </Tab>
           <Tab
-            active={activeTab === 'review'}
+            $active={activeTab === 'review'}
             onClick={() => setActiveTab('review')}
           >
             작성 후기
           </Tab>
           <Tab
-            active={activeTab === 'bookmark'}
+            $active={activeTab === 'bookmark'}
             onClick={() => setActiveTab('bookmark')}
           >
             북마크
           </Tab>
         </TabContainer>
       </TabContainerParent>
+
       <TabContent
         ref={tabContentRef}
         style={{ display: activeTab ? 'block' : 'none' }}

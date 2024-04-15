@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 
 const BackgroundOverlay = styled(motion.div)`
   position: absolute;
+  min-width: 480px;
   overflow: hidden;
   top: 0;
   left: 0;
@@ -11,6 +12,7 @@ const BackgroundOverlay = styled(motion.div)`
 `;
 
 const SheetBackground = styled(motion.div)`
+  z-index: 9999;
   position: fixed;
   bottom: ${({ isOpened }) => (isOpened ? '0' : '-100%')};
   max-width: 480px;
@@ -51,8 +53,12 @@ const SheetContent = styled.div`
 `;
 
 const DrawerContainer = styled.div`
-  position: relative;
+  position: absolute;
+
   width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
   margin: 0 auto;
 `;
 

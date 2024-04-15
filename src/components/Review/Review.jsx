@@ -18,12 +18,11 @@ import {
   LoadMoreButtonText,
   LoadMoreButtonIconContainer,
 } from '@/components/Review/Review.styles';
-import EditDrawer from '@/components/EditDrawer/EditDrawer';
-import ComplaintDrawer from '@/components/ComplaintDrawer/ComplaintDrawer';
+
 import ReviewDrawer from '@/components/ReviewDrawer/ReviewDrawer';
 import { IoChevronDownSharp } from 'react-icons/io5';
 
-export default function Review({ address }) {
+export default function Review({ address, isOpened }) {
   const { placeid } = useParams();
   const {
     data: ReviewsData,
@@ -32,19 +31,14 @@ export default function Review({ address }) {
     error,
   } = useGetReviews(placeid);
   const [isReviewDrawerOpen, setIsReviewDrawerOpen] = useState(false);
-  const [isEditDrawerOpen, setIsEditDrawerOpen] = useState(false);
-  const [isComplaintDrawerOpen, setIsComplaintDrawerOpen] = useState(false);
-  const [editReview, setEditReview] = useState(false);
   const [submittedReviews, setSubmittedReviews] = useState([]);
   const [visibleReviews, setVisibleReviews] = useState(3);
-  const [selectedReviewIndex, setSelectedReviewIndex] = useState(null);
   const navigate = useNavigate();
-  console.log(ReviewsData);
+
   const handleWriteReviewClick = () => {
-    toggleReviewDrawer();
+    toggleDrawer();
     document.body.style.overflow = 'hidden';
   };
-
   useEffect(() => {
     if (!isReviewDrawerOpen) {
       document.body.style.overflow = 'auto';
@@ -53,44 +47,9 @@ export default function Review({ address }) {
 
   const toggleDrawer = () => {
     setIsReviewDrawerOpen(!isReviewDrawerOpen);
-    if (isEditDrawerOpen || editReview || isComplaintDrawerOpen) {
-      setIsEditDrawerOpen(false);
-    }
   };
 
-  const toggleReviewDrawer = () => {
-    setIsReviewDrawerOpen(!isReviewDrawerOpen);
-    if (isEditDrawerOpen || editReview || isComplaintDrawerOpen) {
-      setIsEditDrawerOpen(false);
-      setEditReview(false);
-    }
-  };
-
-  const toggleEditDrawer = (reviewId) => {
-    setSelectedReviewIndex(reviewId);
-    setIsEditDrawerOpen(!isEditDrawerOpen);
-    if (isReviewDrawerOpen || editReview || isComplaintDrawerOpen) {
-      setIsReviewDrawerOpen(false);
-      setEditReview(false);
-    }
-  };
-  const toggleEditReview = () => {
-    setEditReview(!editReview);
-    if (isEditDrawerOpen || isReviewDrawerOpen || isComplaintDrawerOpen) {
-      setIsEditDrawerOpen(false);
-      setIsReviewDrawerOpen(false);
-    }
-  };
-
-  const handleReviewCardClick = (reviewId, userToken) => {
-    setSelectedReviewIndex(reviewId);
-
-    if (userToken === localStorage.getItem('Authorization')) {
-      toggleEditDrawer(reviewId);
-    } else {
-      setIsComplaintDrawerOpen(true);
-    }
-  };
+  const [selectedReviewId, setSelectedReviewId] = useState(null);
 
   if (isLoading) return <div>Loading...</div>;
   if (isError) return <div>Error: {error.message}</div>;
@@ -102,7 +61,7 @@ export default function Review({ address }) {
           <Header>
             <ReviewCount>
               <ReviewTitle>리뷰</ReviewTitle>
-              <ReviewNumber>{ReviewsData.length}개</ReviewNumber>
+              <ReviewNumber>{ReviewsData?.totalCount}개</ReviewNumber>
             </ReviewCount>
             <Link to="write-review" smooth={true} duration={500}>
               <WriteReview onClick={handleWriteReviewClick}>
@@ -110,7 +69,7 @@ export default function Review({ address }) {
               </WriteReview>
             </Link>
           </Header>
-          {ReviewsData.length === 0 ? (
+          {ReviewsData?.totalCount === 0 ? (
             <ReviewContent>
               <NoReview>
                 <NoReviewText>리뷰를 작성해주세요.</NoReviewText>
@@ -118,21 +77,23 @@ export default function Review({ address }) {
             </ReviewContent>
           ) : (
             <>
-              {ReviewsData.slice(0, visibleReviews).map((review) => (
+              {ReviewsData?.reviews.map((review) => (
                 <ReviewCard
                   key={review._id}
+                  reviewId={review._id}
+                  address={address}
+                  isCurrentUser={review.CurrentUser}
                   nickname={review.user_id.nickname}
                   veganLevel={review.user_id.tag}
                   comment={review.content}
                   date={review.updatedAt}
-                  userToken={review.user_id.token}
-                  click={() => {
-                    setSelectedReviewIndex(review._id);
-                    toggleEditDrawer(review._id);
-                  }}
+                  selectedReviewId={selectedReviewId}
+                  onSelectReviewId={setSelectedReviewId}
+                  isOpened={isOpened}
                 />
               ))}
-              {ReviewsData.length > visibleReviews && (
+
+              {ReviewsData.reviews.length > visibleReviews && (
                 <LoadMoreButtonContainer
                   onClick={() => {
                     navigate(`/place/${placeid}/review`);
@@ -157,32 +118,6 @@ export default function Review({ address }) {
           toggleDrawer={toggleDrawer}
           submittedReviews={submittedReviews}
           setSubmittedReviews={setSubmittedReviews}
-        />
-      )}
-      {isEditDrawerOpen && (
-        <EditDrawer
-          onEdit={toggleEditReview}
-          reviewId={selectedReviewIndex}
-          isOpened={isEditDrawerOpen}
-        />
-      )}
-      {isComplaintDrawerOpen && (
-        <ComplaintDrawer
-          reviewId={selectedReviewIndex}
-          isOpened={isComplaintDrawerOpen}
-          toggleDrawer={toggleEditReview}
-        />
-      )}
-      {editReview && (
-        <ReviewDrawer
-          address={address}
-          titleText={false}
-          submitText={false}
-          isOpened={toggleEditReview}
-          toggleDrawer={toggleDrawer}
-          submittedReviews={submittedReviews}
-          setSubmittedReviews={setSubmittedReviews}
-          reviewIndex={selectedReviewIndex}
         />
       )}
     </>

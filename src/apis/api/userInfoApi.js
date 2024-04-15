@@ -25,7 +25,7 @@ export const updateUserData = async ({ nickname, tag }) => {
 };
 
 //reviews/me?pageNumber=number&pageSize=number
-export const getReviewsByUserId = async (pageNumber, pageSize) => {
+export const getReviewsByUserId = async (pageNumber = 1, pageSize) => {
   try {
     const response = await api.get(
       `/reviews/me?pageNumber=${pageNumber}&pageSize=${pageSize}`,
@@ -36,7 +36,7 @@ export const getReviewsByUserId = async (pageNumber, pageSize) => {
   }
 };
 
-export const getReportedByUserId = async (pageNumber, pageSize) => {
+export const getReportedByUserId = async (pageNumber = 1, pageSize) => {
   try {
     const response = await api.get(
       `/reports/me?pageNumber=${pageNumber}&pageSize=${pageSize}`,
@@ -48,7 +48,7 @@ export const getReportedByUserId = async (pageNumber, pageSize) => {
 };
 
 // /bookmarks/users?pageNumber=value&pageSize=value
-export const getBookmarkedByUserId = async (pageNumber, pageSize) => {
+export const getBookmarkedByUserId = async (pageNumber = 1, pageSize) => {
   try {
     const response = await api.get(
       `/bookmarks/me?pageNumber=${pageNumber}&pageSize=${pageSize}`,
@@ -74,6 +74,14 @@ export const deleteBookmark = async (bookmarkId) => {
     return response.data.data;
   } catch (error) {
     throw new Error('Error deleting bookmark: ' + error.message);
+  }
+};
+export const updateComplaint = async (reviewId) => {
+  try {
+    const response = await api.patch(`/users/complaint/${reviewId}`);
+    return response.data.data;
+  } catch (error) {
+    throw new Error('Error updating complaint: ' + error.message);
   }
 };
 

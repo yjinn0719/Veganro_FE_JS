@@ -114,6 +114,14 @@ const Icon = styled.div`
   position: relative;
 `;
 
+const ButtonContent = styled.div`
+  height: 100%;
+  gap: 10px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+`;
+
 export {
   Container,
   InnerContainer,
@@ -127,4 +135,5 @@ export {
   Button,
   VeganTagContainer,
   Icon,
+  ButtonContent,
 };

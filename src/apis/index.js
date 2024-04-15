@@ -1,10 +1,16 @@
 import api from './utils/axiosInstance';
-import { getAllPlaces, fetchPlaces, getPlaceData } from './api/placeApi';
+import {
+  getAllPlaces,
+  fetchPlaces,
+  getPlaceData,
+  getBookmarkByPlaceId,
+} from './api/placeApi';
 import {
   getReviewsByPlaceId,
   postReview,
   deleteReview,
   updateReview,
+  getMyReviews,
 } from './api/reviewApi';
 import {
   getUserData,
@@ -14,6 +20,7 @@ import {
   getBookmarkedByUserId,
   postBookmark,
   deleteBookmark,
+  updateComplaint,
 } from './api/userInfoApi';
 import getPlacesWithDistance from './service/distance';
 
@@ -26,6 +33,7 @@ export {
   getReviewsByPlaceId,
   postReview,
   deleteReview,
+  getMyReviews,
   updateReview,
   getUserData,
   updateUserData,
@@ -34,4 +42,6 @@ export {
   getBookmarkedByUserId,
   postBookmark,
   deleteBookmark,
+  getBookmarkByPlaceId,
+  updateComplaint,
 };

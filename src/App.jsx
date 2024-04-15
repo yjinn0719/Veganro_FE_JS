@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { RecoilRoot } from 'recoil';
 import MyRouter from './routes/index';
+import Toast from './hooks/useToast';
 
 const AppContainer = styled.div`
   width: 100%;
@@ -50,6 +51,7 @@ function App() {
     <RecoilRoot>
       <AppContainer>
         <MyRouter />
+        <Toast />
       </AppContainer>
     </RecoilRoot>
   );

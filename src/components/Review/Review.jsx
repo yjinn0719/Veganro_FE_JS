@@ -80,6 +80,7 @@ export default function Review({ address }) {
                 <ReviewCard
                   key={review._id}
                   reviewId={review._id}
+                  address={address}
                   isCurrentUser={review.CurrentUser}
                   nickname={review.user_id.nickname}
                   veganLevel={review.user_id.tag}

@@ -11,11 +11,6 @@ export default function EditDrawer({ isOpened, address, reviewId }) {
   const [isEditDrawerOpen, setIsEditDrawerOpen] = useState(false);
   const [submittedReviews, setSubmittedReviews] = useState([]);
 
-  useEffect(() => {
-    if (!isEditDrawerOpen) {
-      document.body.style.overflow = 'auto';
-    }
-  }, [isReviewDrawerOpen]);
   const toggleDrawer = () => {
     setIsDeleteDrawerOpen(!isDeleteDrawerOpen);
     if (isEditDrawerOpen) {

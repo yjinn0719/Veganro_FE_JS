@@ -18,6 +18,7 @@ import EditDrawer from '@/components/EditDrawer/EditDrawer';
 import ComplaintDrawer from '@/components/ComplaintDrawer/ComplaintDrawer';
 
 export default function ReviewCard({
+  address,
   reviewId,
   nickname,
   veganLevel,
@@ -89,6 +90,7 @@ export default function ReviewCard({
         <DrawerContainer>
           {isEditDrawerOpen && (
             <EditDrawer
+              address={address}
               reviewId={clickedReviewId}
               isOpened={isEditDrawerOpen}
               toggleDrawer={toggleEditDrawer}

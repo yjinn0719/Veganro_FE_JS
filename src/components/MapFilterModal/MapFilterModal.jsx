@@ -11,14 +11,15 @@ import { MenuTagBtn, MenuTagContent } from '../MenuTag/MenuTag.styles';
 
 import { VEGAN_MENU_TYPES } from '@/constants';
 
-function MapFilterModal({ updateMarkers }) {
+function MapFilterModal({ updateMarkers, onClose }) {
   const [isClicked, setIsClicked] = useState(false);
   const [selectedMenuTypes, setSelectedMenuTypes] = useState([]);
   const [isSavedActive, setIsSavedActive] = useState(false);
 
-  const handleModalClick = () => {
-    console.log(isClicked);
-    setIsClicked(!isClicked);
+  const handleModalClick = (e) => {
+    if (e.target === e.currentTarget) {
+      setIsClicked(!isClicked);
+    }
   };
 
   const handleMenuTagClick = (type) => {
@@ -31,15 +32,13 @@ function MapFilterModal({ updateMarkers }) {
     });
   };
 
-  // 세영님, '전체 채식 메뉴'는 true, '일부 채식 메뉴'는 false인 bool값으로 변경해서 여기도 로직 변경했습니다
-  const handleSaveClick = () => {
+  const handleSaveClick = (e) => {
+    e.stopPropagation();
     const isFullVegan = selectedMenuTypes.includes(VEGAN_MENU_TYPES[0]);
     const isPartialVegan = selectedMenuTypes.includes(VEGAN_MENU_TYPES[1]);
-
     const veganOption = isFullVegan ? true : isPartialVegan ? false : null;
     updateMarkers(veganOption);
-    setIsClicked(false); // '저장하기' 버튼 클릭  -> 모달 창 close
-    console.log('필터 값 저장', veganOption);
+    onClose(false);
   };
 
   useEffect(() => {
@@ -47,7 +46,7 @@ function MapFilterModal({ updateMarkers }) {
   }, [selectedMenuTypes]);
 
   return (
-    <Container onClick={handleModalClick} clicked={isClicked ? 1 : 0}>
+    <Container onClick={handleModalClick}>
       <Inner>
         <Title>맞춤 비건 식당을 찾아보세요</Title>
         <ButtonBox>

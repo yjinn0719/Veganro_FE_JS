@@ -129,12 +129,15 @@ export default function Home() {
                   }
                 />
               ))}
-              <SmallRoundButton title="refresh" onClick={handleCategoryReset} />
+              <FilterButton title="filter" onClick={handleFilterModal} />
+              {showFilterModal && (
+                <MapFilterModal
+                  updateMarkers={updateMarkers}
+                  onClose={setShowFilterModal}
+                />
+              )}
             </Categories>
-            <FilterButton title="filter" onClick={handleFilterModal} />
-            {showFilterModal && (
-              <MapFilterModal updateMarkers={updateMarkers} />
-            )}
+            <SmallRoundButton title="refresh" onClick={handleCategoryReset} />
           </FilterBar>
         </TopBar>
         {error && (

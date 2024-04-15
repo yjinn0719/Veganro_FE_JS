@@ -26,7 +26,7 @@ const Redirection = () => {
 
         localStorage.setItem('Authorization', `${response.data.data.token}`);
 
-        navigate('/');
+        navigate('/signup');
       })
       .catch((error) => {
         console.error('Error during login:', error);

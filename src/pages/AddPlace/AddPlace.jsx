@@ -8,6 +8,7 @@ import PrimaryButton from '@/components/PrimaryButton/PrimaryButton';
 import KakaoAddress from '../../components/KakaoAddress/KakaoAddress';
 import OpenTimeTab from '../../components/OpenTimeTab/OpenTimeTab';
 import { createReportPlace } from '@/apis/api/reportApi';
+import { getAddressCoordinates } from '../../apis/api/addressApi';
 import {
   MainContainer,
   TagContainer,
@@ -26,6 +27,7 @@ function AddPlace() {
   const [placeAddressApi, setPlaceAddressApi] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [snsUrls, setSnsUrls] = useState([]);
+  const [location, setLocation] = useState(null);
   const [selectedTag, setSelectedTag] = useState('월');
   const [timeValues, setTimeValues] = useState({
     월: ['', '', '', ''],
@@ -73,33 +75,23 @@ function AddPlace() {
       address: placeAddressApi,
       address_lot_number: '서울 00-00',
       address_detail: placeAddress || '',
-      location: [126.9710461, 37.5560575],
+      location: location,
       open_times: formattedOpenTimes,
       sns_url: snsUrls.length > 0 ? snsUrls : [],
     };
   };
 
   // const handleSubmit = async () => {
-  //   const data = collectData();
+  //   const data = collectData(); // 데이터를 수집하는 함수 호출
+  //   console.log('Collected Data:', data); // 수집된 전체 데이터 출력
+  //   console.log('Open Times:', data.open_times); // 특히 영업시간 데이터 출력
   //   try {
-  //     const result = await createReportPlace(data);
-  //     console.log(result);
+  //     const result = await createReportPlace(data); // 서버에 데이터 전송
+  //     console.log('Submission Result:', result); // 서버 응답 결과 출력
   //   } catch (error) {
-  //     console.error(error);
+  //     console.error('Submission Error:', error); // 오류 발생 시 콘솔에 오류 출력
   //   }
   // };
-
-  const handleSubmit = async () => {
-    const data = collectData(); // 데이터를 수집하는 함수 호출
-    console.log('Collected Data:', data); // 수집된 전체 데이터 출력
-    console.log('Open Times:', data.open_times); // 특히 영업시간 데이터 출력
-    try {
-      const result = await createReportPlace(data); // 서버에 데이터 전송
-      console.log('Submission Result:', result); // 서버 응답 결과 출력
-    } catch (error) {
-      console.error('Submission Error:', error); // 오류 발생 시 콘솔에 오류 출력
-    }
-  };
 
   const isButtonEnabled =
     placeAddressApi.length > 0 &&
@@ -110,9 +102,18 @@ function AddPlace() {
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 
-  const handleAddressSelect = (address) => {
-    setPlaceAddressApi(address); // 사용자가 선택한 주소를 상태에 저장
-    closeModal(); // 주소 선택 후 모달 닫기
+  const handleAddressSelect = async (address) => {
+    setPlaceAddressApi(address);
+    try {
+      const coordinates = await getAddressCoordinates(address);
+      if (coordinates) {
+        setLocation(coordinates);
+        console.log('좌표:', coordinates);
+      }
+    } catch (error) {
+      console.error('주소를 좌표로 변환하는 중 오류 발생:', error);
+    }
+    closeModal();
   };
 
   const handlePlaceTagClick = (type) => {
@@ -121,6 +122,16 @@ function AddPlace() {
 
   const handleMenuTagClick = (type) => {
     setSelectMenu(type);
+  };
+
+  const handleSubmit = async () => {
+    const data = collectData();
+    try {
+      const result = await createReportPlace(data);
+      console.log(result);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const handleTimeChange = (day, index, value) => {
@@ -137,7 +148,7 @@ function AddPlace() {
     <>
       <MainContainer>
         <Navbar title="가게제보" icon="delete" />
-        {/* <PlaceMap></PlaceMap> */}
+        <PlaceMap address={placeAddressApi} name={placeName}></PlaceMap>
         <AddPlaceText>가게 위치</AddPlaceText>
         <AddressInputContainer>
           <InputBox

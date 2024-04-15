@@ -2,7 +2,7 @@ import { Route, Routes } from 'react-router-dom';
 import { PATH } from '@/constants/router';
 import Home from '@/pages/Home/Home';
 import Auth from '@/pages/Auth/Auth';
-// import SignUp from '@/pages/SignUp/SignUp';
+import SignUp from '@/pages/SignUp/SignUp';
 import AddPlace from '@/pages/AddPlace/AddPlace';
 import Review from '@/pages/ReviewDetail/ReviewDetail';
 import PlaceDetail from '@/pages/PlaceDetail/PlaceDetail';
@@ -19,7 +19,7 @@ const MyRouter = () => {
       <Route path={PATH.MAIN} element={<Home />} />
       <Route path={PATH.AUTH} element={<Auth />} />
       <Route path={PATH.REDIRECTION} element={<Redirection />} />
-      {/* <Route path={PATH.SIGNUP} element={<SignUp />} /> */}
+      <Route path={PATH.SIGNUP} element={<SignUp />} />
       <Route path={PATH.ADDPLACE} element={<AddPlace />} />
       <Route path={PATH.REVIEW} element={<Review />} />
       <Route path={PATH.PLACEDETAIL} element={<PlaceDetail />} />

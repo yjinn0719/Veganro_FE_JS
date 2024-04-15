@@ -39,7 +39,7 @@ export default function EditMyPage({ title = '프로필 설정', nickname }) {
     try {
       await updateUserData({ nickname: newNickname, tag: activeTag });
       console.log('저장완료');
-      navigate(`/user/:userid`);
+      navigate(`/user/${userid}`);
     } catch (error) {
       if (error.response && error.response.status === 409) {
         setErrorMessage('이미 사용 중인 닉네임입니다.');

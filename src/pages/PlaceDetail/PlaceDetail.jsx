@@ -1,5 +1,5 @@
 import React from 'react';
-import { ClipLoader } from 'react-spinners';
+import Spinner from '@/components/Spinner/Spinner';
 import { useParams } from 'react-router-dom';
 import { IoNavigateCircleOutline } from 'react-icons/io5';
 import { useGetPlace } from '../../hooks/usePlace';
@@ -52,11 +52,7 @@ export default function PlaceDetail() {
     return (
       <MainContainer>
         <Loading>
-          <ClipLoader
-            color="#36d7b7"
-            loading={placeDataLoading || userLocationLoading}
-            size={150}
-          />
+          <Spinner />
           <div>Loading...</div>
         </Loading>
       </MainContainer>

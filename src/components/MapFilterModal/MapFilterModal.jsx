@@ -17,6 +17,7 @@ function MapFilterModal({ updateMarkers }) {
   const [isSavedActive, setIsSavedActive] = useState(false);
 
   const handleModalClick = () => {
+    console.log(isClicked);
     setIsClicked(!isClicked);
   };
 
@@ -30,10 +31,15 @@ function MapFilterModal({ updateMarkers }) {
     });
   };
 
+  // 세영님, '전체 채식 메뉴'는 true, '일부 채식 메뉴'는 false인 bool값으로 변경해서 여기도 로직 변경했습니다
   const handleSaveClick = () => {
-    updateMarkers(selectedMenuTypes);
-    setIsClicked(false);
-    console.log('필터 값 저장', selectedMenuTypes);
+    const isFullVegan = selectedMenuTypes.includes(VEGAN_MENU_TYPES[0]);
+    const isPartialVegan = selectedMenuTypes.includes(VEGAN_MENU_TYPES[1]);
+
+    const veganOption = isFullVegan ? true : isPartialVegan ? false : null;
+    updateMarkers(veganOption);
+    setIsClicked(false); // '저장하기' 버튼 클릭  -> 모달 창 close
+    console.log('필터 값 저장', veganOption);
   };
 
   useEffect(() => {

@@ -36,10 +36,11 @@ const PlaceMarkers = ({
         ),
       );
 
-      const menuTypeFilteredMarkers = categoryFilteredMarkers.filter((place) =>
-        selectedMenuTypes.length > 0
-          ? selectedMenuTypes.includes(place.vegan_option)
-          : true,
+      // 세영님, selectedMenuTypes를 String[] -> bool값으로 변경해서 placeMarkers도 그에 맞게 변경했습니다
+      const menuTypeFilteredMarkers = categoryFilteredMarkers.filter(
+        (place) =>
+          selectedMenuTypes === null ||
+          place.vegan_option === selectedMenuTypes,
       );
 
       setFilteredMarkers(

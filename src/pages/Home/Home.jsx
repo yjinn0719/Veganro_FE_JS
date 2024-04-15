@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
+
+import { selectedMenuTypeState } from '@/states/filterState';
+
 import KakaoMap from '../KakaoMap/KakaoMap';
 import useCurrentLocation from '@/hooks/useCurrentLocation';
 import SearchBar from '@/components/SearchBar/SearchBar';
@@ -26,7 +29,11 @@ export default function Home() {
   const navigate = useNavigate();
   const { location, error, isLoading, reloadLocation } = useCurrentLocation();
   const [showFilterModal, setShowFilterModal] = useState(false);
-  const [selectedMenuTypes, setSelectedMenuTypes] = useState([]);
+
+  // 세영님, menutypes값 recoil로 넘겼습니다
+  const [selectedMenuTypes, setSelectedMenuTypes] = useRecoilState(
+    selectedMenuTypeState,
+  );
 
   // 카테고리 상태 객체 배열로 초기화
   const [categoriesStatus, setCategoriesStatus] = useState(() => {
@@ -43,7 +50,7 @@ export default function Home() {
   // 앱 최초 진입, 현재 위치 불러오기
   useEffect(() => {
     reloadLocation(); // 위치 재요청
-  }, []);
+  }, [selectedMenuTypes]); // 세영님,
 
   // 버튼 클릭 시 현재 위치 업데이트
   const handleRelocateClick = (e) => {
@@ -78,6 +85,11 @@ export default function Home() {
         clicked: 0,
       })),
     );
+    // Recoil 상태 초기화
+    setSelectedCategories([]);
+
+    // 선택한 메뉴 유형 초기화
+    setSelectedMenuTypes(null);
   };
 
   // 필터 모달 핸들러
@@ -90,6 +102,8 @@ export default function Home() {
   };
 
   const updateMarkers = (menuTypes) => {
+    // 세영님, menuTypes String을 Bool값으로 바꿨습니다
+    // '전체 메뉴 비건' 선택 시 true, '일부 메뉴 비건' 선택 시 false
     setSelectedMenuTypes(menuTypes);
   };
 

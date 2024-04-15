@@ -25,7 +25,7 @@ const PlaceMarkers = ({
         setIsLoading(false);
       }
     };
-    fetchPlacesData(); // 컴포넌트 마운트 되었을때, 데이터 부르기
+    fetchPlacesData();
   }, []);
 
   useEffect(() => {
@@ -36,7 +36,6 @@ const PlaceMarkers = ({
         ),
       );
 
-      // 세영님, selectedMenuTypes를 String[] -> bool값으로 변경해서 placeMarkers도 그에 맞게 변경했습니다
       const menuTypeFilteredMarkers = categoryFilteredMarkers.filter(
         (place) =>
           selectedMenuTypes === null ||
@@ -81,7 +80,7 @@ const PlaceMarkers = ({
           clickable={true}
           onClick={() => handleMarkerMove(marker.id, marker.position)}
           image={{
-            src: marker.categoryImg,
+            src: selectedMarkerId === marker.id ? null : marker.categoryImg,
             size: { width: 30, height: 30 },
           }}
         ></MapMarker>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import InputBox from '@/components/InputBox/InputBox';
 import Navbar from '@/components/Navbar/Navbar';
 import PlaceMap from '@/components/PlaceMap/PlaceMap';
@@ -28,16 +28,43 @@ function AddPlace() {
   const [snsUrls, setSnsUrls] = useState([]);
   const [selectedTag, setSelectedTag] = useState('월');
   const [timeValues, setTimeValues] = useState({
-    월: { 0: '', 1: '', 2: '', 3: '' },
-    화: { 0: '', 1: '', 2: '', 3: '' },
-    수: { 0: '', 1: '', 2: '', 3: '' },
-    목: { 0: '', 1: '', 2: '', 3: '' },
-    금: { 0: '', 1: '', 2: '', 3: '' },
-    토: { 0: '', 1: '', 2: '', 3: '' },
-    일: { 0: '', 1: '', 2: '', 3: '' },
+    월: ['', '', '', ''],
+    화: ['', '', '', ''],
+    수: ['', '', '', ''],
+    목: ['', '', '', ''],
+    금: ['', '', '', ''],
+    토: ['', '', '', ''],
+    일: ['', '', '', ''],
   });
 
+  useEffect(() => {
+    console.log('Updated timeValues:', timeValues);
+  }, [timeValues]);
+
   const collectData = () => {
+    const weekDays = ['월', '화', '수', '목', '금', '토', '일'];
+    const formattedOpenTimes = weekDays.map((day) => {
+      const times = timeValues[day];
+      if (
+        times.length === 0 ||
+        (times[0] === '' &&
+          times[1] === '' &&
+          times[2] === '' &&
+          times[3] === '')
+      ) {
+        return `${day}: 휴무`;
+      } else {
+        let timeDescriptions = [];
+        if (times[0] && times[1]) {
+          timeDescriptions.push(`${times[0]}-${times[1]}`);
+        }
+        if (times[2] && times[3]) {
+          timeDescriptions.push(`브레이크타임: ${times[2]}-${times[3]}`);
+        }
+        return `${day}: ${timeDescriptions.length > 0 ? timeDescriptions.join(', ') : '정보 없음'}`;
+      }
+    });
+
     return {
       name: placeName,
       category: selectPlace,
@@ -47,18 +74,30 @@ function AddPlace() {
       address_lot_number: '서울 00-00',
       address_detail: placeAddress || '',
       location: [126.9710461, 37.5560575],
-      open_times: timeValues.length > 0 ? timeValues : [],
+      open_times: formattedOpenTimes,
       sns_url: snsUrls.length > 0 ? snsUrls : [],
     };
   };
 
+  // const handleSubmit = async () => {
+  //   const data = collectData();
+  //   try {
+  //     const result = await createReportPlace(data);
+  //     console.log(result);
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
+
   const handleSubmit = async () => {
-    const data = collectData();
+    const data = collectData(); // 데이터를 수집하는 함수 호출
+    console.log('Collected Data:', data); // 수집된 전체 데이터 출력
+    console.log('Open Times:', data.open_times); // 특히 영업시간 데이터 출력
     try {
-      const result = await createReportPlace(data);
-      console.log(result);
+      const result = await createReportPlace(data); // 서버에 데이터 전송
+      console.log('Submission Result:', result); // 서버 응답 결과 출력
     } catch (error) {
-      console.error(error);
+      console.error('Submission Error:', error); // 오류 발생 시 콘솔에 오류 출력
     }
   };
 
@@ -85,10 +124,14 @@ function AddPlace() {
   };
 
   const handleTimeChange = (day, index, value) => {
-    setTimeValues((prevValues) => ({
-      ...prevValues,
-      [day]: { ...prevValues[day], [index]: value },
-    }));
+    setTimeValues((prevValues) => {
+      const newTimes = [...prevValues[day]]; // 현재 요일의 시간 배열을 복사
+      newTimes[index] = value; // 특정 인덱스 위치에 새로운 시간 값 저장
+      return {
+        ...prevValues,
+        [day]: newTimes, // 업데이트된 시간 배열로 상태 갱신
+      };
+    });
   };
   return (
     <>

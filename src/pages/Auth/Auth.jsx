@@ -5,7 +5,8 @@ import { AuthContainer, LogoContainer, LogoContent } from './Auth.styles';
 
 function Auth() {
   const REST_API_KEY = 'b3bc79737b4fcbc77096caf5a631f774';
-  const REDIRECT_URI = 'http://localhost:4000/auth/kakao/callback';
+  const REDIRECT_URI =
+    'https://veganro-frontend.vercel.app/auth/kakao/callback';
   const link = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
 
   const loginHandler = () => {

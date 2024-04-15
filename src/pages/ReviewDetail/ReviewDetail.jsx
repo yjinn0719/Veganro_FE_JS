@@ -36,6 +36,8 @@ export default function Review() {
   } = useGetReviewsByPlaceId(placeid);
   const { data: placeData } = useGetPlace(placeid);
   const [isReviewDrawerOpen, setIsReviewDrawerOpen] = useState(false);
+  const [selectedReviewId, setSelectedReviewId] = useState(null);
+
   const [submittedReviews, setSubmittedReviews] = useState([]);
   const handleWriteReviewClick = () => {
     toggleDrawer();
@@ -96,6 +98,8 @@ export default function Review() {
                     veganLevel={review.user_id.tag}
                     comment={review.content}
                     date={review.updatedAt}
+                    selectedReviewId={selectedReviewId}
+                    onSelectReviewId={setSelectedReviewId}
                   />
                 )),
               )}

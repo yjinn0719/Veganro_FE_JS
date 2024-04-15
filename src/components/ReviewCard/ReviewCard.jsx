@@ -27,13 +27,11 @@ export default function ReviewCard({
   selectedReviewId,
   onSelectReviewId,
   placeId,
-  isOpened,
 }) {
   const [isReviewCurrentUser, setIsReviewCurrentUser] = useState(false);
   const [isEditDrawerOpen, setIsEditDrawerOpen] = useState(false);
   const [isComplaintDrawerOpen, setIsComplaintDrawerOpen] = useState(false);
   const [clickedReviewId, setClickedReviewId] = useState(null);
-  console.log(isOpened);
 
   const { placeid } = useParams();
   const effectivePlaceId = placeId || placeid;
@@ -74,13 +72,13 @@ export default function ReviewCard({
   };
 
   useEffect(() => {
-      if(selectedReviewId !== null) {
-          if(selectedReviewId !== clickedReviewId) {
-              setIsEditDrawerOpen(false);
-              setIsComplaintDrawerOpen(false);
-          }
+    if (selectedReviewId !== null) {
+      if (selectedReviewId !== clickedReviewId) {
+        setIsEditDrawerOpen(false);
+        setIsComplaintDrawerOpen(false);
       }
-  },[selectedReviewId]);
+    }
+  }, [selectedReviewId]);
 
   return (
     <>

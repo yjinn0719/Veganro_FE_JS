@@ -44,7 +44,6 @@ export default function Review({
     toggleDrawer();
     document.body.style.overflow = 'hidden';
   };
-  console.log(isOpened);
   useEffect(() => {
     if (!isReviewDrawerOpen) {
       document.body.style.overflow = 'auto';

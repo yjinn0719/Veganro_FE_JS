@@ -11,6 +11,7 @@ import { createReportPlace } from '@/apis/api/reportApi';
 import { getAddressCoordinates } from '../../apis/api/addressApi';
 import {
   MainContainer,
+  MapContainer,
   TagContainer,
   AddPlaceText,
   AddressInputContainer,
@@ -77,18 +78,6 @@ function AddPlace() {
     };
   };
 
-  // const handleSubmit = async () => {
-  //   const data = collectData(); // 데이터를 수집하는 함수 호출
-  //   console.log('Collected Data:', data); // 수집된 전체 데이터 출력
-  //   console.log('Open Times:', data.open_times); // 특히 영업시간 데이터 출력
-  //   try {
-  //     const result = await createReportPlace(data); // 서버에 데이터 전송
-  //     console.log('Submission Result:', result); // 서버 응답 결과 출력
-  //   } catch (error) {
-  //     console.error('Submission Error:', error); // 오류 발생 시 콘솔에 오류 출력
-  //   }
-  // };
-
   const isButtonEnabled =
     placeAddressApi.length > 0 &&
     placeName.length > 0 &&
@@ -145,7 +134,9 @@ function AddPlace() {
     <>
       <MainContainer>
         <Navbar title="가게제보" icon="delete" />
-        <PlaceMap address={placeAddressApi} name={placeName}></PlaceMap>
+        <MapContainer>
+          <PlaceMap address={placeAddressApi} name={placeName}></PlaceMap>
+        </MapContainer>
         <AddPlaceText>가게 위치</AddPlaceText>
         <AddressInputContainer>
           <InputBox

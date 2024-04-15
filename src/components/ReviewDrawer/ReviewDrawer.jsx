@@ -13,6 +13,7 @@ import {
   ReviewTextAreaContainer,
   ReviewPlaceholder,
 } from './ReviewDrawer.styles';
+import { notify } from '../../hooks/useToast';
 
 export default function ReviewDrawer({
   address,
@@ -36,8 +37,10 @@ export default function ReviewDrawer({
         };
         if (submitText) {
           await postReview(reviewData);
+          notify('success', '리뷰가 등록되었습니다.');
         } else {
           await updateReview({ reviewId: reviewIndex, content: reviewText });
+          notify('success', '리뷰가 수정되었습니다.');
         }
         setReviewText('');
 

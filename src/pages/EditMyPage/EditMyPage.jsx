@@ -20,6 +20,7 @@ import VeganTag from '../../components/VeganTag/VeganTag';
 import InputBox from '../../components/InputBox/InputBox';
 import { updateUserData } from '../../apis/api/userInfoApi';
 import { useNavigate } from 'react-router-dom';
+import { notify } from '@/hooks/useToast';
 
 export default function EditMyPage({ title = '프로필 설정', nickname }) {
   const [newNickname, setNewNickname] = useState(nickname);
@@ -33,13 +34,12 @@ export default function EditMyPage({ title = '프로필 설정', nickname }) {
 
   const handleTagClick = (tag) => {
     setActiveTag(tag);
-    console.log(tag);
   };
   const handleSave = async () => {
     try {
       await updateUserData({ nickname: newNickname, tag: activeTag });
-      console.log('저장완료');
-      navigate(`/user/${userid}`);
+      notify('success', '프로필이 등록되었습니다.');
+      navigate(`/`);
     } catch (error) {
       if (error.response && error.response.status === 409) {
         setErrorMessage('이미 사용 중인 닉네임입니다.');
@@ -120,7 +120,7 @@ export default function EditMyPage({ title = '프로필 설정', nickname }) {
             <SecondaryButton
               title="취소"
               color="gray"
-              onClick={() => navigate(`/`)}
+              onClick={() => navigate(`/user/${userid}`)}
             />
           </ButtonContainer>
           <ButtonContainer>

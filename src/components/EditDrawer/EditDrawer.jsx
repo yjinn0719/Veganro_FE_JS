@@ -1,5 +1,6 @@
 import Drawer from '../Drawer/Drawer';
 import { useState, useEffect } from 'react';
+import { notify } from '../../hooks/useToast';
 
 import { ItemWrapper, ItemText } from './EditDrawer.styles';
 import { useDeleteReview } from '../../hooks/useReview';
@@ -28,9 +29,7 @@ export default function EditDrawer({ isOpened, address, reviewId }) {
   const handleDelete = async () => {
     try {
       await mutate(reviewId);
-      setTimeout(() => {
-        window.location.reload();
-      }, 500);
+      notify('error', '리뷰가 삭제되었습니다.');
     } catch (error) {
       console.error('Error deleting review:', error);
     }

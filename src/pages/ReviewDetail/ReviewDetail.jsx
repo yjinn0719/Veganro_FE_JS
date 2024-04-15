@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useInView } from 'react-intersection-observer';
 import { useGetReviewsByPlaceId } from '../../hooks/useReview';
+import Spinner from '@/components/Spinner/Spinner';
+
 import { useGetPlace } from '../../hooks/usePlace';
 import { Link } from 'react-scroll';
 import ScrollToTop from '@/components/ScrollToTop/ScrollToTop';
@@ -59,7 +61,7 @@ export default function Review() {
     setIsReviewDrawerOpen(!isReviewDrawerOpen);
   };
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <Spinner />;
   if (isError) return <div>Error: {error.message}</div>;
 
   return (

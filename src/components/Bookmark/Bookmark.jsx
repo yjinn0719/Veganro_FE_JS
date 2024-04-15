@@ -5,6 +5,7 @@ import BookmarkIcon from '@mui/icons-material/Bookmark';
 import BookmarkBorderOutlinedIcon from '@mui/icons-material/BookmarkBorderOutlined';
 import { usePostBookmark, useDeleteBookmark } from '../../hooks/useUser';
 import { useGetBookmarkByPlaceId } from '../../hooks/usePlace';
+import { notify } from '../../hooks/useToast';
 
 function Bookmark() {
   const { placeid } = useParams();
@@ -17,7 +18,7 @@ function Bookmark() {
   useEffect(() => {
     if (bookmarkDataByPlaceId) {
       const bookmarkStatus = bookmarkDataByPlaceId.isBookmarked;
-      const bookmarkId = bookmarkDataByPlaceId._id;
+      const bookmarkId = bookmarkDataByPlaceId.bookmarkId;
       setBookmarkId(bookmarkId);
       setIsClicked(bookmarkStatus);
     } else {
@@ -36,9 +37,12 @@ function Bookmark() {
     try {
       if (newValue) {
         await postBookmark({ place_id: placeid });
+        notify('success', '북마크에 추가되었습니다.');
       } else {
         if (bookmarkId) {
           await deleteBookmark(bookmarkId);
+          notify('warning', '북마크가 삭제되었습니다.');
+
           setBookmarkId(null);
         }
       }

@@ -5,6 +5,7 @@ import {
   ItemText,
 } from '@/components/EditDrawer/EditDrawer.styles';
 import { useUpdateComplaint } from '@/hooks/useUser';
+import { notify } from '../../hooks/useToast';
 
 export default function ComplaintDrawer({ isOpened, reviewId: reviewId }) {
   const [isComplaintDrawerOpen, setIsComplaintDrawerOpen] = useState(false);
@@ -12,9 +13,7 @@ export default function ComplaintDrawer({ isOpened, reviewId: reviewId }) {
   const handleReportClick = async () => {
     try {
       await mutate(reviewId, reviewId);
-      setTimeout(() => {
-        window.location.reload();
-      }, 500);
+      notify('error', '리뷰가 신고되었습니다.');
     } catch (error) {
       console.error('Error reporting review:', error);
     }

@@ -23,6 +23,8 @@ export default function ReviewCard({
   veganLevel,
   comment,
   date,
+  selectedReviewId,
+  onSelectReviewId,
 }) {
   const [isReviewCurrentUser, setIsReviewCurrentUser] = useState(false);
   const [isEditDrawerOpen, setIsEditDrawerOpen] = useState(false);
@@ -59,12 +61,22 @@ export default function ReviewCard({
 
   const handleReviewCardClick = () => {
     setClickedReviewId(reviewId);
+    onSelectReviewId(reviewId);
     if (isReviewCurrentUser) {
       toggleEditDrawer();
     } else {
       toggleComplaintReview();
     }
   };
+
+  useEffect(() => {
+      if(selectedReviewId !== null) {
+          if(selectedReviewId !== clickedReviewId) {
+              setIsEditDrawerOpen(false);
+              setIsComplaintDrawerOpen(false);
+          }
+      }
+  },[selectedReviewId]);
 
   return (
     <>
@@ -85,7 +97,6 @@ export default function ReviewCard({
         <CommentDate>{date}</CommentDate>
         <CommentText>{comment}</CommentText>
       </CommentContainer>
-      {(isEditDrawerOpen || isComplaintDrawerOpen) && (
         <DrawerContainer>
           {isEditDrawerOpen && (
             <EditDrawer
@@ -102,7 +113,6 @@ export default function ReviewCard({
             />
           )}
         </DrawerContainer>
-      )}
     </>
   );
 }

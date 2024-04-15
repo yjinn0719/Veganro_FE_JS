@@ -50,6 +50,8 @@ export default function Review({ address }) {
     setIsReviewDrawerOpen(!isReviewDrawerOpen);
   };
 
+  const [selectedReviewId, setSelectedReviewId] = useState(null);
+
   if (isLoading) return <div>Loading...</div>;
   if (isError) return <div>Error: {error.message}</div>;
 
@@ -85,6 +87,8 @@ export default function Review({ address }) {
                   veganLevel={review.user_id.tag}
                   comment={review.content}
                   date={review.updatedAt}
+                  selectedReviewId={selectedReviewId}
+                  onSelectReviewId={setSelectedReviewId}
                 />
               ))}
 

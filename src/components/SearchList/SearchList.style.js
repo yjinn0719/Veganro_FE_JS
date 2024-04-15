@@ -19,6 +19,12 @@ export const TextBox = styled.div`
   align-items: flex-start;
   gap: 8px;
 `;
+
+export const TitleBox = styled.div`
+  display: flex;
+  align-items: center;
+  // width: 156px;
+`;
 export const PlaceName = styled.div`
   overflow: hidden;
   color: var(--Gray-800, #383838);
@@ -28,6 +34,21 @@ export const PlaceName = styled.div`
   text-overflow: ellipsis;
   font-family: Pretendard;
   font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+`;
+export const VeganMenu = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4px 6px;
+  margin-left: 8px;
+  gap: 10px;
+  border-radius: 4px;
+  background: rgba(79, 131, 55, 0.1);
+  color: var(--Green-500, #4f8337);
+  font-size: 12px;
   font-style: normal;
   font-weight: 600;
   line-height: normal;

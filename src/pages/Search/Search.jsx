@@ -10,8 +10,10 @@ import { selectedCategoryState } from '@/states/filterState';
 import SearchBar from '@/components/SearchBar/SearchBar';
 import PlaceCategory from '@/components/PlaceCategory/PlaceCategory';
 import SearchList from '@/components/SearchList/SearchList';
-import SmallRoundButton from '@/components/SmallRoundButton/SmallRoundButton';
 import MenuButton from '@/components/MenuButton/MenuButton';
+import SmallRoundButton from '@/components/SmallRoundButton/SmallRoundButton';
+import MapFilterModal from '@/components/MapFilterModal/MapFilterModal';
+
 import {
   Categories,
   Wrapper,
@@ -66,6 +68,11 @@ export default function Search() {
           place.address.toLowerCase().includes(searchTerm.toLowerCase()),
       )
     : places;
+
+  // 유저의 현재 위치 기준, places 가까운 순 정렬
+  const sortedPlaces = [...filteredPlaces].sort(
+    (a, b) => a.distance - b.distance,
+  );
 
   // 카테고리 선택 핸들러
   const handleCategorySelect = (categoryName) => {
@@ -142,10 +149,11 @@ export default function Search() {
         </SearchNav>
         <ScrollableList>
           {places &&
-            filteredPlaces.map((place) => (
+            sortedPlaces.map((place) => (
               <SearchList
                 key={place._id}
                 name={place.name}
+                vegan_option={place.vegan_option}
                 distance={`${place.distance}km`}
                 address={`${place.address} ${place.address_detail}`}
                 tel={place.tel}
@@ -156,7 +164,7 @@ export default function Search() {
           <MapViewButton
             className="map-view-button"
             title="지도에서 다시 찾기"
-            onClick={() => console.log('Clicked')}
+            onClick={() => navigate('/')}
           />
           {/* <MenuButton /> */}
         </BottomBar>

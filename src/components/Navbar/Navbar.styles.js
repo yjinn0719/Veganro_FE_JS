@@ -16,6 +16,7 @@ export const NavContainer = styled.div`
   right: 0;
   margin: auto;
   box-sizing: border-box;
+  z-index: 999;
 `;
 
 export const NavTitle = styled.p`

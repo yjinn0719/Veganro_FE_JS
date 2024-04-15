@@ -51,7 +51,7 @@ const SelectBox = ({ placeholder, value, onChange, options }) => {
     <SelectBoxContainer>
       <Select
         classNamePrefix="select"
-        value={options.find((option) => option.value === value)}
+        value={options.find((option) => option.value === value) ?? ''}
         onChange={(option) => onChange(option.value)}
         placeholder={placeholder}
         options={options}

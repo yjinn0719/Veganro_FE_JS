@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { RecoilRoot } from 'recoil';
 import MyRouter from './routes/index';

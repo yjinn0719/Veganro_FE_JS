@@ -14,6 +14,7 @@ export default function Drawer({ height, children, isOpened, toggleDrawer }) {
   const [contentRef] = useMeasure();
   const dragControls = useDragControls();
 
+  console.log(isOpened);
   return (
     <DrawerContainer>
       <BackgroundOverlay

@@ -96,7 +96,15 @@ const Container = styled.div`
   display: inline-flex;
 `;
 
+const DrawerContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
 export {
+  DrawerContainer,
   CommentContainer,
   CommentHeader,
   CommentInfo,

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { VegTagButton, VegTagTitle } from './VeganTag.styles';
 
-function VeganTag({ title, onClick, $isActive }) {
+function VeganTag({ title, onClick, isActive }) {
   const [isClickable, setIsClickable] = useState(true);
 
   const handleClick = () => {
@@ -15,7 +15,7 @@ function VeganTag({ title, onClick, $isActive }) {
   };
 
   return (
-    <VegTagButton onClick={handleClick} isActive={$isActive}>
+    <VegTagButton onClick={handleClick} $isActive={isActive}>
       <VegTagTitle>{title}</VegTagTitle>
     </VegTagButton>
   );

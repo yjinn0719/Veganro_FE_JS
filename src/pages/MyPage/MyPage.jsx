@@ -1,3 +1,5 @@
+import React, { Suspense } from 'react';
+import Spinner from '@/components/Spinner/Spinner';
 import TabBar from '@/components/TabBar/TabBar';
 import Navbar from '@/components/Navbar/Navbar';
 import { useParams } from 'react-router-dom';
@@ -16,8 +18,10 @@ import {
 export default function MyPage() {
   const { userid } = useParams();
   const { data: userData, isLoading, isError, error } = useGetUser(userid);
-  if (isLoading) return <div>Loading...</div>;
-  if (isError) return <div>Error: {error.message}</div>;
+
+  if (isLoading) return <Spinner />; // 로딩 중에는 스피너 표시
+  if (isError) return <div>Error: {error.message}</div>; // 에러 발생 시 에러 메시지 표시
+
   return (
     <Container>
       <Navbar icon="setting" title="마이페이지" />

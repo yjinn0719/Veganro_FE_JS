@@ -12,6 +12,7 @@ import {
   updateUserData,
   postBookmark,
   deleteBookmark,
+  updateComplaint,
 } from '../apis/api/userInfoApi';
 
 export const useGetUser = (userId) => {
@@ -27,14 +28,18 @@ export const useGetUser = (userId) => {
 export const useUpdateUser = () => {
   return useMutation({ mutationFn: updateUserData });
 };
-
+export const useUpdateComplaint = () => {
+  return useMutation({ mutationFn: updateComplaint });
+};
 export const useGetReviewsByUserId = (pageSize = 10) => {
   return useInfiniteQuery({
     queryKey: ['getReviewsByUserId'],
     queryFn: ({ pageParam }) => getReviewsByUserId(pageParam, pageSize),
     initialPageParam: 1,
     getNextPageParam: (lastPage, allPages) => {
-      const nextPage = lastPage.length ? allPages.length + 1 : undefined;
+      const nextPage = lastPage.reviews.length
+        ? allPages.length + 1
+        : undefined;
       return nextPage;
     },
   });
@@ -64,7 +69,7 @@ export const useGetBookmarkedByUserId = (pageSize = 10) => {
   });
 };
 
-export const useGetBookmarked = (pageNumber = 1, pageSize = 1000) => {
+export const useGetBookmarked = (pageNumber = 1, pageSize = 10) => {
   return useQuery({
     queryKey: ['getBookmarked', pageNumber, pageSize],
     queryFn: () => getBookmarkedByUserId(pageNumber, pageSize),

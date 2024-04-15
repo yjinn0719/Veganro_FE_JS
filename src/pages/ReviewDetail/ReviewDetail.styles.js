@@ -1,5 +1,18 @@
 import styled from 'styled-components';
 
+const Container = styled.div`
+  position: relative;
+  top: 40px;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  padding: 16px;
+  background: white;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 12px;
+  display: inline-flex;
+`;
 const ReviewContainer = styled.div`
 width: 100%;
 max-width: 480px;
@@ -21,4 +34,4 @@ const Content = styled.div`
   width: 95%;
 `;
 
-export { ReviewContainer, Content };
+export { ReviewContainer, Content, Container };

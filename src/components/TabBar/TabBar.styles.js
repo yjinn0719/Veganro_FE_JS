@@ -17,8 +17,8 @@ const Container = styled.div`
 
 const TabContainerParent = styled.div`
   position: sticky;
-  top: 50px;
-  z-index: 1;
+  top: 48px;
+  z-index: 999;
   background-color: #fff;
 `;
 
@@ -34,12 +34,12 @@ const Tab = styled.div`
   height: 43px;
   padding: 12px;
   border-bottom: ${(props) =>
-    props.active ? '2px #4F8337 solid' : '1px #EFEFEF solid'};
+    props.$active ? '2px #4F8337 solid' : '1px #EFEFEF solid'};
   justify-content: center;
   align-items: center;
   display: flex;
   text-align: center;
-  color: ${(props) => (props.active ? '#4F8337' : '#ADADAD')};
+  color: ${(props) => (props.$active ? '#4F8337' : '#ADADAD')};
   font-size: 16px;
   font-family: Pretendard;
   font-weight: 600;
@@ -52,7 +52,6 @@ const TabContent = styled.div`
 `;
 
 const DataContent = styled.div`
-  min-height: 3000px;
   gap: 10px;
   display: flex;
   flex-direction: column;

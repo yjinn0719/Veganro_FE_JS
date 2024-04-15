@@ -3,40 +3,32 @@ import { useParams } from 'react-router-dom';
 import { BookmarkContainer, BookmarkContent } from './Bookmark.styles';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import BookmarkBorderOutlinedIcon from '@mui/icons-material/BookmarkBorderOutlined';
-import {
-  useGetBookmarked,
-  usePostBookmark,
-  useDeleteBookmark,
-} from '../../hooks/useUser';
+import { usePostBookmark, useDeleteBookmark } from '../../hooks/useUser';
+import { useGetBookmarkByPlaceId } from '../../hooks/usePlace';
+import { notify } from '../../hooks/useToast';
 
 function Bookmark() {
   const { placeid } = useParams();
-  const { data: bookmarkData } = useGetBookmarked();
+  const { data: bookmarkDataByPlaceId } = useGetBookmarkByPlaceId(placeid);
+
   const [isClicked, setIsClicked] = useState(false);
   const [bookmarkId, setBookmarkId] = useState(null);
-
   const { mutate: postBookmark } = usePostBookmark();
   const { mutate: deleteBookmark } = useDeleteBookmark();
-
   useEffect(() => {
-    if (bookmarkData) {
-      const bookmarkIdByUser = bookmarkData.map((data) => data.place_id._id);
-      if (bookmarkIdByUser.includes(placeid)) {
-        setIsClicked(true);
-        const bookmark = bookmarkData.find(
-          (data) => data.place_id._id === placeid,
-        );
-        setBookmarkId(bookmark._id);
-      } else {
-        setIsClicked(false);
-        setBookmarkId(null);
-      }
+    if (bookmarkDataByPlaceId) {
+      const bookmarkStatus = bookmarkDataByPlaceId.isBookmarked;
+      const bookmarkId = bookmarkDataByPlaceId.bookmarkId;
+      setBookmarkId(bookmarkId);
+      setIsClicked(bookmarkStatus);
+    } else {
+      setIsClicked(false);
+      setBookmarkId(null);
     }
-  }, [bookmarkData, placeid]);
+  }, [bookmarkDataByPlaceId, placeid]);
 
   const handleClick = async () => {
     if (!placeid) {
-      // placeid가 없으면 처리하지 않음
       return;
     }
 
@@ -45,9 +37,12 @@ function Bookmark() {
     try {
       if (newValue) {
         await postBookmark({ place_id: placeid });
+        notify('success', '북마크에 추가되었습니다.');
       } else {
         if (bookmarkId) {
           await deleteBookmark(bookmarkId);
+          notify('warning', '북마크가 삭제되었습니다.');
+
           setBookmarkId(null);
         }
       }

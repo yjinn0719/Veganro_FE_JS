@@ -30,7 +30,7 @@ const ContentContainer = styled.div`
 
 const ImageSection = styled.div`
   width: 100%;
-  margin-top: 20px;
+  margin-top: 34px;
   height: 380px;
   padding-bottom: 16px;
   padding-left: 16px;

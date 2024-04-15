@@ -25,13 +25,14 @@ import {
   selectedMenuTypeState,
   selectedCategoryState,
 } from '@/states/filterState';
+import { isMenuOpenState } from '@/states/menuOpenState';
 
 export default function Home() {
   const navigate = useNavigate();
   const { location, error, isLoading, reloadLocation } = useCurrentLocation();
   const [showFilterModal, setShowFilterModal] = useState(false);
   const [isButtonActive, setIsButtonActive] = useState(false);
-
+  const [isMenuOpen, setIsMenuOpen] = useRecoilState(isMenuOpenState);
   const [selectedMenuTypes, setSelectedMenuTypes] = useRecoilState(
     selectedMenuTypeState,
   );
@@ -134,6 +135,7 @@ export default function Home() {
                 <MapFilterModal
                   updateMarkers={updateMarkers}
                   onClose={setShowFilterModal}
+                  setIsButtonActive={setIsButtonActive}
                 />
               )}
             </Categories>
@@ -163,7 +165,7 @@ export default function Home() {
             onClick={handleRelocateClick}
           />
           {/* <ListViewButton className="list-view-button" title="리스트뷰" /> */}
-          <MenuButton />
+          <MenuButton isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
         </BottomBar>
       </Wrapper>
     </>

@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import { useRecoilState } from 'recoil';
 import { MapMarker } from 'react-kakao-maps-sdk';
 import { getAllPlaces } from '@/apis';
 import PlaceInfoModal from '@/components/PlaceInfoModal/PlaceInfoModal';
+import { isMenuOpenState } from '@/states/menuOpenState';
+import { isModalOpenState } from '@/states/placeModalState';
 
 const PlaceMarkers = ({
   categoriesStatus,
@@ -11,8 +14,9 @@ const PlaceMarkers = ({
   const [placeData, setPlaceData] = useState([]);
   const [filteredMarkers, setFilteredMarkers] = useState([]);
   const [selectedMarkerId, setSelectedMarkerId] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useRecoilState(isModalOpenState);
+  const [isMenuOpen, setIsMenuOpen] = useRecoilState(isMenuOpenState);
 
   useEffect(() => {
     const fetchPlacesData = async () => {
@@ -57,15 +61,17 @@ const PlaceMarkers = ({
     }
   }, [placeData, categoriesStatus, selectedMenuTypes, isLoading]);
 
+  useEffect(() => {
+    if (isMenuOpen) {
+      setIsModalOpen(false);
+    }
+  }, [isMenuOpen]);
+
   // 식당 상세 페이지 이동 핸들러
   const handleMarkerMove = (id, position) => {
     setSelectedMarkerId(id);
     handleMarkerClick(position);
     setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
   };
 
   if (isLoading) return <div>Loading...</div>;
@@ -89,7 +95,7 @@ const PlaceMarkers = ({
         ></MapMarker>
       ))}
       {isModalOpen && selectedMarkerId !== null && (
-        <PlaceInfoModal markerId={selectedMarkerId} closeModal={closeModal} />
+        <PlaceInfoModal markerId={selectedMarkerId} />
       )}
     </>
   );

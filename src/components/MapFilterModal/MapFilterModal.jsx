@@ -16,6 +16,20 @@ function MapFilterModal({ updateMarkers, onClose }) {
   const [selectedMenuTypes, setSelectedMenuTypes] = useState([]);
   const [isSavedActive, setIsSavedActive] = useState(false);
 
+  // (임시) 메뉴 필터 이전 값 저장 위한 로직
+  // useEffect(() => {
+  //   setSelectedMenuTypes((prevState) => {
+  //     if (prevState.length === 0) {
+  //       return VEGAN_MENU_TYPES;
+  //     }
+  //     return prevState;
+  //   });
+  // }, []);
+
+  useEffect(() => {
+    setIsSavedActive(selectedMenuTypes.length > 0);
+  }, [selectedMenuTypes]);
+
   const handleModalClick = (e) => {
     if (e.target === e.currentTarget) {
       setIsClicked(!isClicked);
@@ -23,13 +37,7 @@ function MapFilterModal({ updateMarkers, onClose }) {
   };
 
   const handleMenuTagClick = (type) => {
-    setSelectedMenuTypes((prevState) => {
-      if (prevState.includes(type)) {
-        return prevState.filter((item) => item !== type);
-      } else {
-        return [...prevState, type];
-      }
-    });
+    setSelectedMenuTypes([type]);
   };
 
   const handleSaveClick = (e) => {
@@ -40,10 +48,6 @@ function MapFilterModal({ updateMarkers, onClose }) {
     updateMarkers(veganOption);
     onClose(false);
   };
-
-  useEffect(() => {
-    setIsSavedActive(selectedMenuTypes.length > 0);
-  }, [selectedMenuTypes]);
 
   return (
     <Container onClick={handleModalClick}>

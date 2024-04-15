@@ -50,7 +50,7 @@ export default function Home() {
   // 앱 최초 진입, 현재 위치 불러오기
   useEffect(() => {
     reloadLocation(); // 위치 재요청
-  }, [selectedMenuTypes]); // 세영님,
+  }, []);
 
   // 버튼 클릭 시 현재 위치 업데이트
   const handleRelocateClick = (e) => {
@@ -60,7 +60,6 @@ export default function Home() {
 
   // 카테고리 선택 핸들러
   const handleCategorySelect = (categoryName) => {
-    // to 세영님) categorySelect에 recoil 도입 수정 했습니다
     setSelectedCategories((prevSelected) => {
       const isSelected = prevSelected.includes(categoryName);
       return isSelected
@@ -87,7 +86,6 @@ export default function Home() {
     );
     // Recoil 상태 초기화
     setSelectedCategories([]);
-
     // 선택한 메뉴 유형 초기화
     setSelectedMenuTypes(null);
   };
@@ -102,8 +100,6 @@ export default function Home() {
   };
 
   const updateMarkers = (menuTypes) => {
-    // 세영님, menuTypes String을 Bool값으로 바꿨습니다
-    // '전체 메뉴 비건' 선택 시 true, '일부 메뉴 비건' 선택 시 false
     setSelectedMenuTypes(menuTypes);
   };
 

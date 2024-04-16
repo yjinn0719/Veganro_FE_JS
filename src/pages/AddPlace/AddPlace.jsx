@@ -44,9 +44,9 @@ function AddPlace() {
 
   const navigate = useNavigate();
 
-  const collectData = () => {
-    const weekDays = ['월', '화', '수', '목', '금', '토', '일'];
-    const formattedOpenTimes = weekDays.map((day) => {
+  const AddPlaceData = () => {
+    const week = ['월', '화', '수', '목', '금', '토', '일'];
+    const newOpenTimes = week.map((day) => {
       const times = timeValues[day];
       if (
         times.length === 0 ||
@@ -57,14 +57,14 @@ function AddPlace() {
       ) {
         return `${day}: 휴무`;
       } else {
-        let timeDescriptions = [];
+        let dailyTimes = [];
         if (times[0] && times[1]) {
-          timeDescriptions.push(`${times[0]}-${times[1]}`);
+          dailyTimes.push(`${times[0]}-${times[1]}`);
         }
         if (times[2] && times[3]) {
-          timeDescriptions.push(`브레이크타임: ${times[2]}-${times[3]}`);
+          dailyTimes.push(`브레이크타임: ${times[2]}-${times[3]}`);
         }
-        return `${day}: ${timeDescriptions.length > 0 ? timeDescriptions.join(', ') : '정보 없음'}`;
+        return `${day}: ${dailyTimes.length > 0 ? dailyTimes.join(', ') : '정보 없음'}`;
       }
     });
 
@@ -77,7 +77,7 @@ function AddPlace() {
       address_lot_number: '서울 00-00',
       address_detail: placeAddress || '',
       location: location,
-      open_times: formattedOpenTimes,
+      open_times: newOpenTimes,
       sns_url: snsUrls.length > 0 ? snsUrls : [],
     };
   };
@@ -125,7 +125,7 @@ function AddPlace() {
   };
 
   const handleSubmit = async () => {
-    const data = collectData();
+    const data = AddPlaceData();
     try {
       const result = await createReportPlace(data);
       navigate('/');

@@ -54,7 +54,6 @@ export default function Review() {
   }, [isReviewDrawerOpen]);
   useEffect(() => {
     if (inView && hasNextPage && !isFetchingNextPage) {
-      console.log(inView, hasNextPage, isFetchingNextPage);
       fetchNextPage();
     }
   }, [inView, hasNextPage, isFetchingNextPage, fetchNextPage]);

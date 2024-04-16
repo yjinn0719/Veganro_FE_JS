@@ -19,10 +19,16 @@ export default function MapComponent({ address }) {
       if (status === kakao.maps.services.Status.OK) {
         const coords = new kakao.maps.LatLng(result[0].y, result[0].x);
 
-        // 결과값으로 받은 위치를 마커로 표시합니다
+        const imageSrc =
+          'https://storage.cloud.google.com/vegan-ro/current_position_pin.png';
+        const imageSize = new kakao.maps.Size(32, 36);
+
+        const markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
+
         const marker = new kakao.maps.Marker({
           map: map,
           position: coords,
+          image: markerImage,
         });
 
         // // 인포윈도우로 장소에 대한 설명을 표시합니다
@@ -33,6 +39,7 @@ export default function MapComponent({ address }) {
 
         // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
         map.setCenter(coords);
+        marker.setMap(map);
       }
     });
   }, [address]); // useEffect의 두 번째 인수로 address를 추가하여 address가 변경될 때마다 실행되도록 합니다.

@@ -102,3 +102,9 @@ export const CategoryIcon = styled.div`
   border-radius: 3.6px;
   border: 1px #8f8f8f solid;
 `;
+
+export const CategoryImg = styled.img`
+  object-fit: cover;
+  width: 54px;
+  height: 54px;
+`;

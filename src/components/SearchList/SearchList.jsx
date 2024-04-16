@@ -10,6 +10,7 @@ import {
   Address,
   Distance,
   CategoryIcon,
+  CategoryImg,
 } from './SearchList.style';
 
 import { VEGAN_MENU_TYPES } from '@/constants';
@@ -17,7 +18,9 @@ import { VEGAN_MENU_TYPES } from '@/constants';
 export default function SearchList(props) {
   return (
     <CardWrapper>
-      <CategoryIcon src={props.category_img} alt="Category Icon" />
+      <CategoryIcon>
+        <CategoryImg className="category" src={props.img} alt="식당 카테고리" />
+      </CategoryIcon>
       <TextBox>
         <TitleBox>
           <PlaceName>{props.name}</PlaceName>

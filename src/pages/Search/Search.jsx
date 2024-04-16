@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { fetchPlaces } from '@/apis/index';
 import useCurrentLocation from '@/hooks/useCurrentLocation';
 import { getPlacesWithDistance } from '@/apis/index';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import {
   selectedCategoryState,
   selectedMenuTypeState,
@@ -12,7 +12,7 @@ import {
 import SearchBar from '@/components/SearchBar/SearchBar';
 import PlaceCategory from '@/components/PlaceCategory/PlaceCategory';
 import SearchList from '@/components/SearchList/SearchList';
-import MenuButton from '@/components/MenuButton/MenuButton';
+// import MenuButton from '@/components/MenuButton/MenuButton';
 import SmallRoundButton from '@/components/SmallRoundButton/SmallRoundButton';
 import MapFilterModal from '@/components/MapFilterModal/MapFilterModal';
 
@@ -190,6 +190,7 @@ export default function Search() {
             filteredPlaces.map((place) => (
               <SearchList
                 key={place._id}
+                img={place.category_img.url.basic_url}
                 name={place.name}
                 vegan_option={place.vegan_option}
                 distance={`${place.distance}km`}

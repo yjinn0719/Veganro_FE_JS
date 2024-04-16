@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useInView } from 'react-intersection-observer';
 import { useGetReviewsByPlaceId } from '../../hooks/useReview';
 import Spinner from '@/components/Spinner/Spinner';
+import MenuButton from '@/components/MenuButton/MenuButton';
 
 import { useGetPlace } from '../../hooks/usePlace';
 import { Link } from 'react-scroll';
@@ -20,6 +21,7 @@ import {
   NoReview,
   NoReviewText,
 } from '@/components/Review/Review.styles';
+import { MenuContainer } from '@/pages/PlaceDetail/PlaceDetail.styles';
 import { Container } from '@/pages/ReviewDetail/ReviewDetail.styles';
 
 import ReviewDrawer from '@/components/ReviewDrawer/ReviewDrawer';
@@ -52,7 +54,6 @@ export default function Review() {
   }, [isReviewDrawerOpen]);
   useEffect(() => {
     if (inView && hasNextPage && !isFetchingNextPage) {
-      console.log(inView, hasNextPage, isFetchingNextPage);
       fetchNextPage();
     }
   }, [inView, hasNextPage, isFetchingNextPage, fetchNextPage]);
@@ -129,6 +130,9 @@ export default function Review() {
           setSubmittedReviews={setSubmittedReviews}
         />
       )}
+      <MenuContainer>
+        <MenuButton />
+      </MenuContainer>
     </>
   );
 }

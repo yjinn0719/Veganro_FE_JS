@@ -39,7 +39,6 @@ export const useGetReviewsByPlaceId = (placeId, pageSize = 10) => {
       getReviewsByPlaceId(placeId, pageParam, pageSize),
     initialPageParam: 1,
     getNextPageParam: (lastPage, allPages) => {
-      console.log(allPages);
       const nextPage = lastPage.reviews.length
         ? allPages.length + 1
         : undefined;

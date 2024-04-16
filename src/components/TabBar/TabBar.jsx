@@ -26,6 +26,7 @@ import { Reviews } from '@mui/icons-material';
 
 const TabBar = () => {
   const { ref, inView } = useInView();
+  const [selectedReviewId, setSelectedReviewId] = useState(null);
 
   const {
     data: ReviewsData,
@@ -84,8 +85,7 @@ const TabBar = () => {
     bookmarkHasNextPage,
     bookmarkFetchNextPage,
   ]);
-  console.log(inView);
-  console.log(bookmarkFetchingNextPage, bookmarkHasNextPage, BookmarkData);
+
   if (
     userLocationLoading ||
     ReportData === undefined ||
@@ -167,6 +167,9 @@ const TabBar = () => {
                 veganLevel={review.user_id.tag}
                 comment={review.content}
                 date={review.updatedAt}
+                address={review.content}
+                selectedReviewId={selectedReviewId}
+                onSelectReviewId={setSelectedReviewId}
                 placeId={review.place_id}
               />
             )),
@@ -235,7 +238,6 @@ const TabBar = () => {
       );
     }
   };
-
   return (
     <Container>
       <TabContainerParent>

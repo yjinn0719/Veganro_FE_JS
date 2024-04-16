@@ -3,14 +3,16 @@ import { useNavigate } from 'react-router-dom';
 import { fetchPlaces } from '@/apis/index';
 import useCurrentLocation from '@/hooks/useCurrentLocation';
 import { getPlacesWithDistance } from '@/apis/index';
-
-import { useRecoilState } from 'recoil';
-import { selectedCategoryState } from '@/states/filterState';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import {
+  selectedCategoryState,
+  selectedMenuTypeState,
+} from '@/states/filterState';
 
 import SearchBar from '@/components/SearchBar/SearchBar';
 import PlaceCategory from '@/components/PlaceCategory/PlaceCategory';
 import SearchList from '@/components/SearchList/SearchList';
-import MenuButton from '@/components/MenuButton/MenuButton';
+// import MenuButton from '@/components/MenuButton/MenuButton';
 import SmallRoundButton from '@/components/SmallRoundButton/SmallRoundButton';
 import MapFilterModal from '@/components/MapFilterModal/MapFilterModal';
 
@@ -28,28 +30,33 @@ import {
 import { PLACE_TYPES } from '../../constants';
 
 export default function Search() {
+  const navigate = useNavigate();
   const [places, setPlaces] = useState([]);
   const { location, isLoading, error } = useCurrentLocation(); // 사용자~place 동적 거리계산 상태관리용
   const [searchTerm, setSearchTerm] = useState('');
+  const [isButtonActive, setIsButtonActive] = useState(false);
 
   //recoil로 옮겨야하는 상태관리값
   const [showFilterModal, setShowFilterModal] = useState(false);
-  const [categoriesStatus, setCategoriesStatus] = useState([]);
+  const [categoriesStatus, setCategoriesStatus] = useState(
+    PLACE_TYPES.map((type) => ({ name: type, clicked: false })),
+  );
   const [selectedCategories, setSelectedCategories] = useRecoilState(
     selectedCategoryState,
   );
+  const [selectedMenuTypes, setSelectedMenuTypes] = useRecoilState(
+    selectedMenuTypeState,
+  );
+  const [filteredPlaces, setFilteredPlaces] = useState([]);
 
   useEffect(() => {
-    // 추후 리팩터링 때 try-catch 검증 추가
     async function loadPlaces() {
-      // 1. places 데이터 로딩
       const res = await fetchPlaces();
       setPlaces(res.data.data);
     }
     loadPlaces();
-  }, []);
+  }, [location, isLoading, selectedCategories, selectedMenuTypes]);
 
-  // 2. 사용자~places 거리 계산 service 결과 로딩
   useEffect(() => {
     if (!isLoading && location.center) {
       getPlacesWithDistance(location.center, fetchPlaces)
@@ -58,25 +65,39 @@ export default function Search() {
         })
         .catch(console.error);
     }
-  }, [location, isLoading]);
+  }, [location, isLoading, selectedCategories, selectedMenuTypes]);
 
-  // 검색어 필터링
-  const filteredPlaces = searchTerm
-    ? places.filter(
-        (place) =>
-          place.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          place.address.toLowerCase().includes(searchTerm.toLowerCase()),
-      )
-    : places;
+  // 렌더링 성능 이슈 -> useMemo 사용하면 좋을 것 같다?
+  useEffect(() => {
+    // 1. searchTerm 필터링
+    let results = places.filter(
+      (place) =>
+        place.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        place.address.toLowerCase().includes(searchTerm.toLowerCase()),
+    );
 
-  // 유저의 현재 위치 기준, places 가까운 순 정렬
-  const sortedPlaces = [...filteredPlaces].sort(
-    (a, b) => a.distance - b.distance,
-  );
+    // 2. searchTerm 결과에 category 필터링
+    if (selectedCategories.length > 0) {
+      results = results.filter((place) =>
+        selectedCategories.includes(place.category),
+      );
+    }
+
+    // 3. menuTypes 필터링
+    if (selectedMenuTypes != null) {
+      results = results.filter(
+        (place) => place.vegan_option == selectedMenuTypes,
+      );
+    }
+
+    // 4. 거리순 정렬
+    results.sort((a, b) => a.distance - b.distance);
+
+    setFilteredPlaces(results);
+  }, [places, selectedCategories, selectedMenuTypes, searchTerm]);
 
   // 카테고리 선택 핸들러
   const handleCategorySelect = (categoryName) => {
-    // to 세영님) categorySelect에 recoil 도입 수정 했습니다
     setSelectedCategories((prevSelected) => {
       const isSelected = prevSelected.includes(categoryName);
       return isSelected
@@ -93,26 +114,31 @@ export default function Search() {
     );
   };
 
-  // 카테고리 초기화 핸들러
-  const handleCategoryReset = () => {
-    // Recoil 상태 초기화: 실제 데이터 필터링에 사용
-    setCategoriesStatus([]);
-
+  // 초기화 핸들러
+  const handleFilterReset = () => {
     setCategoriesStatus((prevCategories) =>
       prevCategories.map((category) => ({
         ...category,
         clicked: 0,
       })),
     );
+
+    setSelectedCategories([]);
+    setSelectedMenuTypes(null);
+    setShowFilterModal(false);
+    setIsButtonActive(false);
+    localStorage.removeItem('selectedMenuTypes');
   };
 
   // 필터 모달 핸들러
   const handleFilterModal = () => {
     setShowFilterModal(!showFilterModal);
-    console.log('필터 모달');
+    setIsButtonActive(!isButtonActive);
   };
 
-  const navigate = useNavigate();
+  const updateMarkers = (menuTypes) => {
+    setSelectedMenuTypes(menuTypes);
+  };
 
   if (error) {
     return <div>위치 정보를 가져올 수 없습니다 {error}</div>;
@@ -133,9 +159,10 @@ export default function Search() {
           />
           <FilterBar>
             <Categories className="category-bar">
-              {PLACE_TYPES.map((title, index) => (
+              {PLACE_TYPES.map((title) => (
                 <PlaceCategory
-                  key={index}
+                  className="category-button"
+                  key={title}
                   title={title}
                   onClick={() => handleCategorySelect(title)}
                   initialClicked={
@@ -144,17 +171,26 @@ export default function Search() {
                   }
                 />
               ))}
-              <SmallRoundButton title="refresh" onClick={handleCategoryReset} />
+              <FilterButton
+                title={isButtonActive ? 'close' : 'filter'}
+                onClick={handleFilterModal}
+              />
+              {showFilterModal && (
+                <MapFilterModal
+                  updateMarkers={updateMarkers}
+                  onClose={setShowFilterModal}
+                />
+              )}
             </Categories>
-            <FilterButton title="filter" onClick={handleFilterModal} />
-            {showFilterModal && <MapFilterModal />}
+            <SmallRoundButton title="refresh" onClick={handleFilterReset} />
           </FilterBar>
         </SearchNav>
         <ScrollableList>
           {places &&
-            sortedPlaces.map((place) => (
+            filteredPlaces.map((place) => (
               <SearchList
                 key={place._id}
+                img={place.category_img.url.basic_url}
                 name={place.name}
                 vegan_option={place.vegan_option}
                 distance={`${place.distance}km`}

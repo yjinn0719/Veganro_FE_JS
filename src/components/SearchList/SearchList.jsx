@@ -6,14 +6,12 @@ import {
   PlaceName,
   VeganMenu,
   DistBox,
-  DistanceNavicon,
   Address,
   Distance,
   CategoryIcon,
   CategoryImg,
 } from './SearchList.style';
-
-import { VEGAN_MENU_TYPES } from '@/constants';
+import { IoNavigateCircleOutline } from 'react-icons/io5';
 
 export default function SearchList(props) {
   return (
@@ -29,7 +27,7 @@ export default function SearchList(props) {
           </VeganMenu>
         </TitleBox>
         <DistBox>
-          <DistanceNavicon />
+          <IoNavigateCircleOutline size="12" color="#6e6e6e" />
           <Distance>{props.distance}</Distance>
         </DistBox>
         <Address>{props.address}</Address>

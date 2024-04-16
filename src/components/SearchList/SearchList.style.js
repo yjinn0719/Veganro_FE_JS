@@ -60,13 +60,14 @@ export const DistBox = styled.div`
   gap: 2px;
 `;
 
-export const DistanceNavicon = styled.div`
-  width: 12px;
-  height: 12px;
-  background-image: url(${DistanceNaviIcon});
-  background-size: contain;
-  background-repeat: no-repeat;
-`;
+// vercel 배포시 안보임 이슈
+// export const DistanceNavicon = styled.div`
+//   width: 12px;
+//   height: 12px;
+//   background-image: url(${DistanceNaviIcon});
+//   background-size: contain;
+//   background-repeat: no-repeat;
+// `;
 
 export const Distance = styled.div`
   color: var(--Gray-600, #6e6e6e);

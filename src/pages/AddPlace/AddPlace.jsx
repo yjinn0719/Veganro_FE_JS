@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import InputBox from '@/components/InputBox/InputBox';
 import Navbar from '@/components/Navbar/Navbar';
 import PlaceMap from '@/components/PlaceMap/PlaceMap';
@@ -9,6 +10,7 @@ import KakaoAddress from '../../components/KakaoAddress/KakaoAddress';
 import OpenTimeTab from '../../components/OpenTimeTab/OpenTimeTab';
 import { createReportPlace } from '@/apis/api/reportApi';
 import { getAddressCoordinates } from '../../apis/api/addressApi';
+import { IoSearchCircleOutline } from 'react-icons/io5';
 import {
   MainContainer,
   MapContainer,
@@ -39,6 +41,8 @@ function AddPlace() {
     토: ['', '', '', ''],
     일: ['', '', '', ''],
   });
+
+  const navigate = useNavigate();
 
   const collectData = () => {
     const weekDays = ['월', '화', '수', '목', '금', '토', '일'];
@@ -109,16 +113,6 @@ function AddPlace() {
     setSelectMenu(type);
   };
 
-  const handleSubmit = async () => {
-    const data = collectData();
-    try {
-      const result = await createReportPlace(data);
-      console.log(result);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
   const handleTimeChange = (day, index, value) => {
     setTimeValues((prevValues) => {
       const newTimes = [...prevValues[day]]; // 현재 요일의 시간 배열을 복사
@@ -128,6 +122,17 @@ function AddPlace() {
         [day]: newTimes, // 업데이트된 시간 배열로 상태 갱신
       };
     });
+  };
+
+  const handleSubmit = async () => {
+    const data = collectData();
+    try {
+      const result = await createReportPlace(data);
+      navigate('/');
+      console.log(result);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -144,7 +149,9 @@ function AddPlace() {
             value={placeAddressApi} // 주소 검색 결과를 표시
             onChange={(e) => setPlaceAddressApi(e.target.value)}
           ></InputBox>
-          <AddPlaceSearch onClick={openModal}>검색</AddPlaceSearch>
+          <AddPlaceSearch onClick={openModal}>
+            <IoSearchCircleOutline size="35" />
+          </AddPlaceSearch>
         </AddressInputContainer>
         <InputBox
           placeholder="상세 위치"

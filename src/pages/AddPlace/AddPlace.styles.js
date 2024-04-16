@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const MapContainer = styled.div`
-  height: 200px;
+  height: 150px;
   display: flex;
   flex-direction: column;
   width: 100%;

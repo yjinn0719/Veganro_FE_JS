@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
 import PlaceMarkers from '../KakaoMap/PlaceMarkers';
+import currentPositionPin from '@/assets/images/current_position_pin.png';
 
 const KakaoMap = ({ centerMove, categoriesStatus, selectedMenuTypes }) => {
   const [currentLocation, setCurrentLocation] = useState({
@@ -54,7 +55,7 @@ const KakaoMap = ({ centerMove, categoriesStatus, selectedMenuTypes }) => {
         title="Current Location"
         clickable={false}
         image={{
-          src: 'https://storage.cloud.google.com/vegan-ro/current_position_pin.png',
+          src: currentPositionPin,
           size: {
             width: 32,
             height: 36,

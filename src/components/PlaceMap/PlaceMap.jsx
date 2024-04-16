@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import currentPositionPin from '@/assets/images/current_position_pin.png';
 
 export default function MapComponent({ address }) {
   useEffect(() => {
@@ -19,11 +20,11 @@ export default function MapComponent({ address }) {
       if (status === kakao.maps.services.Status.OK) {
         const coords = new kakao.maps.LatLng(result[0].y, result[0].x);
 
-        const imageSrc =
-          'https://storage.cloud.google.com/vegan-ro/current_position_pin.png';
         const imageSize = new kakao.maps.Size(32, 36);
-
-        const markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
+        const markerImage = new kakao.maps.MarkerImage(
+          currentPositionPin,
+          imageSize,
+        );
 
         const marker = new kakao.maps.Marker({
           map: map,

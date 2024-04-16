@@ -179,10 +179,12 @@ const Loading = styled.div`
   display: flex;
 `;
 const MenuContainer = styled.div`
-  position: fixed;
+  padding-left: 420px;
+  width: 100%;
+  height: 100%;
+  position: sticky;
   bottom: 16px;
-  right: 16px;
-  background: transparent;
+  box-sizing: border-box;
   z-index: 999;
 `;
 

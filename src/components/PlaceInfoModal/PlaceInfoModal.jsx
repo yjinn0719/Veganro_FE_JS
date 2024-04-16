@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useRecoilState } from 'recoil';
+import { isModalOpenState } from '@/states/placeModalState';
 import { useGetPlace } from '@/hooks/usePlace';
 import useCurrentLocation from '@/hooks/useCurrentLocation';
 import getDistance from '@/hooks/useDistance';
@@ -27,8 +29,9 @@ import {
   CloseButton,
 } from './PlaceInfoModal.style';
 
-function PlaceInfoModal({ markerId, closeModal }) {
+function PlaceInfoModal({ markerId }) {
   const navigate = useNavigate();
+  const [isModalOpen, setIsModalOpen] = useRecoilState(isModalOpenState);
 
   const {
     data: placeData,
@@ -61,6 +64,10 @@ function PlaceInfoModal({ markerId, closeModal }) {
       setDistance(calculatedDistance);
     }
   }, [placeDataLoading, userLocationLoading, placeData, userLocation]);
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 
   if (placeDataLoading || userLocationLoading) {
     return <div>Loading...</div>;

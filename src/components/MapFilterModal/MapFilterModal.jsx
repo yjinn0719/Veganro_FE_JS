@@ -11,7 +11,7 @@ import { MenuTagBtn, MenuTagContent } from '../MenuTag/MenuTag.styles';
 
 import { VEGAN_MENU_TYPES } from '@/constants';
 
-function MapFilterModal({ updateMarkers, onClose }) {
+function MapFilterModal({ updateMarkers, onClose, setIsButtonActive }) {
   const [isClicked, setIsClicked] = useState(false);
   const [selectedMenuTypes, setSelectedMenuTypes] = useState([]);
   const [isSavedActive, setIsSavedActive] = useState(false);
@@ -49,6 +49,7 @@ function MapFilterModal({ updateMarkers, onClose }) {
       JSON.stringify(selectedMenuTypes),
     );
     onClose(false);
+    setIsButtonActive(false);
   };
 
   return (

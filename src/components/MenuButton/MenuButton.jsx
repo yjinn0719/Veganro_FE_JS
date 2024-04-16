@@ -1,23 +1,33 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useRecoilState } from 'recoil';
 import { Menu, MenuList } from './MenuButton.style';
 import RoundButton from '@/components/RoundButton/RoundButton';
-
 import { MENU_LIST } from '@/constants';
 import { PATH } from '@/constants/router';
 
+import { isMenuOpenState } from '@/states/menuOpenState';
+import { isModalOpenState } from '@/states/placeModalState';
+
 function MenuButton() {
   const navigate = useNavigate();
-  const [isMenuOpen, setIsMenuOpen] = useState(0);
+  const [isMenuOpen, setIsMenuOpen] = useRecoilState(isMenuOpenState);
+  const [isModalOpen, setIsModalOpen] = useRecoilState(isModalOpenState);
   const [isButtonActive, setIsButtonActive] = useState(false);
 
   const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-    setIsButtonActive(!isButtonActive);
+    if (isModalOpen) {
+      setIsModalOpen(false);
+    }
+
+    setIsMenuOpen((prevState) => {
+      setIsButtonActive(!prevState);
+      return !prevState;
+    });
   };
 
   const handleNavigation = (page) => {
-    setIsMenuOpen(0);
+    setIsMenuOpen(false);
     const routePath = PATH[page.toUpperCase()];
     if (routePath) {
       navigate(routePath);

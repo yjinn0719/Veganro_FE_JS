@@ -4,8 +4,8 @@ import mainLogo from '@/assets/icons/mainLogo.svg';
 import { AuthContainer, LogoContainer, LogoContent } from './Auth.styles';
 
 function Auth() {
-  const REST_API_KEY = process.env.REST_API_KEY;
-  const REDIRECT_URI = process.env.REDIRECT_URI;
+  const REST_API_KEY = import.meta.env.VITE_APP_REST_API_KEY;
+  const REDIRECT_URI = import.meta.env.VITE_APP_REDIRECT_URI;
   const link = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
 
   const loginHandler = () => {

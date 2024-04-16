@@ -17,7 +17,7 @@ import { VEGAN_MENU_TYPES } from '@/constants';
 
 export default function SearchList(props) {
   return (
-    <CardWrapper>
+    <CardWrapper onClick={props.onClick}>
       <CategoryIcon>
         <CategoryImg className="category" src={props.img} alt="식당 카테고리" />
       </CategoryIcon>

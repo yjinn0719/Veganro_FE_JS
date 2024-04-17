@@ -1,4 +1,5 @@
 import api from '@/apis/utils/axiosInstance';
+import { notify } from '../../hooks/useToast';
 
 //https://veganro-backend.vercel.app/api/reviews?placeId=6610e830658638b12ce49ef2&pageNumber=1r&pageSize=10
 
@@ -16,10 +17,14 @@ export const getReviewsByPlaceId = async (
     handleError(error);
   }
 };
-export const getMyReviews = async (placeId) => {
+export const getMyReviews = async (placeId, token) => {
   try {
-    const response = await api.get(`/reviews/check?placeId=${placeId}`);
-    return response.data.data;
+    if (token) {
+      const response = await api.get(`/reviews/check?placeId=${placeId}`);
+      return response.data.data;
+    } else {
+      return null;
+    }
   } catch (error) {
     handleError(error);
   }
@@ -27,8 +32,10 @@ export const getMyReviews = async (placeId) => {
 export const postReview = async (reviewData) => {
   try {
     const response = await api.post('/reviews', reviewData);
+    notify('success', '리뷰가 등록되었습니다.');
     return response.data.data;
   } catch (error) {
+    notify('error', '로그인이 필요합니다.');
     throw new Error('Error posting review: ' + error.message);
   }
 };

@@ -107,11 +107,6 @@ export default function EditMyPage({ title = '프로필 설정', nickname }) {
                 isActive={activeTag === '플로'}
                 onClick={() => handleTagClick('플로')}
               />
-              <VeganTag
-                title="플렉시테리언"
-                isActive={activeTag === '플렉시테리언'}
-                onClick={() => handleTagClick('플렉시테리언')}
-              />
             </VeganTagContainer>
           </TagContainer>
         </TagContainer>

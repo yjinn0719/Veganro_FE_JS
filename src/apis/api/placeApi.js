@@ -29,10 +29,16 @@ export const getPlaceData = async (placeId) => {
   }
 };
 
-export const getBookmarkByPlaceId = async (placeId) => {
+export const getBookmarkByPlaceId = async (placeId, token) => {
   try {
-    const response = await api.get(`/bookmarks/check?placeId=${placeId}`);
-    return response.data.data;
+    if (token) {
+      // 토큰이 있는 경우에만 데이터를 가져옵니다.
+      const response = await api.get(`/bookmarks/check?placeId=${placeId}`);
+      return response.data.data;
+    } else {
+      // 토큰이 없는 경우에는 데이터를 가져오지 않습니다.
+      return null;
+    }
   } catch (error) {
     handleError(error);
   }

@@ -37,7 +37,6 @@ export default function ReviewDrawer({
         };
         if (submitText) {
           await postReview(reviewData);
-          notify('success', '리뷰가 등록되었습니다.');
         } else {
           await updateReview({ reviewId: reviewIndex, content: reviewText });
           notify('success', '리뷰가 수정되었습니다.');
@@ -46,7 +45,7 @@ export default function ReviewDrawer({
 
         setTimeout(() => {
           window.location.reload();
-        }, 500);
+        }, 1000);
       } catch (error) {
         console.error('Error posting or updating review:', error);
       }

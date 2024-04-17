@@ -15,10 +15,10 @@ function Bookmark() {
   const [bookmarkId, setBookmarkId] = useState(null);
   const { mutate: postBookmark } = usePostBookmark();
   const { mutate: deleteBookmark } = useDeleteBookmark();
+
   useEffect(() => {
     if (bookmarkDataByPlaceId) {
       const bookmarkStatus = bookmarkDataByPlaceId.isBookmarked;
-      const bookmarkId = bookmarkDataByPlaceId.bookmarkId;
       setBookmarkId(bookmarkId);
       setIsClicked(bookmarkStatus);
     } else {
@@ -37,11 +37,9 @@ function Bookmark() {
     try {
       if (newValue) {
         await postBookmark({ place_id: placeid });
-        notify('success', '북마크에 추가되었습니다.');
       } else {
         if (bookmarkId) {
           await deleteBookmark(bookmarkId);
-          notify('warning', '북마크가 삭제되었습니다.');
 
           setBookmarkId(null);
         }

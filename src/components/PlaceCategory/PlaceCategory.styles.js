@@ -27,7 +27,7 @@ export const PlaceCategoryBtn = styled.button`
       props.clicked ? props.theme.color.white : props.theme.color.gray[300]};
   background: ${(props) =>
     getBackgroundColor(props.clicked, props.title, props.theme)};
-  box-shadow: 4px 6px 16px 0px rgba(71, 71, 71, 0.12);
+  box-shadow: 4px 6px 16px 0px rgba(71, 71, 71, 0.1);
   transition: all 0.3s ease-in;
 
   img {
@@ -36,6 +36,10 @@ export const PlaceCategoryBtn = styled.button`
     &.clicked {
       filter: invert(100%);
     }
+  }
+
+  &:hover {
+    box-shadow: 4px 6px 16px 0px rgba(71, 71, 71, 0.3);
   }
 `;
 

@@ -3,10 +3,7 @@ import styled from 'styled-components';
 const Container = styled.div`
   margin: 0 auto;
   width: 100%;
-  padding-left: 12px;
-  padding-right: 12px;
-  padding-top: 16px;
-  padding-bottom: 16px;
+  padding: 16px 12px;
   background: white;
   border-radius: 4px;
   overflow: hidden;

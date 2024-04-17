@@ -12,6 +12,7 @@ import {
   CategoryImg,
 } from './SearchList.style';
 import { IoNavigateCircleOutline } from 'react-icons/io5';
+import { VEGAN_MENU_TYPES } from '@/constants';
 
 export default function SearchList(props) {
   return (
@@ -23,7 +24,9 @@ export default function SearchList(props) {
         <TitleBox>
           <PlaceName>{props.name}</PlaceName>
           <VeganMenu>
-            {props.vegan_option === true ? '전체 메뉴 비건' : '일부 메뉴 비건'}
+            {props.vegan_option === true
+              ? VEGAN_MENU_TYPES[0]
+              : VEGAN_MENU_TYPES[1]}
           </VeganMenu>
         </TitleBox>
         <DistBox>

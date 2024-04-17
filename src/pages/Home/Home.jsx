@@ -84,7 +84,9 @@ export default function Home() {
     setSelectedMenuTypes(null);
     setShowFilterModal(false);
     setIsButtonActive(false);
-    localStorage.removeItem('selectedMenuTypes');
+    sessionStorage.clear();
+    // 기존에 사용했던 localStorage 기록 날리고 싶으실 경우 주석 풀고 Home에서 새로고침btn 누르시면 됩니다!
+    //localStorage.clear();
   };
 
   const handleFilterModal = () => {

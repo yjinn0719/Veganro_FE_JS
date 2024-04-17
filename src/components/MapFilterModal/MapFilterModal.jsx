@@ -18,7 +18,7 @@ function MapFilterModal({ updateMarkers, onClose, setIsButtonActive }) {
 
   // 메뉴 필터 이전 값 불러오기
   useEffect(() => {
-    const storedMenuTypes = localStorage.getItem('selectedMenuTypes');
+    const storedMenuTypes = sessionStorage.getItem('selectedMenuTypes');
     if (storedMenuTypes) {
       setSelectedMenuTypes(JSON.parse(storedMenuTypes));
     }
@@ -44,9 +44,10 @@ function MapFilterModal({ updateMarkers, onClose, setIsButtonActive }) {
     const isPartialVegan = selectedMenuTypes.includes(VEGAN_MENU_TYPES[1]);
     const veganOption = isFullVegan ? true : isPartialVegan ? false : null;
     updateMarkers(veganOption);
-    localStorage.setItem(
+    sessionStorage.setItem(
       'selectedMenuTypes',
       JSON.stringify(selectedMenuTypes),
+      // selectedMenuTypes.includes(VEGAN_MENU_TYPES[0]) ? true : false,
     );
     onClose(false);
     setIsButtonActive(false);

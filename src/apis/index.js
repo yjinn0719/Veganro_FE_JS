@@ -23,9 +23,11 @@ import {
   updateComplaint,
 } from './api/userInfoApi';
 import getPlacesWithDistance from './service/distance';
+import { postAuth } from './api/authApi';
 
 export {
   api,
+  postAuth,
   fetchPlaces,
   getAllPlaces,
   getPlacesWithDistance,

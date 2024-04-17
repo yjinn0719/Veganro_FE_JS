@@ -179,13 +179,16 @@ const Loading = styled.div`
   display: flex;
 `;
 const MenuContainer = styled.div`
-  padding-left: 420px;
+  display: flex;
   width: 100%;
   height: 100%;
   position: sticky;
   bottom: 16px;
   box-sizing: border-box;
   z-index: 999;
+  flex-direction: column;
+  align-items: flex-end;
+  padding-right: 16px;
 `;
 
 export {

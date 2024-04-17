@@ -3,7 +3,6 @@ import { motion } from 'framer-motion';
 
 const BackgroundOverlay = styled(motion.div)`
   position: absolute;
-  min-width: 480px;
   overflow: hidden;
   top: 0;
   left: 0;

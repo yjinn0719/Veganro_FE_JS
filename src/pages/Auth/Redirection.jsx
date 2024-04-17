@@ -7,7 +7,6 @@ const Redirection = () => {
   const code = new URL(window.location.href).searchParams.get('code');
 
   useEffect(() => {
-    console.log('Current URL:', window.location.href); // 현재 URL 전체 출력
     console.log('Code:', code);
     axios
       .post(

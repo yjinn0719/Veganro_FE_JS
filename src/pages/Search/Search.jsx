@@ -196,6 +196,7 @@ export default function Search() {
                 distance={`${place.distance}km`}
                 address={`${place.address} ${place.address_detail}`}
                 tel={place.tel}
+                onClick={() => navigate(`/place/${place._id}`)}
               />
             ))}
         </ScrollableList>

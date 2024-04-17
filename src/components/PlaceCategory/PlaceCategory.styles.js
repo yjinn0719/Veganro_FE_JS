@@ -31,8 +31,8 @@ export const PlaceCategoryBtn = styled.button`
   transition: all 0.3s ease-in;
 
   img {
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
     &.clicked {
       filter: invert(100%);
     }

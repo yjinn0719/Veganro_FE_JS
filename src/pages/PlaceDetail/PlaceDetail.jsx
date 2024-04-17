@@ -8,12 +8,13 @@ import MapComponent from '@/components/PlaceMap/PlaceMap';
 import BookMarked from '@/components/Bookmark/Bookmark';
 import PlaceDetailInfo from '@/components/PlaceDetailInfo/PlaceDetailInfo';
 import Review from '@/components/Review/Review';
-import MenuButton from '@/components/MenuButton/MenuButton';
 import useCurrentLocation from '@/hooks/useCurrentLocation';
 import getDistance from '../../hooks/useDistance';
+import { VEGAN_MENU_TYPES } from '@/constants';
 
 import {
   MainContainer,
+  ContentWrapper,
   ContentContainer,
   ImageSection,
   OuterContainer,
@@ -78,49 +79,51 @@ export default function PlaceDetail() {
     return (
       <MainContainer>
         <Navbar title={placeData.name} icon="null" />
-        <ContentContainer>
-          <ImageSection>
-            <MapComponent address={placeData.address} name={placeData.name} />
-            <OuterContainer>
-              <Content>
-                <InnerContainer>
-                  <Icon src={placeData.category_img.url.basic_url} />
-                </InnerContainer>
-                <ContentContainer>
-                  <NameContainer>
-                    <Name>{placeData.name}</Name>
-                  </NameContainer>
-                  <TagContainer>
-                    <Tag>{placeData.vegan_option ? '일부 비건' : '비건'}</Tag>
-                  </TagContainer>
-                  <InfoContainer>
-                    <Info>
-                      <DistanceIcon>
-                        <IoNavigateCircleOutline size="15" />
-                      </DistanceIcon>
-                      <Distance>{distance}km</Distance>
-                    </Info>
-                  </InfoContainer>
-                </ContentContainer>
-              </Content>
-              <BookMarked />
-            </OuterContainer>
-          </ImageSection>
-        </ContentContainer>
-        <>
-          <PlaceDetailInfo
-            placeLocation={placeData.address}
-            placeNumber={placeData.tel}
-            placeHours={placeData.open_times || []}
-            placeURL={placeData.sns_url || []}
-          />
-        </>
-        <ReviewContainer>
-          <Review address={placeData.address} />
-        </ReviewContainer>
-        <MenuContainer>
-          <MenuButton />
-        </MenuContainer>
+        <ContentWrapper>
+          <ContentContainer>
+            <ImageSection>
+              <MapComponent address={placeData.address} name={placeData.name} />
+              <OuterContainer>
+                <Content>
+                  <InnerContainer>
+                    <Icon src={placeData.category_img.url.basic_url} />
+                  </InnerContainer>
+                  <ContentContainer>
+                    <NameContainer>
+                      <Name>{placeData.name}</Name>
+                    </NameContainer>
+                    <TagContainer>
+                      <Tag>
+                        {placeData.vegan_option
+                          ? VEGAN_MENU_TYPES[0]
+                          : VEGAN_MENU_TYPES[1]}
+                      </Tag>
+                    </TagContainer>
+                    <InfoContainer>
+                      <Info>
+                        <DistanceIcon>
+                          <IoNavigateCircleOutline size="15" />
+                        </DistanceIcon>
+                        <Distance>{distance}km</Distance>
+                      </Info>
+                    </InfoContainer>
+                  </ContentContainer>
+                </Content>
+                <BookMarked />
+              </OuterContainer>
+            </ImageSection>
+            <PlaceDetailInfo
+              placeLocation={placeData.address}
+              placeNumber={placeData.tel}
+              placeHours={placeData.open_times || []}
+              placeURL={placeData.sns_url || []}
+            />
+            <ReviewContainer>
+              <Review address={placeData.address} />
+            </ReviewContainer>
+          </ContentContainer>
+        </ContentWrapper>
+        <MenuContainer />
       </MainContainer>
     );
   }

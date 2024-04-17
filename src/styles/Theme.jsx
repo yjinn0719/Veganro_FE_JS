@@ -11,6 +11,7 @@ const Theme = {
     beige: {
       500: '#A99283',
       300: '#FFF9F5',
+      100: '#F7F9F0',
     },
     burgundy: {
       500: '#B53B3B',

@@ -7,6 +7,8 @@ export const Wrapper = styled.main`
   width: 100%;
   height: 100vh;
   position: relative;
+  background-color: ${(props) => props.theme.color.beige[100]};
+  overflow: hidden;
 `;
 export const TopBar = styled.div`
   width: 100%;
@@ -31,7 +33,7 @@ export const FilterButton = styled(SmallRoundButton)`
 export const Categories = styled.div`
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
 `;
 export const BottomBar = styled.div`
   width: 100%;

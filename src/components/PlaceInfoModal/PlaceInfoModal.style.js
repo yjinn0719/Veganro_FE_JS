@@ -52,7 +52,9 @@ export const Title = styled.p`
   color: ${(props) => props.theme.color.gray[800]};
 `;
 export const MenuTag = styled.div`
+  width: max-content;
   padding: 4px 6px;
+  box-sizing: border-box;
   border-radius: 4px;
   font-size: 14px;
   font-weight: 500;

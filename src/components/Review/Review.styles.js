@@ -41,7 +41,6 @@ const ReviewCount = styled.div`
 const ReviewTitle = styled.div`
   color: #1f1f1f;
   font-size: 16px;
-  font-family: 'Pretendard';
   font-weight: 600;
   word-wrap: break-word;
 `;
@@ -49,15 +48,13 @@ const ReviewTitle = styled.div`
 const ReviewNumber = styled.div`
   color: #8f8f8f;
   font-size: 10px;
-  font-family: 'Pretendard';
   font-weight: 500;
   word-wrap: break-word;
 `;
 
 const WriteReview = styled.button`
-  color: #4f8337;
-  font-size: 10px;
-  font-family: 'Pretendard';
+  color: ${(props) => props.theme.color.green[500]};
+  font-size: 12px;
   font-weight: 600;
   word-wrap: break-word;
 `;

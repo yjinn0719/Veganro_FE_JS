@@ -1,39 +1,41 @@
 import styled from 'styled-components';
+import MenuButton from '@/components/MenuButton/MenuButton';
 
 const MainContainer = styled.div`
   width: 100%;
-  height: 100%;
-  top: 60px;
-  padding-top: 16px;
-  background: #f5f5f5;
+  height: 100vh;
+  background: ${(props) => props.theme.color.gray[50]};
   flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
+  align-items: center;
   display: flex;
+  overflow: hidden;
+  position: relative;
 `;
 const Content = styled.div`
   width: 100%;
   display: flex;
   flex-direction: row;
-  margin: 15px 0;
+  margin: 16px 0;
 `;
-
+const ContentWrapper = styled.div`
+  width: 100%;
+  height: calc(100vh - 48px);
+  position: absolute;
+  top: 48px;
+  overflow-y: scroll;
+`;
 const ContentContainer = styled.div`
   align-self: stretch;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  gap: 10px;
+  gap: 8px;
   display: flex;
 `;
 
 const ImageSection = styled.div`
   width: 100%;
-  margin-top: 34px;
-  height: 380px;
-  padding-bottom: 16px;
-  padding-left: 16px;
-  padding-right: 16px;
+  padding: 0 16px 16px 16px;
   background: white;
   flex-direction: column;
   justify-content: flex-start;
@@ -43,15 +45,14 @@ const ImageSection = styled.div`
 `;
 
 const Tag = styled.div`
-  padding-left: 6px;
-  padding-right: 6px;
-  padding-top: 4px;
-  padding-bottom: 4px;
+  padding: 4px 6px;
+  box-sizing: border-box;
+  color: ${(props) => props.theme.color.green[500]};
   border-radius: 4px;
   justify-content: center;
   align-items: center;
-  gap: 10px;
   font-weight: 700;
+  font-size: 12px;
   display: flex;
 `;
 
@@ -63,18 +64,16 @@ const VeganIcon = styled.div`
 
 const OuterContainer = styled.div`
   width: 100%;
-  height: 100%;
 `;
 
 const InnerContainer = styled.div`
   margin: 0 20px 0 0;
   width: 60px;
   height: 60px;
-  border-radius: 3.6px;
+  border-radius: 4px;
   overflow: hidden;
   display: flex;
 `;
-
 const Icon = styled.img`
   width: 54px;
   height: 54px;
@@ -85,37 +84,30 @@ const Icon = styled.img`
 `;
 
 const NameContainer = styled.div`
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
-  gap: 6px;
   display: flex;
 `;
 
 const Name = styled.div`
   color: #383838;
   font-size: 18px;
-  font-family: Pretendard;
   font-weight: 600;
   word-wrap: break-word;
 `;
 
 const TagContainer = styled.div`
-  padding-left: 6px;
-  padding-right: 6px;
-  padding-top: 4px;
-  padding-bottom: 4px;
+  padding: 4px 5px;
   background: rgba(79, 131, 55, 0.1);
   border-radius: 4px;
   justify-content: center;
   align-items: center;
-  gap: 10px;
   display: flex;
 `;
 
 const placeTag = styled.div`
-  color: #4f8337;
+  color: ${(props) => props.theme.color.green[500]};
   font-size: 14px;
-  font-family: Pretendard;
   font-weight: 600;
   word-wrap: break-word;
 `;
@@ -143,7 +135,6 @@ const DistanceIcon = styled.div`
 const Distance = styled.div`
   color: #6e6e6e;
   font-size: 12px;
-  font-family: Pretendard;
   font-weight: 500;
   word-wrap: break-word;
 `;
@@ -157,7 +148,6 @@ const placeVeganIcon = styled.div`
 const VeganTag = styled.div`
   color: #6e6e6e;
   font-size: 12px;
-  font-family: Pretendard;
   font-weight: 500;
   word-wrap: break-word;
 `;
@@ -167,7 +157,7 @@ const ReviewContainer = styled.div`
   position: sticky;
   top: 0;
   z-index: 1;
-  background-color: #fff;
+  background-color: white;
 `;
 
 const Loading = styled.div`
@@ -177,12 +167,18 @@ const Loading = styled.div`
   align-items: center;
   display: flex;
 `;
+<<<<<<< Updated upstream
 const MenuContainer = styled.div`
   display: flex;
   width: 100%;
   height: 100%;
   position: sticky;
+=======
+const MenuContainer = styled(MenuButton)`
+  position: absolute;
+>>>>>>> Stashed changes
   bottom: 16px;
+  right: 16px;
   box-sizing: border-box;
   z-index: 999;
   flex-direction: column;
@@ -192,6 +188,7 @@ const MenuContainer = styled.div`
 
 export {
   MainContainer,
+  ContentWrapper,
   ContentContainer,
   ImageSection,
   Tag,

@@ -23,6 +23,7 @@ import {
 import getDistance from '../../hooks/useDistance';
 import useCurrentLocation from '../../hooks/useCurrentLocation';
 import { Reviews } from '@mui/icons-material';
+import { VEGAN_MENU_TYPES } from '@/constants';
 
 const TabBar = () => {
   const { ref, inView } = useInView();
@@ -123,7 +124,11 @@ const TabBar = () => {
                 <PlaceCard
                   key={report._id}
                   name={report.name}
-                  veganOption={report.vegan_option ? '일부 비건' : '비건'}
+                  veganOption={
+                    report.vegan_option
+                      ? VEGAN_MENU_TYPES[0]
+                      : VEGAN_MENU_TYPES[1]
+                  }
                   distance={distance}
                   location={report.address}
                   number={report.tel === '' ? '없음' : report.tel}
@@ -215,7 +220,9 @@ const TabBar = () => {
                   key={bookmark._id}
                   name={bookmark.place_id.name}
                   veganOption={
-                    bookmark.place_id.vegan_option ? '일부 비건' : '비건'
+                    bookmark.place_id.vegan_option
+                      ? VEGAN_MENU_TYPES[0]
+                      : VEGAN_MENU_TYPES[1]
                   }
                   distance={distance}
                   location={bookmark.place_id.address}

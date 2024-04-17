@@ -9,19 +9,19 @@ export const Wrapper = styled.main`
   height: 100vh;
   position: relative;
   box-sizing: border-box;
+  background-color: ${(props) => props.theme.color.beige[100]};
+  overflow: hidden;
 `;
 export const Categories = styled.div`
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
 `;
 export const SearchNav = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   padding: 12px 0;
-
-  background-color: #f7f9f0;
   position: sticky;
   z-index: 1000;
   top: 0;
@@ -46,7 +46,8 @@ export const FilterButton = styled(SmallRoundButton)`
 
 export const ScrollableList = styled.div`
   overflow: auto;
-  max-height: 88%;
+  height: calc(100vh - 125px);
+  overflow-y: scroll;
 `;
 
 export const BottomBar = styled.div`

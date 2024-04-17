@@ -45,5 +45,5 @@ export default function MapComponent({ address }) {
     });
   }, [address]); // useEffect의 두 번째 인수로 address를 추가하여 address가 변경될 때마다 실행되도록 합니다.
 
-  return <div id="map" style={{ width: '100%', height: '400px' }}></div>;
+  return <div id="map" style={{ width: '100%', height: '120px' }}></div>;
 }

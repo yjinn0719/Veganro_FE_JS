@@ -1,6 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
 import reset from 'styled-reset';
 import './fonts/fonts.css';
+import backgroundImg from '../assets/images/background.png';
 
 const GlobalStyles = createGlobalStyle`
     ${reset}
@@ -24,6 +25,8 @@ const GlobalStyles = createGlobalStyle`
         line-height: 1;
         font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
         background-color: #F6F9F0;
+        height: 100vh;
+        overflow: hidden;
     }
     ol, ul{
         list-style: none;
@@ -40,6 +43,15 @@ const GlobalStyles = createGlobalStyle`
         display: flex;
         justify-content: center;
         position: relative;
+        background-image: url(/src/assets/images/background.png);
+        background-position: center;
+        background-size: 100% auto;
+        background-repeat: no-repeat;
+        -ms-overflow-style: none; /* IE and Edge */
+        scrollbar-width: none; /* Firefox */
+    }
+    #root::-webkit-scrollbar {
+        display: none; /* Chrome, Safari, Opera*/
     }
     img[src='']{
         display: none !important;

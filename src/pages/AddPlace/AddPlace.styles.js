@@ -1,11 +1,14 @@
 import styled from 'styled-components';
 
 export const MapContainer = styled.div`
-  height: 150px;
+  height: 200px;
   display: flex;
   flex-direction: column;
   width: 100%;
   gap: 16px;
+`;
+export const ContentWrapper = styled.div`
+  width: 100%;
 `;
 export const MainContainer = styled.div`
   display: flex;

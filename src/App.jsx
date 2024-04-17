@@ -3,12 +3,23 @@ import styled from 'styled-components';
 import { RecoilRoot } from 'recoil';
 import MyRouter from './routes/index';
 import Toast from './hooks/useToast';
+import Landing from './components/Landing/Landing';
 
-const AppContainer = styled.div`
+const AppWrapper = styled.div`
   width: 100%;
-  max-width: 480px;
-  height: 100%;
+  max-width: 1000px;
   margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  gap: 80px;
+  align-items: center;
+`;
+const AppContainer = styled.div`
+  width: 480px;
+  height: 100%;
+  position: relative;
+  border-left: solid 1px ${(props) => props.theme.color.gray[200]};
+  border-right: solid 1px ${(props) => props.theme.color.gray[200]};
 `;
 function App() {
   // 루트 디렉토리의 index.html <script>태그 안에 있던 map api 호출 부분에서 에러 이슈 -> VITE_APP_KAKAO_MAP_KEY 값은 정적 HTML 파일에 직접 삽입 불가 -> jsx 파일 APP에 useEffect 통해 스크립트를 동적으로 로드
@@ -49,10 +60,13 @@ function App() {
 
   return (
     <RecoilRoot>
-      <AppContainer>
-        <MyRouter />
-        <Toast />
-      </AppContainer>
+      <AppWrapper>
+        <Landing />
+        <AppContainer>
+          <MyRouter />
+          <Toast />
+        </AppContainer>
+      </AppWrapper>
     </RecoilRoot>
   );
 }

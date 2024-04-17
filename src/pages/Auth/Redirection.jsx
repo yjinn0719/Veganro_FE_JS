@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import Spinner from '@/components/Spinner/Spinner';
 import { useNavigate } from 'react-router-dom';
 import { useGetUser } from '@/hooks/useUser';
 import { usePostAuth } from '@/hooks/useAuth';
@@ -41,7 +42,11 @@ const Redirection = () => {
     }
   }, [userLoading, userData, navigate]);
 
-  return <div>로그인 중입니다.</div>;
+  return (
+    <div>
+      <Spinner />
+    </div>
+  );
 };
 
 export default Redirection;

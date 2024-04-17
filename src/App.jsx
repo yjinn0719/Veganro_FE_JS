@@ -7,11 +7,11 @@ import Landing from './components/Landing/Landing';
 
 const AppWrapper = styled.div`
   width: 100%;
-  max-width: 1000px;
+  max-width: 940px;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
-  gap: 80px;
+  gap: 60px;
   align-items: center;
 `;
 const AppContainer = styled.div`

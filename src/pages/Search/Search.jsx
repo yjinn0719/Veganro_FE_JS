@@ -5,6 +5,7 @@ import useCurrentLocation from '@/hooks/useCurrentLocation';
 import { getPlacesWithDistance } from '@/apis/index';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import {
+  initialCategoryState,
   selectedCategoryState,
   selectedMenuTypeState,
 } from '@/states/filterState';
@@ -38,9 +39,8 @@ export default function Search() {
 
   //recoil로 옮겨야하는 상태관리값
   const [showFilterModal, setShowFilterModal] = useState(false);
-  const [categoriesStatus, setCategoriesStatus] = useState(
-    PLACE_TYPES.map((type) => ({ name: type, clicked: false })),
-  );
+  const [categoriesStatus, setCategoriesStatus] =
+    useRecoilState(initialCategoryState);
   const [selectedCategories, setSelectedCategories] = useRecoilState(
     selectedCategoryState,
   );

@@ -24,6 +24,7 @@ import { PLACE_TYPES } from '@/constants';
 import {
   selectedMenuTypeState,
   selectedCategoryState,
+  initialCategoryState,
 } from '@/states/filterState';
 import { isMenuOpenState } from '@/states/menuOpenState';
 
@@ -39,14 +40,8 @@ export default function Home() {
   const [selectedCategories, setSelectedCategories] = useRecoilState(
     selectedCategoryState,
   );
-
-  const [categoriesStatus, setCategoriesStatus] = useState(() => {
-    const initialCategoriesStatus = PLACE_TYPES.map((type) => ({
-      name: type,
-      clicked: type === '식당',
-    }));
-    return initialCategoriesStatus;
-  });
+  const [categoriesStatus, setCategoriesStatus] =
+    useRecoilState(initialCategoryState);
 
   // 앱 최초 진입, 현재 위치 불러오기
   useEffect(() => {

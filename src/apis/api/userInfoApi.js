@@ -6,7 +6,6 @@ export const getUserData = async () => {
     const response = await api.get('/users/me');
     return response.data.data;
   } catch (error) {
-    notify('error', '로그인이 필요합니다.');
     handleError(error);
   }
 };

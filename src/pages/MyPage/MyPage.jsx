@@ -16,7 +16,6 @@ import {
   Nickname,
   BadgeText,
 } from './MyPage.styles';
-import { MenuContainer } from '@/pages/PlaceDetail/PlaceDetail.styles';
 
 export default function MyPage() {
   const { userid } = useParams();
@@ -42,9 +41,7 @@ export default function MyPage() {
           <TabBar />
         </ProfileWrapper>
       </Container>
-      <MenuContainer>
-        <MenuButton />
-      </MenuContainer>
+      <MenuButton />
     </>
   );
 }

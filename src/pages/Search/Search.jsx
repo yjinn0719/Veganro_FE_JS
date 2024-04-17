@@ -13,7 +13,8 @@ import {
 import SearchBar from '@/components/SearchBar/SearchBar';
 import PlaceCategory from '@/components/PlaceCategory/PlaceCategory';
 import SearchList from '@/components/SearchList/SearchList';
-// import MenuButton from '@/components/MenuButton/MenuButton';
+import MapButton from '@/components/MapButton/MapButton';
+import MenuButton from '@/components/MenuButton/MenuButton';
 import SmallRoundButton from '@/components/SmallRoundButton/SmallRoundButton';
 import MapFilterModal from '@/components/MapFilterModal/MapFilterModal';
 
@@ -24,8 +25,7 @@ import {
   FilterBar,
   FilterButton,
   ScrollableList,
-  BottomBar,
-  MapViewButton,
+  MapButtonContainer,
 } from './Search.style';
 
 import { PLACE_TYPES } from '../../constants';
@@ -200,14 +200,14 @@ export default function Search() {
               />
             ))}
         </ScrollableList>
-        <BottomBar>
-          <MapViewButton
+        <MapButtonContainer>
+          <MapButton
             className="map-view-button"
             title="지도에서 다시 찾기"
             onClick={() => navigate('/')}
           />
-          {/* <MenuButton /> */}
-        </BottomBar>
+        </MapButtonContainer>
+        <MenuButton />
       </Wrapper>
     </>
   );

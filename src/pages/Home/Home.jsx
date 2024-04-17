@@ -14,11 +14,10 @@ import {
   TopBar,
   FilterBar,
   Categories,
-  BottomBar,
   RelocateButton,
-  ListViewButton,
   FilterButton,
 } from '../Home/Home.style';
+import GpsFixedRoundedIcon from '@mui/icons-material/GpsFixedRounded';
 import { PLACE_TYPES } from '@/constants';
 
 import {
@@ -153,15 +152,20 @@ export default function Home() {
             selectedMenuTypes={selectedMenuTypes}
           />
         )}
-        <BottomBar>
-          <RelocateButton
-            title="gps"
-            className="relocate-button"
-            onClick={handleRelocateClick}
+        <RelocateButton
+          title="gps"
+          className="relocate-button"
+          onClick={handleRelocateClick}
+        >
+          <GpsFixedRoundedIcon
+            sx={{
+              color: '#383838',
+              width: '24px',
+              height: '24px',
+            }}
           />
-          {/* <ListViewButton className="list-view-button" title="리스트뷰" /> */}
-          <MenuButton isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
-        </BottomBar>
+        </RelocateButton>
+        <MenuButton isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
       </Wrapper>
     </>
   );

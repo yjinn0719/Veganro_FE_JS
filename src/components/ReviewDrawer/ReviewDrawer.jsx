@@ -13,7 +13,8 @@ import {
   ReviewTextAreaContainer,
   ReviewPlaceholder,
 } from './ReviewDrawer.styles';
-import { notify } from '../../hooks/useToast';
+import { notify } from '@/hooks/useToast';
+import { IoLocation } from 'react-icons/io5';
 
 export default function ReviewDrawer({
   address,
@@ -67,26 +68,7 @@ export default function ReviewDrawer({
           <FormContentContainer>
             <AddressInputContainer>
               <LocationIcon>
-                <div
-                  style={{
-                    width: '3px',
-                    height: '3px',
-                    left: '10.50px',
-                    top: '7.50px',
-                    position: 'absolute',
-                    background: '#4F8337',
-                  }}
-                />
-                <div
-                  style={{
-                    width: '15px',
-                    height: '21px',
-                    left: '4.50px',
-                    top: '1.50px',
-                    position: 'absolute',
-                    background: '#4F8337',
-                  }}
-                />
+                <IoLocation size="20" />
               </LocationIcon>
               <AddressText>{address}</AddressText>
             </AddressInputContainer>

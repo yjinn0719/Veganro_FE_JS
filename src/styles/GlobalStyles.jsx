@@ -45,13 +45,16 @@ const GlobalStyles = createGlobalStyle`
         position: relative;
         background-image: url(/src/assets/images/background.png);
         background-position: center;
-        background-size: 100% auto;
+        background-size: 120%;
         background-repeat: no-repeat;
+        overflow-hidden;
+        width: 100vw;
+        height: 100vh;
         -ms-overflow-style: none; /* IE and Edge */
         scrollbar-width: none; /* Firefox */
     }
     #root::-webkit-scrollbar {
-        display: none; /* Chrome, Safari, Opera*/
+        display: none;
     }
     img[src='']{
         display: none !important;

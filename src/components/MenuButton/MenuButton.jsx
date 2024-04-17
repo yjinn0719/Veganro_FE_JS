@@ -37,8 +37,8 @@ function MenuButton() {
   };
 
   return (
-    <Menu>
-      <MenuList $isopened={isMenuOpen}>
+    <Menu className="menu-container">
+      <MenuList $isopened={isMenuOpen} className="menu-list">
         {isMenuOpen &&
           MENU_LIST.map((title, index) => (
             <RoundButton

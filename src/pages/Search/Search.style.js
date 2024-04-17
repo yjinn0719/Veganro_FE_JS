@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 import SmallRoundButton from '@/components/SmallRoundButton/SmallRoundButton';
-import MapButton from '@/components/MapButton/MapButton';
 
 export const Wrapper = styled.main`
   padding: 0 16px 16px 16px;
@@ -48,20 +47,25 @@ export const ScrollableList = styled.div`
   overflow: auto;
   height: calc(100vh - 125px);
   overflow-y: scroll;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 export const BottomBar = styled.div`
-  width: 100%;
   position: absolute;
   bottom: 16px;
-  padding: 0 16px;
+  left: 0;
+  right: 0;
   box-sizing: border-box;
   display: flex;
   justify-content: center;
   align-items: flex-end;
   z-index: 999;
 `;
-export const MapViewButton = styled(MapButton)`
-  &.map-view-button {
-  }
+export const MapButtonContainer = styled.div`
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
 `;

@@ -11,15 +11,20 @@ export const ContentWrapper = styled.div`
   width: 100%;
 `;
 export const MainContainer = styled.div`
+  position: absolute;
+  top: 48px;
   display: flex;
   width: 100%;
-  height: 100%;
-  padding: 16px;
+  height: calc(100vh - 48px);
+  overflow-y: scroll;
+  padding: 0 16px 16px 16px;
   flex-direction: column;
   align-items: flex-start;
-  gap: 24px;
-  margin-top: 50px;
+  gap: 16px;
   background: ${(props) => props.theme.color.white};
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 export const TagContainer = styled.div`
@@ -35,13 +40,13 @@ export const DateTagContainer = styled.div`
 `;
 
 export const AddPlaceText = styled.p`
-  overflow: hidden;
   color: ${(props) => props.theme.color.gray[800]};
   text-overflow: ellipsis;
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
+  margin-bottom: -6px;
 `;
 
 export const AddPlaceSearch = styled.p`
@@ -52,6 +57,15 @@ export const AddPlaceSearch = styled.p`
   font-style: normal;
   font-weight: 600;
   line-height: normal;
+  position: absolute;
+  cursor: pointer;
+  right: 8px;
+  transition: all 0.2s ease-in;
+  &:hover {
+    svg {
+      color: ${(props) => props.theme.color.green[500]};
+    }
+  }
 `;
 
 export const AddressInputContainer = styled.div`
@@ -59,4 +73,5 @@ export const AddressInputContainer = styled.div`
   align-items: center;
   gap: 8px;
   width: 100%; // 컨테이너의 너비를 부모에 맞춥니다.
+  position: relative;
 `;

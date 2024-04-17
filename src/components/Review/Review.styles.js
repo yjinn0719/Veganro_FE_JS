@@ -17,7 +17,7 @@ const ReviewWrapper = styled.div`
   flex: 1 1 0;
   flex-direction: column;
   justify-content: flex-start;
-  align-items: flex-start;
+  align-items: center;
   gap: 12px;
   display: inline-flex;
 `;
@@ -88,9 +88,8 @@ const NoReviewText = styled.div`
 `;
 
 const LoadMoreButtonContainer = styled.div`
-  width: 100%;
-  height: 100%;
   padding: 8px 12px;
+  box-sizing: border-box;
   background: white;
   border-radius: 100px;
   border: 1px solid #dddddd;
@@ -98,12 +97,17 @@ const LoadMoreButtonContainer = styled.div`
   justify-content: center;
   align-items: center;
   gap: 6px;
+  box-shadow: 4px 6px 16px 0px rgba(71, 71, 71, 0.1);
+  transition: all 0.2s ease-in;
+  cursor: pointer;
+  &:hover {
+    box-shadow: 4px 6px 16px 0px rgba(71, 71, 71, 0.3);
+  }
 `;
 
 const LoadMoreButtonText = styled.button`
   color: #6e6e6e;
-  font-size: 10px;
-  font-family: 'Pretendard';
+  font-size: 12px;
   font-weight: 500;
   word-wrap: break-word;
 `;
@@ -120,7 +124,7 @@ const LoadMoreButtonIcon = styled.div`
   left: 2.62px;
   top: 4.31px;
   position: absolute;
-  border: 1.12px solid #c4c4c4;
+  border: solid 1px #c4c4c4;
 `;
 
 export {

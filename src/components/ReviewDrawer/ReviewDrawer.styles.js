@@ -12,7 +12,6 @@ const Title = styled.button`
   text-align: center;
   color: #383838;
   font-size: 20px;
-  font-family: 'Pretendard';
   font-weight: 600;
   word-wrap: break-word;
 `;
@@ -48,6 +47,10 @@ const LocationIcon = styled.div`
   width: 24px;
   height: 24px;
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: ${(props) => props.theme.color.green[500]};
 `;
 
 const AddressText = styled.div`
@@ -74,8 +77,6 @@ const ReviewPlaceholder = styled.textarea`
   height: 100%;
   color: #c4c4c4;
   font-size: 16px;
-  font-family: 'Pretendard';
-  font-weight: 600;
   word-wrap: break-word;
   background: none;
   border: none;
@@ -100,7 +101,6 @@ const SubmitButtonContainer = styled.div`
 const SubmitButtonText = styled.button`
   color: white;
   font-size: 16px;
-  font-family: 'Pretendard';
   font-weight: 600;
   word-wrap: break-word;
 `;

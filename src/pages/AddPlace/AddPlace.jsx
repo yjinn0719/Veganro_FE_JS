@@ -9,7 +9,7 @@ import PrimaryButton from '@/components/PrimaryButton/PrimaryButton';
 import KakaoAddress from '@/components/KakaoAddress/KakaoAddress';
 import OpenTimeTab from '@/components/OpenTimeTab/OpenTimeTab';
 import { createReportPlace } from '@/apis/api/reportApi';
-import { RiFileSearchFill } from 'react-icons/ri';
+import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import {
   MainContainer,
   MapContainer,
@@ -152,8 +152,8 @@ function AddPlace() {
 
   return (
     <>
+      <Navbar title="가게제보" icon="null" />
       <MainContainer>
-        <Navbar title="가게제보" icon="null" />
         <MapContainer>
           <PlaceMap address={placeAddressApi} name={placeName}></PlaceMap>
         </MapContainer>
@@ -165,7 +165,7 @@ function AddPlace() {
             onChange={(e) => setPlaceAddressApi(e.target.value)}
           ></InputBox>
           <AddPlaceSearch onClick={openModal}>
-            <RiFileSearchFill size="45" />
+            <SearchOutlinedIcon sx={{ width: '24px', height: '24px' }} />
           </AddPlaceSearch>
         </AddressInputContainer>
         <InputBox

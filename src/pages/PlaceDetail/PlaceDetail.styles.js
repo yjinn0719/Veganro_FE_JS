@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import MenuButton from '@/components/MenuButton/MenuButton';
 
 const MainContainer = styled.div`
   width: 100%;
@@ -23,6 +22,10 @@ const ContentWrapper = styled.div`
   position: absolute;
   top: 48px;
   overflow-y: scroll;
+  position: relative;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 const ContentContainer = styled.div`
   align-self: stretch;
@@ -167,24 +170,6 @@ const Loading = styled.div`
   align-items: center;
   display: flex;
 `;
-<<<<<<< Updated upstream
-const MenuContainer = styled.div`
-  display: flex;
-  width: 100%;
-  height: 100%;
-  position: sticky;
-=======
-const MenuContainer = styled(MenuButton)`
-  position: absolute;
->>>>>>> Stashed changes
-  bottom: 16px;
-  right: 16px;
-  box-sizing: border-box;
-  z-index: 999;
-  flex-direction: column;
-  align-items: flex-end;
-  padding-right: 16px;
-`;
 
 export {
   MainContainer,
@@ -209,5 +194,4 @@ export {
   VeganTag,
   ReviewContainer,
   Loading,
-  MenuContainer,
 };

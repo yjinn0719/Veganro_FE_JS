@@ -11,6 +11,7 @@ export const CardWrapper = styled.div`
   border-radius: 4px;
   border: 1px solid var(--Gray-100, #efefef);
   background: var(--White, #fff);
+  cursor: pointer;
 `;
 
 export const TextBox = styled.div`

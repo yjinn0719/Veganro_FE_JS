@@ -10,6 +10,11 @@ export const MapBtn = styled.button`
   flex-shrink: 0;
   border-radius: 100px;
   background: ${(props) => props.theme.color.gray[800]};
+  box-shadow: 4px 6px 16px 0px rgba(71, 71, 71, 0.1);
+  transition: all 0.2s ease-in;
+  &:hover {
+    box-shadow: 4px 6px 16px 0px rgba(71, 71, 71, 0.3);
+  }
 `;
 
 export const MapBtnTitle = styled.p`

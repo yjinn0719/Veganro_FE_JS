@@ -80,7 +80,6 @@ const TagContainer = styled.div`
 const TagText = styled.div`
   color: #4f8337;
   font-size: 12px;
-  font-family: Pretendard;
   font-weight: 600;
   word-wrap: break-word;
 `;
@@ -115,18 +114,17 @@ const DistanceOuter = styled.div`
 `;
 
 const DistanceInner = styled.div`
-  width: 9px;
-  height: 9px;
+  width: 10px;
+  height: 10px;
   left: 1.5px;
   top: 1.5px;
   position: absolute;
-  border: 0.75px #6e6e6e solid;
+  border: 1px #6e6e6e solid;
 `;
 
 const InfoText = styled.div`
   color: #6e6e6e;
   font-size: 12px;
-  font-family: Pretendard;
   font-weight: 500;
   word-wrap: break-word;
 `;
@@ -134,7 +132,6 @@ const InfoText = styled.div`
 const LocationText = styled.div`
   color: #4f4f4f;
   font-size: 14px;
-  font-family: Pretendard;
   font-weight: 500;
   word-wrap: break-word;
 `;
@@ -142,7 +139,6 @@ const LocationText = styled.div`
 const NumberText = styled.div`
   color: #6e6e6e;
   font-size: 12px;
-  font-family: Pretendard;
   font-weight: 500;
   word-wrap: break-word;
 `;

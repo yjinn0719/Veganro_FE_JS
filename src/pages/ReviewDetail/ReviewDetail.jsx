@@ -21,7 +21,6 @@ import {
   NoReview,
   NoReviewText,
 } from '@/components/Review/Review.styles';
-import { MenuContainer } from '@/pages/PlaceDetail/PlaceDetail.styles';
 import { Container } from '@/pages/ReviewDetail/ReviewDetail.styles';
 
 import ReviewDrawer from '@/components/ReviewDrawer/ReviewDrawer';
@@ -130,9 +129,7 @@ export default function Review() {
           setSubmittedReviews={setSubmittedReviews}
         />
       )}
-      <MenuContainer>
-        <MenuButton />
-      </MenuContainer>
+      <MenuButton />
     </>
   );
 }

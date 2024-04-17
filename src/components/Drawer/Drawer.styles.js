@@ -2,17 +2,19 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
 const BackgroundOverlay = styled(motion.div)`
-  position: absolute;
+  position: fixed;
   overflow: hidden;
   top: 0;
   left: 0;
+  bottom: 0;
   width: 100%;
   height: 100vh;
+  background: black;
 `;
 
 const SheetBackground = styled(motion.div)`
   z-index: 9999;
-  position: fixed;
+  position: absolute;
   bottom: ${({ isOpened }) => (isOpened ? '0' : '-100%')};
   max-width: 480px;
   width: 100%;
@@ -26,7 +28,7 @@ const SheetBackground = styled(motion.div)`
 `;
 
 const BottomHeader = styled.div`
-  height: 40px;
+  height: 24px;
   cursor: grab;
   user-select: none;
 `;
@@ -47,8 +49,11 @@ const SheetContentWrapper = styled.div`
 `;
 
 const SheetContent = styled.div`
-  font-size: 20px;
   width: 100%;
+  font-size: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 `;
 
 const DrawerContainer = styled.div`

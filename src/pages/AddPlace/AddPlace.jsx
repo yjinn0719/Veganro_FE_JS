@@ -6,11 +6,10 @@ import PlaceMap from '@/components/PlaceMap/PlaceMap';
 import PlaceTag from '@/components/PlaceTag/PlaceTag';
 import MenuTag from '@/components/MenuTag/MenuTag';
 import PrimaryButton from '@/components/PrimaryButton/PrimaryButton';
-import KakaoAddress from '../../components/KakaoAddress/KakaoAddress';
-import OpenTimeTab from '../../components/OpenTimeTab/OpenTimeTab';
+import KakaoAddress from '@/components/KakaoAddress/KakaoAddress';
+import OpenTimeTab from '@/components/OpenTimeTab/OpenTimeTab';
 import { createReportPlace } from '@/apis/api/reportApi';
-import { getAddressCoordinates } from '../../apis/api/addressApi';
-import { IoSearchCircleOutline } from 'react-icons/io5';
+import { RiFileSearchFill } from 'react-icons/ri';
 import {
   MainContainer,
   MapContainer,
@@ -25,12 +24,13 @@ function AddPlace() {
   const [selectMenu, setSelectMenu] = useState('');
   const [placeAddress, setPlaceAddress] = useState('');
   const [placeName, setPlaceName] = useState('');
-  const [placeSns, setPlaceSns] = useState('');
+  const [placeSns, setPlaceSns] = useState([]);
   const [placeNumber, setPlaceNumber] = useState('');
   const [placeAddressApi, setPlaceAddressApi] = useState('');
+  const [placeAddressLotApi, setPlaceAddressLotApi] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [snsUrls, setSnsUrls] = useState([]);
   const [location, setLocation] = useState(null);
+  const [warning, setWarning] = useState('');
   const [selectedTag, setSelectedTag] = useState('월');
   const [timeValues, setTimeValues] = useState({
     월: ['', '', '', ''],
@@ -74,11 +74,11 @@ function AddPlace() {
       vegan_option: selectMenu === '일부 채식 메뉴 제공',
       tel: placeNumber || '',
       address: placeAddressApi,
-      address_lot_number: '서울 00-00',
+      address_lot_number: placeAddressLotApi,
       address_detail: placeAddress || '',
       location: location,
       open_times: newOpenTimes,
-      sns_url: snsUrls.length > 0 ? snsUrls : [],
+      sns_url: placeSns.length > 0 ? placeSns : '',
     };
   };
 
@@ -91,16 +91,14 @@ function AddPlace() {
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 
-  const handleAddressSelect = async (address) => {
-    setPlaceAddressApi(address);
-    try {
-      const coordinates = await getAddressCoordinates(address);
-      if (coordinates) {
-        setLocation(coordinates);
-        console.log('좌표:', coordinates);
-      }
-    } catch (error) {
-      console.error('주소를 좌표로 변환하는 중 오류 발생:', error);
+  const handleAddressSelect = ({ roadAddress, lotAddress, coordinates }) => {
+    setPlaceAddressApi(roadAddress);
+    setPlaceAddressLotApi(lotAddress);
+
+    if (coordinates) {
+      setLocation(coordinates);
+    } else {
+      console.error('주소에 대한 좌표 정보를 설정할 수 없습니다.');
     }
     closeModal();
   };
@@ -126,6 +124,8 @@ function AddPlace() {
 
   const handleSubmit = async () => {
     const data = AddPlaceData();
+    console.log('Submitting data:', data);
+
     try {
       const result = await createReportPlace(data);
       navigate('/');
@@ -135,24 +135,44 @@ function AddPlace() {
     }
   };
 
+  const handleNumberChange = (e) => {
+    const newNumber = e.target.value;
+    setPlaceNumber(newNumber);
+
+    // 전화번호 형식 검사
+    const phoneRegex = /^(0\d{1,4}-\d{1,4}-\d{4})$/;
+    if (!phoneRegex.test(newNumber)) {
+      setWarning(
+        '유효하지 않은 전화번호 형식입니다. 예: 00-000-0000, 000-0000-0000 ...',
+      );
+    } else {
+      setWarning(''); // 경고 메시지 초기화
+    }
+  };
+
   return (
     <>
       <MainContainer>
-        <Navbar title="가게제보" icon="delete" />
+        <Navbar title="가게제보" icon="null" />
         <MapContainer>
           <PlaceMap address={placeAddressApi} name={placeName}></PlaceMap>
         </MapContainer>
         <AddPlaceText>가게 위치</AddPlaceText>
         <AddressInputContainer>
           <InputBox
-            placeholder="가게 위치"
+            placeholder="도로명 주소"
             value={placeAddressApi} // 주소 검색 결과를 표시
             onChange={(e) => setPlaceAddressApi(e.target.value)}
           ></InputBox>
           <AddPlaceSearch onClick={openModal}>
-            <IoSearchCircleOutline size="35" />
+            <RiFileSearchFill size="45" />
           </AddPlaceSearch>
         </AddressInputContainer>
+        <InputBox
+          placeholder="지번 주소"
+          value={placeAddressLotApi} // 지번 주소 검색 결과를 표시
+          onChange={(e) => setPlaceAddressLotApi(e.target.value)}
+        />
         <InputBox
           placeholder="상세 위치"
           value={placeAddress}
@@ -201,10 +221,13 @@ function AddPlace() {
         />
         <AddPlaceText>연락처 (옵션)</AddPlaceText>
         <InputBox
+          type="text"
           placeholder="010-1234-5678"
           value={placeNumber}
-          onChange={(e) => setPlaceNumber(e.target.value)}
+          onChange={handleNumberChange}
         ></InputBox>
+        {warning && <p style={{ color: 'red' }}>{warning}</p>}
+
         <PrimaryButton
           title="이 위치로 등록하기"
           isEnabled={isButtonEnabled}

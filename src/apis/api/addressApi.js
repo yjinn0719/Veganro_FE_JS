@@ -2,12 +2,12 @@ import axios from 'axios';
 
 export const getAddressCoordinates = async (address) => {
   try {
-    const apiKey = '8dd63e5f9683453decbcec3fa0376a61'; // 실제 API 키로 교체하세요.
+    const REST_API_KEY = import.meta.env.VITE_APP_REST_API_KEY;
     const response = await axios.get(
       'https://dapi.kakao.com/v2/local/search/address.json',
       {
         headers: {
-          Authorization: `KakaoAK ${apiKey}`, // 헤더에 API 키를 올바르게 설정
+          Authorization: `KakaoAK ${REST_API_KEY}`,
         },
         params: {
           query: address,

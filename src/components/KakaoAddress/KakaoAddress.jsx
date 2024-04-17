@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import DaumPostcode from 'react-daum-postcode';
 import { ModalOverlay, ModalContent } from './KakaoAddress.styles';
+import { getAddressCoordinates } from '@/apis/api/addressApi';
 
 const KakaoAddress = ({ onClose, onAddressSelect }) => {
   useEffect(() => {
@@ -10,23 +11,40 @@ const KakaoAddress = ({ onClose, onAddressSelect }) => {
     };
   }, []);
 
-  const handleComplete = (data) => {
+  const handleComplete = async (data) => {
     let fullAddress = data.address;
     let extraAddress = '';
+    let jibunAddress = data.jibunAddress || '';
 
     if (data.addressType === 'R') {
       if (data.bname !== '') {
         extraAddress += data.bname;
       }
       if (data.buildingName !== '') {
-        extraAddress +=
-          extraAddress !== '' ? `, ${data.buildingName}` : data.buildingName;
+        extraAddress += extraAddress
+          ? `, ${data.buildingName}`
+          : data.buildingName;
       }
-      fullAddress += extraAddress !== '' ? ` (${extraAddress})` : '';
+      fullAddress += extraAddress ? ` (${extraAddress})` : '';
     }
-    // 선택한 주소 정보를 부모 컴포넌트로 전달
-    onAddressSelect(fullAddress);
-    // 모달을 닫을 때 body의 스크롤을 다시 허용
+
+    try {
+      const coordinates = await getAddressCoordinates(fullAddress);
+      console.log(coordinates);
+      onAddressSelect({
+        roadAddress: fullAddress,
+        lotAddress: jibunAddress,
+        coordinates: coordinates,
+      });
+    } catch (error) {
+      console.error('좌표 변환 실패:', error);
+      onAddressSelect({
+        roadAddress: fullAddress,
+        lotAddress: jibunAddress,
+        coordinates: null,
+      });
+    }
+
     document.body.style.overflow = 'auto';
     onClose();
   };

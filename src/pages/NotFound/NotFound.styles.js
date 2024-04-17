@@ -9,13 +9,10 @@ export const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
 `;
-export const ImageContainer = styled.div`
-  width: 120px;
-  height: 120px;
-  background-image: url(@/assets/images/not_found.png);
-  background-size: cover;
-  background-position: center;
-`;
+
 export const Title = styled.h1`
-  font-size: 24px;
+  padding-top: 20px;
+  font-size: 18px;
+  font-weight: 700;
+  color: ${(props) => props.theme.color.gray[600]};
 `;

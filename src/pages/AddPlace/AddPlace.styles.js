@@ -44,7 +44,7 @@ export const AddPlaceText = styled.p`
 export const AddPlaceSearch = styled.p`
   white-space: nowrap;
   display: flex;
-  color: ${(props) => props.theme.color.green[500]};
+  color: ${(props) => props.theme.color.gray[500]};
   font-size: 16px;
   font-style: normal;
   font-weight: 600;

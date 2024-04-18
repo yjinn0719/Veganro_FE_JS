@@ -19,6 +19,7 @@ const GreenBox = styled.div`
   width: 60px;
   height: 60px;
   border-radius: 4px;
+  align-items: center;
   overflow: hidden;
   display: flex;
 `;

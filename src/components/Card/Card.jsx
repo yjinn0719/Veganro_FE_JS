@@ -26,9 +26,10 @@ export default function PlaceCard({
   veganOption,
   distance = '0.5km',
   img,
+  onClick,
 }) {
   return (
-    <Container>
+    <Container onClick={onClick}>
       <GreenBox>
         <Icon src={img} />
       </GreenBox>

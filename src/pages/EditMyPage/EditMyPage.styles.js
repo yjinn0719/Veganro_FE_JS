@@ -122,7 +122,21 @@ const ButtonContent = styled.div`
   flex-direction: row;
 `;
 
+const InfomationContainer = styled.div`
+  margin: 10px auto;
+  width: 90%;
+  height: 300px;
+`;
+
+const InfomationImg = styled.img`
+  width: 100%;
+  height: 300px;
+  background: url('src/assets/images/VeganOptionInfo.png');
+`;
+
 export {
+  InfomationImg,
+  InfomationContainer,
   Container,
   InnerContainer,
   TextBox,

@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useInView } from 'react-intersection-observer';
 import {
   useGetReviewsByUserId,
@@ -28,6 +29,7 @@ import { VEGAN_MENU_TYPES } from '@/constants';
 const TabBar = () => {
   const { ref, inView } = useInView();
   const [selectedReviewId, setSelectedReviewId] = useState(null);
+  const navigate = useNavigate();
 
   const {
     data: ReviewsData,
@@ -228,6 +230,9 @@ const TabBar = () => {
                   location={bookmark.place_id.address}
                   number={bookmark.place_id.tel}
                   img={bookmark.place_id.category_img.url.basic_url}
+                  onClick={() => {
+                    navigate(`/place/${bookmark.place_id._id}`);
+                  }}
                 />
               );
             }),

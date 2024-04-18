@@ -10,6 +10,8 @@ import {
   VeganTagContainer,
   Icon,
   ButtonContent,
+  InfomationContainer,
+  InfomationImg,
 } from './EditMyPage.styles';
 import { useParams } from 'react-router-dom';
 import Navbar from '@/components/Navbar/Navbar';
@@ -25,6 +27,7 @@ import { notify } from '@/hooks/useToast';
 export default function EditMyPage({ title = '프로필 설정', nickname }) {
   const [newNickname, setNewNickname] = useState(nickname);
   const [activeTag, setActiveTag] = useState('');
+  const [showInformation, setShowInformation] = useState(false);
   const { userid } = useParams();
   const navigate = useNavigate();
 
@@ -39,7 +42,7 @@ export default function EditMyPage({ title = '프로필 설정', nickname }) {
     try {
       await updateUserData({ nickname: newNickname, tag: activeTag });
       notify('success', '프로필이 등록되었습니다.');
-      navigate(`/`);
+      navigate(`/home`);
     } catch (error) {
       if (error.response && error.response.status === 409) {
         setErrorMessage('이미 사용 중인 닉네임입니다.');
@@ -47,6 +50,10 @@ export default function EditMyPage({ title = '프로필 설정', nickname }) {
         console.error(error);
       }
     }
+  };
+
+  const handleClick = () => {
+    setShowInformation(!showInformation);
   };
   const isButtonEnabled = newNickname && newNickname.length > 0; // 조건문으로 확인
 
@@ -71,45 +78,50 @@ export default function EditMyPage({ title = '프로필 설정', nickname }) {
             <Text color="#383838" fontSize={20}>
               채식 유형
             </Text>
-            <Icon>
+            <Icon onClick={handleClick}>
               <IoInformationCircle size="20" />
             </Icon>
           </SubTextBox>
           <TagContainer>
             <VeganTagContainer>
               <VeganTag
-                title="비건 (Vegan)"
+                title="비건 Vegan"
                 isActive={activeTag === '비건'}
                 onClick={() => handleTagClick('비건')}
               />
               <VeganTag
-                title="락토 (Lacto)"
+                title="락토 Lacto"
                 isActive={activeTag === '락토'}
                 onClick={() => handleTagClick('락토')}
               />
               <VeganTag
-                title="오보 (Ovo)"
+                title="오보 Ovo"
                 isActive={activeTag === '오보'}
                 onClick={() => handleTagClick('오보')}
               />
               <VeganTag
-                title="락토-오보 (Lacto-Ovo)"
+                title="락토-오보 Lacto-Ovo"
                 isActive={activeTag === '락토-오보'}
                 onClick={() => handleTagClick('락토-오보')}
               />
               <VeganTag
-                title="페스코 (Pesco)"
+                title="페스코 Pesco"
                 isActive={activeTag === '페스코'}
                 onClick={() => handleTagClick('페스코')}
               />
               <VeganTag
-                title="폴로 (Pollo)"
+                title="폴로 Pollo"
                 isActive={activeTag === '폴로'}
                 onClick={() => handleTagClick('폴로')}
               />
             </VeganTagContainer>
           </TagContainer>
         </TagContainer>
+        {showInformation && (
+          <InfomationContainer>
+            <InfomationImg />
+          </InfomationContainer>
+        )}
         <ButtonContent>
           <ButtonContainer>
             <SecondaryButton

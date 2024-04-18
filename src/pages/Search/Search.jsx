@@ -205,7 +205,7 @@ export default function Search() {
           <MapButton
             className="map-view-button"
             title="지도에서 다시 찾기"
-            onClick={() => navigate('/')}
+            onClick={() => navigate('/home')}
           />
         </MapButtonContainer>
         <MenuButton />

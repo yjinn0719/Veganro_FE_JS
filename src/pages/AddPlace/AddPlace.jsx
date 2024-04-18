@@ -125,12 +125,9 @@ function AddPlace() {
 
   const handleSubmit = async () => {
     const data = AddPlaceData();
-    console.log('Submitting data:', data);
-
     try {
       const result = await createReportPlace(data);
-      navigate('/');
-      console.log(result);
+      navigate('/home');
     } catch (error) {
       console.error(error);
     }
@@ -147,7 +144,7 @@ function AddPlace() {
         '유효하지 않은 전화번호 형식입니다. 예: 00-000-0000, 000-0000-0000 ...',
       );
     } else {
-      setWarning(''); // 경고 메시지 초기화
+      setWarning('');
     }
   };
 

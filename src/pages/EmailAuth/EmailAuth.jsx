@@ -31,7 +31,13 @@ function EmailAuth() {
     const data = EmailAuthData();
     try {
       const result = await postEmailAuth(data);
-      navigate('/home');
+
+      if (result.token) {
+        localStorage.setItem('Authorization', result.token);
+        navigate('/home');
+      } else {
+        throw new Error('Token not provided');
+      }
     } catch (error) {
       console.error(error);
     }

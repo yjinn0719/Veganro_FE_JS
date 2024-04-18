@@ -5,7 +5,7 @@ import SmallRoundButton from '@/components/SmallRoundButton/SmallRoundButton';
 export const Wrapper = styled.main`
   padding: 0 16px 16px 16px;
   width: 100%;
-  height: 100vh;
+  height: 100%;
   position: relative;
   box-sizing: border-box;
   background-color: ${(props) => props.theme.color.beige[100]};
@@ -45,7 +45,7 @@ export const FilterButton = styled(SmallRoundButton)`
 
 export const ScrollableList = styled.div`
   overflow: auto;
-  height: calc(100vh - 125px);
+  height: calc(100% - 125px);
   overflow-y: scroll;
   &::-webkit-scrollbar {
     display: none;

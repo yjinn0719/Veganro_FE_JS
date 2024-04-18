@@ -5,7 +5,7 @@ import {
   useGetReviewsByUserId,
   useGetReportedByUserId,
   useGetBookmarkedByUserId,
-} from '../../hooks/useUser';
+} from '@/hooks/useUser';
 import PlaceCard from '@/components/Card/Card';
 import ReviewCard from '@/components/ReviewCard/ReviewCard';
 import {
@@ -21,9 +21,8 @@ import {
   NoReview,
   NoReviewText,
 } from '@/components/Review/Review.styles';
-import getDistance from '../../hooks/useDistance';
-import useCurrentLocation from '../../hooks/useCurrentLocation';
-import { Reviews } from '@mui/icons-material';
+import getDistance from '@/hooks/useDistance.jsx';
+import useCurrentLocation from '@/hooks/useCurrentLocation';
 import { VEGAN_MENU_TYPES } from '@/constants';
 
 const TabBar = () => {

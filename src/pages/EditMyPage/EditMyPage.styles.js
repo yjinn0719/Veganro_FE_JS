@@ -1,23 +1,31 @@
 import styled from 'styled-components';
+
 const Container = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
-  background: #fff;
+  background: white;
 `;
-
 const InnerContainer = styled.div`
-  margin: 70px auto;
-  width: 90%;
+  width: 100%;
+  height: calc(100% - 48px);
+  padding: 16px;
+  box-sizing: border-box;
   flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
+  justify-content: space-between;
+  align-items: center;
   display: flex;
-  min-height: 400px;
-}
+  position: absolute;
+  top: 48px;
 `;
-
+const InfoContainer = styled.div`
+  width: 100%;
+  padding: 32px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+`;
 const TextBox = styled.div`
   width: 100%;
   flex-direction: column;
@@ -29,27 +37,24 @@ const TextBox = styled.div`
 `;
 
 const SubTextBox = styled.div`
-height: 24px;
-flex-direction: row;
-display: flex;
-justify-content: flex-start;
-gap: 8px;
-}
+  height: 24px;
+  flex-direction: row;
+  display: flex;
+  justify-content: flex-start;
+  gap: 8px;
 `;
 
 const Text = styled.div`
-  color: ${(props) => props.color};
-  font-size: ${(props) => props.fontSize}px;
-  font-family: 'Pretendard';
+  color: ${(props) => props.theme.color.gray[800]};
+  font-size: 18px;
   font-weight: 600;
   word-wrap: break-word;
 `;
 
 const Card = styled.div`
-  width: 448px;
+  width: 100%;
   height: 50px;
   padding: 12px;
-  background: ${(props) => props.background};
   border-radius: 4px;
   flex-direction: column;
   justify-content: center;
@@ -59,33 +64,23 @@ const Card = styled.div`
 
 const TagContainer = styled.div`
   width: 100%;
-  margin-top: 20px;
   flex-direction: column;
   justify-content: flex-start;
   align-items: stretch;
-  gap: 12px;
+  gap: 16px;
   display: flex;
 `;
 
 const Tag = styled.div`
   width: ${(props) => props.width}px;
   padding: 12px;
-  background: ${(props) => props.background};
   border-radius: 100px;
-  border: ${(props) => props.border};
   justify-content: flex-start;
   align-items: center;
   display: flex;
 `;
 
 const ButtonContainer = styled.div`
-  display: flex;
-  height: 100px;
-  margin-top: 400px;
-  align-self: stretch;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 16px;
   width: 100%;
 `;
 
@@ -93,33 +88,32 @@ const Button = styled.div`
   flex: 1 1 0;
   height: 50px;
   padding: 12px;
-  background: ${(props) => props.background};
   border-radius: 4px;
   justify-content: center;
   align-items: center;
   gap: 8px;
   display: flex;
 `;
-
-const VeganTagContainer = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 10px;
-`;
-const Icon = styled.div`
-  width: 24px;
-  height: 24px;
-  position: relative;
-`;
-
 const ButtonContent = styled.div`
   height: 100%;
   gap: 10px;
   width: 100%;
   display: flex;
   flex-direction: row;
+  align-items: flex-end;
+`;
+const VeganTagContainer = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 12px;
+`;
+const Icon = styled.div`
+  width: 24px;
+  height: 24px;
+  position: relative;
+  color: ${(props) => props.theme.color.gray[500]};
 `;
 
 const InfomationContainer = styled.div`
@@ -139,6 +133,7 @@ export {
   InfomationContainer,
   Container,
   InnerContainer,
+  InfoContainer,
   TextBox,
   SubTextBox,
   Text,

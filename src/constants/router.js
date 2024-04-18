@@ -1,6 +1,7 @@
 export const PATH = {
-  MAIN: '/',
-  AUTH: '/auth',
+  AUTH: '/',
+  MAIN: '/home',
+  EMAILAUTH: '/emailauth',
   SIGNUP: '/signup',
   SEARCH: '/search',
   REVIEW: '/place/:placeid/review',

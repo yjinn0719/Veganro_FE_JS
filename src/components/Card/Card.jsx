@@ -7,17 +7,12 @@ import {
   TagText,
   InfoContainer,
   InfoItem,
-  DistanceIcon,
   InfoText,
   LocationText,
   NumberText,
   Icon,
 } from './Card.styles';
-import {
-  IoNavigateCircleOutline,
-  IoLocationOutline,
-  IoCallOutline,
-} from 'react-icons/io5';
+import { IoNavigateCircle, IoLocation, IoCall } from 'react-icons/io5';
 
 export default function PlaceCard({
   name,
@@ -39,7 +34,6 @@ export default function PlaceCard({
             style={{
               color: '#383838',
               fontSize: 18,
-              fontFamily: 'Pretendard',
               fontWeight: '600',
               wordWrap: 'break-word',
             }}
@@ -52,18 +46,16 @@ export default function PlaceCard({
         </NameContainer>
         <InfoContainer>
           <InfoItem>
-            <DistanceIcon>
-              <IoNavigateCircleOutline size="13" />
-            </DistanceIcon>
+            <IoNavigateCircle size="14" />
             <InfoText>{distance}km</InfoText>
           </InfoItem>
         </InfoContainer>
         <InfoItem>
-          <IoLocationOutline size="13" />
+          <IoLocation size="14" />
           <LocationText>{location}</LocationText>
         </InfoItem>
         <InfoItem>
-          <IoCallOutline size="13" />
+          <IoCall size="14" />
           <NumberText>{number}</NumberText>
         </InfoItem>
       </TextContainer>

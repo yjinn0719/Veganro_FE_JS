@@ -2,6 +2,7 @@ import { Route, Routes } from 'react-router-dom';
 import { PATH } from '@/constants/router';
 import Home from '@/pages/Home/Home';
 import Auth from '@/pages/Auth/Auth';
+import EmailAuth from '@/pages/EmailAuth/EmailAuth';
 import SignUp from '@/pages/SignUp/SignUp';
 import AddPlace from '@/pages/AddPlace/AddPlace';
 import Review from '@/pages/ReviewDetail/ReviewDetail';
@@ -17,6 +18,7 @@ const MyRouter = () => {
     <Routes>
       <Route path={PATH.MAIN} element={<Home />} />
       <Route path={PATH.AUTH} element={<Auth />} />
+      <Route path={PATH.EMAILAUTH} element={<EmailAuth />} />
       <Route path={PATH.REDIRECTION} element={<Redirection />} />
       <Route path={PATH.SIGNUP} element={<SignUp />} />
       <Route path={PATH.ADDPLACE} element={<AddPlace />} />

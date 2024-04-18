@@ -1,6 +1,6 @@
 import {
   Wrapper,
-  ImageContainer,
+  Link,
   TextBox,
   TopText,
   BodyText,
@@ -10,10 +10,13 @@ import {
 const Landing = () => {
   return (
     <Wrapper>
-      <ImageContainer></ImageContainer>
+      <Link
+        href="https://kdt-gitlab.elice.io/sw_track/class_08/web_project_ii/team05"
+        target="_blank"
+      />
       <TextBox>
         <TopText>
-          내일을 바꾸는 <b>여정</b>
+          한 발자국 더 <b>건강한 길로</b>
         </TopText>
         <BodyText>내 주변 채식 맛집</BodyText>
         <BottomText>

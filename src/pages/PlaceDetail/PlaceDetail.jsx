@@ -9,7 +9,7 @@ import BookMarked from '@/components/Bookmark/Bookmark';
 import PlaceDetailInfo from '@/components/PlaceDetailInfo/PlaceDetailInfo';
 import Review from '@/components/Review/Review';
 import useCurrentLocation from '@/hooks/useCurrentLocation';
-import getDistance from '../../hooks/useDistance';
+import getDistance from '@/hooks/useDistance';
 import MenuButton from '@/components/MenuButton/MenuButton';
 import { VEGAN_MENU_TYPES } from '@/constants';
 

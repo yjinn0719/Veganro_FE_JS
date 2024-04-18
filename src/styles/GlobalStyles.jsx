@@ -1,7 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
 import reset from 'styled-reset';
 import './fonts/fonts.css';
-import backgroundImg from '../assets/images/background.png';
 
 const GlobalStyles = createGlobalStyle`
     ${reset}
@@ -27,6 +26,11 @@ const GlobalStyles = createGlobalStyle`
         background-color: #F6F9F0;
         height: 100vh;
         overflow: hidden;
+        -ms-overflow-style: none; /* IE and Edge */
+        scrollbar-width: none; /* Firefox */
+    }
+    body::-webkit-scrollbar {
+        display: none;
     }
     ol, ul{
         list-style: none;
@@ -45,8 +49,8 @@ const GlobalStyles = createGlobalStyle`
         position: relative;
         background-image: url(/src/assets/images/background.png);
         background-position: center;
-        background-size: 120%;
-        background-repeat: no-repeat;
+        background-size: 124%;
+        background-repeat: repeat-y;
         overflow-hidden;
         width: 100vw;
         height: 100vh;
@@ -58,6 +62,13 @@ const GlobalStyles = createGlobalStyle`
     }
     img[src='']{
         display: none !important;
+    }
+    details[open] > summary::after {
+        transform: rotate(180deg);
+        transform-origin: center;
+    }
+    summary::-webkit-details-marker {
+        display: none;
     }
 `;
 

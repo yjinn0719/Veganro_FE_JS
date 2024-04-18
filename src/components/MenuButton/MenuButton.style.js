@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Menu = styled.div`
+export const Menu = styled.menu`
   display: flex;
   flex-direction: column;
   gap: 8px;

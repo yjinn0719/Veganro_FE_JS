@@ -3,7 +3,6 @@ import styled from 'styled-components';
 export const NavContainer = styled.div`
   display: flex;
   width: 100%;
-  max-width: 480px;
   padding: 12px 16px;
   align-items: flex-start;
   justify-content: space-between;
@@ -15,6 +14,10 @@ export const NavContainer = styled.div`
   right: 0;
   box-sizing: border-box;
   z-index: 999;
+  svg {
+    font-size: 24px;
+    color: ${(props) => props.theme.color.gray[800]};
+  }
 `;
 
 export const NavTitle = styled.p`

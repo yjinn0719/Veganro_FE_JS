@@ -11,6 +11,10 @@ const Container = styled.div`
 const ProfileWrapper = styled.div`
   height: calc(100vh - 48px);
   position: relative;
+  overflow-y: scroll;
+  &::-webkit-scrollbar {
+    display: none;
+  }
   top: 50px;
   width: 100%;
   flex-direction: column;
@@ -20,6 +24,7 @@ const ProfileWrapper = styled.div`
 `;
 
 const ProfileContent = styled.div`
+  width: 100%;
   height: 271px;
   padding-top: 32px;
   padding-bottom: 32px;

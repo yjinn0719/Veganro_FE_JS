@@ -17,6 +17,7 @@ import MapButton from '@/components/MapButton/MapButton';
 import MenuButton from '@/components/MenuButton/MenuButton';
 import SmallRoundButton from '@/components/SmallRoundButton/SmallRoundButton';
 import MapFilterModal from '@/components/MapFilterModal/MapFilterModal';
+import Spinner from '@/components/Spinner/Spinner';
 
 import {
   Categories,

@@ -9,7 +9,6 @@ import {
   selectedCategoryState,
   selectedMenuTypeState,
 } from '@/states/filterState';
-import Spinner from '@/components/Spinner/Spinner';
 import SearchBar from '@/components/SearchBar/SearchBar';
 import PlaceCategory from '@/components/PlaceCategory/PlaceCategory';
 import SearchList from '@/components/SearchList/SearchList';

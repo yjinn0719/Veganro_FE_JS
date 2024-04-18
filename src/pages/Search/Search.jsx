@@ -22,6 +22,7 @@ import {
   Categories,
   Wrapper,
   SearchNav,
+  FilterContainer,
   FilterBar,
   FilterButton,
   ScrollableList,
@@ -29,7 +30,6 @@ import {
 } from './Search.style';
 
 import { PLACE_TYPES } from '../../constants';
-
 export default function Search() {
   const navigate = useNavigate();
   const [places, setPlaces] = useState([]);
@@ -176,11 +176,13 @@ export default function Search() {
                 onClick={handleFilterModal}
               />
               {showFilterModal && (
-                <MapFilterModal
-                  updateMarkers={updateMarkers}
-                  onClose={setShowFilterModal}
-                  setIsButtonActive={setIsButtonActive}
-                />
+                <FilterContainer>
+                  <MapFilterModal
+                    updateMarkers={updateMarkers}
+                    onClose={setShowFilterModal}
+                    setIsButtonActive={setIsButtonActive}
+                  />
+                </FilterContainer>
               )}
             </Categories>
             <SmallRoundButton title="refresh" onClick={handleFilterReset} />

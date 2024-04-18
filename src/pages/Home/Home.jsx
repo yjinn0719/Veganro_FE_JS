@@ -14,6 +14,7 @@ import {
   Wrapper,
   TopBar,
   FilterBar,
+  FilterContainer,
   Categories,
   RelocateButton,
   FilterButton,
@@ -127,11 +128,13 @@ export default function Home() {
                 onClick={handleFilterModal}
               />
               {showFilterModal && (
-                <MapFilterModal
-                  updateMarkers={updateMarkers}
-                  onClose={setShowFilterModal}
-                  setIsButtonActive={setIsButtonActive}
-                />
+                <FilterContainer>
+                  <MapFilterModal
+                    updateMarkers={updateMarkers}
+                    onClose={setShowFilterModal}
+                    setIsButtonActive={setIsButtonActive}
+                  />
+                </FilterContainer>
               )}
             </Categories>
             <SmallRoundButton title="refresh" onClick={handleFilterReset} />

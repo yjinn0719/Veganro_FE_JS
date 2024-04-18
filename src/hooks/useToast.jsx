@@ -33,7 +33,7 @@ const Toast = () => {
       draggable // 드래그 가능
       pauseOnHover // 마우스를 올리면 알람 정지
       theme="light"
-      // limit={1} // 알람 개수 제한
+      limit={1} // 알람 개수 제한
     />
   );
 };

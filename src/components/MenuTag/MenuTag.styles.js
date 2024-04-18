@@ -24,6 +24,11 @@ export const MenuTagContent = styled.p`
     props.$clicked
       ? props.theme.color.green[500]
       : props.theme.color.gray[600]};
-  font-size: 16px;
-  font-weight: 600;
+  font-weight: 500;
+  ${(props) => props.theme.media.desktop`
+    font-size: 16px;
+  `}
+  ${(props) => props.theme.media.mobile`
+    font-size: 14px;
+  `}
 `;

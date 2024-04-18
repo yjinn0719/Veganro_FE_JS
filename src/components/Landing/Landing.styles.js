@@ -10,6 +10,7 @@ const vibration = keyframes`
 `;
 export const Wrapper = styled.div`
   width: calc(100% - 480px);
+  min-width: 360px;
   height: 100vh;
   display: flex;
   flex-direction: column;

@@ -1,3 +1,30 @@
+import { css } from 'styled-components';
+
+const sizes = {
+  desktop: 1024,
+  tablet: 768,
+  mobile: 328,
+};
+
+const media = {
+  desktop: (...args) => css`
+    @media (min-width: ${sizes.desktop}px) {
+      ${css(...args)};
+    }
+  `,
+  tablet: (...args) => css`
+    @media (min-width: ${sizes.tablet}px) {
+      ${css(...args)}
+    }
+  `,
+  mobile: (...args) => css`
+    @media (min-width: ${sizes.mobile}px) and (max-width: ${sizes.tablet -
+      1}px) {
+      ${css(...args)};
+    }
+  `,
+};
+
 const Theme = {
   color: {
     green: {
@@ -34,6 +61,7 @@ const Theme = {
     },
     white: '#fff',
   },
+  media,
 };
 
 export default Theme;

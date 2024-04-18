@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const MainContainer = styled.div`
   width: 100%;
-  height: 100vh;
+  height: 100%;
   background: ${(props) => props.theme.color.gray[50]};
   flex-direction: column;
   align-items: center;
@@ -18,7 +18,7 @@ const Content = styled.div`
 `;
 const ContentWrapper = styled.div`
   width: 100%;
-  height: calc(100vh - 48px);
+  height: calc(100% - 48px);
   position: absolute;
   top: 48px;
   overflow-y: scroll;

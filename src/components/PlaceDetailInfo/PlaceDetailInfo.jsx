@@ -5,17 +5,13 @@ import {
   InfoWrapper,
   InfoItem,
   IconWrapper,
-  Icon,
   InfoText,
+  HoursSummary,
   HoursContainer,
   HourText,
+  UrlText,
 } from './PlaceDetailInfo.styles';
-import {
-  IoLocationOutline,
-  IoCallOutline,
-  IoTimeOutline,
-  IoGlobeOutline,
-} from 'react-icons/io5';
+import { IoLocation, IoCall, IoTime, IoGlobe } from 'react-icons/io5';
 
 export default function PlaceDetailInfo({
   placeLocation,
@@ -31,34 +27,42 @@ export default function PlaceDetailInfo({
       <InfoWrapper>
         <InfoItem>
           <IconWrapper>
-            <IoLocationOutline size="16" />
+            <IoLocation size="16" />
           </IconWrapper>
           <InfoText>{placeLocation}</InfoText>
         </InfoItem>
         <InfoItem>
           <IconWrapper>
-            <IoCallOutline size="13" />
+            <IoCall size="16" />
           </IconWrapper>
           <InfoText>{placeNumber}</InfoText>
         </InfoItem>
         <InfoItem>
-          <IconWrapper>
-            <IoTimeOutline size="15" />
-          </IconWrapper>
-          <InfoText>영업시간</InfoText>
+          <details>
+            <HoursSummary>
+              <IconWrapper>
+                <IoTime size="16" />
+              </IconWrapper>
+              <InfoText>영업시간</InfoText>
+            </HoursSummary>
+            <HoursContainer>
+              {placeHours.map((hour, index) => (
+                <HourText key={index}>{hour}</HourText>
+              ))}
+            </HoursContainer>
+          </details>
         </InfoItem>
         <InfoItem>
-          <HoursContainer>
-            {placeHours.map((hour, index) => (
-              <HourText key={index}>{hour}</HourText>
-            ))}
-          </HoursContainer>
-        </InfoItem>
-        <InfoItem>
           <IconWrapper>
-            <IoGlobeOutline size="15" />
+            <IoGlobe size="16" />
           </IconWrapper>
-          <InfoText>{placeURL}</InfoText>
+          {placeURL && placeURL.length > 0 ? (
+            <UrlText href={placeURL} target="_blank" rel="noopener noreferrer">
+              Visit Website
+            </UrlText>
+          ) : (
+            <InfoText>---</InfoText>
+          )}
         </InfoItem>
       </InfoWrapper>
     </Container>

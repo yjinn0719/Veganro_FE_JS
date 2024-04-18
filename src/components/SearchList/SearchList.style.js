@@ -9,8 +9,8 @@ export const CardWrapper = styled.div`
   align-items: flex-start;
   gap: 12px;
   border-radius: 4px;
-  border: 1px solid var(--Gray-100, #efefef);
-  background: var(--White, #fff);
+  border: solid 1px ${(props) => props.theme.color.gray[100]};
+  background: ${(props) => props.theme.color.white};
   cursor: pointer;
 `;
 
@@ -24,35 +24,36 @@ export const TextBox = styled.div`
 export const TitleBox = styled.div`
   display: flex;
   align-items: center;
-  // width: 156px;
 `;
 export const PlaceName = styled.div`
   overflow: hidden;
-  color: var(--Gray-800, #383838);
+  color: ${(props) => props.theme.color.gray[800]};
   font-feature-settings:
     'clig' off,
     'liga' off;
   text-overflow: ellipsis;
-  font-family: Pretendard;
   font-size: 18px;
-  font-style: normal;
   font-weight: 600;
-  line-height: normal;
+  ${(props) => props.theme.media.desktop`
+    font-size: 18px;
+    margin-right: 8px;
+  `}
+  ${(props) => props.theme.media.mobile`
+    font-size: 14px;
+    margin-right: 6px;
+  `}
 `;
 export const VeganMenu = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 4px 6px;
-  margin-left: 8px;
   gap: 10px;
   border-radius: 4px;
   background: rgba(79, 131, 55, 0.1);
-  color: var(--Green-500, #4f8337);
+  color: ${(props) => props.theme.color.green[500]};
   font-size: 12px;
-  font-style: normal;
   font-weight: 600;
-  line-height: normal;
 `;
 
 export const DistBox = styled.div`
@@ -61,52 +62,67 @@ export const DistBox = styled.div`
   gap: 2px;
 `;
 
-// vercel 배포시 안보임 이슈
-// export const DistanceNavicon = styled.div`
-//   width: 12px;
-//   height: 12px;
-//   background-image: url(${DistanceNaviIcon});
-//   background-size: contain;
-//   background-repeat: no-repeat;
-// `;
-
 export const Distance = styled.div`
-  color: var(--Gray-600, #6e6e6e);
+  color: ${(props) => props.theme.color.gray[600]};
   font-feature-settings:
     'clig' off,
     'liga' off;
-  font-family: Pretendard;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
+  ${(props) => props.theme.media.desktop`
+    font-size: 14px;
+  `}
+  ${(props) => props.theme.media.mobile`
+    font-size: 12px;
+  `}
 `;
-
-export const Address = styled.div`
-  color: var(--Gray-700, #4f4f4f);
+export const Address = styled.p`
+  color: ${(props) => props.theme.color.gray[700]};
   font-feature-settings:
     'clig' off,
     'liga' off;
-  font-family: Pretendard;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
+  ${(props) => props.theme.media.desktop`
+    font-size: 14px;
+  `}
+  ${(props) => props.theme.media.mobile`
+    font-size: 12px;
+  `}
 `;
-
+export const Tel = styled.p`
+  color: ${(props) => props.theme.color.gray[700]};
+  font-feature-settings:
+    'clig' off,
+    'liga' off;
+  ${(props) => props.theme.media.desktop`
+    font-size: 14px;
+  `}
+  ${(props) => props.theme.media.mobile`
+    font-size: 12px;
+  `}
+`;
 export const CategoryIcon = styled.div`
-  width: 54px;
-  height: 54px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   flex-shrink: 0;
-  border-radius: 3.6px;
-  border: 1px #8f8f8f solid;
+  border-radius: 4px;
+  border: solid 1px ${(props) => props.theme.color.gray[500]};
+  ${(props) => props.theme.media.desktop`
+    width: 54px;
+    height: 54px;
+  `}
+  ${(props) => props.theme.media.mobile`
+    width: 44px;
+    height: 44px;
+  `}
 `;
 
 export const CategoryImg = styled.img`
   object-fit: cover;
-  width: 54px;
-  height: 54px;
+  ${(props) => props.theme.media.desktop`
+    width: 54px;
+    height: 54px;
+  `}
+  ${(props) => props.theme.media.mobile`
+    width: 44px;
+    height: 44px;
+  `}
 `;

@@ -7,6 +7,7 @@ import {
   VeganMenu,
   DistBox,
   Address,
+  Tel,
   Distance,
   CategoryIcon,
   CategoryImg,
@@ -34,7 +35,7 @@ export default function SearchList(props) {
           <Distance>{props.distance}</Distance>
         </DistBox>
         <Address>{props.address}</Address>
-        <div>{props.tel}</div>
+        <Tel>{props.tel}</Tel>
       </TextBox>
     </CardWrapper>
   );

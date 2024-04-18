@@ -12,9 +12,10 @@ const KakaoAddress = ({ onClose, onAddressSelect }) => {
   }, []);
 
   const handleComplete = async (data) => {
+    console.log(data);
     let fullAddress = data.address;
     let extraAddress = '';
-    let jibunAddress = data.jibunAddress || '';
+    let jibunAddress = data.autoJibunAddress || '';
 
     if (data.addressType === 'R') {
       if (data.bname !== '') {

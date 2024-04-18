@@ -46,6 +46,11 @@ export const AddPlaceText = styled.p`
   font-weight: 600;
   line-height: normal;
   margin-bottom: -6px;
+  small {
+    font-size: 80%;
+    color: ${(props) => props.theme.color.gray[500]};
+    font-weight: 500;
+  }
   ${(props) => props.theme.media.desktop`
     font-size: 16px;
   `}

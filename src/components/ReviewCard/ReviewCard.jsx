@@ -96,7 +96,7 @@ export default function ReviewCard({
             <IconDot top={1.5} />
           </IconContainer>
         </CommentHeader>
-        <CommentDate>{date}</CommentDate>
+        <CommentDate>{date.toLocaleString('ko-KR')}</CommentDate>
         <CommentText>{comment}</CommentText>
       </CommentContainer>
       <DrawerContainer>

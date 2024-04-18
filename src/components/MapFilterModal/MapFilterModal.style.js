@@ -6,12 +6,6 @@ import {
 
 export const Container = styled.div`
   width: 100%;
-  padding: 16px;
-  z-index: 999;
-  position: absolute;
-  top: 98px;
-  left: 0;
-  right: 0;
 `;
 export const Inner = styled.div`
   width: 100%;

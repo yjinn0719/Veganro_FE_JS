@@ -63,6 +63,7 @@ const InfoText = styled.div`
   font-size: 12px;
   word-wrap: break-word;
   font-weight: 500;
+  line-height: 16px;
 `;
 const HoursSummary = styled.summary`
   display: flex;

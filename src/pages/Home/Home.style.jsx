@@ -29,6 +29,15 @@ export const FilterBar = styled.div`
 export const FilterButton = styled(SmallRoundButton)`
   position: relative;
 `;
+export const FilterContainer = styled.div`
+  width: 100%;
+  padding: 16px;
+  box-sizing: border-box;
+  position: absolute;
+  top: 98px;
+  left: 0;
+  z-index: 9;
+`;
 export const Categories = styled.div`
   display: flex;
   align-items: center;

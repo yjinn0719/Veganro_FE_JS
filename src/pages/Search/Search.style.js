@@ -20,13 +20,20 @@ export const SearchNav = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 12px 0;
+  padding: 16px 0;
   position: sticky;
   z-index: 1000;
   top: 0;
   left: 0;
   right: 0;
   box-sizing: border-box;
+`;
+export const FilterContainer = styled.div`
+  width: 100%;
+  position: absolute;
+  top: 130px;
+  left: 0;
+  z-index: 9;
 `;
 
 export const FilterBar = styled.div`

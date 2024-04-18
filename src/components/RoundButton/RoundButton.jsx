@@ -5,6 +5,7 @@ import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import PersonOutlineRoundedIcon from '@mui/icons-material/PersonOutlineRounded';
 import EmojiFlagsRoundedIcon from '@mui/icons-material/EmojiFlagsRounded';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
+import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
 import { Button } from './RoundButton.style';
 
 function RoundButton({ title, onClick }) {
@@ -53,6 +54,16 @@ function RoundButton({ title, onClick }) {
       case 'addplace':
         return (
           <EmojiFlagsRoundedIcon
+            sx={{
+              color: '#383838',
+              width: '24px',
+              height: '24px',
+            }}
+          />
+        );
+      case 'logout':
+        return (
+          <LogoutRoundedIcon
             sx={{
               color: '#383838',
               width: '24px',

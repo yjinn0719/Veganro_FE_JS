@@ -31,7 +31,10 @@ export default function ComplaintDrawer({
         {isOpened && (
           <>
             <ItemWrapper>
-              <ItemText color="#FF4747" onClick={handleReportClick}>
+              <ItemText
+                style={{ color: '#FF4747', fontSize: '14px' }}
+                onClick={handleReportClick}
+              >
                 신고
               </ItemText>
             </ItemWrapper>

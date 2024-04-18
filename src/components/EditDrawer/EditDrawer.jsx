@@ -40,12 +40,17 @@ export default function EditDrawer({
         {isOpened && (
           <>
             <ItemWrapper>
-              <ItemText color="#FF4747" onClick={handleDelete}>
+              <ItemText
+                style={{ color: '#FF4747', fontSize: '14px' }}
+                onClick={handleDelete}
+              >
                 삭제
               </ItemText>
             </ItemWrapper>
-            <ItemWrapper style={{ height: '73.31px' }}>
-              <ItemText onClick={toggleEditReview}>수정</ItemText>
+            <ItemWrapper style={{ height: '72px' }}>
+              <ItemText onClick={toggleEditReview} style={{ fontSize: '14px' }}>
+                수정
+              </ItemText>
             </ItemWrapper>
           </>
         )}

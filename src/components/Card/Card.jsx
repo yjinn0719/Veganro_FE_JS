@@ -38,7 +38,6 @@ export default function PlaceCard({
             style={{
               color: '#383838',
               fontSize: 18,
-              fontFamily: 'Pretendard',
               fontWeight: '600',
               wordWrap: 'break-word',
             }}

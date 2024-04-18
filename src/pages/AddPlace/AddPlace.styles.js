@@ -15,7 +15,7 @@ export const MainContainer = styled.div`
   top: 48px;
   display: flex;
   width: 100%;
-  height: calc(100vh - 48px);
+  height: calc(100% - 48px);
   overflow-y: scroll;
   padding: 0 16px 16px 16px;
   flex-direction: column;
@@ -42,11 +42,16 @@ export const DateTagContainer = styled.div`
 export const AddPlaceText = styled.p`
   color: ${(props) => props.theme.color.gray[800]};
   text-overflow: ellipsis;
-  font-size: 16px;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
   margin-bottom: -6px;
+  ${(props) => props.theme.media.desktop`
+    font-size: 16px;
+  `}
+  ${(props) => props.theme.media.mobile`
+    font-size: 14px;
+  `}
 `;
 
 export const AddPlaceSearch = styled.p`
@@ -55,8 +60,7 @@ export const AddPlaceSearch = styled.p`
   color: ${(props) => props.theme.color.gray[500]};
   font-size: 16px;
   font-style: normal;
-  font-weight: 600;
-  line-height: normal;
+  font-weight: 500;
   position: absolute;
   cursor: pointer;
   right: 8px;
@@ -72,6 +76,6 @@ export const AddressInputContainer = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
-  width: 100%; // 컨테이너의 너비를 부모에 맞춥니다.
+  width: 100%;
   position: relative;
 `;

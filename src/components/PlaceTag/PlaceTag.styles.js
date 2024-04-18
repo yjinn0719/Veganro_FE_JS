@@ -25,7 +25,11 @@ export const PlaceTagContent = styled.p`
     props.clicked ? props.theme.color.green[500] : props.theme.color.gray[600]};
   text-align: center;
   font-size: 16px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
+  font-weight: 500;
+  ${(props) => props.theme.media.tablet`
+    font-size: 16px;
+  `}
+  ${(props) => props.theme.media.mobile`
+    font-size: 14px;
+  `}
 `;

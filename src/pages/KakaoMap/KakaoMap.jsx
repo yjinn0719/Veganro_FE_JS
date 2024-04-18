@@ -40,7 +40,7 @@ const KakaoMap = ({ centerMove, categoriesStatus, selectedMenuTypes }) => {
   return (
     <Map
       id="map"
-      style={{ height: '100vh' }}
+      style={{ height: '100%' }}
       center={currentLocation.center}
       level={8}
       isPanto={true}

@@ -5,7 +5,7 @@ const Container = styled.div`
   top: 48px;
   overflow: hidden;
   width: 100%;
-  height: calc(100vh - 48px);
+  height: calc(100% - 48px);
   padding: 16px;
   background: white;
   justify-content: flex-start;

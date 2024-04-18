@@ -1,18 +1,16 @@
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
-  // display: flex;
+  display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
-  // max-width: 448px;
-  // padding: 16px 0; 얘가 있으면 배경색 들어가요ㅜㅜ
   box-sizing: border-box;
   position: relative;
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  // z-index: 99;
+  z-index: 99;
 `;
 
 export const SearchContainer = styled.div`
@@ -26,7 +24,6 @@ export const SearchContainer = styled.div`
 `;
 
 export const Search = styled.input`
-  padding: 16px 40px 16px 16px;
   width: 100%;
   font-size: 14px;
   font-weight: 500;
@@ -47,6 +44,12 @@ export const Search = styled.input`
   &:focus ~ div {
     color: ${(props) => props.theme.color.gray[800]};
   }
+  ${(props) => props.theme.media.tablet`
+    padding: 16px 40px 16px 16px;
+  `}
+  ${(props) => props.theme.media.mobile`
+    padding: 12px 40px 12px 12px;
+  `}
 `;
 
 export const IconContainer = styled.div`

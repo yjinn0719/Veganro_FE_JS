@@ -10,6 +10,7 @@ import KakaoAddress from '@/components/KakaoAddress/KakaoAddress';
 import OpenTimeTab from '@/components/OpenTimeTab/OpenTimeTab';
 import { createReportPlace } from '@/apis/api/reportApi';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
+import { PLACE_TYPES, VEGAN_MENU_TYPES } from '@/constants';
 import {
   MainContainer,
   MapContainer,
@@ -71,7 +72,7 @@ function AddPlace() {
     return {
       name: placeName,
       category: selectPlace,
-      vegan_option: selectMenu === '일부 채식 메뉴 제공',
+      vegan_option: selectMenu === VEGAN_MENU_TYPES[1],
       tel: placeNumber || '',
       address: placeAddressApi,
       address_lot_number: placeAddressLotApi,
@@ -186,7 +187,7 @@ function AddPlace() {
         />
         <AddPlaceText>가게 형태</AddPlaceText>
         <TagContainer>
-          {['식당', '술집', '카페', '마켓'].map((type) => (
+          {PLACE_TYPES.map((type) => (
             <PlaceTag
               key={type}
               title={type}
@@ -197,7 +198,7 @@ function AddPlace() {
         </TagContainer>
         <AddPlaceText>채식 메뉴</AddPlaceText>
         <TagContainer>
-          {['전체 채식 메뉴 제공', '일부 채식 메뉴 제공'].map((type) => (
+          {VEGAN_MENU_TYPES.map((type) => (
             <MenuTag
               key={type}
               title={type}

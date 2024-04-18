@@ -4,7 +4,7 @@ import SmallRoundButton from '@/components/SmallRoundButton/SmallRoundButton';
 
 export const Wrapper = styled.main`
   width: 100%;
-  height: 100vh;
+  height: 100%;
   position: relative;
   background-color: ${(props) => props.theme.color.beige[100]};
   overflow: hidden;

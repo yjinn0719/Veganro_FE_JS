@@ -7,8 +7,11 @@ import {
 import { useUpdateComplaint } from '@/hooks/useUser';
 import { notify } from '../../hooks/useToast';
 
-export default function ComplaintDrawer({ isOpened, reviewId: reviewId }) {
-  const [isComplaintDrawerOpen, setIsComplaintDrawerOpen] = useState(false);
+export default function ComplaintDrawer({
+  isOpened,
+  reviewId: reviewId,
+  toggleDrawer,
+}) {
   const { mutate } = useUpdateComplaint();
   const handleReportClick = async () => {
     try {
@@ -22,21 +25,19 @@ export default function ComplaintDrawer({ isOpened, reviewId: reviewId }) {
     }
   };
 
-  const toggleDrawer = () => {
-    setIsComplaintDrawerOpen(!isComplaintDrawerOpen);
-  };
-
   return (
-    <Drawer isOpened={isOpened} toggleDrawer={toggleDrawer}>
-      {isOpened && (
-        <>
-          <ItemWrapper>
-            <ItemText color="#FF4747" onClick={handleReportClick}>
-              신고
-            </ItemText>
-          </ItemWrapper>
-        </>
-      )}
-    </Drawer>
+    <>
+      <Drawer isOpened={isOpened} toggleDrawer={toggleDrawer}>
+        {isOpened && (
+          <>
+            <ItemWrapper>
+              <ItemText color="#FF4747" onClick={handleReportClick}>
+                신고
+              </ItemText>
+            </ItemWrapper>
+          </>
+        )}
+      </Drawer>
+    </>
   );
 }

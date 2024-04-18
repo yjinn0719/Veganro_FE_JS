@@ -19,12 +19,8 @@ export const getReviewsByPlaceId = async (
 };
 export const getMyReviews = async (placeId, token) => {
   try {
-    if (token) {
-      const response = await api.get(`/reviews/check?placeId=${placeId}`);
-      return response.data.data;
-    } else {
-      return null;
-    }
+    const response = await api.get(`/reviews/check?placeId=${placeId}`);
+    return response.data.data;
   } catch (error) {
     handleError(error);
   }

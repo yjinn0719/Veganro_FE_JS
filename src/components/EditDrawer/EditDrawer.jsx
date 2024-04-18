@@ -6,18 +6,17 @@ import { ItemWrapper, ItemText } from './EditDrawer.styles';
 import { useDeleteReview } from '../../hooks/useReview';
 import ReviewDrawer from '../ReviewDrawer/ReviewDrawer';
 
-export default function EditDrawer({ isOpened, address, reviewId }) {
+export default function EditDrawer({
+  isOpened,
+  address,
+  reviewId,
+  toggleDrawer,
+}) {
   const { mutate } = useDeleteReview();
   const [isDeleteDrawerOpen, setIsDeleteDrawerOpen] = useState(false);
   const [isEditDrawerOpen, setIsEditDrawerOpen] = useState(false);
   const [submittedReviews, setSubmittedReviews] = useState([]);
 
-  const toggleDrawer = () => {
-    setIsDeleteDrawerOpen(!isDeleteDrawerOpen);
-    if (isEditDrawerOpen) {
-      setIsEditDrawerOpen(false);
-    }
-  };
   const toggleEditReview = () => {
     document.body.style.overflow = 'hidden';
     setIsEditDrawerOpen(!isEditDrawerOpen);

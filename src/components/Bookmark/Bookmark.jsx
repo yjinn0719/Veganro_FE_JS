@@ -13,7 +13,6 @@ function Bookmark() {
   const [bookmarkId, setBookmarkId] = useState(null);
   const { mutate: postBookmark } = usePostBookmark();
   const { mutate: deleteBookmark } = useDeleteBookmark();
-  console.log(bookmarkDataByPlaceId);
   useEffect(() => {
     if (bookmarkDataByPlaceId) {
       const bookmarkStatus = bookmarkDataByPlaceId.isBookmarked;

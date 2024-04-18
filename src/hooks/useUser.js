@@ -15,13 +15,14 @@ import {
   updateComplaint,
 } from '../apis/api/userInfoApi';
 
-export const useGetUser = (userId) => {
+export const useGetUser = () => {
   return useQuery({
-    queryKey: ['getUser', userId],
-    queryFn: () => getUserData(userId),
-    config: {
-      retry: false,
-    },
+    queryKey: ['getUser'],
+    queryFn: getUserData,
+    retry: false,
+    enabled: false,
+    refetchOnWindowFocus: false,
+    refetchOnMount: false,
   });
 };
 

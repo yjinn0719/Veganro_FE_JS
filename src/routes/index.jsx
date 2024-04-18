@@ -4,6 +4,7 @@ import Home from '@/pages/Home/Home';
 import Auth from '@/pages/Auth/Auth';
 import EmailAuth from '@/pages/EmailAuth/EmailAuth';
 import SignUp from '@/pages/SignUp/SignUp';
+import Logout from '@/pages/Logout/Logout';
 import AddPlace from '@/pages/AddPlace/AddPlace';
 import Review from '@/pages/ReviewDetail/ReviewDetail';
 import Search from '@/pages/Search/Search';
@@ -27,6 +28,7 @@ const MyRouter = () => {
       <Route path={PATH.PLACEDETAIL} element={<PlaceDetail />} />
       <Route path={PATH.MY} element={<MyPage />} />
       <Route path={PATH.MYEDIT} element={<EditMyPage />} />
+      <Route path={PATH.LOGOUT} element={<Logout />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

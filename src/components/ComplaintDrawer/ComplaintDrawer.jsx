@@ -24,7 +24,7 @@ export default function ComplaintDrawer({ isOpened, reviewId: reviewId }) {
   };
 
   return (
-    <Drawer height={14.5} isOpened={isOpened} toggleDrawer={toggleDrawer}>
+    <Drawer isOpened={isOpened} toggleDrawer={toggleDrawer}>
       {isOpened && (
         <>
           <ItemWrapper>

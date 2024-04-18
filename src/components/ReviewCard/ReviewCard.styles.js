@@ -3,7 +3,7 @@ import styled from 'styled-components';
 const CommentContainer = styled.div`
   width: 100%;
   padding: 12px;
-  background: #f9f9f9;
+  background: ${(props) => props.theme.color.gray[10]};
   border-radius: 4px;
   flex-direction: column;
   justify-content: center;
@@ -20,7 +20,7 @@ const CommentHeader = styled.div`
 `;
 
 const CommentInfo = styled.div`
-  width: 273.5px;
+  width: 274px;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
@@ -29,9 +29,8 @@ const CommentInfo = styled.div`
 `;
 
 const CommentTitle = styled.div`
-  color: #383838;
+  color: ${(props) => props.theme.color.gray[800]};
   font-size: 14px;
-  font-family: 'Pretendard';
   font-weight: 500;
   word-wrap: break-word;
 `;
@@ -52,7 +51,6 @@ const CommentTag = styled.div`
 const TagText = styled.div`
   color: #4f8337;
   font-size: 12px;
-  font-family: 'Pretendard';
   font-weight: 600;
   word-wrap: break-word;
 `;
@@ -69,20 +67,18 @@ const IconDot = styled.div`
   left: 6.5px;
   top: ${({ top }) => top}px;
   position: absolute;
-  background: #6e6e6e;
+  background: ${(props) => props.theme.color.gray[600]};
 `;
 const CommentDate = styled.div`
   color: #6e6e6e;
   font-size: 12px;
-  font-family: 'Pretendard';
   font-weight: 500;
   word-wrap: break-word;
 `;
 
 const CommentText = styled.div`
-  color: #6e6e6e;
+  color: ${(props) => props.theme.color.gray[600]};
   font-size: 14px;
-  font-family: 'Pretendard';
   font-weight: 500;
   word-wrap: break-word;
 `;
@@ -90,14 +86,12 @@ const CommentText = styled.div`
 const Container = styled.div`
   width: 100%;
   height: 100%;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
   display: inline-flex;
 `;
 
 const DrawerContainer = styled.div`
   width: 100%;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;

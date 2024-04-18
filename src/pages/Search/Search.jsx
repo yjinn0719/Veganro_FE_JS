@@ -9,7 +9,6 @@ import {
   selectedCategoryState,
   selectedMenuTypeState,
 } from '@/states/filterState';
-
 import SearchBar from '@/components/SearchBar/SearchBar';
 import PlaceCategory from '@/components/PlaceCategory/PlaceCategory';
 import SearchList from '@/components/SearchList/SearchList';
@@ -17,6 +16,7 @@ import MapButton from '@/components/MapButton/MapButton';
 import MenuButton from '@/components/MenuButton/MenuButton';
 import SmallRoundButton from '@/components/SmallRoundButton/SmallRoundButton';
 import MapFilterModal from '@/components/MapFilterModal/MapFilterModal';
+import Spinner from '@/components/Spinner/Spinner';
 
 import {
   Categories,
@@ -145,7 +145,7 @@ export default function Search() {
   }
 
   if (isLoading) {
-    return <div>위치 정보를 가져오는 중..</div>;
+    return <Spinner />;
   }
 
   return (

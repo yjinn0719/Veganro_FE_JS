@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { BookmarkContainer, BookmarkContent } from './Bookmark.styles';
-import BookmarkIcon from '@mui/icons-material/Bookmark';
-import BookmarkBorderOutlinedIcon from '@mui/icons-material/BookmarkBorderOutlined';
-import { usePostBookmark, useDeleteBookmark } from '../../hooks/useUser';
-import { useGetBookmarkByPlaceId } from '../../hooks/usePlace';
-import { notify } from '../../hooks/useToast';
+import { usePostBookmark, useDeleteBookmark } from '@/hooks/useUser';
+import { useGetBookmarkByPlaceId } from '@/hooks/usePlace';
+import { notify } from '@/hooks/useToast';
+import { IoBookmark } from 'react-icons/io5';
 
 function Bookmark() {
   const { placeid } = useParams();
@@ -53,13 +52,12 @@ function Bookmark() {
   return (
     <BookmarkContainer onClick={handleClick} clicked={isClicked ? 1 : 0}>
       <BookmarkContent clicked={isClicked ? 1 : 0}>
-        {isClicked ? (
-          <BookmarkIcon
-            sx={{ color: '#4F8337', width: '24px', height: '24px' }}
-          />
-        ) : (
-          <BookmarkBorderOutlinedIcon sx={{ width: '24px', height: '24px' }} />
-        )}
+        <IoBookmark
+          style={{
+            color: isClicked ? '#4F8337' : '#6E6E6E',
+            fontSize: 18,
+          }}
+        />
         <p>북마크</p>
       </BookmarkContent>
     </BookmarkContainer>

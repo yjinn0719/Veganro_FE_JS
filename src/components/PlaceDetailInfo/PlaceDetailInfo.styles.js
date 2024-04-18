@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 const Container = styled.div`
   width: 100%;
-  height: 100%;
   padding: 16px;
   background: white;
   flex-direction: column;
@@ -10,6 +9,7 @@ const Container = styled.div`
   align-items: flex-start;
   gap: 12px;
   display: inline-flex;
+  position: relative;
 `;
 
 const TitleWrapper = styled.div`

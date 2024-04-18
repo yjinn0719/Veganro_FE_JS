@@ -7,7 +7,7 @@ const Container = styled.div`
   background: white;
   border-radius: 4px;
   overflow: hidden;
-  border: 1px #efefef solid;
+  border: solid 1px ${(props) => props.theme.color.gray[100]};
   justify-content: flex-start;
   align-items: flex-start;
   gap: 10px;
@@ -18,7 +18,7 @@ const GreenBox = styled.div`
   margin: 0 10px 0 0;
   width: 60px;
   height: 60px;
-  border-radius: 3.6px;
+  border-radius: 4px;
   overflow: hidden;
   display: flex;
 `;
@@ -43,29 +43,26 @@ const InnerWhiteBox = styled.div`
   top: 4px;
   position: absolute;
   background: white;
-  border: 0.5px #4f8337 solid;
+  border: solid 1px ${(props) => props.theme.color.green[500]};
 `;
 
 const TextContainer = styled.div`
+  display: inline-flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
   gap: 10px;
-  display: inline-flex;
 `;
 
 const NameContainer = styled.div`
+  display: inline-flex;
   justify-content: flex-start;
   align-items: center;
   gap: 8px;
-  display: inline-flex;
 `;
 
 const TagContainer = styled.div`
-  padding-left: 6px;
-  padding-right: 6px;
-  padding-top: 4px;
-  padding-bottom: 4px;
+  padding: 4px 6px;
   background: rgba(79, 131, 55, 0.1);
   border-radius: 4px;
   justify-content: center;
@@ -91,14 +88,11 @@ const InfoContainer = styled.div`
 const InfoItem = styled.div`
   justify-content: flex-start;
   align-items: center;
-  gap: 2px;
+  gap: 4px;
   display: flex;
-`;
-
-const DistanceIcon = styled.div`
-  width: 12px;
-  height: 12px;
-  position: relative;
+  svg {
+    color: ${(props) => props.theme.color.gray[600]};
+  }
 `;
 
 const DistanceOuter = styled.div`
@@ -118,19 +112,16 @@ const DistanceInner = styled.div`
   position: absolute;
   border: solid 1px ${(props) => props.theme.color.gray[600]};
 `;
-
 const InfoText = styled.div`
   color: ${(props) => props.theme.color.gray[600]};
-  font-size: 12px;
+  font-size: 14px;
   word-wrap: break-word;
 `;
-
 const LocationText = styled.div`
   color: ${(props) => props.theme.color.gray[600]};
   font-size: 14px;
   word-wrap: break-word;
 `;
-
 const NumberText = styled.div`
   color: ${(props) => props.theme.color.gray[600]};
   font-size: 14px;
@@ -148,7 +139,6 @@ export {
   TagText,
   InfoContainer,
   InfoItem,
-  DistanceIcon,
   DistanceOuter,
   DistanceInner,
   InfoText,

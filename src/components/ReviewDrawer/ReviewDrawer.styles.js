@@ -10,7 +10,7 @@ const TitleContainer = styled.div`
 `;
 const Title = styled.button`
   text-align: center;
-  color: #383838;
+  color: ${(props) => props.theme.color.gray[800]};
   font-size: 20px;
   font-weight: 600;
   word-wrap: break-word;
@@ -35,7 +35,7 @@ const AddressInputContainer = styled.div`
   padding-right: 16px;
   padding-top: 12px;
   padding-bottom: 12px;
-  background: #f9f9f9;
+  background: ${(props) => props.theme.color.gray[10]};
   border-radius: 4px;
   justify-content: center;
   align-items: center;
@@ -54,9 +54,8 @@ const LocationIcon = styled.div`
 `;
 
 const AddressText = styled.div`
-  color: #383838;
+  color: ${(props) => props.theme.color.gray[800]};
   font-size: 16px;
-  font-family: 'Pretendard';
   font-weight: 600;
   word-wrap: break-word;
 `;
@@ -65,7 +64,7 @@ const ReviewTextAreaContainer = styled.div`
   width: 100%;
   height: 120px;
   padding: 12px;
-  background: #f9f9f9;
+  background: ${(props) => props.theme.color.gray[10]};
   border-radius: 4px;
   justify-content: flex-start;
   align-items: flex-start;
@@ -75,11 +74,14 @@ const ReviewTextAreaContainer = styled.div`
 const ReviewPlaceholder = styled.textarea`
   width: 100%;
   height: 100%;
-  color: #c4c4c4;
+  color: ${(props) => props.theme.color.gray[800]};
   font-size: 16px;
   word-wrap: break-word;
   background: none;
   border: none;
+  &::placeholder {
+    color: ${(props) => props.theme.color.gray[300]};
+  }
 `;
 
 const SubmitButtonContainer = styled.div`

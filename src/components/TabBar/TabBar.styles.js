@@ -8,7 +8,6 @@ const PlaceContent = React.memo(styled.div`
 
 const Container = styled.div`
   width: 100%;
-  height: 100%;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -17,7 +16,7 @@ const Container = styled.div`
 
 const TabContainerParent = styled.div`
   position: sticky;
-  top: 48px;
+  top: -10px;
   z-index: 999;
   background-color: #fff;
 `;

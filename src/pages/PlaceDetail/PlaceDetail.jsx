@@ -54,7 +54,6 @@ export default function PlaceDetail() {
       <MainContainer>
         <Loading>
           <Spinner />
-          <div>Loading...</div>
         </Loading>
       </MainContainer>
     );

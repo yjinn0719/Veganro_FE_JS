@@ -19,7 +19,6 @@ const Content = styled.div`
 const ContentWrapper = styled.div`
   width: 100%;
   height: calc(100% - 48px);
-  position: absolute;
   top: 48px;
   overflow-y: scroll;
   position: relative;
@@ -28,6 +27,7 @@ const ContentWrapper = styled.div`
   }
 `;
 const ContentContainer = styled.div`
+  height: 100%;
   align-self: stretch;
   flex-direction: column;
   justify-content: flex-start;
@@ -93,7 +93,7 @@ const NameContainer = styled.div`
 `;
 
 const Name = styled.div`
-  color: #383838;
+  color: ${(props) => props.theme.color.gray[800]};
   font-size: 18px;
   font-weight: 600;
   word-wrap: break-word;
@@ -130,13 +130,13 @@ const Info = styled.div`
 `;
 
 const DistanceIcon = styled.div`
-  width: 15px;
-  height: 15px;
+  width: 16px;
+  height: 16px;
   position: relative;
 `;
 
 const Distance = styled.div`
-  color: #6e6e6e;
+  color: ${(props) => props.theme.color.gray[600]};
   font-size: 12px;
   font-weight: 500;
   word-wrap: break-word;
@@ -149,7 +149,7 @@ const placeVeganIcon = styled.div`
 `;
 
 const VeganTag = styled.div`
-  color: #6e6e6e;
+  color: ${(props) => props.theme.color.gray[600]};
   font-size: 12px;
   font-weight: 500;
   word-wrap: break-word;
@@ -157,9 +157,6 @@ const VeganTag = styled.div`
 
 const ReviewContainer = styled.div`
   width: 100%;
-  position: sticky;
-  top: 0;
-  z-index: 1;
   background-color: white;
 `;
 

@@ -20,11 +20,11 @@ function MapFilterModal({ updateMarkers, onClose, setIsButtonActive }) {
   const [menuTypes, setMenuTypes] = useRecoilState(selectedMenuTypeState);
 
   useEffect(() => {
-    if(menuTypes !== null) {
-      if(menuTypes) {
-        setSelectedMenuTypes('전체 채식 메뉴')
+    if (menuTypes !== null) {
+      if (menuTypes) {
+        setSelectedMenuTypes('전체 채식 메뉴');
       } else {
-        setSelectedMenuTypes('일부 채식 메뉴')
+        setSelectedMenuTypes('일부 채식 메뉴');
       }
     }
   }, [menuTypes]);

@@ -172,7 +172,7 @@ function AddPlace() {
           onChange={(e) => setPlaceAddressLotApi(e.target.value)}
         />
         <InputBox
-          placeholder="상세 위치"
+          placeholder="상세 위치 (선택)"
           value={placeAddress}
           onChange={(e) => setPlaceAddress(e.target.value)}
         ></InputBox>
@@ -204,20 +204,26 @@ function AddPlace() {
             />
           ))}
         </TagContainer>
-        <AddPlaceText>SNS (옵션)</AddPlaceText>
+        <AddPlaceText>
+          SNS <small>(선택)</small>
+        </AddPlaceText>
         <InputBox
           placeholder="https://www.instagram.com/vegan-ro/"
           value={placeSns}
           onChange={(e) => setPlaceSns(e.target.value)}
         ></InputBox>
-        <AddPlaceText>영업시간 (옵션)</AddPlaceText>
+        <AddPlaceText>
+          영업시간 <small>(선택)</small>
+        </AddPlaceText>
         <OpenTimeTab
           selectedTag={selectedTag}
           setSelectedTag={setSelectedTag}
           timeValues={timeValues}
           handleTimeChange={handleTimeChange}
         />
-        <AddPlaceText>연락처 (옵션)</AddPlaceText>
+        <AddPlaceText>
+          연락처 <small>(선택)</small>
+        </AddPlaceText>
         <InputBox
           type="text"
           placeholder="010-1234-5678"

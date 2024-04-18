@@ -30,7 +30,6 @@ const KakaoAddress = ({ onClose, onAddressSelect }) => {
 
     try {
       const coordinates = await getAddressCoordinates(fullAddress);
-      console.log(coordinates);
       onAddressSelect({
         roadAddress: fullAddress,
         lotAddress: jibunAddress,

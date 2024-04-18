@@ -5,6 +5,7 @@ import { getAllPlaces } from '@/apis';
 import PlaceInfoModal from '@/components/PlaceInfoModal/PlaceInfoModal';
 import { isMenuOpenState } from '@/states/menuOpenState';
 import { isModalOpenState } from '@/states/placeModalState';
+import Spinner from '@/components/Spinner/Spinner';
 
 const PlaceMarkers = ({
   categoriesStatus,
@@ -74,7 +75,7 @@ const PlaceMarkers = ({
     setIsModalOpen(true);
   };
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <Spinner />;
 
   return (
     <>

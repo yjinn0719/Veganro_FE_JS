@@ -9,6 +9,7 @@ import PlaceCategory from '@/components/PlaceCategory/PlaceCategory';
 import MenuButton from '@/components/MenuButton/MenuButton';
 import SmallRoundButton from '@/components/SmallRoundButton/SmallRoundButton';
 import MapFilterModal from '@/components/MapFilterModal/MapFilterModal';
+import Spinner from '@/components/Spinner/Spinner';
 import {
   Wrapper,
   TopBar,
@@ -146,7 +147,7 @@ export default function Home() {
           </div>
         )}
         {isLoading ? (
-          <div>위치 정보를 가져오는 중..</div>
+          <Spinner />
         ) : (
           <KakaoMap
             centerMove={location.center}

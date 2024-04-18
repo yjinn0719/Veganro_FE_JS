@@ -25,7 +25,7 @@ const Redirection = () => {
           }
         }
       } catch (error) {
-        console.error('Error during login:', error);
+        console.error(error);
       }
     };
 
@@ -35,7 +35,7 @@ const Redirection = () => {
   useEffect(() => {
     if (!userLoading && userData) {
       if (userData.nickname) {
-        navigate('/');
+        navigate('/home');
       } else {
         navigate('/signup');
       }

@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
-import Spinner from '@/components/Spinner/Spinner';
 import TabBar from '@/components/TabBar/TabBar';
 import Navbar from '@/components/Navbar/Navbar';
 import { useGetUserData } from '../../hooks/useUser';
 import MenuButton from '@/components/MenuButton/MenuButton';
+import Loading from '@/components/Loading/Loading';
 import { useNavigate } from 'react-router-dom';
 import { notify } from '../../hooks/useToast';
 
@@ -29,7 +29,7 @@ export default function MyPage() {
     refetch,
   } = useGetUserData();
 
-  if (isLoading) return <Spinner />;
+  if (isLoading) return <Loading />;
   if (isError) {
     notify('error', '로그인이 되어있는지 확인해주세요.');
     navigate('/');

@@ -1,46 +1,38 @@
 import React, { useEffect } from 'react';
 import Spinner from '@/components/Spinner/Spinner';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate, useSearchParams } from 'react-router-dom';
 import { useGetUser } from '@/hooks/useUser';
 import { usePostAuth } from '@/hooks/useAuth';
 
 const Redirection = () => {
   const navigate = useNavigate();
-  const code = new URL(window.location.href).searchParams.get('code');
+  const [searchParams, _] = useSearchParams();
+  const authorizationCode = searchParams.get('code');
+
   const postAuth = usePostAuth();
-  const {
-    data: userData,
-    isLoading: userLoading,
-    refetch: refetchUser,
-  } = useGetUser();
+  const {data, isLoading, isFetching, isError, refetch } = useGetUser();
+
+  if (authorizationCode === '' || authorizationCode === undefined) {
+    return navigate('/', { replace: true });
+  }
 
   useEffect(() => {
-    const handlePostAuth = async () => {
-      try {
-        if (code) {
-          const authData = await postAuth(code);
-          if (authData && authData.token) {
-            localStorage.setItem('Authorization', authData.token);
-            refetchUser();
-          }
+    if(authorizationCode) {
+      postAuth(authorizationCode).then(data => {
+        const {token} = data;
+        if(token) {
+          localStorage.setItem('Authorization', token);
+          refetch();
+        } else {
+          console.error('토큰을 응답받지 못했습니다.');
         }
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    handlePostAuth();
-  }, [code, postAuth, refetchUser]);
-
-  useEffect(() => {
-    if (!userLoading && userData) {
-      if (userData.nickname) {
-        navigate('/home');
-      } else {
-        navigate('/signup');
-      }
+      }).catch(err => console.error(err));
     }
-  }, [userLoading, userData, navigate]);
+  }, [authorizationCode]);
+
+  if(data !== undefined) {
+    return data.nickname ? <Navigate to="/home" replace={true} /> : <Navigate to="/signup" replace={true} />
+  }
 
   return (
     <div>

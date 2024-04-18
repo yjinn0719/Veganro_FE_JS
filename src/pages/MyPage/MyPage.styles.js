@@ -5,7 +5,7 @@ const Container = styled.div`
   height: 100vh;
   display: flex;
   justify-content: center;
-  background: #fff;
+  background: white;
 `;
 
 const ProfileWrapper = styled.div`
@@ -25,9 +25,8 @@ const ProfileWrapper = styled.div`
 
 const ProfileContent = styled.div`
   width: 100%;
-  height: 271px;
-  padding-top: 32px;
-  padding-bottom: 32px;
+  height: 270px;
+  padding: 32px 0;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
@@ -46,7 +45,7 @@ const AvatarContainer = styled.div`
 const Avatar = styled.img`
   width: 100px;
   height: 100px;
-  border-radius: 9999px;
+  border-radius: 100px;
 `;
 
 const Badge = styled.div`
@@ -60,17 +59,15 @@ const Badge = styled.div`
   align-items: center;
   gap: 10px;
   display: flex;
-  color: #4f8337;
+  color: ${(props) => props.theme.color.green[500]};
   font-size: 18px;
-  font-family: Pretendard;
   font-weight: 600;
   word-wrap: break-word;
 `;
 
 const Nickname = styled.div`
-  color: #1f1f1f;
+  color: ${(props) => props.theme.color.gray[800]};
   font-size: 32px;
-  font-family: Pretendard;
   font-weight: 700;
   word-wrap: break-word;
 `;

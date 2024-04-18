@@ -16,7 +16,7 @@ function VeganTag({ title, onClick, isActive }) {
 
   return (
     <VegTagButton onClick={handleClick} $isActive={isActive}>
-      <VegTagTitle>{title}</VegTagTitle>
+      <VegTagTitle $isActive={isActive}>{title}</VegTagTitle>
     </VegTagButton>
   );
 }

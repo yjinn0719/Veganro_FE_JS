@@ -1,7 +1,11 @@
 import { useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { updateUserData } from '@/apis/api/userInfoApi';
+import { notify } from '@/hooks/useToast';
 import {
   Container,
   InnerContainer,
+  InfoContainer,
   TextBox,
   SubTextBox,
   Text,
@@ -11,16 +15,12 @@ import {
   Icon,
   ButtonContent,
 } from './EditMyPage.styles';
-import { useParams } from 'react-router-dom';
 import Navbar from '@/components/Navbar/Navbar';
-import { IoInformationCircle } from 'react-icons/io5';
 import SecondaryButton from '@/components/SecondaryButton/SecondaryButton';
-import PrimaryButton from '../../components/PrimaryButton/PrimaryButton';
-import VeganTag from '../../components/VeganTag/VeganTag';
-import InputBox from '../../components/InputBox/InputBox';
-import { updateUserData } from '../../apis/api/userInfoApi';
-import { useNavigate } from 'react-router-dom';
-import { notify } from '@/hooks/useToast';
+import PrimaryButton from '@/components/PrimaryButton/PrimaryButton';
+import VeganTag from '@/components/VeganTag/VeganTag';
+import InputBox from '@/components/InputBox/InputBox';
+import { IoInformationCircle } from 'react-icons/io5';
 
 export default function EditMyPage({ title = '프로필 설정', nickname }) {
   const [newNickname, setNewNickname] = useState(nickname);
@@ -54,62 +54,62 @@ export default function EditMyPage({ title = '프로필 설정', nickname }) {
     <Container>
       <Navbar icon="null" title={title} />
       <InnerContainer>
-        <TextBox>
-          <SubTextBox>
-            <Text color="#383838" fontSize={20}>
-              닉네임
-            </Text>
-          </SubTextBox>
-          <InputBox
-            placeholder="닉네임을 입력해주세요"
-            value={newNickname}
-            onChange={handleNicknameChange}
-          />
-        </TextBox>
-        <TagContainer>
-          <SubTextBox>
-            <Text color="#383838" fontSize={20}>
-              채식 유형
-            </Text>
-            <Icon>
-              <IoInformationCircle size="20" />
-            </Icon>
-          </SubTextBox>
+        <InfoContainer>
+          <TextBox>
+            <SubTextBox>
+              <Text color="#383838" fontSize={20}>
+                닉네임
+              </Text>
+            </SubTextBox>
+            <InputBox
+              placeholder="닉네임을 입력해주세요"
+              value={newNickname}
+              onChange={handleNicknameChange}
+            />
+          </TextBox>
           <TagContainer>
-            <VeganTagContainer>
-              <VeganTag
-                title="비건 (Vegan)"
-                isActive={activeTag === '비건'}
-                onClick={() => handleTagClick('비건')}
-              />
-              <VeganTag
-                title="락토 (Lacto)"
-                isActive={activeTag === '락토'}
-                onClick={() => handleTagClick('락토')}
-              />
-              <VeganTag
-                title="오보 (Ovo)"
-                isActive={activeTag === '오보'}
-                onClick={() => handleTagClick('오보')}
-              />
-              <VeganTag
-                title="락토-오보 (Lacto-Ovo)"
-                isActive={activeTag === '락토-오보'}
-                onClick={() => handleTagClick('락토-오보')}
-              />
-              <VeganTag
-                title="페스코 (Pesco)"
-                isActive={activeTag === '페스코'}
-                onClick={() => handleTagClick('페스코')}
-              />
-              <VeganTag
-                title="폴로 (Pollo)"
-                isActive={activeTag === '폴로'}
-                onClick={() => handleTagClick('폴로')}
-              />
-            </VeganTagContainer>
+            <SubTextBox>
+              <Text>채식 유형</Text>
+              <Icon>
+                <IoInformationCircle size="20" />
+              </Icon>
+            </SubTextBox>
+            <TagContainer>
+              <VeganTagContainer>
+                <VeganTag
+                  title="비건 (Vegan)"
+                  isActive={activeTag === '비건'}
+                  onClick={() => handleTagClick('비건')}
+                />
+                <VeganTag
+                  title="락토 (Lacto)"
+                  isActive={activeTag === '락토'}
+                  onClick={() => handleTagClick('락토')}
+                />
+                <VeganTag
+                  title="오보 (Ovo)"
+                  isActive={activeTag === '오보'}
+                  onClick={() => handleTagClick('오보')}
+                />
+                <VeganTag
+                  title="락토-오보 (Lacto-Ovo)"
+                  isActive={activeTag === '락토-오보'}
+                  onClick={() => handleTagClick('락토-오보')}
+                />
+                <VeganTag
+                  title="페스코 (Pesco)"
+                  isActive={activeTag === '페스코'}
+                  onClick={() => handleTagClick('페스코')}
+                />
+                <VeganTag
+                  title="폴로 (Pollo)"
+                  isActive={activeTag === '폴로'}
+                  onClick={() => handleTagClick('폴로')}
+                />
+              </VeganTagContainer>
+            </TagContainer>
           </TagContainer>
-        </TagContainer>
+        </InfoContainer>
         <ButtonContent>
           <ButtonContainer>
             <SecondaryButton

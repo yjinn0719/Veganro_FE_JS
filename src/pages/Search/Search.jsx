@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { fetchPlaces } from '@/apis/index';
 import useCurrentLocation from '@/hooks/useCurrentLocation';
 import { getPlacesWithDistance } from '@/apis/index';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState } from 'recoil';
 import {
   initialCategoryState,
   selectedCategoryState,
@@ -127,7 +127,7 @@ export default function Search() {
     setSelectedMenuTypes(null);
     setShowFilterModal(false);
     setIsButtonActive(false);
-    localStorage.removeItem('selectedMenuTypes');
+    sessionStorage.clear();
   };
 
   // 필터 모달 핸들러
@@ -179,6 +179,7 @@ export default function Search() {
                 <MapFilterModal
                   updateMarkers={updateMarkers}
                   onClose={setShowFilterModal}
+                  setIsButtonActive={setIsButtonActive}
                 />
               )}
             </Categories>

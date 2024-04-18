@@ -47,7 +47,7 @@ const GlobalStyles = createGlobalStyle`
         display: flex;
         justify-content: center;
         position: relative;
-        background-image: url(/src/assets/images/background.png);
+        background-image: url('https://storage.googleapis.com/elice_04/vegan-ro-img/background.png');
         background-position: center;
         background-size: 124%;
         background-repeat: repeat-y;

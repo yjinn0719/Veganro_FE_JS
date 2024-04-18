@@ -131,7 +131,7 @@ const InfomationContainer = styled.div`
 const InfomationImg = styled.img`
   width: 100%;
   height: 300px;
-  background-image: url('/src/assets/images/VeganOptionInfo.png');
+  background-image: url(''https://storage.googleapis.com/elice_04/vegan-ro-img/VeganOptionInfo.png');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;

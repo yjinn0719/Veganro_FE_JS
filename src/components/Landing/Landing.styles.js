@@ -24,7 +24,7 @@ export const Link = styled.a`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: url(/src/assets/images/landing_sign.png);
+  background-image: url('https://storage.googleapis.com/elice_04/vegan-ro-img/landing_sign.png');
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
@@ -73,7 +73,7 @@ export const BottomText = styled.p`
       position: absolute;
       bottom: -10px;
       left: 0;
-      background-image: url(/src/assets/images/landing_underline.png);
+      background-image: url('https://storage.googleapis.com/elice_04/vegan-ro-img/landing_underline.png');
       background-size: contain;
       background-position: center;
       background-repeat: no-repeat;

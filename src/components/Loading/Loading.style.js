@@ -34,7 +34,7 @@ export const Wrapper = styled.div`
 export const LogoContainer = styled.div`
   width: 180px;
   height: 180px;
-  background-image: url(src/assets/images/logo.png);
+  background-image: url('https://storage.googleapis.com/elice_04/vegan-ro-img/logo.png');
   bakcground-position: center center;
   background-repeat: no-repeat;
   background-size: 100%;

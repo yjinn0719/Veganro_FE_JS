@@ -6,10 +6,6 @@ export const getUserData = async () => {
     const response = await api.get('/users/me');
     return response.data.data;
   } catch (error) {
-    if (error.response.status === 401) {
-      notify('error', '로그인이 필요합니다.');
-      return '/'; // 로그인 페이지로의 경로를 반환합니다.
-    }
     handleError(error);
   }
 };

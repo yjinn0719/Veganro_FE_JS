@@ -27,6 +27,7 @@ import {
   initialCategoryState,
 } from '@/states/filterState';
 import { isMenuOpenState } from '@/states/menuOpenState';
+import Spinner from '@/components/Spinner/Spinner';
 
 export default function Home() {
   const navigate = useNavigate();

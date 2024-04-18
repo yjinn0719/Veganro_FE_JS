@@ -22,13 +22,14 @@ export const useGetReviews = (placeId, pageNumber = 1, pageSize = 4) => {
   });
 };
 
-export const useGetMyReviews = (placeId) => {
+export const useGetMyReviews = (placeId, token) => {
   return useQuery({
     queryKey: ['getMyReviews', placeId],
-    queryFn: () => getMyReviews(placeId),
-    config: {
-      retry: false,
-    },
+    queryFn: () => getMyReviews(placeId, token),
+    retry: false,
+    enabled: !!token,
+    refetchOnWindowFocus: false,
+    refetchOnMount: false,
   });
 };
 

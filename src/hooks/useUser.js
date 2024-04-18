@@ -26,6 +26,13 @@ export const useGetUser = () => {
   });
 };
 
+export const useGetUserData = () => {
+  return useQuery({
+    queryKey: ['getUser'],
+    queryFn: getUserData,
+  });
+};
+
 export const useUpdateUser = () => {
   return useMutation({ mutationFn: updateUserData });
 };

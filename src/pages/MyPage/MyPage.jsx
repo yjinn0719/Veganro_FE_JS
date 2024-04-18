@@ -1,9 +1,8 @@
-import React, { Suspense } from 'react';
+import React, { useEffect } from 'react';
 import Spinner from '@/components/Spinner/Spinner';
 import TabBar from '@/components/TabBar/TabBar';
 import Navbar from '@/components/Navbar/Navbar';
-import { useParams } from 'react-router-dom';
-import { useGetUser } from '../../hooks/useUser';
+import { useGetUserData } from '../../hooks/useUser';
 import MenuButton from '@/components/MenuButton/MenuButton';
 
 import {
@@ -18,8 +17,14 @@ import {
 } from './MyPage.styles';
 
 export default function MyPage() {
-  const { userid } = useParams();
-  const { data: userData, isLoading, isError, error } = useGetUser(userid);
+  const {
+    data: userData,
+    isLoading,
+    isError,
+    error,
+    refetch,
+  } = useGetUserData();
+
   if (isLoading) return <Spinner />;
   if (isError) return <div>Error: {error.message}</div>;
 

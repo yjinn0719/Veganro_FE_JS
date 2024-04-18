@@ -7,7 +7,11 @@ import { IoBookmark } from 'react-icons/io5';
 
 function Bookmark() {
   const { placeid } = useParams();
-  const { data: bookmarkDataByPlaceId } = useGetBookmarkByPlaceId(placeid);
+  const token = localStorage.getItem('Authorization');
+  const { data: bookmarkDataByPlaceId } = useGetBookmarkByPlaceId(
+    placeid,
+    token,
+  );
 
   const [isClicked, setIsClicked] = useState(false);
   const [bookmarkId, setBookmarkId] = useState(null);

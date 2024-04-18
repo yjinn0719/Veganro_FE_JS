@@ -66,7 +66,7 @@ const TabBar = () => {
   } = useCurrentLocation();
   const [activeTab, setActiveTab] = useState('reported');
   const tabContentRef = useRef(null);
-  console.log('ReviewsData', ReviewsData);
+
   useEffect(() => {
     getCurrentPosition();
   }, []);
@@ -101,8 +101,10 @@ const TabBar = () => {
   if (userLocationError || isReviewsError || isReportError || isBookmarkError) {
     return <div>Error occurred while loading data.</div>;
   }
+  const ReportDataLength = ReportData?.pages[0].reportedPlaces.length;
+
   const renderReportedPlaces = () => {
-    if (ReportData?.pages[0].totalCount === 0) {
+    if (ReportDataLength === 0) {
       return (
         <ReviewContent>
           <NoReview>
@@ -114,7 +116,7 @@ const TabBar = () => {
       return (
         <DataContent>
           {ReportData?.pages.map((page) =>
-            page.map((report) => {
+            page.reportedPlaces.map((report) => {
               const distance =
                 getDistance({
                   lat1: userLocation.center.lat,
@@ -152,8 +154,9 @@ const TabBar = () => {
     }
   };
 
+  const ReviewsDataLength = ReviewsData?.pages[0].reviews.length;
   const renderReviews = () => {
-    if (ReviewsData === 0) {
+    if (ReviewsDataLength === 0) {
       return (
         <ReviewContent>
           <NoReview>
@@ -192,8 +195,10 @@ const TabBar = () => {
     }
   };
 
+  const BookmarkDataLength = BookmarkData?.pages[0].bookmarks.length;
+
   const renderBookmarkedPlaces = () => {
-    if (BookmarkData?.pages[0].totalCount === 0) {
+    if (BookmarkDataLength === 0) {
       return (
         <ReviewContent>
           <NoReview>
@@ -205,7 +210,7 @@ const TabBar = () => {
       return (
         <DataContent>
           {BookmarkData?.pages.map((page) =>
-            page.map((bookmark) => {
+            page.bookmarks.map((bookmark) => {
               const distance =
                 getDistance({
                   lat1: userLocation.center.lat,
@@ -239,13 +244,7 @@ const TabBar = () => {
               <div>Loading more...</div>
             ) : bookmarkHasNextPage ? (
               <div>Load More</div>
-            ) : (
-              <ReviewContent>
-                <NoReview>
-                  <NoReviewText>북마크한 가게가 없습니다.</NoReviewText>
-                </NoReview>
-              </ReviewContent>
-            )}
+            ) : null}
           </div>
         </DataContent>
       );

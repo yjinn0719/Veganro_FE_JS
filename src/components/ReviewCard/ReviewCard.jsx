@@ -32,10 +32,10 @@ export default function ReviewCard({
   const [isEditDrawerOpen, setIsEditDrawerOpen] = useState(false);
   const [isComplaintDrawerOpen, setIsComplaintDrawerOpen] = useState(false);
   const [clickedReviewId, setClickedReviewId] = useState(null);
-
+  const token = localStorage.getItem('Authorization');
   const { placeid } = useParams();
   const effectivePlaceId = placeId || placeid;
-  const { data: myReviews } = useGetMyReviews(effectivePlaceId);
+  const { data: myReviews } = useGetMyReviews(effectivePlaceId, token);
   useEffect(() => {
     if (myReviews) {
       const reviewCurrentUser = myReviews.reviews.find(

@@ -20,7 +20,7 @@ import {
 export default function MyPage() {
   const { userid } = useParams();
   const { data: userData, isLoading, isError, error } = useGetUser(userid);
-
+  console.log(userData);
   if (isLoading) return <Spinner />; // 로딩 중에는 스피너 표시
   if (isError) return <div>Error: {error.message}</div>; // 에러 발생 시 에러 메시지 표시
 
@@ -31,7 +31,9 @@ export default function MyPage() {
         <ProfileWrapper>
           <ProfileContent>
             <AvatarContainer>
-              <Avatar img={userData.tag_img} />
+              <>
+                <Avatar src={userData.tag_img.url.basic_url} />
+              </>
               <Badge>
                 <BadgeText>{userData.tag}</BadgeText>
               </Badge>

@@ -14,6 +14,10 @@ export const NavContainer = styled.div`
   right: 0;
   box-sizing: border-box;
   z-index: 999;
+  svg {
+    font-size: 24px;
+    color: ${(props) => props.theme.color.gray[800]};
+  }
 `;
 
 export const NavTitle = styled.p`

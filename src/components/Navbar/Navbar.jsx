@@ -1,9 +1,11 @@
 import React from 'react';
 import { NavContainer, NavTitle } from './Navbar.styles';
 import { useNavigate, useParams } from 'react-router-dom';
-import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
-import ClearOutlinedIcon from '@mui/icons-material/ClearOutlined';
-import ArrowBackIosNewOutlinedIcon from '@mui/icons-material/ArrowBackIosNewOutlined';
+import {
+  IoClose,
+  IoChevronBackOutline,
+  IoSettingsOutline,
+} from 'react-icons/io5';
 
 function Navbar({ title, icon }) {
   const navigate = useNavigate();
@@ -16,22 +18,12 @@ function Navbar({ title, icon }) {
 
   return (
     <NavContainer>
-      <ArrowBackIosNewOutlinedIcon
-        onClick={handleClick}
-        sx={{ color: '#383838', width: '24px', height: '24px' }}
-      />
+      <IoChevronBackOutline onClick={handleClick} />
       <NavTitle>{title}</NavTitle>
       {icon === 'setting' && (
-        <SettingsOutlinedIcon
-          onClick={() => navigate(`/user/${userid}/edit`)}
-          sx={{ color: '#383838', width: '24px', height: '24px' }}
-        />
+        <IoSettingsOutline onClick={() => navigate(`/user/${userid}/edit`)} />
       )}
-      {icon === 'delete' && (
-        <ClearOutlinedIcon
-          sx={{ color: '#383838', width: '24px', height: '24px' }}
-        />
-      )}
+      {icon === 'delete' && <IoClose />}
       {icon === 'null' && <div style={{ width: '24px', height: '24px' }}></div>}
     </NavContainer>
   );

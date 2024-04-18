@@ -59,7 +59,7 @@ export default function ReviewDrawer({
   };
 
   return (
-    <Drawer height={45.5} isOpened={isOpened} toggleDrawer={toggleDrawer}>
+    <Drawer isOpened={isOpened} toggleDrawer={toggleDrawer}>
       {isOpened && (
         <>
           <TitleContainer>

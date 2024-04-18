@@ -142,7 +142,7 @@ const TabBar = () => {
             ) : reportHasNextPage ? (
               <div>Load More</div>
             ) : (
-              'No more reviews'
+              'No more reports'
             )}
           </div>
         </DataContent>
@@ -237,7 +237,7 @@ const TabBar = () => {
             ) : bookmarkHasNextPage ? (
               <div>Load More</div>
             ) : (
-              'No more reviews'
+              'No more bookmarks'
             )}
           </div>
         </DataContent>

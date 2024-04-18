@@ -78,34 +78,34 @@ export default function EditMyPage({ title = '프로필 설정', nickname }) {
           <TagContainer>
             <VeganTagContainer>
               <VeganTag
-                title="비건"
+                title="비건 (Vegan)"
                 isActive={activeTag === '비건'}
                 onClick={() => handleTagClick('비건')}
               />
               <VeganTag
-                title="락토"
+                title="락토 (Lacto)"
                 isActive={activeTag === '락토'}
                 onClick={() => handleTagClick('락토')}
               />
               <VeganTag
-                title="오보"
+                title="오보 (Ovo)"
                 isActive={activeTag === '오보'}
                 onClick={() => handleTagClick('오보')}
               />
               <VeganTag
-                title="락토-오보"
+                title="락토-오보 (Lacto-Ovo)"
                 isActive={activeTag === '락토-오보'}
                 onClick={() => handleTagClick('락토-오보')}
               />
               <VeganTag
-                title="페스코"
+                title="페스코 (Pesco)"
                 isActive={activeTag === '페스코'}
                 onClick={() => handleTagClick('페스코')}
               />
               <VeganTag
-                title="플로"
-                isActive={activeTag === '플로'}
-                onClick={() => handleTagClick('플로')}
+                title="폴로 (Pollo)"
+                isActive={activeTag === '폴로'}
+                onClick={() => handleTagClick('폴로')}
               />
             </VeganTagContainer>
           </TagContainer>

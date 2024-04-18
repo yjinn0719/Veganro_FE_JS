@@ -47,13 +47,23 @@ export const VeganMenu = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 4px 6px;
+  padding: 4px 5px;
   gap: 10px;
   border-radius: 4px;
   background: rgba(79, 131, 55, 0.1);
   color: ${(props) => props.theme.color.green[500]};
   font-size: 12px;
   font-weight: 600;
+  ${(props) => props.theme.media.desktop`
+    margin-left: 0;
+  `}
+  ${(props) => props.theme.media.tablet`
+    margin-left: 6px;
+  `}
+  ${(props) => props.theme.media.mobile`
+    margin-left: 0;
+    font-size: 11px;
+  `}
 `;
 
 export const DistBox = styled.div`
@@ -104,7 +114,6 @@ export const CategoryIcon = styled.div`
   align-items: center;
   flex-shrink: 0;
   border-radius: 4px;
-  border: solid 1px ${(props) => props.theme.color.gray[500]};
   ${(props) => props.theme.media.desktop`
     width: 54px;
     height: 54px;
@@ -118,6 +127,10 @@ export const CategoryIcon = styled.div`
 export const CategoryImg = styled.img`
   object-fit: cover;
   ${(props) => props.theme.media.desktop`
+    width: 54px;
+    height: 54px;
+  `}
+  ${(props) => props.theme.media.tablet`
     width: 54px;
     height: 54px;
   `}

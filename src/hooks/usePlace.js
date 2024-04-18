@@ -11,12 +11,13 @@ export const useGetPlace = (placeId) => {
   });
 };
 
-export const useGetBookmarkByPlaceId = (placeId) => {
+export const useGetBookmarkByPlaceId = (placeId, token) => {
   return useQuery({
     queryKey: ['getBookmarkByPlaceId', placeId],
-    queryFn: () => getBookmarkByPlaceId(placeId),
-    config: {
-      retry: false,
-    },
+    queryFn: () => getBookmarkByPlaceId(placeId, token),
+    retry: false,
+    enabled: !!token,
+    refetchOnWindowFocus: false,
+    refetchOnMount: false,
   });
 };

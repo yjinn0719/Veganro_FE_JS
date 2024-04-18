@@ -66,6 +66,7 @@ const TabBar = () => {
   } = useCurrentLocation();
   const [activeTab, setActiveTab] = useState('reported');
   const tabContentRef = useRef(null);
+
   useEffect(() => {
     getCurrentPosition();
   }, []);
@@ -100,8 +101,10 @@ const TabBar = () => {
   if (userLocationError || isReviewsError || isReportError || isBookmarkError) {
     return <div>Error occurred while loading data.</div>;
   }
+  const ReportDataLength = ReportData?.pages[0].reportedPlaces.length;
+
   const renderReportedPlaces = () => {
-    if (ReportData.length === 0) {
+    if (ReportDataLength === 0) {
       return (
         <ReviewContent>
           <NoReview>
@@ -113,7 +116,7 @@ const TabBar = () => {
       return (
         <DataContent>
           {ReportData?.pages.map((page) =>
-            page.map((report) => {
+            page.reportedPlaces.map((report) => {
               const distance =
                 getDistance({
                   lat1: userLocation.center.lat,
@@ -144,17 +147,16 @@ const TabBar = () => {
               <div>Loading more...</div>
             ) : reportHasNextPage ? (
               <div>Load More</div>
-            ) : (
-              'No more reports'
-            )}
+            ) : null}
           </div>
         </DataContent>
       );
     }
   };
 
+  const ReviewsDataLength = ReviewsData?.pages[0].reviews.length;
   const renderReviews = () => {
-    if (ReviewsData.length === 0) {
+    if (ReviewsDataLength === 0) {
       return (
         <ReviewContent>
           <NoReview>
@@ -174,10 +176,10 @@ const TabBar = () => {
                 veganLevel={review.user_id.tag}
                 comment={review.content}
                 date={review.updatedAt}
-                address={review.content}
+                address={review.place_id.name}
                 selectedReviewId={selectedReviewId}
                 onSelectReviewId={setSelectedReviewId}
-                placeId={review.place_id}
+                placeId={review.place_id._id}
               />
             )),
           )}
@@ -186,17 +188,17 @@ const TabBar = () => {
               <div>Loading more...</div>
             ) : reviewsHasNextPage ? (
               <div>Load More</div>
-            ) : (
-              'No more reviews'
-            )}
+            ) : null}
           </div>
         </DataContent>
       );
     }
   };
 
+  const BookmarkDataLength = BookmarkData?.pages[0].bookmarks.length;
+
   const renderBookmarkedPlaces = () => {
-    if (BookmarkData.length === 0) {
+    if (BookmarkDataLength === 0) {
       return (
         <ReviewContent>
           <NoReview>
@@ -208,7 +210,7 @@ const TabBar = () => {
       return (
         <DataContent>
           {BookmarkData?.pages.map((page) =>
-            page.map((bookmark) => {
+            page.bookmarks.map((bookmark) => {
               const distance =
                 getDistance({
                   lat1: userLocation.center.lat,
@@ -242,9 +244,7 @@ const TabBar = () => {
               <div>Loading more...</div>
             ) : bookmarkHasNextPage ? (
               <div>Load More</div>
-            ) : (
-              'No more bookmarks'
-            )}
+            ) : null}
           </div>
         </DataContent>
       );

@@ -29,7 +29,7 @@ export const getPlaceData = async (placeId) => {
   }
 };
 
-export const getBookmarkByPlaceId = async (placeId, token) => {
+export const getBookmarkByPlaceId = async (placeId) => {
   try {
     const response = await api.get(`/bookmarks/check?placeId=${placeId}`);
     return response.data.data;

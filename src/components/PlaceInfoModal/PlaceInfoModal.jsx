@@ -5,6 +5,7 @@ import { isModalOpenState } from '@/states/placeModalState';
 import { useGetPlace } from '@/hooks/usePlace';
 import useCurrentLocation from '@/hooks/useCurrentLocation';
 import getDistance from '@/hooks/useDistance.jsx';
+import Spinner from '@/components/Spinner/Spinner';
 
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import { IoNavigateCircleOutline } from 'react-icons/io5';
@@ -70,7 +71,7 @@ function PlaceInfoModal({ markerId }) {
   };
 
   if (placeDataLoading || userLocationLoading) {
-    return <div>Loading...</div>;
+    return <Spinner />;
   }
   if (placeDataError || userLocationError) {
     return (

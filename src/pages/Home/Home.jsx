@@ -26,6 +26,7 @@ import {
   initialCategoryState,
 } from '@/states/filterState';
 import { isMenuOpenState } from '@/states/menuOpenState';
+import Spinner from '@/components/Spinner/Spinner';
 
 export default function Home() {
   const navigate = useNavigate();
@@ -146,7 +147,7 @@ export default function Home() {
           </div>
         )}
         {isLoading ? (
-          <div>위치 정보를 가져오는 중..</div>
+          <Spinner />
         ) : (
           <KakaoMap
             centerMove={location.center}

@@ -28,6 +28,10 @@ function Auth() {
   };
 
   const handleNoLoginClick = () => {
+    const token = localStorage.getItem('Authorization');
+    if (token) {
+      localStorage.removeItem('Authorization');
+    }
     navigate('/home');
   };
 

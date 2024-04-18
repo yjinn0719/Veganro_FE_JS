@@ -7,8 +7,8 @@ export const AuthContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: var(--Gray-900, #2d2d2d);
-  gap: 48px;
+  background: ${(props) => props.theme.color.green[300]};
+  gap: 45px;
 `;
 
 export const LogoContainer = styled.div`
@@ -16,14 +16,35 @@ export const LogoContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 20px;
+  gap: 10px;
 `;
 
 export const LogoContent = styled.p`
-  color: #fff;
-  font-size: 20px;
+  color: ${(props) => props.theme.color.white};
+  font-size: 19px;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
   letter-spacing: 0.48px;
+`;
+
+export const NoLogin = styled.p`
+  color: ${(props) => props.theme.color.gray[100]};
+  font-feature-settings:
+    'clig' off,
+    'liga' off;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  text-decoration: underline;
+  cursor: default;
+`;
+
+export const LoginBtnContainer = styled.div`
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
 `;

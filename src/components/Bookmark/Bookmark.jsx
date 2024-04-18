@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom';
 import { BookmarkContainer, BookmarkContent } from './Bookmark.styles';
 import { usePostBookmark, useDeleteBookmark } from '@/hooks/useUser';
 import { useGetBookmarkByPlaceId } from '@/hooks/usePlace';
-import { notify } from '@/hooks/useToast';
 import { IoBookmark } from 'react-icons/io5';
 
 function Bookmark() {
@@ -14,10 +13,11 @@ function Bookmark() {
   const [bookmarkId, setBookmarkId] = useState(null);
   const { mutate: postBookmark } = usePostBookmark();
   const { mutate: deleteBookmark } = useDeleteBookmark();
-
+  console.log(bookmarkDataByPlaceId);
   useEffect(() => {
     if (bookmarkDataByPlaceId) {
       const bookmarkStatus = bookmarkDataByPlaceId.isBookmarked;
+      const bookmarkId = bookmarkDataByPlaceId.bookmarkId;
       setBookmarkId(bookmarkId);
       setIsClicked(bookmarkStatus);
     } else {
@@ -39,7 +39,6 @@ function Bookmark() {
       } else {
         if (bookmarkId) {
           await deleteBookmark(bookmarkId);
-
           setBookmarkId(null);
         }
       }

@@ -14,6 +14,9 @@ export default function ComplaintDrawer({ isOpened, reviewId: reviewId }) {
     try {
       await mutate(reviewId, reviewId);
       notify('error', '리뷰가 신고되었습니다.');
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
     } catch (error) {
       console.error('Error reporting review:', error);
     }

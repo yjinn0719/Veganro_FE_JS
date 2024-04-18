@@ -1,6 +1,5 @@
 import api from '@/apis/utils/axiosInstance';
 import { notify } from '../../hooks/useToast';
-import { useNavigate } from 'react-router-dom';
 
 export const getUserData = async () => {
   try {
@@ -80,10 +79,9 @@ export const deleteBookmark = async (bookmarkId) => {
   try {
     const response = await api.delete(`/bookmarks/${bookmarkId}`);
     notify('warning', '북마크가 삭제되었습니다.');
-
     return response.data.data;
   } catch (error) {
-    notify('error', '로그인이 필요합니다.');
+    notify('error', '실패했습니다.');
     throw new Error('Error deleting bookmark: ' + error.message);
   }
 };

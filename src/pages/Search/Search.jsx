@@ -145,7 +145,9 @@ export default function Search() {
     return <div>위치 정보를 가져올 수 없습니다 {error}</div>;
   }
 
-  if (isLoading) return <Spinner />;
+  if (isLoading) {
+    return <Spinner />;
+  }
 
   return (
     <>

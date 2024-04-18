@@ -26,13 +26,19 @@ function MenuButton() {
     });
   };
 
-  const handleNavigation = (page) => {
+  const handleNavigation = (title) => {
     setIsMenuOpen(false);
-    const routePath = PATH[page.toUpperCase()];
+    let routePath;
+    if (title.toLowerCase() === 'my') {
+      routePath = `user/${userId}`;
+    } else {
+      routePath = PATH[title.toUpperCase()];
+    }
+
     if (routePath) {
       navigate(routePath);
     } else {
-      console.error('❌ Route path not found for:', page);
+      console.error('❌ Route path not found for:', title);
     }
   };
 

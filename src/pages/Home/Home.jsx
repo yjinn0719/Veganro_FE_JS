@@ -4,12 +4,12 @@ import { useRecoilState } from 'recoil';
 
 import KakaoMap from '../KakaoMap/KakaoMap';
 import useCurrentLocation from '@/hooks/useCurrentLocation';
+import Loading from '@/components/Loading/Loading';
 import SearchBar from '@/components/SearchBar/SearchBar';
 import PlaceCategory from '@/components/PlaceCategory/PlaceCategory';
 import MenuButton from '@/components/MenuButton/MenuButton';
 import SmallRoundButton from '@/components/SmallRoundButton/SmallRoundButton';
 import MapFilterModal from '@/components/MapFilterModal/MapFilterModal';
-import Spinner from '@/components/Spinner/Spinner';
 import {
   Wrapper,
   TopBar,
@@ -85,8 +85,6 @@ export default function Home() {
     setShowFilterModal(false);
     setIsButtonActive(false);
     sessionStorage.clear();
-    // 기존에 사용했던 localStorage 기록 날리고 싶으실 경우 주석 풀고 Home에서 새로고침btn 누르시면 됩니다!
-    //localStorage.clear();
   };
 
   const handleFilterModal = () => {
@@ -147,7 +145,7 @@ export default function Home() {
           </div>
         )}
         {isLoading ? (
-          <Spinner />
+          <Loading />
         ) : (
           <KakaoMap
             centerMove={location.center}

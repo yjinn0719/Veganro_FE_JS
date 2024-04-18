@@ -35,6 +35,12 @@ const TextBox = styled.div`
   height: 100px;
   gap: 12px;
   display: flex;
+  input {
+    transition: all 0.2s ease-in;
+    &:focus {
+      border-color: ${(props) => props.theme.color.green[500]};
+    }
+  }
 `;
 
 const SubTextBox = styled.div`

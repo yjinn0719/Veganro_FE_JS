@@ -3,7 +3,8 @@ import styled from 'styled-components';
 export const VegTagButton = styled.button`
   display: flex;
   height: 50px;
-  min-width: 120px;
+  min-width: 100px;
+  width: fit-content;
   padding: 12px 16px;
   align-items: center;
   border-radius: 100px;

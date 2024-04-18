@@ -21,7 +21,6 @@ const BackgroundOverlay = styled(motion.div)`
   right: 0;
   width: 100%;
   height: 100%;
-  background: black;
 `;
 const SheetBackground = styled(motion.div)`
   position: fixed;

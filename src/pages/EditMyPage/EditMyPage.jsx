@@ -5,7 +5,6 @@ import { notify } from '@/hooks/useToast';
 import {
   Container,
   InnerContainer,
-  InfoContainer,
   TextBox,
   SubTextBox,
   Text,
@@ -61,62 +60,67 @@ export default function EditMyPage({ title = '프로필 설정', nickname }) {
     <Container>
       <Navbar icon="null" title={title} />
       <InnerContainer>
-        <InfoContainer>
-          <TextBox>
-            <SubTextBox>
-              <Text color="#383838" fontSize={20}>
-                닉네임
-              </Text>
-            </SubTextBox>
-            <InputBox
-              placeholder="닉네임을 입력해주세요"
-              value={newNickname}
-              onChange={handleNicknameChange}
-            />
-          </TextBox>
+        <TextBox>
+          <SubTextBox>
+            <Text color="#383838" fontSize={20}>
+              닉네임
+            </Text>
+          </SubTextBox>
+          <InputBox
+            placeholder="닉네임을 입력해주세요"
+            value={newNickname}
+            onChange={handleNicknameChange}
+          />
+        </TextBox>
+        <TagContainer>
+          <SubTextBox>
+            <Text color="#383838" fontSize={20}>
+              채식 유형
+            </Text>
+            <Icon>
+              <IoInformationCircle size="20" onClick={handleClick} />
+            </Icon>
+          </SubTextBox>
           <TagContainer>
-            <SubTextBox>
-              <Text>채식 유형</Text>
-              <Icon>
-                <IoInformationCircle size="20" />
-              </Icon>
-            </SubTextBox>
-            <TagContainer>
-              <VeganTagContainer>
-                <VeganTag
-                  title="비건 (Vegan)"
-                  isActive={activeTag === '비건'}
-                  onClick={() => handleTagClick('비건')}
-                />
-                <VeganTag
-                  title="락토 (Lacto)"
-                  isActive={activeTag === '락토'}
-                  onClick={() => handleTagClick('락토')}
-                />
-                <VeganTag
-                  title="오보 (Ovo)"
-                  isActive={activeTag === '오보'}
-                  onClick={() => handleTagClick('오보')}
-                />
-                <VeganTag
-                  title="락토-오보 (Lacto-Ovo)"
-                  isActive={activeTag === '락토-오보'}
-                  onClick={() => handleTagClick('락토-오보')}
-                />
-                <VeganTag
-                  title="페스코 (Pesco)"
-                  isActive={activeTag === '페스코'}
-                  onClick={() => handleTagClick('페스코')}
-                />
-                <VeganTag
-                  title="폴로 (Pollo)"
-                  isActive={activeTag === '폴로'}
-                  onClick={() => handleTagClick('폴로')}
-                />
-              </VeganTagContainer>
-            </TagContainer>
+            <VeganTagContainer>
+              <VeganTag
+                title="비건"
+                isActive={activeTag === '비건'}
+                onClick={() => handleTagClick('비건')}
+              />
+              <VeganTag
+                title="락토"
+                isActive={activeTag === '락토'}
+                onClick={() => handleTagClick('락토')}
+              />
+              <VeganTag
+                title="오보"
+                isActive={activeTag === '오보'}
+                onClick={() => handleTagClick('오보')}
+              />
+              <VeganTag
+                title="락토-오보"
+                isActive={activeTag === '락토-오보'}
+                onClick={() => handleTagClick('락토-오보')}
+              />
+              <VeganTag
+                title="페스코"
+                isActive={activeTag === '페스코'}
+                onClick={() => handleTagClick('페스코')}
+              />
+              <VeganTag
+                title="폴로"
+                isActive={activeTag === '폴로'}
+                onClick={() => handleTagClick('폴로')}
+              />
+            </VeganTagContainer>
           </TagContainer>
-        </InfoContainer>
+        </TagContainer>
+        {showInformation && (
+          <InfomationContainer>
+            <InfomationImg />
+          </InfomationContainer>
+        )}
         <ButtonContent>
           <ButtonContainer>
             <SecondaryButton

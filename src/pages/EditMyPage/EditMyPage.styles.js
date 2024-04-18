@@ -9,6 +9,7 @@ const Container = styled.div`
 `;
 const InnerContainer = styled.div`
   width: 100%;
+  gap: 15px;
   height: calc(100% - 48px);
   padding: 16px;
   box-sizing: border-box;
@@ -118,14 +119,16 @@ const Icon = styled.div`
 
 const InfomationContainer = styled.div`
   margin: 10px auto;
-  width: 90%;
-  height: 300px;
+  width: 100%;
 `;
 
 const InfomationImg = styled.img`
   width: 100%;
   height: 300px;
-  background: url('src/assets/images/VeganOptionInfo.png');
+  background-image: url('/src/assets/images/VeganOptionInfo.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
 `;
 
 export {

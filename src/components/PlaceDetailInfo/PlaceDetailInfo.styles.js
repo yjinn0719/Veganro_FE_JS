@@ -72,11 +72,13 @@ const HoursSummary = styled.summary`
   position: relative;
   gap: 12px;
   color: ${(props) => props.theme.color.gray[600]};
+  cursor: pointer;
   &::after {
     content: '';
     width: 16px;
     height: 16px;
-    background: url('/src/assets/icons/ChevronDownIcon.svg') no-repeat;
+    background: url('https://storage.googleapis.com/elice_04/vegan-ro-img/ChevronDownIcon.svg')
+      no-repeat;
     background-size: 16px;
     background-position: center;
     transition: all 0.2s ease-in;

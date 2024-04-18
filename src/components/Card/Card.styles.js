@@ -3,10 +3,7 @@ import styled from 'styled-components';
 const Container = styled.div`
   margin: 0 auto;
   width: 100%;
-  padding-left: 12px;
-  padding-right: 12px;
-  padding-top: 16px;
-  padding-bottom: 16px;
+  padding: 16px 12px;
   background: white;
   border-radius: 4px;
   overflow: hidden;
@@ -78,7 +75,7 @@ const TagContainer = styled.div`
 `;
 
 const TagText = styled.div`
-  color: #4f8337;
+  color: ${(props) => props.theme.color.green[500]};
   font-size: 12px;
   font-weight: 600;
   word-wrap: break-word;
@@ -105,41 +102,38 @@ const DistanceIcon = styled.div`
 `;
 
 const DistanceOuter = styled.div`
-  width: 4.87px;
-  height: 4.87px;
-  left: 3.37px;
-  top: 3.75px;
+  width: 5px;
+  height: 5px;
+  left: 4px;
+  top: 4px;
   position: absolute;
-  background: #6e6e6e;
+  background: color: ${(props) => props.theme.color.gray[600]};
 `;
 
 const DistanceInner = styled.div`
   width: 10px;
   height: 10px;
-  left: 1.5px;
-  top: 1.5px;
+  left: 2px;
+  top: 2px;
   position: absolute;
-  border: 1px #6e6e6e solid;
+  border: solid 1px ${(props) => props.theme.color.gray[600]};
 `;
 
 const InfoText = styled.div`
-  color: #6e6e6e;
+  color: ${(props) => props.theme.color.gray[600]};
   font-size: 12px;
-  font-weight: 500;
   word-wrap: break-word;
 `;
 
 const LocationText = styled.div`
-  color: #4f4f4f;
+  color: ${(props) => props.theme.color.gray[600]};
   font-size: 14px;
-  font-weight: 500;
   word-wrap: break-word;
 `;
 
 const NumberText = styled.div`
-  color: #6e6e6e;
-  font-size: 12px;
-  font-weight: 500;
+  color: ${(props) => props.theme.color.gray[600]};
+  font-size: 14px;
   word-wrap: break-word;
 `;
 

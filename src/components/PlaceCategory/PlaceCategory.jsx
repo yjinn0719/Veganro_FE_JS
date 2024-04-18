@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { PlaceCategoryBtn, PlaceCategoryTitle } from './PlaceCategory.styles';
-import GrassIcon from '../../assets/icons/GrassIcon.svg';
-import CafeIcon from '../../assets/icons/CafeIcon.svg';
-import WineIcon from '../../assets/icons/WineIcon.svg';
-import FishIcon from '../../assets/icons/FishIcon.svg';
+import GrassIcon from '@/assets/icons/GrassIcon.svg';
+import CafeIcon from '@/assets/icons/CafeIcon.svg';
+import WineIcon from '@/assets/icons/WineIcon.svg';
+import FishIcon from '@/assets/icons/FishIcon.svg';
 
 function PlaceCategory({ title, onClick, initialClicked }) {
   const [isClicked, setIsClicked] = useState();

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useRecoilState } from 'recoil';
 import {
   Container,
   Inner,
@@ -10,19 +11,23 @@ import {
 import { MenuTagBtn, MenuTagContent } from '../MenuTag/MenuTag.styles';
 
 import { VEGAN_MENU_TYPES } from '@/constants';
+import { selectedMenuTypeState } from '@/states/filterState.js';
 
 function MapFilterModal({ updateMarkers, onClose, setIsButtonActive }) {
   const [isClicked, setIsClicked] = useState(false);
   const [selectedMenuTypes, setSelectedMenuTypes] = useState([]);
   const [isSavedActive, setIsSavedActive] = useState(false);
+  const [menuTypes, setMenuTypes] = useRecoilState(selectedMenuTypeState);
 
-  // 메뉴 필터 이전 값 불러오기
   useEffect(() => {
-    const storedMenuTypes = localStorage.getItem('selectedMenuTypes');
-    if (storedMenuTypes) {
-      setSelectedMenuTypes(JSON.parse(storedMenuTypes));
+    if(menuTypes !== null) {
+      if(menuTypes) {
+        setSelectedMenuTypes('전체 채식 메뉴')
+      } else {
+        setSelectedMenuTypes('일부 채식 메뉴')
+      }
     }
-  }, []);
+  }, [menuTypes]);
 
   useEffect(() => {
     setIsSavedActive(selectedMenuTypes.length > 0);
@@ -44,10 +49,11 @@ function MapFilterModal({ updateMarkers, onClose, setIsButtonActive }) {
     const isPartialVegan = selectedMenuTypes.includes(VEGAN_MENU_TYPES[1]);
     const veganOption = isFullVegan ? true : isPartialVegan ? false : null;
     updateMarkers(veganOption);
-    localStorage.setItem(
-      'selectedMenuTypes',
-      JSON.stringify(selectedMenuTypes),
-    );
+    // sessionStorage.setItem(
+    //   'selectedMenuTypes',
+    //   JSON.stringify(selectedMenuTypes),
+    //   // selectedMenuTypes.includes(VEGAN_MENU_TYPES[0]) ? true : false,
+    // );
     onClose(false);
     setIsButtonActive(false);
   };

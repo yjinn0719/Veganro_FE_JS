@@ -4,7 +4,7 @@ import { useRecoilState } from 'recoil';
 import { isModalOpenState } from '@/states/placeModalState';
 import { useGetPlace } from '@/hooks/usePlace';
 import useCurrentLocation from '@/hooks/useCurrentLocation';
-import getDistance from '@/hooks/useDistance';
+import getDistance from '@/hooks/useDistance.jsx';
 
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import { IoNavigateCircleOutline } from 'react-icons/io5';

@@ -17,17 +17,15 @@ export const getBackgroundColor = (clicked, title, theme) => {
 
 export const PlaceCategoryBtn = styled.button`
   display: inline-flex;
-  padding: 8px 12px;
   justify-content: center;
   align-items: center;
-  gap: 6px;
   border-radius: 4px;
   border: 1px solid
     ${(props) =>
       props.clicked ? props.theme.color.white : props.theme.color.gray[300]};
   background: ${(props) =>
     getBackgroundColor(props.clicked, props.title, props.theme)};
-  box-shadow: 4px 6px 16px 0px rgba(71, 71, 71, 0.12);
+  box-shadow: 4px 6px 16px 0px rgba(71, 71, 71, 0.1);
   transition: all 0.3s ease-in;
 
   img {
@@ -37,13 +35,32 @@ export const PlaceCategoryBtn = styled.button`
       filter: invert(100%);
     }
   }
+
+  &:hover {
+    box-shadow: 4px 6px 16px 0px rgba(71, 71, 71, 0.3);
+  }
+
+  ${(props) => props.theme.media.tablet`
+      padding: 8px 12px;
+      gap: 6px;
+  `}
+
+  ${(props) => props.theme.media.mobile`
+      padding: 6px 8px;
+      gap: 4px;
+  `}
 `;
 
 export const PlaceCategoryTitle = styled.p`
   color: ${(props) =>
     props.clicked ? props.theme.color.white : props.theme.color.gray[700]};
-  font-size: 14px;
-  font-style: normal;
   font-weight: 500;
-  line-height: normal;
+
+  ${(props) => props.theme.media.tablet`
+      font-size: 14px;
+  `}
+
+  ${(props) => props.theme.media.mobile`
+      font-size: 12px;
+  `}
 `;

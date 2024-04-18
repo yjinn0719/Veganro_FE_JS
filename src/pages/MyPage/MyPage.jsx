@@ -4,6 +4,8 @@ import TabBar from '@/components/TabBar/TabBar';
 import Navbar from '@/components/Navbar/Navbar';
 import { useGetUserData } from '../../hooks/useUser';
 import MenuButton from '@/components/MenuButton/MenuButton';
+import { useNavigate } from 'react-router-dom';
+import { notify } from '../../hooks/useToast';
 
 import {
   Container,
@@ -17,6 +19,8 @@ import {
 } from './MyPage.styles';
 
 export default function MyPage() {
+  const navigate = useNavigate();
+
   const {
     data: userData,
     isLoading,
@@ -26,8 +30,10 @@ export default function MyPage() {
   } = useGetUserData();
 
   if (isLoading) return <Spinner />;
-  if (isError) return <div>Error: {error.message}</div>;
-
+  if (isError) {
+    notify('error', '로그인이 되어있는지 확인해주세요.');
+    navigate('/');
+  }
   return (
     <>
       <Container>

@@ -66,6 +66,7 @@ const TabBar = () => {
   } = useCurrentLocation();
   const [activeTab, setActiveTab] = useState('reported');
   const tabContentRef = useRef(null);
+  console.log('ReviewsData', ReviewsData);
   useEffect(() => {
     getCurrentPosition();
   }, []);
@@ -101,7 +102,7 @@ const TabBar = () => {
     return <div>Error occurred while loading data.</div>;
   }
   const renderReportedPlaces = () => {
-    if (ReportData.length === 0) {
+    if (ReportData?.pages[0].totalCount === 0) {
       return (
         <ReviewContent>
           <NoReview>
@@ -144,9 +145,7 @@ const TabBar = () => {
               <div>Loading more...</div>
             ) : reportHasNextPage ? (
               <div>Load More</div>
-            ) : (
-              'No more reports'
-            )}
+            ) : null}
           </div>
         </DataContent>
       );
@@ -154,7 +153,7 @@ const TabBar = () => {
   };
 
   const renderReviews = () => {
-    if (ReviewsData.length === 0) {
+    if (ReviewsData === 0) {
       return (
         <ReviewContent>
           <NoReview>
@@ -174,10 +173,10 @@ const TabBar = () => {
                 veganLevel={review.user_id.tag}
                 comment={review.content}
                 date={review.updatedAt}
-                address={review.content}
+                address={review.place_id.name}
                 selectedReviewId={selectedReviewId}
                 onSelectReviewId={setSelectedReviewId}
-                placeId={review.place_id}
+                placeId={review.place_id._id}
               />
             )),
           )}
@@ -186,9 +185,7 @@ const TabBar = () => {
               <div>Loading more...</div>
             ) : reviewsHasNextPage ? (
               <div>Load More</div>
-            ) : (
-              'No more reviews'
-            )}
+            ) : null}
           </div>
         </DataContent>
       );
@@ -196,7 +193,7 @@ const TabBar = () => {
   };
 
   const renderBookmarkedPlaces = () => {
-    if (BookmarkData.length === 0) {
+    if (BookmarkData?.pages[0].totalCount === 0) {
       return (
         <ReviewContent>
           <NoReview>
@@ -243,7 +240,11 @@ const TabBar = () => {
             ) : bookmarkHasNextPage ? (
               <div>Load More</div>
             ) : (
-              'No more bookmarks'
+              <ReviewContent>
+                <NoReview>
+                  <NoReviewText>북마크한 가게가 없습니다.</NoReviewText>
+                </NoReview>
+              </ReviewContent>
             )}
           </div>
         </DataContent>

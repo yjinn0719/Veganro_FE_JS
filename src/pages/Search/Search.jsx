@@ -17,6 +17,7 @@ import MapButton from '@/components/MapButton/MapButton';
 import MenuButton from '@/components/MenuButton/MenuButton';
 import SmallRoundButton from '@/components/SmallRoundButton/SmallRoundButton';
 import MapFilterModal from '@/components/MapFilterModal/MapFilterModal';
+import Spinner from '@/components/Spinner/Spinner';
 
 import {
   Categories,
@@ -144,9 +145,7 @@ export default function Search() {
     return <div>위치 정보를 가져올 수 없습니다 {error}</div>;
   }
 
-  if (isLoading) {
-    return <div>위치 정보를 가져오는 중..</div>;
-  }
+  if (isLoading) return <Spinner />;
 
   return (
     <>

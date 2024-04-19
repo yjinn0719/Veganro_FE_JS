@@ -77,6 +77,7 @@ const ReviewPlaceholder = styled.textarea`
   color: ${(props) => props.theme.color.gray[800]};
   font-size: 16px;
   word-wrap: break-word;
+  outline: none;
   background: none;
   border: none;
   &::placeholder {

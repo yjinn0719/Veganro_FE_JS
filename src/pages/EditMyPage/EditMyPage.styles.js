@@ -130,9 +130,10 @@ const Tooltip = styled.div`
       left: 0;
       width: 100%;
       height: 300px;
+      background-color: white;
       background-image: url('https://storage.googleapis.com/elice_04/vegan-ro-img/VeganOptionInfo.png');
       background-repeat: no-repeat;
-      background-size: cover;
+      background-size: auto 100%;
       background-position: center;
       border-radius: 4px;
       overflow: hidden;

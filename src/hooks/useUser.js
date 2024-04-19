@@ -59,7 +59,9 @@ export const useGetReportedByUserId = (pageSize = 10) => {
     queryFn: ({ pageParam }) => getReportedByUserId(pageParam, pageSize),
     initialPageParam: 1,
     getNextPageParam: (lastPage, allPages) => {
-      const nextPage = lastPage.length ? allPages.length + 1 : undefined;
+      const nextPage = lastPage.reportedPlaces.length
+        ? allPages.length + 1
+        : undefined;
       return nextPage;
     },
   });
@@ -71,7 +73,9 @@ export const useGetBookmarkedByUserId = (pageSize = 10) => {
     queryFn: ({ pageParam }) => getBookmarkedByUserId(pageParam, pageSize),
     initialPageParam: 1,
     getNextPageParam: (lastPage, allPages) => {
-      const nextPage = lastPage.length ? allPages.length + 1 : undefined;
+      const nextPage = lastPage.bookmarks.length
+        ? allPages.length + 1
+        : undefined;
       return nextPage;
     },
   });

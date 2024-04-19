@@ -22,9 +22,9 @@ function MapFilterModal({ updateMarkers, onClose, setIsButtonActive }) {
   useEffect(() => {
     if (menuTypes !== null) {
       if (menuTypes) {
-        setSelectedMenuTypes('전체 채식 메뉴');
+        setSelectedMenuTypes(VEGAN_MENU_TYPES[0]);
       } else {
-        setSelectedMenuTypes('일부 채식 메뉴');
+        setSelectedMenuTypes(VEGAN_MENU_TYPES[1]);
       }
     }
   }, [menuTypes]);
@@ -45,15 +45,10 @@ function MapFilterModal({ updateMarkers, onClose, setIsButtonActive }) {
 
   const handleSaveClick = (e) => {
     e.stopPropagation();
-    const isFullVegan = selectedMenuTypes.includes(VEGAN_MENU_TYPES[0]);
-    const isPartialVegan = selectedMenuTypes.includes(VEGAN_MENU_TYPES[1]);
-    const veganOption = isFullVegan ? true : isPartialVegan ? false : null;
+    const isFullVegan = selectedMenuTypes.includes(VEGAN_MENU_TYPES[1]);
+    const isPartialVegan = selectedMenuTypes.includes(VEGAN_MENU_TYPES[0]);
+    const veganOption = isFullVegan ? false : isPartialVegan ? true : null;
     updateMarkers(veganOption);
-    // sessionStorage.setItem(
-    //   'selectedMenuTypes',
-    //   JSON.stringify(selectedMenuTypes),
-    //   // selectedMenuTypes.includes(VEGAN_MENU_TYPES[0]) ? true : false,
-    // );
     onClose(false);
     setIsButtonActive(false);
   };

@@ -49,6 +49,7 @@ const SubTextBox = styled.div`
   display: flex;
   justify-content: flex-start;
   gap: 8px;
+  position: relative;
 `;
 
 const Text = styled.div`
@@ -116,30 +117,32 @@ const VeganTagContainer = styled.div`
   flex-wrap: wrap;
   gap: 12px;
 `;
-const Icon = styled.div`
+const Tooltip = styled.div`
   width: 24px;
   height: 24px;
-  position: relative;
+  cursor: pointer;
   color: ${(props) => props.theme.color.gray[500]};
-`;
-
-const InfomationContainer = styled.div`
-  margin: 10px auto;
-  width: 100%;
-`;
-
-const InfomationImg = styled.img`
-  width: 100%;
-  height: 300px;
-  background-image: url(''https://storage.googleapis.com/elice_04/vegan-ro-img/VeganOptionInfo.png');
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
+  &:hover {
+    &::after {
+      content: '';
+      position: absolute;
+      top: 32px;
+      left: 0;
+      width: 100%;
+      height: 300px;
+      background-image: url('https://storage.googleapis.com/elice_04/vegan-ro-img/VeganOptionInfo.png');
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+      border-radius: 4px;
+      overflow: hidden;
+      border: solid 1px ${(props) => props.theme.color.gray[100]};
+      box-shadow: 4px 6px 16px 0px rgba(71, 71, 71, 0.1);
+    }
+  }
 `;
 
 export {
-  InfomationImg,
-  InfomationContainer,
   Container,
   InnerContainer,
   InfoContainer,
@@ -152,6 +155,6 @@ export {
   ButtonContainer,
   Button,
   VeganTagContainer,
-  Icon,
+  Tooltip,
   ButtonContent,
 };

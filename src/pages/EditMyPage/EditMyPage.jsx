@@ -11,10 +11,8 @@ import {
   TagContainer,
   ButtonContainer,
   VeganTagContainer,
-  Icon,
+  Tooltip,
   ButtonContent,
-  InfomationContainer,
-  InfomationImg,
 } from './EditMyPage.styles';
 import Navbar from '@/components/Navbar/Navbar';
 import SecondaryButton from '@/components/SecondaryButton/SecondaryButton';
@@ -73,9 +71,9 @@ export default function EditMyPage({ title = '프로필 설정', nickname }) {
             <Text color="#383838" fontSize={20}>
               채식 유형
             </Text>
-            <Icon>
+            <Tooltip>
               <IoInformationCircle size="20" />
-            </Icon>
+            </Tooltip>
           </SubTextBox>
           <TagContainer>
             <VeganTagContainer>
@@ -112,11 +110,6 @@ export default function EditMyPage({ title = '프로필 설정', nickname }) {
             </VeganTagContainer>
           </TagContainer>
         </TagContainer>
-        {showInformation && (
-          <InfomationContainer>
-            <InfomationImg />
-          </InfomationContainer>
-        )}
         <ButtonContent>
           <ButtonContainer>
             <SecondaryButton

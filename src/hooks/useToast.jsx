@@ -21,10 +21,10 @@ export const notify = (type, message) => {
   }
 };
 
-const Toast = () => {
+const Toast = ({ isDesktopOrLaptop }) => {
   return (
     <ToastContainer
-      position="top-right" // 알람 위치 지정
+      className={isDesktopOrLaptop ? 'desktop-toast' : 'mobile-toast'}
       autoClose={3000} // 자동 off 시간
       hideProgressBar={false} // 진행시간바 숨김
       closeOnClick // 클릭으로 알람 닫기

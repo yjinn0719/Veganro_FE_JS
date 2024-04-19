@@ -21,7 +21,7 @@ import {
 
 import ReviewDrawer from '@/components/ReviewDrawer/ReviewDrawer';
 import { IoChevronDownSharp } from 'react-icons/io5';
-import Spinner from '@/components/Spinner/Spinner';
+import Loading from '@/components/Loading/Loading';
 
 export default function Review({ address, isOpened }) {
   const { placeid } = useParams();
@@ -52,7 +52,7 @@ export default function Review({ address, isOpened }) {
 
   const [selectedReviewId, setSelectedReviewId] = useState(null);
 
-  if (isLoading) return <Spinner />;
+  if (isLoading) return <Loading />;
   if (isError) return <div>Error: {error.message}</div>;
 
   return (

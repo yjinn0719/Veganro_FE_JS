@@ -19,7 +19,8 @@ const MyRouter = () => {
     <Routes>
       <Route path={PATH.MAIN} element={<Home />} />
       <Route path={PATH.AUTH} element={<Auth />} />
-      <Route path={PATH.EMAILAUTH} element={<EmailAuth />} />
+      <Route path={PATH.LOGIN} element={<EmailAuth />} />
+      <Route path={PATH.LOGOUT} element={<Logout />} />
       <Route path={PATH.REDIRECTION} element={<Redirection />} />
       <Route path={PATH.SIGNUP} element={<SignUp />} />
       <Route path={PATH.ADDPLACE} element={<AddPlace />} />
@@ -28,7 +29,6 @@ const MyRouter = () => {
       <Route path={PATH.PLACEDETAIL} element={<PlaceDetail />} />
       <Route path={PATH.MY} element={<MyPage />} />
       <Route path={PATH.MYEDIT} element={<EditMyPage />} />
-      <Route path={PATH.LOGOUT} element={<Logout />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

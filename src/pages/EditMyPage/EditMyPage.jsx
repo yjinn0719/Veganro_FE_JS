@@ -26,7 +26,6 @@ import { IoInformationCircle } from 'react-icons/io5';
 export default function EditMyPage({ title = '프로필 설정', nickname }) {
   const [newNickname, setNewNickname] = useState(nickname);
   const [activeTag, setActiveTag] = useState('');
-  const [showInformation, setShowInformation] = useState(false);
   const { userid } = useParams();
   const navigate = useNavigate();
 
@@ -51,9 +50,6 @@ export default function EditMyPage({ title = '프로필 설정', nickname }) {
     }
   };
 
-  const handleClick = () => {
-    setShowInformation(!showInformation);
-  };
   const isButtonEnabled = newNickname && newNickname.length > 0; // 조건문으로 확인
 
   return (
@@ -78,7 +74,7 @@ export default function EditMyPage({ title = '프로필 설정', nickname }) {
               채식 유형
             </Text>
             <Icon>
-              <IoInformationCircle size="20" onClick={handleClick} />
+              <IoInformationCircle size="20" />
             </Icon>
           </SubTextBox>
           <TagContainer>

@@ -1,5 +1,5 @@
 import React from 'react';
-import Spinner from '@/components/Spinner/Spinner';
+import Loading from '@/components/Loading/Loading';
 import { useParams } from 'react-router-dom';
 import { IoNavigateCircleOutline } from 'react-icons/io5';
 import { useGetPlace } from '../../hooks/usePlace';
@@ -31,7 +31,6 @@ import {
   Distance,
   Content,
   ReviewContainer,
-  Loading,
 } from '@/pages/PlaceDetail/PlaceDetail.styles';
 
 export default function PlaceDetail() {
@@ -52,9 +51,7 @@ export default function PlaceDetail() {
   if (placeDataLoading || userLocationLoading)
     return (
       <MainContainer>
-        <Loading>
-          <Spinner />
-        </Loading>
+        <Loading />
       </MainContainer>
     );
 

@@ -70,6 +70,17 @@ const GlobalStyles = createGlobalStyle`
     summary::-webkit-details-marker {
         display: none;
     }
+    .desktop-toast {
+        position: absolute;
+        top: 60px;
+        right: 20px;
+    }
+
+    .mobile-toast {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+    }
 `;
 
 export default GlobalStyles;

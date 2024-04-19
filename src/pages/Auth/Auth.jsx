@@ -24,7 +24,7 @@ function Auth() {
   };
 
   const handleEmailClick = () => {
-    navigate('/emailauth');
+    navigate('/login');
   };
 
   const handleNoLoginClick = () => {

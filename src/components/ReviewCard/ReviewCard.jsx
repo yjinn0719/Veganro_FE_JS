@@ -47,6 +47,11 @@ export default function ReviewCard({
     }
   }, [myReviews, reviewId]);
 
+  const formatDate = (dateString) => {
+    const parsedDate = new Date(dateString);
+    return parsedDate.toLocaleString('ko-KR');
+  };
+
   const toggleEditDrawer = () => {
     setIsEditDrawerOpen(!isEditDrawerOpen);
     if (isComplaintDrawerOpen) {
@@ -96,7 +101,7 @@ export default function ReviewCard({
             <IconDot top={1.5} />
           </IconContainer>
         </CommentHeader>
-        <CommentDate>{date.toLocaleString('ko-KR')}</CommentDate>
+        <CommentDate>{formatDate(date)}</CommentDate>
         <CommentText>{comment}</CommentText>
       </CommentContainer>
       <DrawerContainer>

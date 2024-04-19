@@ -18,12 +18,15 @@ function Navbar({ title, icon }) {
 
   return (
     <NavContainer>
-      <IoChevronBackOutline onClick={handleClick} />
+      <IoChevronBackOutline
+        onClick={handleClick}
+        style={{ cursor: 'pointer' }}
+      />
       <NavTitle>{title}</NavTitle>
       {icon === 'setting' && (
         <IoSettingsOutline onClick={() => navigate(`/user/${userid}/edit`)} />
       )}
-      {icon === 'delete' && <IoClose />}
+      {icon === 'delete' && <IoClose style={{ cursor: 'pointer' }} />}
       {icon === 'null' && <div style={{ width: '24px', height: '24px' }}></div>}
     </NavContainer>
   );

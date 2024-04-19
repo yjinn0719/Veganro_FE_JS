@@ -24,7 +24,7 @@ import {
 import getDistance from '@/hooks/useDistance.jsx';
 import useCurrentLocation from '@/hooks/useCurrentLocation';
 import { VEGAN_MENU_TYPES } from '@/constants';
-import Spinner from '@/components/Spinner/Spinner';
+import Loading from '@/components/Loading/Loading';
 
 const TabBar = () => {
   const { ref, inView } = useInView();
@@ -96,7 +96,7 @@ const TabBar = () => {
     ReviewsData === undefined ||
     BookmarkData === undefined
   ) {
-    return <Spinner />;
+    return <Loading />;
   }
   if (userLocationError || isReviewsError || isReportError || isBookmarkError) {
     return <div>Error occurred while loading data.</div>;

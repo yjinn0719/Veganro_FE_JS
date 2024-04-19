@@ -4,7 +4,6 @@ import { useRecoilState } from 'recoil';
 import { Menu, MenuList } from './MenuButton.style';
 import RoundButton from '@/components/RoundButton/RoundButton';
 import { MENU_LIST } from '@/constants';
-import { useGetUserData } from '../../hooks/useUser';
 import { PATH } from '@/constants/router';
 
 import { isMenuOpenState } from '@/states/menuOpenState';
@@ -15,8 +14,6 @@ function MenuButton() {
   const [isMenuOpen, setIsMenuOpen] = useRecoilState(isMenuOpenState);
   const [isModalOpen, setIsModalOpen] = useRecoilState(isModalOpenState);
   const [isButtonActive, setIsButtonActive] = useState(false);
-  const { data: userData } = useGetUserData();
-  const userid = userData?._id;
 
   const toggleMenu = () => {
     if (isModalOpen) {
@@ -29,19 +26,14 @@ function MenuButton() {
     });
   };
 
-  const handleNavigation = (title) => {
+  const handleNavigation = (page) => {
     setIsMenuOpen(false);
-    let routePath;
-    if (title.toLowerCase() === 'my') {
-      routePath = `/user/${userid}`;
-    } else {
-      routePath = PATH[title.toUpperCase()];
-    }
+    const routePath = PATH[page.toUpperCase()];
 
     if (routePath) {
       navigate(routePath);
     } else {
-      console.error('❌ Route path not found for:', title);
+      console.error('❌ Route path not found for:', page);
     }
   };
 

@@ -37,7 +37,7 @@ function App() {
         {isDesktopOrLaptop && <Landing />}
         <AppContainer>
           <MyRouter />
-          <Toast />
+          <Toast isDesktopOrLaptop={isDesktopOrLaptop} />
         </AppContainer>
       </AppWrapper>
     </RecoilRoot>

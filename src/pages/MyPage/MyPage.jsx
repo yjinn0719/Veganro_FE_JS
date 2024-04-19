@@ -42,13 +42,13 @@ export default function MyPage() {
           <ProfileContent>
             <AvatarContainer>
               <>
-                <Avatar src={userData.tag_img.url.basic_url} />
+                <Avatar src={userData?.tag_img.url.basic_url} />
               </>
               <Badge>
-                <BadgeText>{userData.tag}</BadgeText>
+                <BadgeText>{userData?.tag}</BadgeText>
               </Badge>
             </AvatarContainer>
-            <Nickname>{userData.nickname}</Nickname>
+            <Nickname>{userData?.nickname}</Nickname>
           </ProfileContent>
           <TabBar />
         </ProfileWrapper>

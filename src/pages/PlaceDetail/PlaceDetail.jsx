@@ -74,19 +74,22 @@ export default function PlaceDetail() {
 
     return (
       <MainContainer>
-        <Navbar title={placeData.name} icon="null" />
+        <Navbar title={placeData?.name} icon="null" />
         <ContentWrapper>
           <ContentContainer>
             <ImageSection>
-              <MapComponent address={placeData.address} name={placeData.name} />
+              <MapComponent
+                address={placeData?.address}
+                name={placeData?.name}
+              />
               <OuterContainer>
                 <Content>
                   <InnerContainer>
-                    <Icon src={placeData.category_img.url.basic_url} />
+                    <Icon src={placeData?.category_img.url.basic_url} />
                   </InnerContainer>
                   <ContentContainer>
                     <NameContainer>
-                      <Name>{placeData.name}</Name>
+                      <Name>{placeData?.name}</Name>
                     </NameContainer>
                     <TagContainer>
                       <Tag>
@@ -109,13 +112,13 @@ export default function PlaceDetail() {
               </OuterContainer>
             </ImageSection>
             <PlaceDetailInfo
-              placeLocation={placeData.address}
-              placeNumber={placeData.tel}
-              placeHours={placeData.open_times || []}
-              placeURL={placeData.sns_url || []}
+              placeLocation={placeData?.address}
+              placeNumber={placeData?.tel}
+              placeHours={placeData?.open_times || []}
+              placeURL={placeData?.sns_url || []}
             />
             <ReviewContainer>
-              <Review address={placeData.address} />
+              <Review address={placeData?.address} />
             </ReviewContainer>
           </ContentContainer>
         </ContentWrapper>

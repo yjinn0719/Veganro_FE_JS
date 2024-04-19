@@ -92,14 +92,14 @@ export default function Review() {
               {ReviewsData?.pages.map((page) =>
                 page.reviews.map((review) => (
                   <ReviewCard
-                    key={review._id}
-                    reviewId={review._id}
-                    address={placeData.address}
-                    isCurrentUser={review.CurrentUser}
-                    nickname={review.user_id.nickname}
-                    veganLevel={review.user_id.tag}
-                    comment={review.content}
-                    date={review.updatedAt}
+                    key={review?._id}
+                    reviewId={review?._id}
+                    address={placeData?.address}
+                    isCurrentUser={review?.CurrentUser}
+                    nickname={review?.user_id.nickname}
+                    veganLevel={review?.user_id.tag}
+                    comment={review?.content}
+                    date={review?.updatedAt}
                     selectedReviewId={selectedReviewId}
                     onSelectReviewId={setSelectedReviewId}
                   />
@@ -120,7 +120,7 @@ export default function Review() {
       </Container>
       {isReviewDrawerOpen && (
         <ReviewDrawer
-          address={placeData.address}
+          address={placeData?.address}
           titleText={true}
           submitText={true}
           isOpened={isReviewDrawerOpen}

@@ -48,18 +48,17 @@ export const NoLogin = styled.button`
     color: ${(props) => props.theme.color.gray[700]};
   }
 `;
-export const DemoLogin = styled.button`
-  color: ${(props) => props.theme.color.green[100]};
-  font-size: 12px;
+export const EmailLogin = styled.button`
+  color: white;
+  width: 100%;
+  font-size: 14px;
   font-weight: 600;
-  padding: 4px 6px;
-  border-radius: 100px;
-  background-color: white;
-  background: rgba(79, 131, 55, 0.4);
-  box-shadow: 4px 6px 16px 0px rgba(71, 71, 71, 0.1);
+  padding: 12px 6px;
+  border-radius: 4px;
+  background-color: ${(props) => props.theme.color.gray[300]};
   transition: all 0.2s ease-in;
   &:hover {
-    box-shadow: 4px 6px 16px 0px rgba(71, 71, 71, 0.3);
+    box-shadow: 4px 6px 16px 0px rgba(71, 71, 71, 0.1);
   }
 `;
 export const LoginBtnContainer = styled.button`
@@ -68,4 +67,10 @@ export const LoginBtnContainer = styled.button`
   justify-content: center;
   align-items: center;
   gap: 12px;
+  img {
+    transition: all.0.2s ease-in;
+    &:hover {
+      box-shadow: 4px 6px 16px 0px rgba(71, 71, 71, 0.1);
+    }
+  }
 `;

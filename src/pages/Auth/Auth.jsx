@@ -9,7 +9,7 @@ import {
   LogoContent,
   LoginBtnContainer,
   NoLogin,
-  DemoLogin,
+  EmailLogin,
 } from './Auth.styles';
 
 function Auth() {
@@ -49,8 +49,8 @@ function Auth() {
             onClick={loginHandler}
             style={{ width: '280px' }}
           />
+          <EmailLogin onClick={handleEmailClick}>이메일로 계속하기</EmailLogin>
           <NoLogin onClick={handleNoLoginClick}>로그인없이 둘러보기</NoLogin>
-          <DemoLogin onClick={handleEmailClick}>데모용</DemoLogin>
         </LoginBtnContainer>
       </Inner>
     </AuthContainer>

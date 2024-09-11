@@ -1,19 +1,37 @@
+# 프로젝트 소개
+**프로젝트 이름 : Vegan-ro**
+<p>제작 기간 : 2024.04.01 ~ 2024.04.19</p> <br>
+<p>팀 구성 : 6명 ( 프론트엔드 4명, 백엔드 2명)</p>
+<p> 엘리스 SW 엔지니어 트랙 8기 2차 프로젝트 과제, "Vegan-ro" 입니다. <br> 한 발자국 더 건강한 길로, 비건로라는 슬로건 아래 각자의 건강을 중시하며 더 나은 삶을 지향하는 이들이 비건 문화로 뭉칠 수 있도록 비건에 대한 접근성을 향상 시키고자 탄생하였습니다. </p>
+
+[협업 노션💡](https://alert-curler-7a3.notion.site/Project-2-Vegan-ro-4b48b9fa012e455b989c07199e5cf51f?pvs=4)<br>
+[시연 영상📹](https://www.youtube.com/watch?v=7NQiQGzf-qI)
+
+---
+
+## 배포 주소
+[Vegan-ro](https://veganro-frontend.vercel.app/)
 
 
+## 시작 가이드
 
-(서비스 명)
+**installation**
+```
+git clone [주소]
+npm install 
+npm run dev 
+```
+<br>
 
-서비스 명을 위 괄호 부분에 작성하세요.
-서비스의 한 줄 소개를 작성하세요.
+**<유저 계정>**<br>
+ID : veganro01@gmail.com<br>
+password : veganro01
 
+**<관리자 계정>**<br>
+ID : manager123@kakao.com<br>
+password : manager0420  
 
-서비스 구성 안내
-
-1. 서비스 소개
-
-기술 스택 (Bulma css, node, mongodb 등)
-웹서비스에 대한 자세한 개요 등
-
+---
 
 2. 서비스 주요 기능 설명
 웹서비스의 유용성, 편의성 및 시각화의 실용성에 대한 설명

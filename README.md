@@ -46,17 +46,17 @@ password : manager0420
 
 **Back-End**
 <div align="center">
-	<img src="https://img.shields.io/badge/Node.js-339933?style=flat&logo=Node.js&logoColor=white" />
-  <img src="https://img.shields.io/badge/mongoDB-47A248?style=for-the-badge&logo=MongoDB&logoColor=white">
+	<img src="https://img.shields.io/badge/nodedotjs-5FA04E?style=flat&logo=nodedotjs&logoColor=white" />
+  <img src="https://img.shields.io/badge/mongodb-47A248?style=for-the-badge&logo=mongodb&logoColor=white">
   <img src="https://img.shields.io/badge/nestjs-E0234E?style=for-the-badge&logo=nestjs&logoColor=white">
 </div>
 
 **Tools**
 <div align="center">
-	<img src="https://img.shields.io/badge/github-181717?style=flat&logo=github&logoColor=white" />
-	<img src="https://img.shields.io/badge/GitLab-FC6D26?style=flat&logo=GitLab&logoColor=white" />
-	<img src="https://img.shields.io/badge/Notion-000000?style=flat&logo=Notion&logoColor=white" />
-	<img src="https://img.shields.io/badge/Discord-5865F2?style=flat&logo=Discord&logoColor=white" />
+  <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white">
+	<img src="https://img.shields.io/badge/gitlab-FC6D26?style=flat&logo=gitlab&logoColor=white" />
+	<img src="https://img.shields.io/badge/notion-000000?style=flat&logo=notion&logoColor=white" />
+	<img src="https://img.shields.io/badge/discord-5865F2?style=flat&logo=discord&logoColor=white" />
 </div>
 
 ---

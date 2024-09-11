@@ -33,73 +33,36 @@ password : manager0420
 
 ---
 
-2. 서비스 주요 기능 설명
-웹서비스의 유용성, 편의성 및 시각화의 실용성에 대한 설명
+## 기술 스택
+**Front-End**
+<div align="center">
+  <img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=black"> 
+  <img src="https://img.shields.io/badge/jquery-0769AD?style=for-the-badge&logo=jquery&logoColor=white">
+  <img src="https://img.shields.io/badge/styledcomponents-DB7093?style=for-the-badge&logo=styledcomponents&logoColor=white">
+  <img src="https://img.shields.io/badge/reactrouter-CA4245?style=for-the-badge&logo=reactrouter&logoColor=white">
+  <img src="https://img.shields.io/badge/vite-646CFF?style=for-the-badge&logo=vite&logoColor=white">
+  <img src="https://img.shields.io/badge/recoil-3578E5?style=for-the-badge&logo=recoil&logoColor=white">
+</div>
 
-주요 기능 (주된 활용성) 및 서브 기능 소개
-프로젝트만의 차별점, 기대 효과
+**Back-End**
+<div align="center">
+	<img src="https://img.shields.io/badge/Node.js-339933?style=flat&logo=Node.js&logoColor=white" />
+  <img src="https://img.shields.io/badge/mongoDB-47A248?style=for-the-badge&logo=MongoDB&logoColor=white">
+  <img src="https://img.shields.io/badge/nestjs-E0234E?style=for-the-badge&logo=nestjs&logoColor=white">
+</div>
 
+**Tools**
+<div align="center">
+	<img src="https://img.shields.io/badge/github-181717?style=flat&logo=github&logoColor=white" />
+	<img src="https://img.shields.io/badge/GitLab-FC6D26?style=flat&logo=GitLab&logoColor=white" />
+	<img src="https://img.shields.io/badge/Notion-000000?style=flat&logo=Notion&logoColor=white" />
+	<img src="https://img.shields.io/badge/Discord-5865F2?style=flat&logo=Discord&logoColor=white" />
+</div>
 
-3. 서비스 구성도
+---
 
-서비스 구조도 그림 (사용한 기술 스택)
-와이어프레임 링크 (예상 웹 화면 UI) e.g) figma 사용
-API 명세를 문서화한 링크
+## 프로젝트 팀원
 
-
-4. 프로젝트 팀원 역할 분담
-
-
-
-이름
-담당 업무
-
-
-
-
-멤버1
-팀장/프론트엔드 개발
-
-
-멤버2
-백엔드 개발
-
-
-
-멤버별 responsibility
-
-멤버 1: 팀장/프론트엔드 담당
-
-
-기획 단계: 구체적인 설계와 지표에 따른 프로젝트 제안서 작성
-개발 단계: 팀원간의 일정 등 조율 + 프론트 or 백엔드 개발
-수정 단계: 기획, 스크럼 진행, 코치님 피드백 반영해서 수정, 발표 준비
-
-
-멤버 2: 백엔드 담당
-
-
-기획 단계: 큰 주제에서 문제 해결 아이디어 도출, 와이어프레임 작성
-개발 단계: 와이어프레임을 기반으로 API 완성
-수정 단계: 피드백 반영해서 백엔드 설계 수정
-
-
-5. 실행 방법
-
-백엔드 (예시):
-1. mongodb 실행
-2. yarn start (혹은 npm start)
-
-
-
-6. 버전
-
-프로젝트의 버전 기입 (예: 1.0.0)
-
-
-7. FAQ
-
-자주 받는 질문 정리
-예시) 이 서비스는 어떻게 실행하면 되나요?
-
-git clone을 하신 후 아래 커맨드를 입력하시면 됩니다. ~~~
+| Frontend | Frontend | Frontend | Frontend | Backend | Backend |
+| --- | --- | --- | --- | --- | --- |
+| 김윤진 | 박찬주 | 최세영 | 최정민 | 박지원 | 박진주 |
